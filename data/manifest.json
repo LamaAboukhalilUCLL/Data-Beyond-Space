@@ -1,0 +1,292 @@
+{
+  "fetched_at": "2026-11-14T14:36:15+00:00",
+  "source": "NASA Physical Sciences Informatics (PSI), https://psi.nasa.gov",
+  "license": "PSI data is CC0-1.0; cite each investigation by its DOI",
+  "investigations": [
+    {
+      "id": "PSI-10",
+      "acronym": "ACME/Flame Design",
+      "title": "Advanced Combustion via Microgravity Experiments / Flame Design",
+      "doi": "10.60555/w4zy-bt45",
+      "total_file_size_bytes": 2180435304347
+    },
+    {
+      "id": "PSI-20",
+      "acronym": "ACME BRE",
+      "title": "Advanced Combustion via Microgravity Experiments - Burning Rate Emulator",
+      "doi": "10.60555/vb93-3y72",
+      "total_file_size_bytes": 2035568427496.0
+    },
+    {
+      "id": "PSI-21",
+      "acronym": "ACME CLD Flame",
+      "title": "Advanced Combustion via Microgravity Experiments / Coflow Laminar Diffusion Flame",
+      "doi": "10.60555/23e1-9950",
+      "total_file_size_bytes": 2005536295241.0
+    },
+    {
+      "id": "PSI-22",
+      "acronym": "ACME E-FIELD Flames",
+      "title": "Advanced Combustion via Microgravity Experiments Electric-Field Effects on Laminar Diffusion Flames",
+      "doi": "10.60555/se5a-8c73",
+      "total_file_size_bytes": 950212491107.0
+    },
+    {
+      "id": "PSI-23",
+      "acronym": "ACME s-Flame",
+      "title": "Advanced Combustion via Microgravity Experiments-Structure and Response of Spherical Diffusion Flames",
+      "doi": "10.60555/k57n-p030",
+      "total_file_size_bytes": 782172126062.0
+    },
+    {
+      "id": "PSI-25",
+      "acronym": "BASS-II",
+      "title": "Burning and Suppression of Solids - II",
+      "doi": "10.60555/4qc4-de67",
+      "total_file_size_bytes": 274631106141.0
+    },
+    {
+      "id": "PSI-26",
+      "acronym": "BASS",
+      "title": "Burning and Suppression of Solids",
+      "doi": "10.60555/58h4-dy80",
+      "total_file_size_bytes": 163551372412.0
+    },
+    {
+      "id": "PSI-39",
+      "acronym": "CFI",
+      "title": "Cool Flames Investigation",
+      "doi": "10.60555/m6pj-a914",
+      "total_file_size_bytes": 718889568684.0
+    },
+    {
+      "id": "PSI-47",
+      "acronym": "DAFT / DAFT-2",
+      "title": "Dust and Aerosol Measurement Feasibility Test / Dust and Aerosol Measurement Feasibility Test-2",
+      "doi": "10.60555/ztgj-d202",
+      "total_file_size_bytes": 41765333.0
+    },
+    {
+      "id": "PSI-60",
+      "acronym": "",
+      "title": "Computational and Experimental Analysis of SPICE Data Sets",
+      "doi": "10.60555/mzjm-yv57",
+      "total_file_size_bytes": 7743
+    },
+    {
+      "id": "PSI-62",
+      "acronym": "",
+      "title": "Concurrent Flame Spread Modeling using Flamelet Generated Manifolds in Microgravity with Comparison to BASS Experiments using Two-Color Tomography",
+      "doi": "10.60555/e9xp-ex83",
+      "total_file_size_bytes": 9694
+    },
+    {
+      "id": "PSI-68",
+      "acronym": "FLEX-2",
+      "title": "Flame Extinguishment Experiment - 2",
+      "doi": "10.60555/byp8-h018",
+      "total_file_size_bytes": 1224752113090.0
+    },
+    {
+      "id": "PSI-69",
+      "acronym": "FLEX",
+      "title": "Flame Extinguishment Experiment",
+      "doi": "10.60555/mbq8-0451",
+      "total_file_size_bytes": 923832535657.0
+    },
+    {
+      "id": "PSI-98",
+      "acronym": "SAFFIRE-I",
+      "title": "Spacecraft Fire Safety Experiment-I",
+      "doi": "10.60555/0t15-1z43",
+      "total_file_size_bytes": 12250600201.0
+    },
+    {
+      "id": "PSI-99",
+      "acronym": "SAFFIRE-II",
+      "title": "Spacecraft Fire Experiment-II",
+      "doi": "10.60555/2chp-m469",
+      "total_file_size_bytes": 16931016137.0
+    },
+    {
+      "id": "PSI-100",
+      "acronym": "SAFFIRE-III",
+      "title": "Spacecraft Fire Experiment-III",
+      "doi": "10.60555/040q-4h36",
+      "total_file_size_bytes": 35210765052.0
+    },
+    {
+      "id": "PSI-101",
+      "acronym": "SAME-R",
+      "title": "Smoke Aerosol Measurement Experiment-Reflight",
+      "doi": "10.60555/2np7-jv14",
+      "total_file_size_bytes": 6308124750.0
+    },
+    {
+      "id": "PSI-102",
+      "acronym": "SAME",
+      "title": "Smoke and Aerosol Measurement Experiment",
+      "doi": "10.60555/gd4k-8h62",
+      "total_file_size_bytes": 657608178.0
+    },
+    {
+      "id": "PSI-106",
+      "acronym": "SLICE",
+      "title": "Structure and Liftoff In Combustion Experiment",
+      "doi": "10.60555/pm12-rg61",
+      "total_file_size_bytes": 72914598688.0
+    },
+    {
+      "id": "PSI-107",
+      "acronym": "SPICE",
+      "title": "Smoke Point In Co-flow Experiment",
+      "doi": "10.60555/9kbh-e962",
+      "total_file_size_bytes": 6946864573.0
+    },
+    {
+      "id": "PSI-115",
+      "acronym": "",
+      "title": "Utilization of the Smoke Aerosol Measurement Experiment Data for Advanced Modeling and Simulation of Smoke Generation in Micro-Gravity",
+      "doi": "10.60555/q0v5-1v28",
+      "total_file_size_bytes": 264404901.0
+    },
+    {
+      "id": "PSI-117",
+      "acronym": "",
+      "title": "Effect of External Thermo-Convective Perturbation on Cool Flame Dynamics: A Multidimensional Multi-Physics CFD Analysis",
+      "doi": "10.60555/gz0q-b577",
+      "total_file_size_bytes": 70820870
+    },
+    {
+      "id": "PSI-142",
+      "acronym": "",
+      "title": "Quantitative Studies of Cool Flame Transitions at Radiation / Stretch Extinction Using Counterflow Flames",
+      "doi": "10.60555/80qf-vj95",
+      "total_file_size_bytes": 748117.0
+    },
+    {
+      "id": "PSI-159",
+      "acronym": "ACME CFI-G",
+      "title": "Advanced Combustion via Microgravity Experiments / Cool Flames Investigation with Gases",
+      "doi": "10.60555/cyt1-kh64",
+      "total_file_size_bytes": 2085592429259
+    }
+  ],
+  "tables": [
+    {
+      "id": "PSI-10",
+      "file": "PSI-10_Experimental table_Flame Design_Normal Flame.csv",
+      "rows": 207
+    },
+    {
+      "id": "PSI-10",
+      "file": "PSI-10_Experimental table_Flame Design_Inverse Flame.csv",
+      "rows": 120
+    },
+    {
+      "id": "PSI-20",
+      "file": "PSI-20_Experimental table_ACME BRE.csv",
+      "rows": 18
+    },
+    {
+      "id": "PSI-21",
+      "file": "PSI-21_Experimental table_CLD Flame.csv",
+      "rows": 32
+    },
+    {
+      "id": "PSI-22",
+      "file": "PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+      "rows": 32
+    },
+    {
+      "id": "PSI-23",
+      "file": "PSI-23_Experimental table_ACME s-Flame.csv",
+      "rows": 18
+    },
+    {
+      "id": "PSI-25",
+      "file": "PSI-25_Experimental table_BASS-II.csv",
+      "rows": 129
+    },
+    {
+      "id": "PSI-26",
+      "file": "PSI-26_Experimental table_BASS.csv",
+      "rows": 122
+    },
+    {
+      "id": "PSI-39",
+      "file": "PSI-39_Experimental table_CFI.csv",
+      "rows": 87
+    },
+    {
+      "id": "PSI-47",
+      "file": "PSI-47_Experimental table_DAFT.csv",
+      "rows": 2
+    },
+    {
+      "id": "PSI-68",
+      "file": "PSI-68_Experimental table_Flex2.csv",
+      "rows": 8
+    },
+    {
+      "id": "PSI-69",
+      "file": "PSI-69_Experimental table_FLEX.csv",
+      "rows": 274
+    },
+    {
+      "id": "PSI-98",
+      "file": "PSI-98_Experimental table_SAFFIRE-1.csv",
+      "rows": 4
+    },
+    {
+      "id": "PSI-99",
+      "file": "PSI-99_Experimental table_SAFFIRE-2.csv",
+      "rows": 15
+    },
+    {
+      "id": "PSI-100",
+      "file": "PSI-100_Experimental table_SAFFIRE-3.csv",
+      "rows": 2
+    },
+    {
+      "id": "PSI-101",
+      "file": "PSI-101_Experimental table_SAME-R.csv",
+      "rows": 109
+    },
+    {
+      "id": "PSI-102",
+      "file": "PSI-102_Experimental table_SAME.csv",
+      "rows": 8
+    },
+    {
+      "id": "PSI-106",
+      "file": "PSI-106_Experimental table_Slice.csv",
+      "rows": 12
+    },
+    {
+      "id": "PSI-107",
+      "file": "PSI-107_Experimental table_Spice.csv",
+      "rows": 469
+    },
+    {
+      "id": "PSI-142",
+      "file": "PSI-142_Experimental table_Data Summary Table.csv",
+      "rows": 8
+    },
+    {
+      "id": "PSI-159",
+      "file": "PSI-159_Experimental table_CFI-G_Normal Flames.csv",
+      "rows": 179
+    },
+    {
+      "id": "PSI-159",
+      "file": "PSI-159_Experimental table_CFI-G_Inverse Flames.csv",
+      "rows": 1015
+    }
+  ],
+  "errors": [],
+  "papers": {
+    "unique_dois": 235,
+    "with_abstract": 72
+  }
+}
