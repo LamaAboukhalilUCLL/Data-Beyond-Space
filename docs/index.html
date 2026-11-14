@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flame in Freefall: how far NASA's fire data reaches toward the Moon Base</title>
+<meta name="description" content="An interactive dashboard that summarizes, ranks and interprets NASA's 24 microgravity combustion investigations by one question: how close did each test come to the air planned for the Moon Base?">
+<meta name="author" content="Data Beyond Space, NASA Space Apps Challenge 2026">
+<!-- AI acknowledgement: the code of this site and its plain-language summaries were written with AI assistance (Claude, Anthropic) and reviewed by the team. All data is NASA's, from the PSI repository. -->
+<meta name="generator" content="Hand-written HTML, CSS and JavaScript, produced with AI assistance (Claude, Anthropic)">
+<meta name="ai-assistance" content="Code and plain-language summaries written with AI assistance (Claude, Anthropic); data from NASA PSI, unmodified">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="#/">
+    <span class="flame" aria-hidden="true"></span>
+    <span><strong>Flame in Freefall</strong><small>Moon Base fire data coverage</small></span>
+  </a>
+  <nav aria-label="Main">
+    <a href="#/" data-nav="home">Overview</a>
+    <a href="#/map" data-nav="map">Coverage map</a>
+    <a href="#/rank" data-nav="rank">Ranking</a>
+    <a href="#/questions" data-nav="questions">Open questions</a>
+    <a href="#/data" data-nav="data">Data and method</a>
+  </nav>
+</header>
+<main id="main" tabindex="-1"><p class="loading">Loading NASA's data…</p></main>
+<footer>
+  <p><strong>Data Beyond Space</strong> · NASA Space Apps Challenge 2026 · Challenge: Flame in Freefall</p>
+  <p>All data: <a href="https://psi.nasa.gov/physci/repo/search?q=combustion">NASA Physical Sciences Informatics (PSI) repository</a>, Combustion Science, shown as NASA published it. This site shows which conditions were tested and which were not. It does not predict how fire behaves on the Moon.</p>
+  <p>Code and plain-language summaries were written with AI assistance (Claude, Anthropic) and reviewed by the team. NASA's own words always appear in quotation marks. This project is not affiliated with or endorsed by NASA.</p>
+</footer>
+<div id="tip" role="tooltip" hidden></div>
+<div id="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-head"><h2 id="modal-title"></h2><button id="modal-close" aria-label="Close">×</button></div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+<noscript><p style="padding:2rem">This dashboard needs JavaScript. The data it shows is in <a href="data/investigations.csv">data/investigations.csv</a> and <a href="data/tests.csv">data/tests.csv</a>.</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>

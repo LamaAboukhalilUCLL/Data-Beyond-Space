@@ -1,0 +1,1206 @@
+﻿psi_id,table_file,spreadsheet_row,what_burns (our label),fuel_or_material_as_written,ambient_o2_as_written,ambient_o2_percent,ambient_o2_listed_percent,burner_flow_o2_as_written,burner_flow_o2_percent,pressure_as_written,pressure_unit,pressure_psi,in_moon_base_zone,outcome_as_written
+PSI-10,PSI-10_table_1.csv,2,Gas flames,C2H4,0.207128374,20.7128,,,,1.01184402,atm,14.87,False,
+PSI-10,PSI-10_table_1.csv,3,Gas flames,C2H4,0.206169206,20.6169,,,,1.01320494,atm,14.89,False,
+PSI-10,PSI-10_table_1.csv,4,Gas flames,C2H4,0.205663073,20.5663,,,,1.0138854,atm,14.9,False,
+PSI-10,PSI-10_table_1.csv,5,Gas flames,C2H4,0.204939076,20.4939,,,,1.01320494,atm,14.89,False,
+PSI-10,PSI-10_table_1.csv,6,Gas flames,C2H4,0.20431758,20.4318,,,,1.0138854,atm,14.9,False,
+PSI-10,PSI-10_table_1.csv,7,Gas flames,C2H4,0.203863566,20.3864,,,,1.0138854,atm,14.9,False,
+PSI-10,PSI-10_table_1.csv,8,Gas flames,C2H4,0.203460708,20.3461,,,,1.01456586,atm,14.91,False,
+PSI-10,PSI-10_table_1.csv,9,Gas flames,C2H4,0.202822015,20.2822,,,,1.01592678,atm,14.93,False,
+PSI-10,PSI-10_table_1.csv,10,Gas flames,C2H4,0.201883189,20.1883,,,,1.01524632,atm,14.92,False,
+PSI-10,PSI-10_table_1.csv,11,Gas flames,C2H4,0.201357214,20.1357,,,,1.01592678,atm,14.93,False,
+PSI-10,PSI-10_table_1.csv,12,Gas flames,C2H4,0.200867151,20.0867,,,,1.01660724,atm,14.94,False,
+PSI-10,PSI-10_table_1.csv,13,Gas flames,C2H4,0.209828781,20.9829,,,,1.00299804,atm,14.74,False,
+PSI-10,PSI-10_table_1.csv,14,Gas flames,C2H4,0.20919187,20.9192,,,,1.00776126,atm,14.81,False,
+PSI-10,PSI-10_table_1.csv,15,Gas flames,C2H4,0.208580728,20.8581,,,,1.00844172,atm,14.82,False,
+PSI-10,PSI-10_table_1.csv,16,Gas flames,C2H4,0.207973375,20.7973,,,,1.01320494,atm,14.89,False,
+PSI-10,PSI-10_table_1.csv,17,Gas flames,C2H4,0.207379511,20.738,,,,1.00912218,atm,14.83,False,
+PSI-10,PSI-10_table_1.csv,18,Gas flames,C2H4,0.20666972,20.667,,,,1.01184402,atm,14.87,False,
+PSI-10,PSI-10_table_1.csv,19,Gas flames,C2H4,0.206083892,20.6084,,,,1.01252448,atm,14.88,False,
+PSI-10,PSI-10_table_1.csv,20,Gas flames,C2H4,0.205485391,20.5485,,,,1.0138854,atm,14.9,False,
+PSI-10,PSI-10_table_1.csv,21,Gas flames,C2H4,0.204907733,20.4908,,,,1.01456586,atm,14.91,False,
+PSI-10,PSI-10_table_1.csv,22,Gas flames,C2H4,0.204429245,20.4429,,,,1.01592678,atm,14.93,False,
+PSI-10,PSI-10_table_1.csv,23,Gas flames,C2H4,0.203807321,20.3807,,,,1.01660724,atm,14.94,False,
+PSI-10,PSI-10_table_1.csv,24,Gas flames,C2H4,0.20322776,20.3228,,,,1.0172877,atm,14.95,False,
+PSI-10,PSI-10_table_1.csv,25,Gas flames,C2H4,0.202550678,20.2551,,,,1.01864862,atm,14.97,False,
+PSI-10,PSI-10_table_1.csv,26,Gas flames,C2H4,0.201832917,20.1833,,,,1.01932908,atm,14.98,False,
+PSI-10,PSI-10_table_1.csv,27,Gas flames,C2H4,0.201123228,20.1123,,,,1.01932908,atm,14.98,False,
+PSI-10,PSI-10_table_1.csv,28,Gas flames,C2H4,0.200535703,20.0536,,,,1.02000954,atm,14.99,False,
+PSI-10,PSI-10_table_1.csv,29,Gas flames,C2H4,0.200108197,20.0108,,,,1.02000954,atm,14.99,False,
+PSI-10,PSI-10_table_1.csv,30,Gas flames,C2H4,0.199796361,19.9796,,,,1.02000954,atm,14.99,False,
+PSI-10,PSI-10_table_1.csv,31,Gas flames,C2H4,0.199415737,19.9416,,,,1.01932908,atm,14.98,False,
+PSI-10,PSI-10_table_1.csv,32,Gas flames,C2H4,0.210188478,21.0188,,,,1.0036785,atm,14.75,False,
+PSI-10,PSI-10_table_1.csv,33,Gas flames,C2H4,0.209521205,20.9521,,,,1.0036785,atm,14.75,False,
+PSI-10,PSI-10_table_1.csv,34,Gas flames,C2H4,0.208724327,20.8724,,,,1.00503942,atm,14.77,False,
+PSI-10,PSI-10_table_1.csv,35,Gas flames,C2H4,0.208021363,20.8021,,,,1.00571988,atm,14.78,False,
+PSI-10,PSI-10_table_1.csv,36,Gas flames,C2H4,0.207274975,20.7275,,,,1.0070808,atm,14.8,False,
+PSI-10,PSI-10_table_1.csv,37,Gas flames,C2H4,0.206583339,20.6583,,,,1.00776126,atm,14.81,False,
+PSI-10,PSI-10_table_1.csv,38,Gas flames,C2H4,0.205935113,20.5935,,,,1.00912218,atm,14.83,False,
+PSI-10,PSI-10_table_1.csv,39,Gas flames,C2H4,0.205363297,20.5363,,,,1.00980264,atm,14.84,False,
+PSI-10,PSI-10_table_1.csv,40,Gas flames,C2H4,0.204891116,20.4891,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,41,Gas flames,C2H4,0.204441536,20.4442,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,42,Gas flames,C2H4,0.20401684,20.4017,,,,1.0104831,atm,14.85,False,
+PSI-10,PSI-10_table_1.csv,43,Gas flames,C2H4,0.203628498,20.3628,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,44,Gas flames,C2H4,0.203230898,20.3231,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,45,Gas flames,C2H4,0.202842409,20.2842,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,46,Gas flames,C2H4,0.202392691,20.2393,,,,1.01252448,atm,14.88,False,
+PSI-10,PSI-10_table_1.csv,47,Gas flames,C2H4,0.201997282,20.1997,,,,1.01320494,atm,14.89,False,
+PSI-10,PSI-10_table_1.csv,48,Gas flames,C2H4,0.201642461,20.1642,,,,1.01252448,atm,14.88,False,
+PSI-10,PSI-10_table_1.csv,49,Gas flames,C2H4,0.201330073,20.133,,,,1.01252448,atm,14.88,False,
+PSI-10,PSI-10_table_1.csv,50,Gas flames,C2H4,0.200879825,20.088,,,,1.01320494,atm,14.89,False,
+PSI-10,PSI-10_table_1.csv,51,Gas flames,C2H4,0.200458311,20.0458,,,,1.0138854,atm,14.9,False,
+PSI-10,PSI-10_table_1.csv,52,Gas flames,C2H4,0.396945546,39.6946,,,,1.00776126,atm,14.81,False,
+PSI-10,PSI-10_table_1.csv,53,Gas flames,C2H4,0.389985715,38.9986,,,,1.01252448,atm,14.88,False,
+PSI-10,PSI-10_table_1.csv,54,Gas flames,C2H4,0.38379786,38.3798,,,,1.01660724,atm,14.94,False,
+PSI-10,PSI-10_table_1.csv,55,Gas flames,C2H4,0.378755156,37.8755,,,,1.02000954,atm,14.99,False,
+PSI-10,PSI-10_table_1.csv,56,Gas flames,C2H4,0.373169325,37.3169,,,,1.02545322,atm,15.07,False,
+PSI-10,PSI-10_table_1.csv,57,Gas flames,C2H4,0.378720538,37.8721,,,,0.98870838,atm,14.53,False,
+PSI-10,PSI-10_table_1.csv,58,Gas flames,C2H4,0.375586869,37.5587,,,,0.99143022,atm,14.57,False,
+PSI-10,PSI-10_table_1.csv,59,Gas flames,C2H4,0.373429444,37.3429,,,,0.99143022,atm,14.57,False,
+PSI-10,PSI-10_table_1.csv,60,Gas flames,C2H4,0.398236568,39.8237,,,,1.00435896,atm,14.76,False,
+PSI-10,PSI-10_table_1.csv,61,Gas flames,C2H4,0.397053473,39.7053,,,,1.0070808,atm,14.8,False,
+PSI-10,PSI-10_table_1.csv,62,Gas flames,C2H4,0.395464744,39.5465,,,,1.0104831,atm,14.85,False,
+PSI-10,PSI-10_table_1.csv,63,Gas flames,C2H4,0.392640279,39.264,,,,1.01524632,atm,14.92,False,
+PSI-10,PSI-10_table_1.csv,64,Gas flames,C2H4,0.388949666,38.895,,,,1.02137046,atm,15.01,False,
+PSI-10,PSI-10_table_1.csv,65,Gas flames,C2H4,0.386279977,38.628,,,,1.02477276,atm,15.06,False,
+PSI-10,PSI-10_table_1.csv,66,Gas flames,C2H4,0.382816521,38.2817,,,,1.02953598,atm,15.13,False,
+PSI-10,PSI-10_table_1.csv,67,Gas flames,C2H4,0.380057661,38.0058,,,,1.03293828,atm,15.18,False,
+PSI-10,PSI-10_table_1.csv,68,Gas flames,C2H4,0.371068834,37.1069,,,,1.04246472,atm,15.32,False,
+PSI-10,PSI-10_table_1.csv,69,Gas flames,C2H4,0.370409062,37.0409,,,,1.04246472,atm,15.32,False,
+PSI-10,PSI-10_table_1.csv,70,Gas flames,C2H4,0.365614547,36.5615,,,,1.04246472,atm,15.32,False,
+PSI-10,PSI-10_table_1.csv,71,Gas flames,C2H4,0.36174856,36.1749,,,,1.04722794,atm,15.39,False,
+PSI-10,PSI-10_table_1.csv,72,Gas flames,C2H4,0.358337895,35.8338,,,,1.04722794,atm,15.39,False,
+PSI-10,PSI-10_table_1.csv,73,Gas flames,C2H4,0.300281323,30.0281,,,,1.00231758,atm,14.73,False,
+PSI-10,PSI-10_table_1.csv,74,Gas flames,C2H4,0.294018816,29.4019,,,,1.00912218,atm,14.83,False,
+PSI-10,PSI-10_table_1.csv,75,Gas flames,C2H4,0.388965886,38.8966,,,,1.01320494,atm,14.89,False,
+PSI-10,PSI-10_table_1.csv,76,Gas flames,C2H4,0.38786475,38.7865,,,,1.01524632,atm,14.92,False,
+PSI-10,PSI-10_table_1.csv,77,Gas flames,C2H4,0.379703491,37.9703,,,,1.02885552,atm,15.12,False,
+PSI-10,PSI-10_table_1.csv,78,Gas flames,C2H4,0.376921633,37.6922,,,,1.03157736,atm,15.16,False,
+PSI-10,PSI-10_table_1.csv,79,Gas flames,C2H4,0.374961367,37.4961,,,,1.0308969,atm,15.15,False,
+PSI-10,PSI-10_table_1.csv,80,Gas flames,C2H4,0.370676005,37.0676,,,,1.0308969,atm,15.15,False,
+PSI-10,PSI-10_table_1.csv,81,Gas flames,C2H4,0.373448053,37.3448,,,,1.02613368,atm,15.08,False,
+PSI-10,PSI-10_table_1.csv,82,Gas flames,C2H4,0.370400179,37.04,,,,1.02613368,atm,15.08,False,
+PSI-10,PSI-10_table_1.csv,83,Gas flames,C2H4,0.368534858,36.8535,,,,1.02613368,atm,15.08,False,
+PSI-10,PSI-10_table_1.csv,84,Gas flames,C2H4,0.365929881,36.593,,,,1.02613368,atm,15.08,False,
+PSI-10,PSI-10_table_1.csv,85,Gas flames,C2H4,0.364456988,36.4457,,,,1.02545322,atm,15.07,False,
+PSI-10,PSI-10_table_1.csv,86,Gas flames,C2H4,0.362735024,36.2735,,,,1.02477276,atm,15.06,False,
+PSI-10,PSI-10_table_1.csv,87,Gas flames,C2H4,0.36092323,36.0923,,,,1.02477276,atm,15.06,False,
+PSI-10,PSI-10_table_1.csv,88,Gas flames,C2H4,0.394349885,39.435,,,,1.00299804,atm,14.74,False,
+PSI-10,PSI-10_table_1.csv,89,Gas flames,C2H4,0.386570926,38.6571,,,,1.00299804,atm,14.74,False,
+PSI-10,PSI-10_table_1.csv,90,Gas flames,C2H4,0.381344603,38.1345,,,,1.0036785,atm,14.75,False,
+PSI-10,PSI-10_table_1.csv,91,Gas flames,C2H4,0.378553501,37.8554,,,,1.00299804,atm,14.74,False,
+PSI-10,PSI-10_table_1.csv,92,Gas flames,C2H4,0.373907361,37.3907,,,,1.00299804,atm,14.74,False,
+PSI-10,PSI-10_table_1.csv,93,Gas flames,C2H4,0.369543498,36.9543,,,,1.0036785,atm,14.75,False,
+PSI-10,PSI-10_table_1.csv,94,Gas flames,C2H4,0.378873529,37.8874,,,,1.00776126,atm,14.81,False,
+PSI-10,PSI-10_table_1.csv,95,Gas flames,C2H4,0.372135709,37.2136,,,,1.01796816,atm,14.96,False,
+PSI-10,PSI-10_table_1.csv,96,Gas flames,C2H4,0.365351771,36.5352,,,,1.02885552,atm,15.12,False,
+PSI-10,PSI-10_table_1.csv,97,Gas flames,C2H4,0.362579633,36.258,,,,1.0308969,atm,15.15,False,
+PSI-10,PSI-10_table_1.csv,98,Gas flames,C2H4,0.361426502,36.1427,,,,1.0308969,atm,15.15,False,
+PSI-10,PSI-10_table_1.csv,99,Gas flames,C2H4,0.35959538,35.9595,,,,1.03157736,atm,15.16,False,
+PSI-10,PSI-10_table_1.csv,100,Gas flames,C2H4,0.398389773,39.839,,,,1.25817054,atm,18.4899,False,
+PSI-10,PSI-10_table_1.csv,101,Gas flames,C2H4,0.397248069,39.7248,,,,1.26021192,atm,18.5199,False,
+PSI-10,PSI-10_table_1.csv,102,Gas flames,C2H4,0.390982574,39.0983,,,,1.26021192,atm,18.5199,False,
+PSI-10,PSI-10_table_1.csv,103,Gas flames,C2H4,0.388733316,38.8733,,,,1.26089238,atm,18.5299,False,
+PSI-10,PSI-10_table_1.csv,104,Gas flames,C2H4,0.387591064,38.7591,,,,1.2622533,atm,18.5499,False,
+PSI-10,PSI-10_table_1.csv,105,Gas flames,C2H4,0.384886695,38.4887,,,,1.26429468,atm,18.5799,False,
+PSI-10,PSI-10_table_1.csv,106,Gas flames,C2H4,0.389437129,38.9437,,,,1.24932456,atm,18.3599,False,
+PSI-10,PSI-10_table_1.csv,107,Gas flames,C2H4,0.387849574,38.785,,,,1.25749008,atm,18.4799,False,
+PSI-10,PSI-10_table_1.csv,108,Gas flames,C2H4,0.385960225,38.596,,,,1.25340732,atm,18.4199,False,
+PSI-10,PSI-10_table_1.csv,109,Gas flames,C2H4,0.383985713,38.3986,,,,1.25612916,atm,18.4599,False,
+PSI-10,PSI-10_table_1.csv,110,Gas flames,C2H4,0.382547209,38.2547,,,,1.25749008,atm,18.4799,False,
+PSI-10,PSI-10_table_1.csv,111,Gas flames,C2H4,0.379403054,37.9403,,,,1.26021192,atm,18.5199,False,
+PSI-10,PSI-10_table_1.csv,112,Gas flames,C2H4,0.377441609,37.7442,,,,1.26021192,atm,18.5199,False,
+PSI-10,PSI-10_table_1.csv,113,Gas flames,C2H4,0.398542439,39.8542,,,,1.25749008,atm,18.4799,False,
+PSI-10,PSI-10_table_1.csv,114,Gas flames,C2H4,0.396833456,39.6833,,,,1.26021192,atm,18.5199,False,
+PSI-10,PSI-10_table_1.csv,115,Gas flames,C2H4,0.39522143,39.5221,,,,1.26293376,atm,18.5599,False,
+PSI-10,PSI-10_table_1.csv,116,Gas flames,C2H4,0.393608129,39.3608,,,,1.26633606,atm,18.6099,False,
+PSI-10,PSI-10_table_1.csv,117,Gas flames,C2H4,0.392269326,39.2269,,,,1.2690579,atm,18.6499,False,
+PSI-10,PSI-10_table_1.csv,118,Gas flames,C2H4,0.390189347,39.0189,,,,1.27177974,atm,18.6899,False,
+PSI-10,PSI-10_table_1.csv,119,Gas flames,C2H4,0.388150549,38.8151,,,,1.27450158,atm,18.7299,False,
+PSI-10,PSI-10_table_1.csv,120,Gas flames,C2H4,0.386276376,38.6276,,,,1.27654296,atm,18.7599,False,
+PSI-10,PSI-10_table_1.csv,121,Gas flames,C2H4,0.389021209,38.9021,,,,1.27314066,atm,18.7099,False,
+PSI-10,PSI-10_table_1.csv,122,Gas flames,C2H4,0.38758473,38.7585,,,,1.27518204,atm,18.7399,False,
+PSI-10,PSI-10_table_1.csv,123,Gas flames,C2H4,0.385704463,38.5704,,,,1.27654296,atm,18.7599,False,
+PSI-10,PSI-10_table_1.csv,124,Gas flames,C2H4,0.384814006,38.4814,,,,1.2792648,atm,18.7999,False,
+PSI-10,PSI-10_table_1.csv,125,Gas flames,C2H4,0.382594439,38.2594,,,,1.28402802,atm,18.8699,False,
+PSI-10,PSI-10_table_1.csv,126,Gas flames,C2H4,0.380272275,38.0272,,,,1.28879124,atm,18.9399,False,
+PSI-10,PSI-10_table_1.csv,127,Gas flames,C2H4,0.378429675,37.843,,,,1.29015216,atm,18.9599,False,
+PSI-10,PSI-10_table_1.csv,128,Gas flames,C2H4,0.398598351,39.8598,,,,1.2554487,atm,18.4499,False,
+PSI-10,PSI-10_table_1.csv,129,Gas flames,C2H4,0.395841809,39.5842,,,,1.27177974,atm,18.6899,False,
+PSI-10,PSI-10_table_1.csv,130,Gas flames,C2H4,0.394925333,39.4925,,,,1.26837744,atm,18.6399,False,
+PSI-10,PSI-10_table_1.csv,131,Gas flames,C2H4,0.394012765,39.4013,,,,1.2724602,atm,18.6999,False,
+PSI-10,PSI-10_table_1.csv,132,Gas flames,C2H4,0.39150599,39.1506,,,,1.27994526,atm,18.8099,False,
+PSI-10,PSI-10_table_1.csv,133,Gas flames,C2H4,0.390872924,39.0873,,,,1.28198664,atm,18.8399,False,
+PSI-10,PSI-10_table_1.csv,134,Gas flames,C2H4,0.390078032,39.0078,,,,1.28402802,atm,18.8699,False,
+PSI-10,PSI-10_table_1.csv,135,Gas flames,C2H4,0.387709109,38.7709,,,,1.29015216,atm,18.9599,False,
+PSI-10,PSI-10_table_1.csv,136,Gas flames,C2H4,0.387159045,38.7159,,,,1.29083262,atm,18.9699,False,
+PSI-10,PSI-10_table_1.csv,137,Gas flames,C2H4,0.383237392,38.3237,,,,1.292874,atm,18.9999,False,
+PSI-10,PSI-10_table_1.csv,138,Gas flames,C2H4,0.379651533,37.9652,,,,1.29423492,atm,19.0199,False,
+PSI-10,PSI-10_table_1.csv,139,Gas flames,C2H4,0.375979956,37.598,,,,1.29491538,atm,19.0299,False,
+PSI-10,PSI-10_table_1.csv,140,Gas flames,C2H4,0.372524632,37.2525,,,,1.29559584,atm,19.0399,False,
+PSI-10,PSI-10_table_1.csv,141,Gas flames,C2H4,0.369301945,36.9302,,,,1.2962763,atm,19.0499,False,
+PSI-10,PSI-10_table_1.csv,142,Gas flames,C2H4,0.365498172,36.5498,,,,1.29695676,atm,19.0599,False,
+PSI-10,PSI-10_table_1.csv,143,Gas flames,C2H4,0.395565745,39.5566,,,,1.25476824,atm,18.4399,False,
+PSI-10,PSI-10_table_1.csv,144,Gas flames,C2H4,0.394453826,39.4454,,,,1.25612916,atm,18.4599,False,
+PSI-10,PSI-10_table_1.csv,145,Gas flames,C2H4,0.392202621,39.2203,,,,1.258851,atm,18.4999,False,
+PSI-10,PSI-10_table_1.csv,146,Gas flames,C2H4,0.390754941,39.0755,,,,1.26089238,atm,18.5299,False,
+PSI-10,PSI-10_table_1.csv,147,Gas flames,C2H4,0.389782968,38.9783,,,,1.26157284,atm,18.5399,False,
+PSI-10,PSI-10_table_1.csv,148,Gas flames,C2H4,0.388258954,38.8259,,,,1.2622533,atm,18.5499,False,
+PSI-10,PSI-10_table_1.csv,149,Gas flames,C2H4,0.3865883,38.6588,,,,1.26293376,atm,18.5599,False,
+PSI-10,PSI-10_table_1.csv,150,Gas flames,C2H4,0.384641571,38.4642,,,,1.26429468,atm,18.5799,False,
+PSI-10,PSI-10_table_1.csv,151,Gas flames,C2H4,0.383088242,38.3088,,,,1.26497514,atm,18.5899,False,
+PSI-10,PSI-10_table_1.csv,152,Gas flames,C2H4,0.386116096,38.6116,,,,1.26293376,atm,18.5599,False,
+PSI-10,PSI-10_table_1.csv,153,Gas flames,C2H4,0.3842703,38.427,,,,1.26293376,atm,18.5599,False,
+PSI-10,PSI-10_table_1.csv,154,Gas flames,C2H4,0.382214792,38.2215,,,,1.2622533,atm,18.5499,False,
+PSI-10,PSI-10_table_1.csv,155,Gas flames,C2H4,0.381649393,38.1649,,,,1.26361422,atm,18.5699,False,
+PSI-10,PSI-10_table_1.csv,156,Gas flames,C2H4,0.394712947,39.4713,,,,1.00231758,atm,14.73,False,
+PSI-10,PSI-10_table_1.csv,157,Gas flames,C2H4,0.392546384,39.2546,,,,1.00435896,atm,14.76,False,
+PSI-10,PSI-10_table_1.csv,158,Gas flames,C2H4,0.391981265,39.1981,,,,1.00435896,atm,14.76,False,
+PSI-10,PSI-10_table_1.csv,159,Gas flames,C2H4,0.390565564,39.0566,,,,1.00571988,atm,14.78,False,
+PSI-10,PSI-10_table_1.csv,160,Gas flames,C2H4,0.388965224,38.8965,,,,1.00640034,atm,14.79,False,
+PSI-10,PSI-10_table_1.csv,161,Gas flames,C2H4,0.386954381,38.6954,,,,1.00776126,atm,14.81,False,
+PSI-10,PSI-10_table_1.csv,162,Gas flames,C2H4,0.384496992,38.4497,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,163,Gas flames,C2H4,0.382566898,38.2567,,,,1.01252448,atm,14.88,False,
+PSI-10,PSI-10_table_1.csv,164,Gas flames,C2H4,0.299432834,29.9433,,,,1.00163712,atm,14.72,False,
+PSI-10,PSI-10_table_1.csv,165,Gas flames,C2H4,0.297429735,29.743,,,,1.00299804,atm,14.74,False,
+PSI-10,PSI-10_table_1.csv,166,Gas flames,C2H4,0.293952369,29.3952,,,,1.00503942,atm,14.77,False,
+PSI-10,PSI-10_table_1.csv,167,Gas flames,C2H4,0.289422616,28.9423,,,,1.01252448,atm,14.88,False,
+PSI-10,PSI-10_table_1.csv,168,Gas flames,C2H4,0.209912572,20.9913,,,,1.00299804,atm,14.74,False,
+PSI-10,PSI-10_table_1.csv,169,Gas flames,C2H4,0.208975718,20.8976,,,,1.00640034,atm,14.79,False,
+PSI-10,PSI-10_table_1.csv,170,Gas flames,C2H4,0.208213735,20.8214,,,,1.00776126,atm,14.81,False,
+PSI-10,PSI-10_table_1.csv,171,Gas flames,C2H4,0.207380999,20.7381,,,,1.00844172,atm,14.82,False,
+PSI-10,PSI-10_table_1.csv,172,Gas flames,C2H4,0.206772012,20.6772,,,,1.00844172,atm,14.82,False,
+PSI-10,PSI-10_table_1.csv,173,Gas flames,C2H4,0.206181778,20.6182,,,,1.00844172,atm,14.82,False,
+PSI-10,PSI-10_table_1.csv,174,Gas flames,C2H4,0.20545971,20.546,,,,1.00844172,atm,14.82,False,
+PSI-10,PSI-10_table_1.csv,175,Gas flames,C2H4,0.20452292,20.4523,,,,1.00912218,atm,14.83,False,
+PSI-10,PSI-10_table_1.csv,176,Gas flames,C2H4,0.203933489,20.3933,,,,1.00980264,atm,14.84,False,
+PSI-10,PSI-10_table_1.csv,177,Gas flames,C2H4,0.203433022,20.3433,,,,1.0104831,atm,14.85,False,
+PSI-10,PSI-10_table_1.csv,178,Gas flames,C2H4,0.202879725,20.288,,,,1.0104831,atm,14.85,False,
+PSI-10,PSI-10_table_1.csv,179,Gas flames,C2H4,0.2022457,20.2246,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,180,Gas flames,C2H4,0.201524174,20.1524,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,181,Gas flames,C2H4,0.201046071,20.1046,,,,1.01184402,atm,14.87,False,
+PSI-10,PSI-10_table_1.csv,182,Gas flames,C2H4,0.20058213,20.0582,,,,1.01184402,atm,14.87,False,
+PSI-10,PSI-10_table_1.csv,183,Gas flames,C2H4,0.200485764,20.0486,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,184,Gas flames,C2H4,0.199858989,19.9859,,,,1.01184402,atm,14.87,False,
+PSI-10,PSI-10_table_1.csv,185,Gas flames,C2H4,0.19968905,19.9689,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,186,Gas flames,C2H4,0.199163298,19.9163,,,,1.01116356,atm,14.86,False,
+PSI-10,PSI-10_table_1.csv,187,Gas flames,C2H4,0.198596375,19.8596,,,,1.01184402,atm,14.87,False,
+PSI-10,PSI-10_table_1.csv,188,Gas flames,C2H4,0.198048193,19.8048,,,,1.01184402,atm,14.87,False,
+PSI-10,PSI-10_table_1.csv,189,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,190,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,191,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,192,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,193,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,194,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,195,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,196,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,197,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,198,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,199,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,200,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,201,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,202,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,203,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,204,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,205,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,206,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,207,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_1.csv,208,Gas flames,C3H8,0.4,40.0,,,,0.931972789,atm,13.6962,False,
+PSI-10,PSI-10_table_2.csv,2,Gas flames,C2H4 atmosphere,,,,0.37082819,37.0828,0.99823482,atm,14.67,,
+PSI-10,PSI-10_table_2.csv,3,Gas flames,C2H4 atmosphere,,,,0.371286026,37.1286,1.00163712,atm,14.72,,
+PSI-10,PSI-10_table_2.csv,4,Gas flames,C2H4 atmosphere,,,,0.212319452,21.2319,1.0036785,atm,14.75,,
+PSI-10,PSI-10_table_2.csv,5,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.9492417,atm,13.95,,
+PSI-10,PSI-10_table_2.csv,6,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.95060262,atm,13.97,,
+PSI-10,PSI-10_table_2.csv,7,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.95196354,atm,13.99,,
+PSI-10,PSI-10_table_2.csv,8,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.952644,atm,14.0,,
+PSI-10,PSI-10_table_2.csv,9,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.95332446,atm,14.01,,
+PSI-10,PSI-10_table_2.csv,10,Gas flames,C2H4 atmosphere,,,,0.40193315,40.1933,0.95400492,atm,14.02,,
+PSI-10,PSI-10_table_2.csv,11,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.99823482,atm,14.67,,
+PSI-10,PSI-10_table_2.csv,12,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.0002762,atm,14.7,,
+PSI-10,PSI-10_table_2.csv,13,Gas flames,C2H4 atmosphere,,,,0.564864309,56.4864,1.00231758,atm,14.73,,
+PSI-10,PSI-10_table_2.csv,14,Gas flames,C2H4 atmosphere,,,,0.565263488,56.5263,1.00435896,atm,14.76,,
+PSI-10,PSI-10_table_2.csv,15,Gas flames,C2H4 atmosphere,,,,0.355416217,35.5416,1.00640034,atm,14.79,,
+PSI-10,PSI-10_table_2.csv,16,Gas flames,C2H4 atmosphere,,,,0.355855949,35.5856,1.00776126,atm,14.81,,
+PSI-10,PSI-10_table_2.csv,17,Gas flames,C2H4 atmosphere,,,,0.289768222,28.9768,1.00980264,atm,14.84,,
+PSI-10,PSI-10_table_2.csv,18,Gas flames,C2H4 atmosphere,,,,0.291369888,29.137,1.01184402,atm,14.87,,
+PSI-10,PSI-10_table_2.csv,19,Gas flames,C2H4 atmosphere,,,,0.293991022,29.3991,1.0138854,atm,14.9,,
+PSI-10,PSI-10_table_2.csv,20,Gas flames,C2H4 atmosphere,,,,0.291244031,29.1244,1.01524632,atm,14.92,,
+PSI-10,PSI-10_table_2.csv,21,Gas flames,C2H4 atmosphere,,,,0.294875805,29.4876,1.01660724,atm,14.94,,
+PSI-10,PSI-10_table_2.csv,22,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.99959574,atm,14.69,,
+PSI-10,PSI-10_table_2.csv,23,Gas flames,C2H4 atmosphere,,,,0.469396187,46.9396,1.00163712,atm,14.72,,
+PSI-10,PSI-10_table_2.csv,24,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.42460704,atm,6.24,,
+PSI-10,PSI-10_table_2.csv,25,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.4252875,atm,6.25,,
+PSI-10,PSI-10_table_2.csv,26,Gas flames,C2H4 atmosphere,,,,0.212288808,21.2289,0.42664842,atm,6.27,,
+PSI-10,PSI-10_table_2.csv,27,Gas flames,C2H4 atmosphere,,,,0.252907672,25.2908,0.42800934,atm,6.29,,
+PSI-10,PSI-10_table_2.csv,28,Gas flames,C2H4 atmosphere,,,,0.345371087,34.5371,0.99891528,atm,14.68,,
+PSI-10,PSI-10_table_2.csv,29,Gas flames,C2H4 atmosphere,,,,0.262286322,26.2286,1.00163712,atm,14.72,,
+PSI-10,PSI-10_table_2.csv,30,Gas flames,C2H4 atmosphere,,,,0.212467161,21.2467,1.0036785,atm,14.75,,
+PSI-10,PSI-10_table_2.csv,31,Gas flames,C2H4 atmosphere,,,,RAMP,,1.01320494,atm,14.89,,
+PSI-10,PSI-10_table_2.csv,32,Gas flames,C2H4 atmosphere,,,,RAMP,,1.02000954,atm,14.99,,
+PSI-10,PSI-10_table_2.csv,33,Gas flames,C2H4 atmosphere,,,,RAMP,,1.02885552,atm,15.12,,
+PSI-10,PSI-10_table_2.csv,34,Gas flames,C2H4 atmosphere,,,,0.500492181,50.0492,1.03838196,atm,15.26,,
+PSI-10,PSI-10_table_2.csv,35,Gas flames,C2H4 atmosphere,,,,0.502028139,50.2028,0.50149902,atm,7.37,,
+PSI-10,PSI-10_table_2.csv,36,Gas flames,C2H4 atmosphere,,,,0.319651909,31.9652,0.50422086,atm,7.41,,
+PSI-10,PSI-10_table_2.csv,37,Gas flames,C2H4 atmosphere,,,,0.212378902,21.2379,0.50762316,atm,7.46,,
+PSI-10,PSI-10_table_2.csv,38,Gas flames,C2H4 atmosphere,,,,0.212017175,21.2017,0.51578868,atm,7.58,,
+PSI-10,PSI-10_table_2.csv,39,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.0002762,atm,14.7,,
+PSI-10,PSI-10_table_2.csv,40,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.00231758,atm,14.73,,
+PSI-10,PSI-10_table_2.csv,41,Gas flames,C2H4 atmosphere,,,,0.433408794,43.3409,1.0036785,atm,14.75,,
+PSI-10,PSI-10_table_2.csv,42,Gas flames,C2H4 atmosphere,,,,0.433829814,43.383,1.0070808,atm,14.8,,
+PSI-10,PSI-10_table_2.csv,43,Gas flames,C2H4 atmosphere,,,,0.269972431,26.9972,1.00980264,atm,14.84,,
+PSI-10,PSI-10_table_2.csv,44,Gas flames,C2H4 atmosphere,,,,0.270380954,27.0381,1.01320494,atm,14.89,,
+PSI-10,PSI-10_table_2.csv,45,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.99891528,atm,14.68,,
+PSI-10,PSI-10_table_2.csv,46,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.0002762,atm,14.7,,
+PSI-10,PSI-10_table_2.csv,47,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.00163712,atm,14.72,,
+PSI-10,PSI-10_table_2.csv,48,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.00231758,atm,14.73,,
+PSI-10,PSI-10_table_2.csv,49,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.0036785,atm,14.75,,
+PSI-10,PSI-10_table_2.csv,50,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.0036785,atm,14.75,,
+PSI-10,PSI-10_table_2.csv,51,Gas flames,C2H4 atmosphere,,,,0.569603349,56.9603,1.0036785,atm,14.75,,
+PSI-10,PSI-10_table_2.csv,52,Gas flames,C2H4 atmosphere,,,,0.571963123,57.1963,1.00571988,atm,14.78,,
+PSI-10,PSI-10_table_2.csv,53,Gas flames,C2H4 atmosphere,,,,0.572032341,57.2032,1.0070808,atm,14.8,,
+PSI-10,PSI-10_table_2.csv,54,Gas flames,C2H4 atmosphere,,,,0.364248407,36.4248,1.00776126,atm,14.81,,
+PSI-10,PSI-10_table_2.csv,55,Gas flames,C2H4 atmosphere,,,,0.366162786,36.6163,1.00912218,atm,14.83,,
+PSI-10,PSI-10_table_2.csv,56,Gas flames,C2H4 atmosphere,,,,0.434718543,43.4719,0.99959574,atm,14.69,,
+PSI-10,PSI-10_table_2.csv,57,Gas flames,C2H4 atmosphere,,,,0.271103057,27.1103,1.00163712,atm,14.72,,
+PSI-10,PSI-10_table_2.csv,58,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.00299804,atm,14.74,,
+PSI-10,PSI-10_table_2.csv,59,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.99823482,atm,14.67,,
+PSI-10,PSI-10_table_2.csv,60,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.0002762,atm,14.7,,
+PSI-10,PSI-10_table_2.csv,61,Gas flames,C2H4 atmosphere,,,,0.568658025,56.8658,1.00095666,atm,14.71,,
+PSI-10,PSI-10_table_2.csv,62,Gas flames,C2H4 atmosphere,,,,0.455719081,45.5719,1.00163712,atm,14.72,,
+PSI-10,PSI-10_table_2.csv,63,Gas flames,C2H4 atmosphere,,,,0.365417242,36.5417,1.00299804,atm,14.74,,
+PSI-10,PSI-10_table_2.csv,64,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.99891528,atm,14.68,,
+PSI-10,PSI-10_table_2.csv,65,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.00095666,atm,14.71,,
+PSI-10,PSI-10_table_2.csv,66,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.00231758,atm,14.73,,
+PSI-10,PSI-10_table_2.csv,67,Gas flames,C2H4 atmosphere,,,,0.497148646,49.7149,1.0036785,atm,14.75,,
+PSI-10,PSI-10_table_2.csv,68,Gas flames,C2H4 atmosphere,,,,0.318171716,31.8172,1.00640034,atm,14.79,,
+PSI-10,PSI-10_table_2.csv,69,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.01116356,atm,14.86,,
+PSI-10,PSI-10_table_2.csv,70,Gas flames,C2H4 atmosphere,,,,0.460992465,46.0992,1.01184402,atm,14.87,,
+PSI-10,PSI-10_table_2.csv,71,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.99959574,atm,14.69,,
+PSI-10,PSI-10_table_2.csv,72,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.00163712,atm,14.72,,
+PSI-10,PSI-10_table_2.csv,73,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.00299804,atm,14.74,,
+PSI-10,PSI-10_table_2.csv,74,Gas flames,C2H4 atmosphere,,,,0.644458404,64.4458,1.00435896,atm,14.76,,
+PSI-10,PSI-10_table_2.csv,75,Gas flames,C2H4 atmosphere,,,,0.411995618,41.1996,1.00503942,atm,14.77,,
+PSI-10,PSI-10_table_2.csv,76,Gas flames,C2H4 atmosphere,,,,0.256270373,25.627,1.0070808,atm,14.8,,
+PSI-10,PSI-10_table_2.csv,77,Gas flames,C2H4 atmosphere,,,,RAMP,,1.00980264,atm,14.84,,
+PSI-10,PSI-10_table_2.csv,78,Gas flames,C2H4 atmosphere,,,,RAMP,,1.01116356,atm,14.86,,
+PSI-10,PSI-10_table_2.csv,79,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.49945764,atm,7.34,,
+PSI-10,PSI-10_table_2.csv,80,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.50081856,atm,7.36,,
+PSI-10,PSI-10_table_2.csv,81,Gas flames,C2H4 atmosphere,,,,0.643889549,64.389,0.50149902,atm,7.37,,
+PSI-10,PSI-10_table_2.csv,82,Gas flames,C2H4 atmosphere,,,,0.411583511,41.1584,0.50217948,atm,7.38,,
+PSI-10,PSI-10_table_2.csv,83,Gas flames,C2H4 atmosphere,,,,0.256080232,25.608,0.50422086,atm,7.41,,
+PSI-10,PSI-10_table_2.csv,84,Gas flames,C2H4 atmosphere,,,,0.327364706,32.7365,0.50558178,atm,7.43,,
+PSI-10,PSI-10_table_2.csv,85,Gas flames,C2H4 atmosphere,,,,0.413276012,41.3276,0.50762316,atm,7.46,,
+PSI-10,PSI-10_table_2.csv,86,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.50830362,atm,7.47,,
+PSI-10,PSI-10_table_2.csv,87,Gas flames,C2H4 atmosphere,,,,RAMP,,0.50830362,atm,7.47,,
+PSI-10,PSI-10_table_2.csv,88,Gas flames,C2H4 atmosphere,,,,RAMP,,0.51102546,atm,7.51,,
+PSI-10,PSI-10_table_2.csv,89,Gas flames,C2H4 atmosphere,,,,LOW O2,,0.51238638,atm,7.53,,
+PSI-10,PSI-10_table_2.csv,90,Gas flames,C2H4 atmosphere,,,,LOW O2,,0.5171496,atm,7.6,,
+PSI-10,PSI-10_table_2.csv,91,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,2.99810676,atm,44.0599,,
+PSI-10,PSI-10_table_2.csv,92,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,2.99946768,atm,44.0799,,
+PSI-10,PSI-10_table_2.csv,93,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,3.0008286,atm,44.0999,,
+PSI-10,PSI-10_table_2.csv,94,Gas flames,C2H4 atmosphere,,,,RAMP,,3.00218952,atm,44.1199,,
+PSI-10,PSI-10_table_2.csv,95,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,3.00286998,atm,44.1299,,
+PSI-10,PSI-10_table_2.csv,96,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,3.00355044,atm,44.1399,,
+PSI-10,PSI-10_table_2.csv,97,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,3.00491136,atm,44.1599,,
+PSI-10,PSI-10_table_2.csv,98,Gas flames,C2H4 atmosphere,,,,0.491262479,49.1262,3.00559182,atm,44.1699,,
+PSI-10,PSI-10_table_2.csv,99,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,3.0076332,atm,44.1999,,
+PSI-10,PSI-10_table_2.csv,100,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,2.99810676,atm,44.0599,,
+PSI-10,PSI-10_table_2.csv,101,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,2.99810676,atm,44.0599,,
+PSI-10,PSI-10_table_2.csv,102,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,2.99810676,atm,44.0599,,
+PSI-10,PSI-10_table_2.csv,103,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,2.99946768,atm,44.0799,,
+PSI-10,PSI-10_table_2.csv,104,Gas flames,C2H4 atmosphere,,,,RAMP,,2.99946768,atm,44.0799,,
+PSI-10,PSI-10_table_2.csv,105,Gas flames,C2H4 atmosphere,,,,0.498054913,49.8055,3.00014814,atm,44.0899,,
+PSI-10,PSI-10_table_2.csv,106,Gas flames,C2H4 atmosphere,,,,0.318569512,31.857,3.00218952,atm,44.1199,,
+PSI-10,PSI-10_table_2.csv,107,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.97129262,atm,28.9699,,
+PSI-10,PSI-10_table_2.csv,108,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.97197308,atm,28.9799,,
+PSI-10,PSI-10_table_2.csv,109,Gas flames,C2H4 atmosphere,,,,0.569103938,56.9104,1.97401446,atm,29.0099,,
+PSI-10,PSI-10_table_2.csv,110,Gas flames,C2H4 atmosphere,,,,0.455889821,45.589,1.97469492,atm,29.0199,,
+PSI-10,PSI-10_table_2.csv,111,Gas flames,C2H4 atmosphere,,,,0.455328049,45.5328,1.97401446,atm,29.0099,,
+PSI-10,PSI-10_table_2.csv,112,Gas flames,C2H4 atmosphere,,,,0.36478772,36.4788,1.97741676,atm,29.0599,,
+PSI-10,PSI-10_table_2.csv,113,Gas flames,C2H4 atmosphere,,,,0.290628255,29.0628,1.97809722,atm,29.0699,,
+PSI-10,PSI-10_table_2.csv,114,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,1.97945814,atm,29.0899,,
+PSI-10,PSI-10_table_2.csv,115,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.49945764,atm,7.34,,
+PSI-10,PSI-10_table_2.csv,116,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.5035404,atm,7.4,,
+PSI-10,PSI-10_table_2.csv,117,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.5069427,atm,7.45,,
+PSI-10,PSI-10_table_2.csv,118,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.50762316,atm,7.46,,
+PSI-10,PSI-10_table_2.csv,119,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.50898408,atm,7.48,,
+PSI-10,PSI-10_table_2.csv,120,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.510345,atm,7.5,,
+PSI-10,PSI-10_table_2.csv,121,Gas flames,C2H4 atmosphere,,,,0.849977932,84.9978,0.51238638,atm,7.53,,
+PSI-20,PSI-20_table_1.csv,2,Gas burner emulating solids,100% C2H4,21; 26.5; 40,,21.0; 26.5; 40.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,3,Gas burner emulating solids,100% C2H4,26.5; 34,,26.5; 34.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,4,Gas burner emulating solids,50% C2H4,21; 26.5; 34; 40,,21.0; 26.5; 34.0; 40.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,5,Gas burner emulating solids,50% C2H4,26.5; 40,,26.5; 40.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,6,Gas burner emulating solids,50% C2H4,3400%,,,,,,,,,
+PSI-20,PSI-20_table_1.csv,7,Gas burner emulating solids,50% C2H4,26.5; 34,,26.5; 34.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,8,Gas burner emulating solids,100%C2H4,26.5; 34,,26.5; 34.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,9,Gas burner emulating solids,100%C2H4,2100%,,,,,,,,,
+PSI-20,PSI-20_table_1.csv,10,Gas burner emulating solids,100%C2H4,21; 26.5; 34,,21.0; 26.5; 34.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,11,Gas burner emulating solids,100% C2H4,25; 34; 40,,25.0; 34.0; 40.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,12,Gas burner emulating solids,100% C2H4,26.5; 34,,26.5; 34.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,13,Gas burner emulating solids,100% CH4,25; 34; 40,,25.0; 34.0; 40.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,14,Gas burner emulating solids,100% CH4,25; 40,,25.0; 40.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,15,Gas burner emulating solids,50% C2H4,25; 40,,25.0; 40.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,16,Gas burner emulating solids,100% C2H4,34; 40,,34.0; 40.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,17,Gas burner emulating solids,100% C2H4,25; 34; 40,,25.0; 34.0; 40.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,18,Gas burner emulating solids,100% C2H4,21; 26.5; 34,,21.0; 26.5; 34.0,,,,,,,
+PSI-20,PSI-20_table_1.csv,19,Gas burner emulating solids,100% C2H4,25; 34; 40,,25.0; 34.0; 40.0,,,,,,,
+PSI-23,PSI-23_table_1.csv,2,Gas flames,50% C2H4 with N2,~21% O2 with N2,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,3,Gas flames,50% C2H4 with N3,~21% O2 with N3,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,4,Gas flames,45% CH4 with N2,~21% O2 with N4,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,5,Gas flames,45% CH4 with N3,~30% O2 with N2,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,6,Gas flames,100% H2,~21% O2 with N2,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,7,Gas flames,44.4% H2 with CH4,~21% O2 with N3,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,8,Gas flames,66.7% H2 with CH4,~21% O2 with N4,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,9,Gas flames,100% H2,~21% O2 with N5,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,10,Gas flames,50% C2H4 with N2,~21% O2 with N6,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,11,Gas flames,"25% H2, 20% CH4, with He",~21% O2 with He,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,12,Gas flames,"20% H2, 25% CH4, with He",~21% O2 with He,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,13,Gas flames,"30% H2, 15% CH4, with He",~30% O2 with He,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,14,Gas flames,45% H2 with He,~30% and ~21% O2 with He,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,15,Gas flames,45% CH4 with He,~30% and ~21% O2 with He,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,16,Gas flames,20% C2H4 with He,~30% O2 with He,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,17,Gas flames,25% C2H4 with He,~30% and ~21% O2 with He,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,18,Gas flames,30% C2H4 with He,~30% and ~21% O2 with He,,,,,,,,,
+PSI-23,PSI-23_table_1.csv,19,Gas flames,35% H2 with He,~30% and ~21% O2 with He,,,,,,,,,
+PSI-25,PSI-25_table_1.csv,2,Solid materials,100 micron PMMA film   2 cm wide,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,3,Solid materials,200 micron PMMA film   2 cm wide,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,4,Solid materials,100 micron film   2 cm wide,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,5,Solid materials,300 micron PMMA film   2 cm wide,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,6,Solid materials,200 micron  2 cm wide,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,7,Solid materials,2 cm 0.1 mm PMMA film,21,21.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,8,Solid materials,400 micron film   2 cm wide,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,9,Solid materials,2 cm   0.2 mm PMMA film,21,21.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,10,Solid materials,2 cm   0.1 mm PMMA film,21,21.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,11,Solid materials,1 cm   0.2 mm PMMA film,21,21.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,12,Solid materials,2 cm   0.2 mm PMMA film,21,21.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,13,Solid materials,300 micron film   2 cm wide,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,14,Solid materials,2 cm   0.4 mm thick film,21,21.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,15,Solid materials,1 cm wide 200 micron thick PMMA,15,15.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,16,Solid materials,2 cm   0.1 mm PMMA film,21,21.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,17,Solid materials,2 cm 100 micron thick PMMA,17.3,17.3,,,,,,,,
+PSI-25,PSI-25_table_1.csv,18,Solid materials,1 cm wide 200 micron thick PMMA,17.5,17.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,19,Solid materials,1 cm wide 200 micron thick PMMA,17.4,17.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,20,Solid materials,2 cm 100 micron thick PMMA,17.3,17.3,,,,,,,,
+PSI-25,PSI-25_table_1.csv,21,Solid materials,2 cm 100 micron thick PMMA,17.4,17.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,22,Solid materials,1 cm wide 200 micron thick PMMA,20.8,20.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,23,Solid materials,1 cm wide 200 micron thick PMMA,20.7,20.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,24,Solid materials,Nomex natural (nomex III),22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,25,Solid materials,Nomex natural (nomex III),21,21.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,26,Solid materials,Nomex natural (nomex III),21.7,21.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,27,Solid materials,Japan Wax candle,17.4,17.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,28,Solid materials,1 mm thick PMMA   1 sided   2 cm,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,29,Solid materials,3 mm thick PMMA 1 sided    2 cm wide,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,30,Solid materials,2 cm wide   5 mm thick 1 sided PMMA,20.8,20.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,31,Solid materials,5 mm thick PMMA   2 cm wide,21.8,21.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,32,Solid materials,3 mm thick PMMA   2 sided   2 cm thick,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,33,Solid materials,1 mm thick PMMA   2 cm wide,21.8,21.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,34,Solid materials,1 cm wide PMMA 1 mm thick,18.9,18.9,,,,,,,,
+PSI-25,PSI-25_table_1.csv,35,Solid materials,1 cm wide PMMA 2 mm thick,19.1,19.1,,,,,,,,
+PSI-25,PSI-25_table_1.csv,36,Solid materials,1 cm wide PMMA 3 mm thick,18,18.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,37,Solid materials,4 mm thick   1 cm wide PMMA slab,20.1,20.1,,,,,,,,
+PSI-25,PSI-25_table_1.csv,38,Solid materials,1 cm wide PMMA 5 mm thick,20,20.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,39,Solid materials,2 mm thick PMMA   2 cm wide,21.7,21.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,40,Solid materials,4 mm thick PMMA   2 cm wide,20.8,20.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,41,Solid materials,2mm thick PMMA   1 sided   2 cm wide,22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,42,Solid materials,2 cm   4 mm 1 sided PMMA slab,21,21.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,43,Solid materials,1 mm thick PMMA   2 cm wide,19.2,19.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,44,Solid materials,2 cm wide PMMA 2 mm thick,18.8,18.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,45,Solid materials,2 cm wide PMMA 3 mm thick,17.9,17.9,,,,,,,,
+PSI-25,PSI-25_table_1.csv,46,Solid materials,4 mm thick   2 cm 2ide PMMA slab,19,19.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,47,Solid materials,5 mm thick PMMA   2 cm wide,18,18.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,48,Solid materials,"1/4"" clear rod",22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,49,Solid materials,"1/4"" clear rod",22.2,22.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,50,Solid materials,"1/4"" clear rod",18,18.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,51,Solid materials,"1/4"" clear rod",18,18.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,52,Solid materials,"3/8""clear rod",14.8,14.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,53,Solid materials,"1/2"" clear PMMA rod",15.1,15.1,,,,,,,,
+PSI-25,PSI-25_table_1.csv,54,Solid materials,"1/2"" clear PMMA rod",14.2,14.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,55,Solid materials,"1/4"" clear rod",16.7,16.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,56,Solid materials,"1/4"" clear rod",16,16.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,57,Solid materials,"1/4"" clear rod",15.7,15.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,58,Solid materials,"1/4"" clear rod",15.5,15.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,59,Solid materials,"1/4"" clear rod",15,15.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,60,Solid materials,"1/4"" clear rod",16.7,16.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,61,Solid materials,"1/4"" black rod",15.4,15.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,62,Solid materials,"3/8"" clear rod",13.6,13.6,,,,,,,,
+PSI-25,PSI-25_table_1.csv,63,Solid materials,"1/2"" clear PMMA rod",15.9,15.9,,,,,,,,
+PSI-25,PSI-25_table_1.csv,64,Solid materials,"1/2"" clear PMMA rod",14.6,14.6,,,,,,,,
+PSI-25,PSI-25_table_1.csv,65,Solid materials,"1/4"" black rod",16.3,16.3,,,,,,,,
+PSI-25,PSI-25_table_1.csv,66,Solid materials,"3/8"" clear rod",17.1,17.1,,,,,,,,
+PSI-25,PSI-25_table_1.csv,67,Solid materials,"3/8"" clear rod",16.7,16.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,68,Solid materials,"3/8""clear rod",14.5,14.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,69,Solid materials,"1/4"" clear rod",15.1,15.1,,,,,,,,
+PSI-25,PSI-25_table_1.csv,70,Solid materials,"1/4"" clear rod",15.2,15.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,71,Solid materials,"1/4"" clear rod",15.3,15.3,,,,,,,,
+PSI-25,PSI-25_table_1.csv,72,Solid materials,"1/4"" clear rod",16.5,16.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,73,Solid materials,"3/8"" clear rod",15.9,15.9,,,,,,,,
+PSI-25,PSI-25_table_1.csv,74,Solid materials,"1/2"" clear rod",15.4,15.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,75,Solid materials,"1/4"" black rod",17.7,17.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,76,Solid materials,"1/4"" black rod",17.4,17.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,77,Solid materials,"1/4"" clear rod",17.7,17.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,78,Solid materials,1/4 clear rod,17.4,17.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,79,Solid materials,"3/8"" black rod",18.5,18.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,80,Solid materials,"0.5"" black rod",19.3,19.3,,,,,,,,
+PSI-25,PSI-25_table_1.csv,81,Solid materials,"1/4"" black rod",18.9,18.9,,,,,,,,
+PSI-25,PSI-25_table_1.csv,82,Solid materials,"3/8"" black rod",16.4,16.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,83,Solid materials,"0.5"" black rod",17.6,17.6,,,,,,,,
+PSI-25,PSI-25_table_1.csv,84,Solid materials,"1/4"" black rod",17,17.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,85,Solid materials,"3/8"" black rod",17.5,17.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,86,Solid materials,"0.5"" black rod",20.7,20.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,87,Solid materials,"0.5"" black rod",20.6,20.6,,,,,,,,
+PSI-25,PSI-25_table_1.csv,88,Solid materials,1/4 blac rod,18.4,18.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,89,Solid materials,1/4 black rod,18,18.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,90,Solid materials,"1/4"" black rod",18.2,18.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,91,Solid materials,"1/4""  black rod",16.8,16.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,92,Solid materials,"1/4"" black rod",20,20.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,93,Solid materials,"1/4"" black rod",17.5,17.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,94,Solid materials,"1/4"" black rod",19,19.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,95,Solid materials,1/4 black rod,16.3,16.3,,,,,,,,
+PSI-25,PSI-25_table_1.csv,96,Solid materials,"1/4"" black rod",16.3,16.3,,,,,,,,
+PSI-25,PSI-25_table_1.csv,97,Solid materials,"3/8"" black rod",20.8,20.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,98,Solid materials,"3/8"" black rod",20,20.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,99,Solid materials,"3/8"" black rod",18.2,18.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,100,Solid materials,"3/8"" black rod",19,19.0,,,,,,,,
+PSI-25,PSI-25_table_1.csv,101,Solid materials,"3/8"" clear rod",20.9,20.9,,,,,,,,
+PSI-25,PSI-25_table_1.csv,102,Solid materials,2 cm SIBAL,18.5,18.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,103,Solid materials,2 cm SIBAL,18.5,18.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,104,Solid materials,4 cm spherical section,17.2,17.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,105,Solid materials,2 cm SIBAL,18.7,18.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,106,Solid materials,2 cm SIBAL,18.8,18.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,107,Solid materials,2 cm SIBAL,18.8,18.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,108,Solid materials,4 cm spherical section,17.3,17.3,,,,,,,,
+PSI-25,PSI-25_table_1.csv,109,Solid materials,2 cm SIBAL,16.4,16.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,110,Solid materials,2 cm SIBAL,16.4,16.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,111,Solid materials,2 cm SIBAL,17.1,17.1,,,,,,,,
+PSI-25,PSI-25_table_1.csv,112,Solid materials,2 cm SIBAL,16.8,16.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,113,Solid materials,2 cm SIBAL,17.5,17.5,,,,,,,,
+PSI-25,PSI-25_table_1.csv,114,Solid materials,2 cm SIBAL,16.9,16.9,,,,,,,,
+PSI-25,PSI-25_table_1.csv,115,Solid materials,2 cm SIBAL,18.7,18.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,116,Solid materials,2 cm SIBAL,17.6,17.6,,,,,,,,
+PSI-25,PSI-25_table_1.csv,117,Solid materials,2 cm SIBAL,16.9,16.9,,,,,,,,
+PSI-25,PSI-25_table_1.csv,118,Solid materials,2 cm SIBAL,17.4,17.4,,,,,,,,
+PSI-25,PSI-25_table_1.csv,119,Solid materials,1 cm SIBAL,17.2,17.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,120,Solid materials,1 cm SIBAL,17.2,17.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,121,Solid materials,1 cm SIBAL,17.2,17.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,122,Solid materials,1 cm SIBAL,17.1,17.1,,,,,,,,
+PSI-25,PSI-25_table_1.csv,123,Solid materials,2 cm Sibal   moved igniter,17.2,17.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,124,Solid materials,1 cm SIBAL   top side ign,18.2,18.2,,,,,,,,
+PSI-25,PSI-25_table_1.csv,125,Solid materials,2 cm SIBAL,20.8,20.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,126,Solid materials,2 cm SIBAL,20.8,20.8,,,,,,,,
+PSI-25,PSI-25_table_1.csv,127,Solid materials,1 cm SIBAL,20.7,20.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,128,Solid materials,1 cm SIBAL,20.7,20.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,129,Solid materials,1 cm SIBAL,20.7,20.7,,,,,,,,
+PSI-25,PSI-25_table_1.csv,130,Solid materials,1 cm SIBAL,20.7,20.7,,,,,,,,
+PSI-39,PSI-39_table_1.csv,2,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,3,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,4,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,5,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,6,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,7,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,8,Liquid fuel droplets,C12H26,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,9,Liquid fuel droplets,C12H26,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,10,Liquid fuel droplets,C12H26,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,11,Liquid fuel droplets,C12H26,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,12,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,13,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,14,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,15,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,16,Liquid fuel droplets,C12H26,0.21,21.0,,,,1 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,17,Liquid fuel droplets,C12H26,0.21,21.0,,,,1.25 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,18,Liquid fuel droplets,C12H26,0.21,21.0,,,,1.25 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,19,Liquid fuel droplets,C12H26,0.21,21.0,,,,1.25 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,20,Liquid fuel droplets,C12H26,0.21,21.0,,,,1.25 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,21,Liquid fuel droplets,C12H26,0.21,21.0,,,,2 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,22,Liquid fuel droplets,C12H26,0.21,21.0,,,,2 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,23,Liquid fuel droplets,C12H26,0.21,21.0,,,,2 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,24,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,25,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,26,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,27,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,28,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,29,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,30,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,31,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,32,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,33,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,34,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,35,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.17,17.0,,,,1 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,36,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,37,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,38,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,39,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1.25 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,40,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1.25 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,41,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1.25 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,42,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1.25 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,43,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1.25 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,44,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,2 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,45,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,2 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,46,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,2 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,47,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,2 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,48,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.17,17.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,49,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.17,17.0,,,,3 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,50,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.17,17.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,51,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.17,17.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,52,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.17,17.0,,,,3 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,53,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,54,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,55,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,56,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,57,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,5 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,58,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,5 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,59,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,5 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,60,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,0.75 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,61,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,0.75 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,62,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,0.75 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,63,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,0.75 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,64,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,0.5 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,65,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,0.5 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,66,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,0.5 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,67,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,68,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,69,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,70,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,71,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,72,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,3 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,73,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,74,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,75,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,3 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,76,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,3 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,77,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,78,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,79,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,80,Liquid fuel droplets,[.60]/[.40] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,81,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,82,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,83,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,84,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,85,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.17,17.0,,,,1 atm ,text with unit,,,
+PSI-39,PSI-39_table_1.csv,86,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,87,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-39,PSI-39_table_1.csv,88,Liquid fuel droplets,[.75]/[.25] C12H26/iso-dodecane,0.21,21.0,,,,1 atm,text with unit,,,
+PSI-68,PSI-68_table_1.csv,2,Liquid fuel droplets,IsoOctane (pure),0.17; 0.21;0.25; 0.3,,17.0; 21.0; 25.0; 30.0,,,0.5; 1.0; 1.5; 2.0; or 3.0 ,atm,,,
+PSI-68,PSI-68_table_1.csv,3,Liquid fuel droplets,n-Octane (pure),0.17; 0.21;0.25; 0.3,,17.0; 21.0; 25.0; 30.0,,,0.5; 1.0; 1.5; 2.0; or 3.0 ,atm,,,
+PSI-68,PSI-68_table_1.csv,4,Liquid fuel droplets,Heptane (pure),0.17; 0.21;0.25; 0.3,,17.0; 21.0; 25.0; 30.0,,,0.5; 1.0; 1.5; 2.0; or 3.0 ,atm,,,
+PSI-68,PSI-68_table_1.csv,5,Liquid fuel droplets,Decane (pure),0.17; 0.21;0.25; 0.3,,17.0; 21.0; 25.0; 30.0,,,0.5; 1.0; 1.5; 2.0; or 3.0 ,atm,,,
+PSI-68,PSI-68_table_1.csv,6,Liquid fuel droplets,Ethanol (pure),0.17; 0.21;0.25; 0.3,,17.0; 21.0; 25.0; 30.0,,,0.5; 1.0; 1.5; 2.0; or 3.0 ,atm,,,
+PSI-68,PSI-68_table_1.csv,7,Liquid fuel droplets,Propanol (95%) Glycerol (5%) (mixture),0.17; 0.21;0.25; 0.3,,17.0; 21.0; 25.0; 30.0,,,0.5; 1.0; 1.5; 2.0; or 3.0 ,atm,,,
+PSI-68,PSI-68_table_1.csv,8,Liquid fuel droplets,Heptane (50%) IsoOctane (50%) (mixture),0.17; 0.21;0.25; 0.3,,17.0; 21.0; 25.0; 30.0,,,0.5; 1.0; 1.5; 2.0; or 3.0 ,atm,,,
+PSI-68,PSI-68_table_1.csv,9,Liquid fuel droplets,Propanol (80%) Glycerol (20%) (mixture),0.17; 0.21;0.25; 0.3,,17.0; 21.0; 25.0; 30.0,,,0.5; 1.0; 1.5; 2.0; or 3.0 ,atm,,,
+PSI-69,PSI-69_table_1.csv,2,Liquid fuel droplets,Methanol,0.21,21.0,,,,757.7,mmHg,14.6515,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,3,Liquid fuel droplets,Methanol,0.21,21.0,,,,762,mmHg,14.7346,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,4,Liquid fuel droplets,Methanol,0.21,21.0,,,,764.2,mmHg,14.7772,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,5,Liquid fuel droplets,Methanol,0.21,21.0,,,,760,mmHg,14.696,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,6,Liquid fuel droplets,Methanol,0.21,21.0,,,,760,mmHg,14.696,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,7,Liquid fuel droplets,Methanol,0.21,21.0,,,,760,mmHg,14.696,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,8,Liquid fuel droplets,Heptane,0.21,21.0,,,,761.3,mmHg,14.7211,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,9,Liquid fuel droplets,Heptane,0.21,21.0,,,,762.4,mmHg,14.7424,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,10,Liquid fuel droplets,Heptane,0.21,21.0,,,,760,mmHg,14.696,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,11,Liquid fuel droplets,Methanol,0.21,21.0,,,,2319.7,mmHg,44.8556,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,12,Liquid fuel droplets,Methanol,0.21,21.0,,,,2318.8,mmHg,44.8382,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,13,Liquid fuel droplets,Heptane,0.21,21.0,,,,2319.9,mmHg,44.8594,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,14,Liquid fuel droplets,Methanol,0.21,21.0,,,,2074.2,mmHg,40.1084,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,15,Liquid fuel droplets,Methanol,0.21,21.0,,,,2055.6,mmHg,39.7487,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,16,Liquid fuel droplets,Methanol,0.21,21.0,,,,2066.6,mmHg,39.9614,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,17,Liquid fuel droplets,Methanol,0.21,21.0,,,,2072.1,mmHg,40.0678,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,18,Liquid fuel droplets,Methanol,0.21,21.0,,,,1545.7,mmHg,29.8889,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,19,Liquid fuel droplets,Heptane,0.21,21.0,,,,1553.8,mmHg,30.0455,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,20,Liquid fuel droplets,Heptane,0.34,34.0,,,,539.1,mmHg,10.4245,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,21,Liquid fuel droplets,Methanol,0.34,34.0,,,,539.5,mmHg,10.4322,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,22,Liquid fuel droplets,Methanol,0.34,34.0,,,,540.6,mmHg,10.4535,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,23,Liquid fuel droplets,Methanol,0.34,34.0,,,,540.5,mmHg,10.4515,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,24,Liquid fuel droplets,Heptane,0.34,34.0,,,,541.8,mmHg,10.4767,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,25,Liquid fuel droplets,Heptane,0.34,34.0,,,,542.8,mmHg,10.496,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,26,Liquid fuel droplets,Methanol,0.3,30.0,,,,537.3,mmHg,10.3897,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,27,Liquid fuel droplets,Methanol,0.3,30.0,,,,538.4,mmHg,10.4109,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,28,Liquid fuel droplets,Heptane,0.3,30.0,,,,540.7,mmHg,10.4554,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,29,Liquid fuel droplets,Heptane,0.3,30.0,,,,539.7,mmHg,10.4361,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,30,Liquid fuel droplets,Methanol,0.3,30.0,,,,766.9,mmHg,14.8294,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,31,Liquid fuel droplets,Methanol,0.3,30.0,,,,769.2,mmHg,14.8739,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,32,Liquid fuel droplets,Heptane,0.3,30.0,,,,770.5,mmHg,14.899,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,33,Liquid fuel droplets,Heptane,0.3,30.0,,,,771,mmHg,14.9087,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,34,Liquid fuel droplets,Methanol,0.21,21.0,,,,764.5,mmHg,14.783,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,35,Liquid fuel droplets,Methanol,0.21,21.0,,,,767.7,mmHg,14.8449,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,36,Liquid fuel droplets,Heptane,0.21,21.0,,,,768.1,mmHg,14.8526,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,37,Liquid fuel droplets,Methanol,0.2,20.0,,,,539,mmHg,10.4225,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,38,Liquid fuel droplets,Methanol,0.34,34.0,,,,534.3,mmHg,10.3317,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,39,Liquid fuel droplets,Methanol,0.34,34.0,,,,534.4,mmHg,10.3336,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,40,Liquid fuel droplets,Heptane,0.34,34.0,,,,534.9,mmHg,10.3433,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,41,Liquid fuel droplets,Methanol,0.3,30.0,,,,535.1,mmHg,10.3471,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,42,Liquid fuel droplets,Methanol,0.3,30.0,,,,534.3,mmHg,10.3317,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,43,Liquid fuel droplets,Heptane,0.3,30.0,,,,535,mmHg,10.3452,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,44,Liquid fuel droplets,Heptane,0.3,30.0,,,,534.9,mmHg,10.3433,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,45,Liquid fuel droplets,Methanol,0.3,30.0,,,,766.8,mmHg,14.8275,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,46,Liquid fuel droplets,Methanol,0.3,30.0,,,,768.3,mmHg,14.8565,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,47,Liquid fuel droplets,Methanol,0.21,21.0,,,,769.5,mmHg,14.8797,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,48,Liquid fuel droplets,Heptane,0.21,21.0,,,,770.1,mmHg,14.8913,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,49,Liquid fuel droplets,Methanol,0.21,21.0,,,,768.7,mmHg,14.8642,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,50,Liquid fuel droplets,Heptane,0.21,21.0,,,,764.9,mmHg,14.7907,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,51,Liquid fuel droplets,Heptane,0.21,21.0,,,,770.1,mmHg,14.8913,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,52,Liquid fuel droplets,Heptane,0.21,21.0,,,,771.4,mmHg,14.9164,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,53,Liquid fuel droplets,Heptane,0.3,30.0,,,,771.1,mmHg,14.9106,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,54,Liquid fuel droplets,Heptane,0.21,21.0,,,,770.2,mmHg,14.8932,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,55,Liquid fuel droplets,Methanol,0.2,20.0,,,,541.4,mmHg,10.4689,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,56,Liquid fuel droplets,Methanol,0.2,20.0,,,,542.6,mmHg,10.4921,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,57,Liquid fuel droplets,Heptane,0.2,20.0,,,,544.1,mmHg,10.5212,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,58,Liquid fuel droplets,Heptane,0.2,20.0,,,,544.4,mmHg,10.527,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,59,Liquid fuel droplets,Methanol,0.18,18.0,,,,773.3,mmHg,14.9531,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,60,Liquid fuel droplets,Methanol,0.18,18.0,,,,769.2,mmHg,14.8739,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,61,Liquid fuel droplets,Methanol,0.18,18.0,,,,773.7,mmHg,14.9609,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,62,Liquid fuel droplets,Methanol,0.18,18.0,,,,774.1,mmHg,14.9686,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,63,Liquid fuel droplets,Heptane,0.18,18.0,,,,761.8,mmHg,14.7308,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,64,Liquid fuel droplets,Heptane,0.18,18.0,,,,767.6,mmHg,14.8429,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,65,Liquid fuel droplets,Heptane,0.18,18.0,,,,764.6,mmHg,14.7849,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,66,Liquid fuel droplets,Methanol,0.15,15.0,,,,765.9,mmHg,14.8101,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,67,Liquid fuel droplets,Methanol,0.15,15.0,,,,766.8,mmHg,14.8275,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,68,Liquid fuel droplets,Methanol,0.15,15.0,,,,767.7,mmHg,14.8449,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,69,Liquid fuel droplets,Methanol,0.15,15.0,,,,768.8,mmHg,14.8661,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,70,Liquid fuel droplets,Heptane,0.14,14.0,,,,767.1,mmHg,14.8333,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,71,Liquid fuel droplets,Heptane,0.15,15.0,,,,761,mmHg,14.7153,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,72,Liquid fuel droplets,Methanol,0.15,15.0,,,,768.3,mmHg,14.8565,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,73,Liquid fuel droplets,Heptane,0.15,15.0,,,,765.2,mmHg,14.7965,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,74,Liquid fuel droplets,Heptane,0.15,15.0,,,,761,mmHg,14.7153,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,75,Liquid fuel droplets,Heptane,0.15,15.0,,,,765.9,mmHg,14.8101,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,76,Liquid fuel droplets,Methanol,0.13,13.0,,,,770.8,mmHg,14.9048,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,77,Liquid fuel droplets,Methanol,0.13,13.0,,,,769.5,mmHg,14.8797,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,78,Liquid fuel droplets,Methanol,0.14,14.0,,,,768.4,mmHg,14.8584,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,79,Liquid fuel droplets,Methanol,0.14,14.0,,,,766,mmHg,14.812,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,80,Liquid fuel droplets,Heptane,0.13,13.0,,,,768.1,mmHg,14.8526,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,81,Liquid fuel droplets,Heptane,0.13,13.0,,,,770,mmHg,14.8893,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,82,Liquid fuel droplets,Heptane,0.13,13.0,,,,770.2,mmHg,14.8932,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,83,Liquid fuel droplets,Methanol,0.13,13.0,,,,764.6,mmHg,14.7849,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,84,Liquid fuel droplets,Methanol,0.12,12.0,,,,772,mmHg,14.928,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,85,Liquid fuel droplets,Methanol,0.12,12.0,,,,767.2,mmHg,14.8352,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,86,Liquid fuel droplets,Methanol,0.12,12.0,,,,771.2,mmHg,14.9125,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,87,Liquid fuel droplets,Methanol,0.12,12.0,,,,770,mmHg,14.8893,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,88,Liquid fuel droplets,Methanol,0.12,12.0,,,,771.2,mmHg,14.9125,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,89,Liquid fuel droplets,Methanol,0.25,25.0,,,,537.5,mmHg,10.3935,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,90,Liquid fuel droplets,Methanol,0.25,25.0,,,,537.4,mmHg,10.3916,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,91,Liquid fuel droplets,Methanol,0.25,25.0,,,,539.2,mmHg,10.4264,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,92,Liquid fuel droplets,Methanol,0.25,25.0,,,,538.3,mmHg,10.409,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,93,Liquid fuel droplets,Heptane,0.25,25.0,,,,536.3,mmHg,10.3703,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,94,Liquid fuel droplets,Heptane,0.25,25.0,,,,537.3,mmHg,10.3897,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,95,Liquid fuel droplets,Heptane,0.24,24.0,,,,533.6,mmHg,10.3181,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,96,Liquid fuel droplets,Heptane,0.24,24.0,,,,534.4,mmHg,10.3336,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,97,Liquid fuel droplets,Heptane,0.24,24.0,,,,534.4,mmHg,10.3336,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,98,Liquid fuel droplets,Methanol,0.23,23.0,,,,534.2,mmHg,10.3297,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,99,Liquid fuel droplets,Methanol,0.23,23.0,,,,537.1,mmHg,10.3858,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,100,Liquid fuel droplets,Methanol,0.23,23.0,,,,535,mmHg,10.3452,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,101,Liquid fuel droplets,Heptane,0.23,23.0,,,,536.7,mmHg,10.3781,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,102,Liquid fuel droplets,Heptane,0.23,23.0,,,,538.7,mmHg,10.4167,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,103,Liquid fuel droplets,Heptane,0.21,21.0,,,,534.2,mmHg,10.3297,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,104,Liquid fuel droplets,Heptane,0.21,21.0,,,,534.3,mmHg,10.3317,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,105,Liquid fuel droplets,Methanol,0.23,23.0,,,,534.1,mmHg,10.3278,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,106,Liquid fuel droplets,Methanol,0.23,23.0,,,,534.6,mmHg,10.3375,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,107,Liquid fuel droplets,Methanol,0.23,23.0,,,,538.3,mmHg,10.409,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,108,Liquid fuel droplets,Methanol,0.23,23.0,,,,535,mmHg,10.3452,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,109,Liquid fuel droplets,Methanol,0.23,23.0,,,,538.3,mmHg,10.409,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,110,Liquid fuel droplets,Methanol,0.21,21.0,,,,536.5,mmHg,10.3742,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,111,Liquid fuel droplets,Methanol,0.21,21.0,,,,537,mmHg,10.3839,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,112,Liquid fuel droplets,Methanol,0.21,21.0,,,,536.9,mmHg,10.3819,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,113,Liquid fuel droplets,Methanol,0.21,21.0,,,,530.7,mmHg,10.262,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,114,Liquid fuel droplets,Methanol,0.2,20.0,,,,534.6,mmHg,10.3375,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,115,Liquid fuel droplets,Methanol,0.2,20.0,,,,0,mmHg,,,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,116,Liquid fuel droplets,Methanol,0.2,20.0,,,,535.8,mmHg,10.3607,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,117,Liquid fuel droplets,Methanol,0.2,20.0,,,,536.3,mmHg,10.3703,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,118,Liquid fuel droplets,Heptane,0.2,20.0,,,,531.1,mmHg,10.2698,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,119,Liquid fuel droplets,Heptane,0.2,20.0,,,,532.8,mmHg,10.3026,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,120,Liquid fuel droplets,Heptane,0.18,18.0,,,,532.6,mmHg,10.2988,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,121,Liquid fuel droplets,Heptane,0.18,18.0,,,,532.5,mmHg,10.2968,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,122,Liquid fuel droplets,Methanol,0.18,18.0,,,,526.3,mmHg,10.177,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,123,Liquid fuel droplets,Methanol,0.18,18.0,,,,531.2,mmHg,10.2717,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,124,Liquid fuel droplets,Methanol,0.18,18.0,,,,532,mmHg,10.2872,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,125,Liquid fuel droplets,Methanol,0.18,18.0,,,,532.4,mmHg,10.2949,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,126,Liquid fuel droplets,Methanol,0.17,17.0,,,,537.2,mmHg,10.3877,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,127,Liquid fuel droplets,Methanol,0.17,17.0,,,,536.1,mmHg,10.3665,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,128,Liquid fuel droplets,Methanol,0.17,17.0,,,,536.7,mmHg,10.3781,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,129,Liquid fuel droplets,Methanol,0.17,17.0,,,,537.3,mmHg,10.3897,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,130,Liquid fuel droplets,Heptane,0.17,17.0,,,,536.2,mmHg,10.3684,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,131,Liquid fuel droplets,Heptane,0.17,17.0,,,,537.2,mmHg,10.3877,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,132,Liquid fuel droplets,Heptane,0.24,24.0,,,,763.9,mmHg,14.7714,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,133,Liquid fuel droplets,Heptane,0.24,24.0,,,,765.2,mmHg,14.7965,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,134,Liquid fuel droplets,Heptane,0.24,24.0,,,,766.7,mmHg,14.8255,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,135,Liquid fuel droplets,Heptane,0.24,24.0,,,,767.2,mmHg,14.8352,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,136,Liquid fuel droplets,Heptane,0.24,24.0,,,,768.2,mmHg,14.8545,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,137,Liquid fuel droplets,Heptane,0.24,24.0,,,,768.1,mmHg,14.8526,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,138,Liquid fuel droplets,Heptane,0.24,24.0,,,,768.2,mmHg,14.8545,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,139,Liquid fuel droplets,Heptane,0.24,24.0,,,,768.6,mmHg,14.8623,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,140,Liquid fuel droplets,Heptane,0.24,24.0,,,,768,mmHg,14.8507,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,141,Liquid fuel droplets,Methanol,0.15,15.0,,,,533.5,mmHg,10.3162,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,142,Liquid fuel droplets,Methanol,0.15,15.0,,,,534.1,mmHg,10.3278,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,143,Liquid fuel droplets,Methanol,0.15,15.0,,,,534.5,mmHg,10.3355,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,144,Liquid fuel droplets,Methanol,0.15,15.0,,,,534.7,mmHg,10.3394,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,145,Liquid fuel droplets,Methanol,0.2,20.0,,,,761.9,mmHg,14.7327,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,146,Liquid fuel droplets,Methanol,0.2,20.0,,,,763.5,mmHg,14.7636,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,147,Liquid fuel droplets,Methanol,0.2,20.0,,,,765.5,mmHg,14.8023,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,148,Liquid fuel droplets,Methanol,0.17,17.0,,,,535.7,mmHg,10.3587,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,149,Liquid fuel droplets,Heptane,0.2,20.0,,,,764.4,mmHg,14.781,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,150,Liquid fuel droplets,Heptane,0.2,20.0,,,,766.2,mmHg,14.8159,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,151,Liquid fuel droplets,Heptane,0.2,20.0,,,,767.6,mmHg,14.8429,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,152,Liquid fuel droplets,Methanol,0.18,18.0,,,,762.5,mmHg,14.7443,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,153,Liquid fuel droplets,Methanol,0.18,18.0,,,,765,mmHg,14.7927,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,154,Liquid fuel droplets,Methanol,0.18,18.0,,,,765.6,mmHg,14.8043,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,155,Liquid fuel droplets,Heptane,0.18,18.0,,,,762.3,mmHg,14.7404,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,156,Liquid fuel droplets,Heptane,0.18,18.0,,,,764.9,mmHg,14.7907,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,157,Liquid fuel droplets,Heptane,0.18,18.0,,,,765.7,mmHg,14.8062,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,158,Liquid fuel droplets,Methanol,0.16,16.0,,,,762.1,mmHg,14.7366,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,159,Liquid fuel droplets,Methanol,0.16,16.0,,,,764.4,mmHg,14.781,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,160,Liquid fuel droplets,Methanol,0.16,16.0,,,,765.5,mmHg,14.8023,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,161,Liquid fuel droplets,Methanol,0.16,16.0,,,,767.6,mmHg,14.8429,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,162,Liquid fuel droplets,Methanol,0.15,15.0,,,,763.3,mmHg,14.7598,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,163,Liquid fuel droplets,Methanol,0.15,15.0,,,,764.4,mmHg,14.781,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,164,Liquid fuel droplets,Methanol,0.15,15.0,,,,765.9,mmHg,14.8101,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,165,Liquid fuel droplets,Methanol,0.15,15.0,,,,766.1,mmHg,14.8139,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,166,Liquid fuel droplets,Heptane,0.18,18.0,,,,765.4,mmHg,14.8004,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,167,Liquid fuel droplets,Methanol,0.14,14.0,,,,760.8,mmHg,14.7114,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,168,Liquid fuel droplets,Methanol,0.14,14.0,,,,761.6,mmHg,14.7269,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,169,Liquid fuel droplets,Methanol,0.21,21.0,,,,763.4,mmHg,14.7617,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,170,Liquid fuel droplets,Methanol,0.21,21.0,,,,766.1,mmHg,14.8139,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,171,Liquid fuel droplets,Methanol,0.21,21.0,,,,766.7,mmHg,14.8255,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,172,Liquid fuel droplets,Heptane,0.18,18.0,,,,759.9,mmHg,14.694,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,173,Liquid fuel droplets,Heptane,0.18,18.0,,,,762,mmHg,14.7346,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,174,Liquid fuel droplets,Heptane,0.18,18.0,,,,762.1,mmHg,14.7366,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,175,Liquid fuel droplets,Heptane,0.24,24.0,,,,531.7,mmHg,10.2814,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,176,Liquid fuel droplets,Heptane,0.24,24.0,,,,532.1,mmHg,10.2891,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,177,Liquid fuel droplets,Methanol,0.24,24.0,,,,536.9,mmHg,10.3819,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,178,Liquid fuel droplets,Methanol,0.24,24.0,,,,537,mmHg,10.3839,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,179,Liquid fuel droplets,Heptane,0.23,23.0,,,,533.6,mmHg,10.3181,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,180,Liquid fuel droplets,Heptane,0.23,23.0,,,,534.4,mmHg,10.3336,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,181,Liquid fuel droplets,Heptane,0.19,19.0,,,,758.4,mmHg,14.665,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,182,Liquid fuel droplets,Heptane,0.19,19.0,,,,759.1,mmHg,14.6786,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,183,Liquid fuel droplets,Heptane,0.19,19.0,,,,759,mmHg,14.6766,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,184,Liquid fuel droplets,Methanol,0.23,23.0,,,,534.4,mmHg,10.3336,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,185,Liquid fuel droplets,Methanol,0.23,23.0,,,,535.1,mmHg,10.3471,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,186,Liquid fuel droplets,Methanol,0.23,23.0,,,,535.2,mmHg,10.3491,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,187,Liquid fuel droplets,Methanol,0.23,23.0,,,,536.2,mmHg,10.3684,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,188,Liquid fuel droplets,Methanol,0.19,19.0,,,,758,mmHg,14.6573,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,189,Liquid fuel droplets,Methanol,0.19,19.0,,,,758.1,mmHg,14.6592,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,190,Liquid fuel droplets,Methanol,0.18,18.0,,,,761.2,mmHg,14.7192,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,191,Liquid fuel droplets,Methanol,0.18,18.0,,,,764.6,mmHg,14.7849,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,192,Liquid fuel droplets,Methanol,0.18,18.0,,,,765.3,mmHg,14.7985,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,193,Liquid fuel droplets,Methanol,0.17,17.0,,,,759.5,mmHg,14.6863,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,194,Liquid fuel droplets,Methanol,0.17,17.0,,,,759.1,mmHg,14.6786,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,195,Liquid fuel droplets,Heptane,0.17,17.0,,,,752,mmHg,14.5413,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,196,Liquid fuel droplets,Heptane,0.17,17.0,,,,752.5,mmHg,14.5509,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,197,Liquid fuel droplets,Heptane,0.2,20.0,,,,758.4,mmHg,14.665,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,198,Liquid fuel droplets,Heptane,0.2,20.0,,,,759.8,mmHg,14.6921,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,199,Liquid fuel droplets,Heptane,0.2,20.0,,,,760.1,mmHg,14.6979,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,200,Liquid fuel droplets,Methanol,0.2,20.0,,,,754,mmHg,14.5799,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,201,Liquid fuel droplets,Methanol,0.2,20.0,,,,756.1,mmHg,14.6206,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,202,Liquid fuel droplets,Methanol,0.2,20.0,,,,756.9,mmHg,14.636,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,203,Liquid fuel droplets,Methanol,0.21,21.0,,,,760.2,mmHg,14.6998,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,204,Liquid fuel droplets,Methanol,0.21,21.0,,,,761.6,mmHg,14.7269,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,205,Liquid fuel droplets,Heptane,0.21,21.0,,,,756.5,mmHg,14.6283,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,206,Liquid fuel droplets,Heptane,0.21,21.0,,,,757.3,mmHg,14.6438,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,207,Liquid fuel droplets,Heptane,0.21,21.0,,,,760.2,mmHg,14.6998,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,208,Liquid fuel droplets,Heptane,0.21,21.0,,,,762.7,mmHg,14.7482,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,209,Liquid fuel droplets,Heptane,0.21,21.0,,,,762.9,mmHg,14.752,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,210,Liquid fuel droplets,Heptane,0.16,16.0,,,,759.8,mmHg,14.6921,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,211,Liquid fuel droplets,Heptane,0.16,16.0,,,,759.8,mmHg,14.6921,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,212,Liquid fuel droplets,Heptane,0.16,16.0,,,,759.9,mmHg,14.694,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,213,Liquid fuel droplets,Heptane,0.15,15.0,,,,764,mmHg,14.7733,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,214,Liquid fuel droplets,Heptane,0.14,14.0,,,,759.8,mmHg,14.6921,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,215,Liquid fuel droplets,Heptane,0.14,14.0,,,,759.9,mmHg,14.694,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,216,Liquid fuel droplets,Methanol,0.14,14.0,,,,757.6,mmHg,14.6496,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,217,Liquid fuel droplets,Methanol,0.14,14.0,,,,758.3,mmHg,14.6631,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,218,Liquid fuel droplets,Methanol,0.13,13.0,,,,759.4,mmHg,14.6844,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,219,Liquid fuel droplets,Methanol,0.13,13.0,,,,760.6,mmHg,14.7076,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,220,Liquid fuel droplets,Methanol,0.12,12.0,,,,761.6,mmHg,14.7269,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,221,Liquid fuel droplets,Methanol,0.12,12.0,,,,761.9,mmHg,14.7327,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,222,Liquid fuel droplets,Methanol,0.12,12.0,,,,763.7,mmHg,14.7675,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,223,Liquid fuel droplets,Methanol,0.2,20.0,,,,759.2,mmHg,14.6805,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,224,Liquid fuel droplets,Methanol,0.2,20.0,,,,759.6,mmHg,14.6882,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,225,Liquid fuel droplets,Heptane,0.2,20.0,,,,755.3,mmHg,14.6051,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,226,Liquid fuel droplets,Methanol,0.19,19.0,,,,753.4,mmHg,14.5683,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,227,Liquid fuel droplets,Methanol,0.18,18.0,,,,759.2,mmHg,14.6805,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,228,Liquid fuel droplets,Methanol,0.18,18.0,,,,760.3,mmHg,14.7018,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,229,Liquid fuel droplets,Heptane,0.21,21.0,,,,767.4,mmHg,14.8391,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,230,Liquid fuel droplets,Heptane,0.21,21.0,,,,768.1,mmHg,14.8526,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,231,Liquid fuel droplets,Heptane,0.21,21.0,,,,769.2,mmHg,14.8739,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,232,Liquid fuel droplets,Heptane,0.19,19.0,,,,758.8,mmHg,14.6728,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,233,Liquid fuel droplets,Heptane,0.18,18.0,,,,763.7,mmHg,14.7675,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,234,Liquid fuel droplets,Heptane,0.18,18.0,,,,765.9,mmHg,14.8101,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,235,Liquid fuel droplets,Heptane,0.18,18.0,,,,766.5,mmHg,14.8217,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,236,Liquid fuel droplets,Heptane,0.17,17.0,,,,759.3,mmHg,14.6824,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,237,Liquid fuel droplets,Heptane,0.17,17.0,,,,759.3,mmHg,14.6824,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,238,Liquid fuel droplets,Heptane,0.17,17.0,,,,759.6,mmHg,14.6882,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,239,Liquid fuel droplets,Heptane,0.17,17.0,,,,759.8,mmHg,14.6921,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,240,Liquid fuel droplets,Methanol,0.17,17.0,,,,754.2,mmHg,14.5838,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,241,Liquid fuel droplets,Methanol,0.17,17.0,,,,757,mmHg,14.638,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,242,Liquid fuel droplets,Methanol,0.16,16.0,,,,759.9,mmHg,14.694,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,243,Liquid fuel droplets,Methanol,0.16,16.0,,,,761,mmHg,14.7153,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,244,Liquid fuel droplets,Heptane,0.16,16.0,,,,757.9,mmHg,14.6554,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,245,Liquid fuel droplets,Methanol,0.15,15.0,,,,755.6,mmHg,14.6109,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,246,Liquid fuel droplets,Methanol,0.15,15.0,,,,756.7,mmHg,14.6322,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,247,Liquid fuel droplets,Methanol,0.14,14.0,,,,759.2,mmHg,14.6805,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,248,Liquid fuel droplets,Methanol,0.14,14.0,,,,759.8,mmHg,14.6921,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,249,Liquid fuel droplets,Methanol,0.13,13.0,,,,763.5,mmHg,14.7636,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,250,Liquid fuel droplets,Heptane,0.24,24.0,,,,534,mmHg,10.3259,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,251,Liquid fuel droplets,Heptane,0.23,23.0,,,,532.2,mmHg,10.291,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,252,Liquid fuel droplets,Methanol,0.24,24.0,,,,534.3,mmHg,10.3317,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,253,Liquid fuel droplets,Methanol,0.24,24.0,,,,534.6,mmHg,10.3375,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,254,Liquid fuel droplets,Methanol,0.23,23.0,,,,531.7,mmHg,10.2814,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,255,Liquid fuel droplets,Methanol,0.23,23.0,,,,531.8,mmHg,10.2833,False,Test end: Disruption
+PSI-69,PSI-69_table_1.csv,256,Liquid fuel droplets,Methanol,0.21,21.0,,,,531.9,mmHg,10.2852,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,257,Liquid fuel droplets,Methanol,0.21,21.0,,,,531.2,mmHg,10.2717,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,258,Liquid fuel droplets,Methanol,0.21,21.0,,,,531.2,mmHg,10.2717,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,259,Liquid fuel droplets,Heptane,0.21,21.0,,,,529.6,mmHg,10.2408,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,260,Liquid fuel droplets,Heptane,0.21,21.0,,,,529,mmHg,10.2292,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,261,Liquid fuel droplets,Heptane,0.2,20.0,,,,532.5,mmHg,10.2968,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,262,Liquid fuel droplets,Heptane,0.2,20.0,,,,532,mmHg,10.2872,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,263,Liquid fuel droplets,Methanol,0.2,20.0,,,,527.6,mmHg,10.2021,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,264,Liquid fuel droplets,Methanol,0.2,20.0,,,,527.9,mmHg,10.2079,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,265,Liquid fuel droplets,Methanol,0.18,18.0,,,,532.4,mmHg,10.2949,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,266,Liquid fuel droplets,Methanol,0.18,18.0,,,,532.9,mmHg,10.3046,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,267,Liquid fuel droplets,Methanol,0.18,18.0,,,,533.2,mmHg,10.3104,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,268,Liquid fuel droplets,Heptane,0.18,18.0,,,,528,mmHg,10.2098,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,269,Liquid fuel droplets,Heptane,0.18,18.0,,,,530.3,mmHg,10.2543,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,270,Liquid fuel droplets,Heptane,0.17,17.0,,,,532.2,mmHg,10.291,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,271,Liquid fuel droplets,Heptane,0.17,17.0,,,,532.5,mmHg,10.2968,False,Test end: Completion
+PSI-69,PSI-69_table_1.csv,272,Liquid fuel droplets,Methanol,0.17,17.0,,,,530.4,mmHg,10.2562,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,273,Liquid fuel droplets,Methanol,0.17,17.0,,,,531.5,mmHg,10.2775,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,274,Liquid fuel droplets,Heptane,0.21,21.0,,,,764.7,mmHg,14.7869,False,Test end: Extinction
+PSI-69,PSI-69_table_1.csv,275,Liquid fuel droplets,Heptane,0.21,21.0,,,,766.2,mmHg,14.8159,False,Test end: Extinction
+PSI-98,PSI-98_table_1.csv,2,Solid materials,SIBAL Fabric,21.5 - 21.7,,,,,,,,,Burn Time (s): 420
+PSI-98,PSI-98_table_1.csv,3,Solid materials,SIBAL Fabric,~ 21.5,,,,,,,,,Burn Time (s): 70
+PSI-99,PSI-99_table_1.csv,2,Solid materials,Silicone,~ 21.5,,,,,,,,,Burn Time (s): Insignificant
+PSI-99,PSI-99_table_1.csv,3,Solid materials,Silicone,~ 22.1,,,,,,,,,Burn Time (s): Insignificant
+PSI-99,PSI-99_table_1.csv,4,Solid materials,Silicone,~ 22.1,,,,,,,,,Burn Time (s): Insignificant
+PSI-99,PSI-99_table_1.csv,5,Solid materials,Silicone,~ 22.1,,,,,,,,,Burn Time (s): Insignificant
+PSI-99,PSI-99_table_1.csv,6,Solid materials,Cotton-Fiberglass (SIBAL),~ 22.1,,,,,,,,,Burn Time (s): 145 s
+PSI-99,PSI-99_table_1.csv,7,Solid materials,,~ 22.1,,,,,,,,,Burn Time (s): 115 s
+PSI-99,PSI-99_table_1.csv,8,Solid materials,PMMA & Nomex,~ 22.1,,,,,,,,,Burn Time (s): 140 s
+PSI-99,PSI-99_table_1.csv,9,Solid materials,PMMA,22.1 to 22.0,,,,,,,,,Burn Time (s): 600 s
+PSI-99,PSI-99_table_1.csv,10,Solid materials,,22.0 to 21.9,,,,,,,,,Burn Time (s): 900 s
+PSI-159,PSI-159_table_1.csv,2,Gas flames,ethane,0.3939,39.39,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,3,Gas flames,ethane,0.389822946,38.9823,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,4,Gas flames,ethane,0.386321188,38.6321,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,5,Gas flames,ethane,0.382905163,38.2905,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,6,Gas flames,ethane,0.380426741,38.0427,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,7,Gas flames,ethane,0.379858042,37.9858,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,8,Gas flames,ethane,0.376135171,37.6135,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,9,Gas flames,ethane,0.373391583,37.3392,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,10,Gas flames,ethane,0.369578072,36.9578,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,11,Gas flames,ethane,0.364549879,36.455,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,12,Gas flames,ethane,0.2101,21.01,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,13,Gas flames,ethane,0.209638709,20.9639,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,14,Gas flames,ethane,0.1802,18.02,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,15,Gas flames,ethane,0.179685675,17.9686,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,16,Gas flames,50% butane,0.3957,39.57,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,17,Gas flames,50% butane,0.393031985,39.3032,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,18,Gas flames,50% butane,0.390548195,39.0548,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,19,Gas flames,50% butane,0.388126117,38.8126,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,20,Gas flames,50% butane,0.386221513,38.6222,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,21,Gas flames,50% butane,0.382509153,38.2509,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,22,Gas flames,50% butane,0.382509153,38.2509,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,23,Gas flames,50% butane,0.381212087,38.1212,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,24,Gas flames,50% butane,0.381212087,38.1212,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,25,Gas flames,50% butane,0.380669262,38.0669,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,26,Gas flames,50% butane,0.2341,23.41,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,27,Gas flames,50% butane,0.233649188,23.3649,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,28,Gas flames,50% butane,0.233254802,23.3255,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,29,Gas flames,50% butane,0.233254802,23.3255,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,30,Gas flames,50% butane,0.233254802,23.3255,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,31,Gas flames,50% butane,0.233254802,23.3255,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,32,Gas flames,50% butane,0.3926,39.26,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,33,Gas flames,50% butane,0.384638613,38.4639,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,34,Gas flames,50% butane,0.377171369,37.7171,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,35,Gas flames,50% butane,0.369281404,36.9281,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,36,Gas flames,50% butane,0.358532281,35.8532,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,37,Gas flames,50% butane,0.35424096,35.4241,,,,0.50665,bar,7.3484,True,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,38,Gas flames,50% butane,0.35424096,35.4241,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,39,Gas flames,50% butane,0.353756802,35.3757,,,,0.50665,bar,7.3484,True,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,40,Gas flames,50% butane,0.352937762,35.2938,,,,0.50665,bar,7.3484,True,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,41,Gas flames,50% butane,0.2097,20.97,,,,0.50665,bar,7.3484,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,42,Gas flames,50% butane,0.208586481,20.8586,,,,0.50665,bar,7.3484,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,43,Gas flames,50% butane,0.207473561,20.7474,,,,0.50665,bar,7.3484,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,44,Gas flames,50% butane,0.206694811,20.6695,,,,0.50665,bar,7.3484,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,45,Gas flames,50% butane,0.206694811,20.6695,,,,0.50665,bar,7.3484,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,46,Gas flames,propane,0.3954,39.54,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,47,Gas flames,propane,0.3940449,39.4045,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,48,Gas flames,propane,0.391274328,39.1274,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,49,Gas flames,propane,0.386794842,38.6795,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,50,Gas flames,propane,0.379543758,37.9544,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,51,Gas flames,propane,0.377663625,37.7664,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,52,Gas flames,propane,0.37709578,37.7096,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,53,Gas flames,propane,0.376528047,37.6528,,,,0.9443956,bar,13.6973,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,54,Gas flames,propane,0.366422787,36.6423,,,,0.9443956,bar,13.6973,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,55,Gas flames,propane,0.366422787,36.6423,,,,0.9443956,bar,13.6973,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,56,Gas flames,propane,0.366422787,36.6423,,,,0.9443956,bar,13.6973,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,57,Gas flames,propane,0.366422787,36.6423,,,,0.9443956,bar,13.6973,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,58,Gas flames,propane,0.2125,21.25,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,59,Gas flames,propane,0.2125,21.25,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,60,Gas flames,propane,0.212224743,21.2225,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,61,Gas flames,propane,0.212004554,21.2005,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,62,Gas flames,propane,0.211798144,21.1798,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,63,Gas flames,propane,0.211798144,21.1798,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,64,Gas flames,propane,0.211591749,21.1592,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,65,Gas flames,propane,0.211402567,21.1403,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,66,Gas flames,30% butane,0.3945,39.45,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,67,Gas flames,30% butane,0.3945,39.45,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,68,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,69,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,70,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,71,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,72,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,73,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,74,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,75,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,76,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,77,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,78,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,79,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,80,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,81,Gas flames,30% butane,0.394118729,39.4119,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,82,Gas flames,30% butane,0.389156864,38.9157,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,83,Gas flames,30% butane,0.38437638,38.4376,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,84,Gas flames,30% butane,0.2111,21.11,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,85,Gas flames,30% butane,0.211072309,21.1072,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,86,Gas flames,30% butane,0.211044619,21.1045,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,87,Gas flames,30% butane,0.211044619,21.1045,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,88,Gas flames,30% butane,0.211044619,21.1045,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,89,Gas flames,30% butane,0.211044619,21.1045,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,90,Gas flames,30% propane,0.2107,21.07,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,91,Gas flames,30% propane,0.210684692,21.0685,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,92,Gas flames,30% propane,0.210654078,21.0654,,,,2.0266,bar,29.3934,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,93,Gas flames,30% propane,0.210654078,21.0654,,,,2.0266,bar,29.3934,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,94,Gas flames,30% propane,0.210654078,21.0654,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,95,Gas flames,30% propane,0.210623465,21.0623,,,,2.0266,bar,29.3934,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,96,Gas flames,30% propane,0.210623465,21.0623,,,,2.0266,bar,29.3934,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,97,Gas flames,30% propane,0.210623465,21.0623,,,,2.0266,bar,29.3934,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,98,Gas flames,30% propane,0.210623465,21.0623,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,99,Gas flames,30% propane,0.210615813,21.0616,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,100,Gas flames,30% propane,0.21050331,21.0503,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,101,Gas flames,30% propane,0.210240854,21.0241,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,102,Gas flames,30% propane,0.2167,21.67,,,,3.0399,bar,44.0901,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,103,Gas flames,30% propane,0.2167,21.67,,,,3.0399,bar,44.0901,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,104,Gas flames,30% propane,0.216689654,21.669,,,,3.0399,bar,44.0901,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,105,Gas flames,30% propane,0.216668964,21.6669,,,,3.0399,bar,44.0901,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,106,Gas flames,30% propane,0.216668964,21.6669,,,,3.0399,bar,44.0901,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,107,Gas flames,30% propane,0.216668964,21.6669,,,,3.0399,bar,44.0901,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,108,Gas flames,30% propane,0.216663791,21.6664,,,,3.0399,bar,44.0901,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,109,Gas flames,30% propane,0.216661205,21.6661,,,,3.0399,bar,44.0901,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,110,Gas flames,30% propane,0.216585869,21.6586,,,,3.0399,bar,44.0901,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,111,Gas flames,30% propane,0.216435213,21.6435,,,,3.0399,bar,44.0901,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,112,Gas flames,30% propane,0.216403828,21.6404,,,,3.0399,bar,44.0901,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,113,Gas flames,30% propane,0.216372442,21.6372,,,,3.0399,bar,44.0901,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,114,Gas flames,30% propane,0.3996,39.96,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,115,Gas flames,30% propane,0.397258964,39.7259,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,116,Gas flames,30% propane,0.394768875,39.4769,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,117,Gas flames,30% propane,0.389508666,38.9509,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,118,Gas flames,30% propane,0.371242231,37.1242,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,119,Gas flames,30% propane,0.357498988,35.7499,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,120,Gas flames,30% propane,0.355683743,35.5684,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,121,Gas flames,30% propane,0.353678232,35.3678,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,122,Gas flames,30% propane,0.352403076,35.2403,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,123,Gas flames,30% propane,0.21,21.0,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,124,Gas flames,30% propane,0.209133851,20.9134,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,125,Gas flames,30% propane,0.208927834,20.8928,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,126,Gas flames,30% ethane,0.3887,38.87,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,127,Gas flames,30% ethane,0.375900202,37.59,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,128,Gas flames,30% ethane,0.363879118,36.3879,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,129,Gas flames,30% ethane,0.34080788,34.0808,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,130,Gas flames,30% ethane,0.334933586,33.4934,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,131,Gas flames,30% ethane,0.332446428,33.2446,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,132,Gas flames,30% ethane,0.3985,39.85,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,133,Gas flames,30% ethane,0.396626309,39.6626,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,134,Gas flames,30% ethane,0.394842385,39.4842,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,135,Gas flames,30% ethane,0.391980391,39.198,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,136,Gas flames,30% ethane,0.388939354,38.8939,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,137,Gas flames,30% ethane,0.384151721,38.4152,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,138,Gas flames,30% ethane,0.383585316,38.3585,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,139,Gas flames,30% ethane,0.382061285,38.2061,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,140,Gas flames,30% ethane,0.3997,39.97,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,141,Gas flames,30% ethane,0.394966671,39.4967,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,142,Gas flames,30% ethane,0.390017987,39.0018,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,143,Gas flames,30% ethane,0.37932621,37.9326,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,144,Gas flames,30% ethane,0.372085537,37.2086,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,145,Gas flames,30% ethane,0.21,21.0,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,146,Gas flames,30% ethane,0.209619681,20.962,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,147,Gas flames,30% ethane,0.209289501,20.929,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,148,Gas flames,30% ethane,0.20892942,20.8929,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,149,Gas flames,30% ethane,0.208389559,20.839,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,150,Gas flames,30% ethane,0.207540819,20.7541,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,151,Gas flames,30% ethane,0.207221235,20.7221,,,,1.0133,bar,14.6967,False,Hot ignition: No
+PSI-159,PSI-159_table_1.csv,152,Gas flames,30% ethane,0.207221235,20.7221,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,153,Gas flames,30% butane,0.3886,38.86,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,154,Gas flames,30% butane,0.38317216,38.3172,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,155,Gas flames,30% butane,0.378521822,37.8522,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,156,Gas flames,30% butane,0.372051768,37.2052,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,157,Gas flames,30% butane,0.355439854,35.544,,,,0.50665,bar,7.3484,True,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,158,Gas flames,30% butane,0.3985,39.85,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,159,Gas flames,30% butane,0.396546482,39.6546,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,160,Gas flames,30% butane,0.39537253,39.5373,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,161,Gas flames,30% butane,0.394310549,39.4311,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,162,Gas flames,30% butane,0.392491915,39.2492,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,163,Gas flames,30% butane,0.390816348,39.0816,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,164,Gas flames,30% butane,0.389605939,38.9606,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,165,Gas flames,30% butane,0.389263058,38.9263,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,166,Gas flames,30% butane,0.385474447,38.5474,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,167,Gas flames,30% butane,0.384750235,38.475,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,168,Gas flames,30% butane,0.384056477,38.4056,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,169,Gas flames,30% butane,0.3993,39.93,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,170,Gas flames,30% butane,0.394233062,39.4233,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,171,Gas flames,30% butane,0.389271344,38.9271,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,172,Gas flames,30% butane,0.388318854,38.8319,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,173,Gas flames,30% butane,0.387190712,38.7191,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,174,Gas flames,30% butane,0.386174345,38.6174,,,,2.0266,bar,29.3934,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,175,Gas flames,30% butane,0.3978,39.78,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,176,Gas flames,30% butane,0.394946781,39.4947,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,177,Gas flames,30% butane,0.38845523,38.8455,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,178,Gas flames,30% butane,0.385436483,38.5436,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,179,Gas flames,30% butane,0.382657026,38.2657,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_1.csv,180,Gas flames,30% butane,0.380783875,38.0784,,,,1.0133,bar,14.6967,False,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,2,Gas flames,ethane,,,,0.21,21.0,1.10,bar,15.9542,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,3,Gas flames,ethane,,,,0.21,21.0,1.10,bar,15.9542,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,4,Gas flames,ethane,,,,0.15,15.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,5,Gas flames,ethane,,,,0.12,12.0,1.1033,bar,16.002,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,6,Gas flames,ethane,,,,0.135,13.5,1.1033,bar,16.002,,Hot ignition: flash
+PSI-159,PSI-159_table_2.csv,7,Gas flames,ethane,,,,0.15,15.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,8,Gas flames,ethane,,,,0.15,15.0,1.1033,bar,16.002,,Hot ignition: flash
+PSI-159,PSI-159_table_2.csv,9,Gas flames,ethane,,,,0.15,15.0,1.1033,bar,16.002,,Hot ignition: flash
+PSI-159,PSI-159_table_2.csv,10,Gas flames,ethane,,,,0.15,15.0,1.1033,bar,16.002,,Hot ignition: flash
+PSI-159,PSI-159_table_2.csv,11,Gas flames,ethane,,,,0.15,15.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,12,Gas flames,ethane,,,,0.15,15.0,0.4953817,bar,7.1849,,Hot ignition: flash
+PSI-159,PSI-159_table_2.csv,13,Gas flames,ethane,,,,0.21,21.0,0.4953817,bar,7.1849,,Hot ignition: flash
+PSI-159,PSI-159_table_2.csv,14,Gas flames,ethane,,,,0.21,21.0,0.4953817,bar,7.1849,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,15,Gas flames,ethane,,,,0.3,30.0,0.4953817,bar,7.1849,,Hot ignition: flash
+PSI-159,PSI-159_table_2.csv,16,Gas flames,ethane,,,,0.3,30.0,0.4953817,bar,7.1849,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,17,Gas flames,ethane,,,,0.3,30.0,0.4953817,bar,7.1849,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,18,Gas flames,ethane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: no
+PSI-159,PSI-159_table_2.csv,19,Gas flames,ethane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,20,Gas flames,ethane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,21,Gas flames,ethane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,22,Gas flames,ethane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,23,Gas flames,ethane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,24,Gas flames,ethane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,25,Gas flames,ethane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,26,Gas flames,ethane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,27,Gas flames,ethane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,28,Gas flames,ethane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,29,Gas flames,ethane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,30,Gas flames,ethane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,31,Gas flames,ethane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,32,Gas flames,ethane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,33,Gas flames,ethane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,34,Gas flames,ethane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,35,Gas flames,ethane,,,,0.5,50.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,36,Gas flames,ethane,,,,0.3,30.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,37,Gas flames,ethane,,,,0.21,21.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,38,Gas flames,ethane,,,,0.21,21.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,39,Gas flames,ethane,,,,0.21,21.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,40,Gas flames,ethane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,41,Gas flames,ethane,,,,0.18,18.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,42,Gas flames,ethane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,43,Gas flames,ethane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,44,Gas flames,ethane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,45,Gas flames,ethane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,46,Gas flames,ethane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: flash
+PSI-159,PSI-159_table_2.csv,47,Gas flames,ethane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,48,Gas flames,ethane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,49,Gas flames,ethane,,,,0.5,50.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,50,Gas flames,ethane,,,,0.21,21.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,51,Gas flames,ethane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,52,Gas flames,ethane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,53,Gas flames,ethane,,,,0.5,50.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,54,Gas flames,ethane,,,,0.21,21.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,55,Gas flames,propane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,56,Gas flames,propane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,57,Gas flames,propane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,58,Gas flames,propane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,59,Gas flames,propane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,60,Gas flames,propane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,61,Gas flames,propane,,,,0.5,50.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,62,Gas flames,propane,,,,0.5,50.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,63,Gas flames,propane,,,,0.21,21.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,64,Gas flames,propane,,,,0.21,21.0,3.3099,bar,48.0061,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,65,Gas flames,propane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,66,Gas flames,propane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,67,Gas flames,propane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,68,Gas flames,propane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,69,Gas flames,propane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,70,Gas flames,propane,,,,0.5,50.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,71,Gas flames,propane,,,,0.5,50.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,72,Gas flames,propane,,,,0.5,50.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,73,Gas flames,propane,,,,0.5,50.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,74,Gas flames,propane,,,,0.21,21.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,75,Gas flames,propane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,76,Gas flames,propane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,77,Gas flames,propane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,78,Gas flames,propane,,,,0.5,50.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,79,Gas flames,propane,,,,0.5,50.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,80,Gas flames,propane,,,,0.21,21.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,81,Gas flames,propane,,,,0.21,21.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,82,Gas flames,propane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,83,Gas flames,propane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,84,Gas flames,propane,,,,0.5,50.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,85,Gas flames,propane,,,,0.21,21.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,86,Gas flames,propane,,,,0.21,21.0,1.1033,bar,16.002,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,87,Gas flames,propane,,,,0.18,18.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,88,Gas flames,propane,,,,0.19,19.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,89,Gas flames,propane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,90,Gas flames,propane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,91,Gas flames,propane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,92,Gas flames,propane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,93,Gas flames,propane,,,,0.3,30.0,0.55165,bar,8.001,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,94,Gas flames,propane,,,,0.21,21.0,0.55165,bar,8.001,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,95,Gas flames,propane,,,,0.21,21.0,0.55165,bar,8.001,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,96,Gas flames,propane,,,,0.21,21.0,0.55165,bar,8.001,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,97,Gas flames,propane,,,,0.3,30.0,0.55165,bar,8.001,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,98,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,99,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,100,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,101,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,102,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,103,Gas flames,butane,,,,0.5,50.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,104,Gas flames,butane,,,,0.21,21.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,105,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,106,Gas flames,butane,,,,0.5,50.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,107,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,108,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,109,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,110,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,111,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,112,Gas flames,butane,,,,0.5,50.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,113,Gas flames,butane,,,,0.21,21.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,114,Gas flames,butane,,,,0.85,85.0,2.2066,bar,32.0041,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,115,Gas flames,butane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,116,Gas flames,butane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,117,Gas flames,butane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,118,Gas flames,butane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,119,Gas flames,butane,,,,0.85,85.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,120,Gas flames,butane,,,,0.5,50.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,121,Gas flames,butane,,,,0.5,50.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,122,Gas flames,butane,,,,0.5,50.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,123,Gas flames,butane,,,,0.21,21.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,124,Gas flames,butane,,,,0.21,21.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,125,Gas flames,butane,,,,0.21,21.0,3.3099,bar,48.0061,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,126,Gas flames,butane,,,,0.21,21.0,3.3099,bar,48.0061,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,127,Gas flames,butane,,,,0.4,40.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,128,Gas flames,butane,,,,0.4,40.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,129,Gas flames,butane,,,,0.7,70.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,130,Gas flames,butane,,,,0.45,45.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,131,Gas flames,butane,,,,0.4,40.0,3.3099,bar,48.0061,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,132,Gas flames,butane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,133,Gas flames,butane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,134,Gas flames,butane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,135,Gas flames,butane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: Yes
+PSI-159,PSI-159_table_2.csv,136,Gas flames,butane,,,,0.5,50.0,1.1033,bar,16.002,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,137,Gas flames,butane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,138,Gas flames,butane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,139,Gas flames,butane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,140,Gas flames,butane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,141,Gas flames,butane,,,,0.85,85.0,1.1033,bar,16.002,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,142,Gas flames,butane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,143,Gas flames,butane,,,,0.5,50.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,144,Gas flames,butane,,,,0.21,21.0,0.55165,bar,8.001,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,145,Gas flames,butane,,,,0.3,30.0,0.55165,bar,8.001,,Hot ignition: No
+PSI-159,PSI-159_table_2.csv,146,Gas flames,butane,,,,0.3,30.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,147,Gas flames,butane,,,,0.21,21.0,0.55165,bar,8.001,,Hot ignition: no
+PSI-159,PSI-159_table_2.csv,148,Gas flames,butane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,149,Gas flames,butane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,150,Gas flames,butane,,,,0.5,50.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,151,Gas flames,butane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,152,Gas flames,butane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,153,Gas flames,butane,,,,0.85,85.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,154,Gas flames,butane,,,,0.5,50.0,0.55165,bar,8.001,,Hot ignition: yes
+PSI-159,PSI-159_table_2.csv,155,Gas flames,butane,,,,0.3,30.0,0.55165,bar,8.001,,Hot ignition: yes
