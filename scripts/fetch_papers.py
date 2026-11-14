@@ -3,9 +3,9 @@
 fetch_papers.py - collects title and abstract for every publication DOI that
 PSI lists for the Combustion Science investigations.
 
-It does NOT download PSI. It reads the PSI records already saved in the team
-snapshot (sync-claudes/app/raw/, see that repo's fetch_snapshot.py) and only
-looks up each DOI on OpenAlex. Nothing is cleaned or interpreted.
+It does NOT download PSI. It reads the PSI records already saved in the
+snapshot (data/psi/raw/, written by fetch_snapshot.py) and only looks up each
+DOI on OpenAlex. Nothing is cleaned or interpreted.
 
 Saves:
   data/papers/papers.json     one entry per unique DOI: which PSI ids cite it,
@@ -17,7 +17,6 @@ Saves:
 
 Run from the repo root (Python 3.9+, no packages):
   python scripts/fetch_papers.py
-  python scripts/fetch_papers.py --raw ../sync-claudes/app/raw
 
 Source: OpenAlex (https://openalex.org), CC0 metadata.
 This script was written with AI assistance (Claude, Anthropic).
@@ -34,7 +33,7 @@ import urllib.parse
 import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEFAULT_RAW = os.path.join(ROOT, "..", "sync-claudes", "app", "raw")
+DEFAULT_RAW = os.path.join(ROOT, "data", "psi", "raw")
 OUT = os.path.join(ROOT, "data", "papers")
 OPENALEX = "https://api.openalex.org/works/doi:"
 AGENT = "SpaceApps2026-DataBeyondSpace/1.0"
@@ -93,7 +92,7 @@ def main():
 
     dois, read = collect_dois(raw_dir)
     if not read:
-        sys.exit(f"No PSI-*.json found in {raw_dir}. Clone the notes repo next to this one or pass --raw.")
+        sys.exit(f"No PSI-*.json found in {raw_dir}. Run scripts/fetch_snapshot.py first or pass --raw.")
 
     snap_manifest = {}
     mpath = os.path.join(raw_dir, "manifest.json")
@@ -138,7 +137,7 @@ def main():
         "started": started,
         "finished": now(),
         "source": "OpenAlex, https://api.openalex.org",
-        "dois_from": "PSI publication lists in the team snapshot (sync-claudes/app/raw)",
+        "dois_from": "PSI publication lists in the snapshot (data/psi/raw)",
         "snapshot_files_read": {n: snap_manifest.get(n, {}).get("sha256") for n in read},
         "unique_dois": len(papers),
         "with_abstract": with_abs,
