@@ -12,7 +12,8 @@ It shows coverage and gaps. It does not predict how fire behaves on the Moon.
 |---|---|
 | Overview | The finding, then a tool: choose an atmosphere and see how much of NASA's fire data fits it |
 | Explore | Every test against the chosen air: oxygen by what burns, oxygen against pressure, and a finder for materials and tests with a filtered CSV download |
-| Ranking | The 24 investigations ordered by how many of five conditions they meet for the chosen air, with the evidence for each |
+| Ranking | The 24 investigations ordered by how many of five conditions they meet for the chosen air, with the evidence for each. A second tab puts all 24 side by side: sample or burner, what was measured, use on Earth |
+| Ask | Type a question; get the sentences from NASA's records and the listed papers that match it best, by meaning. Quotations only, nothing generated |
 | Investigation pages | Each investigation in plain words, NASA's description word for word, what its table records, its publications, and a side-by-side comparison with any other |
 | Open questions | Six fire-safety questions for a Moon Base, each marked open or partly answered, with NASA's own words and table rows as evidence |
 | Data and method | Downloads of the cleaned tables, the rules every number follows, and the references |
@@ -41,7 +42,9 @@ python scripts/fetch_snapshot.py    # only if data/psi/raw/ is missing: download
 python scripts/fetch_papers.py      # optional: titles, years and abstracts of the listed publications
 python scripts/build_dataset.py     # snapshot -> docs/data/
 python scripts/validate.py          # independent checks; fails loudly if anything is off
-node scripts/check_recount.js       # the in-browser recount must equal the build, number for number
+node scripts/check_recount.cjs      # the in-browser recount must equal the build, number for number
+npm install                         # once, only for the next line
+node scripts/build_search.mjs       # passages and their meaning vectors for the Ask page
 ```
 
 ## Structure
@@ -49,9 +52,10 @@ node scripts/check_recount.js       # the in-browser recount must equal the buil
 ```
 data/psi/raw/            NASA's files, byte for byte, with manifest.json (URL, time, size, SHA-256)
 data/papers/             publication metadata from OpenAlex for the DOIs PSI lists
-data/content/            the plain-language texts shown on the site (AI-written, machine-checked)
+data/content/            the plain-language texts and the extracted attributes (AI-written, machine-checked)
 scripts/                 fetch_snapshot.py, fetch_papers.py, build_dataset.py, validate.py
-docs/                    the website; docs/data/ is written by build_dataset.py
+docs/                    the website; docs/data/ is written by the build scripts
+docs/models/, docs/vendor/   the language model and the library that runs it in the browser
 ```
 
 ## How every number stays honest
@@ -63,7 +67,7 @@ docs/                    the website; docs/data/ is written by build_dataset.py
 - **Quotations are checked by program.** The build fails unless every quoted sentence is found word for word in the NASA record it is attributed to.
 - **No number is typed by hand.** Figures in the texts are inserted from the computed data.
 - **Headline numbers are counted twice**, by separate code in `validate.py`.
-- **The recount for other atmospheres is checked too.** `docs/recount.js` follows the same rules, and `check_recount.js` fails unless it reproduces the build exactly for the Moon Base.
+- **The recount for other atmospheres is checked too.** `docs/recount.js` follows the same rules, and `check_recount.cjs` fails unless it reproduces the build exactly for the Moon Base.
 
 ## Data and references
 
@@ -74,10 +78,19 @@ docs/                    the website; docs/data/ is written by build_dataset.py
 - OpenAlex (publication year, journal and abstracts): https://openalex.org
 - Photographs (Moon, Earth, space station): NASA, public domain, via Wikimedia Commons; sources, checksums and changes in `docs/img/CREDITS.md`
 - Typefaces: Barlow Condensed, Public Sans and DM Mono, SIL Open Font License 1.1, from https://fontsource.org (details in `docs/img/CREDITS.md`)
+- Language model all-MiniLM-L6-v2 (Apache-2.0): https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 , in the ONNX build https://huggingface.co/Xenova/all-MiniLM-L6-v2
+- Transformers.js 4.3.2 (Apache-2.0): https://github.com/huggingface/transformers.js , with ONNX Runtime Web (MIT): https://github.com/microsoft/onnxruntime
+- NASA Technical Reports Server, for the reading lists outside PSI: https://ntrs.nasa.gov
 - Python 3 standard library: https://docs.python.org/3/library/
 
 ## Use of AI
 
-The scripts, the website and the plain-language texts were written with AI assistance (Claude, Anthropic) and reviewed by the team. The AI was given only NASA's records and tables. AI-written text is labelled on the site, and NASA's own words always appear in quotation marks. The overview page layout follows a design mockup made with ChatGPT (OpenAI); the mockup is not part of the site, and every number on the page comes from the data. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.
+AI does three jobs here, and each is checked or limited so that it cannot invent anything.
+
+1. **It reads NASA's records.** Claude (Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. The build fails unless every quotation is found word for word in the NASA record, every table column exists, and the texts hold no hand-typed numbers.
+2. **It matches a question to NASA's sentences.** On the Ask page a small open language model, all-MiniLM-L6-v2, runs in the reader's browser. It turns the question and 925 passages into vectors and shows the closest passages. It writes nothing, and the question never leaves the reader's computer.
+3. **It helped write the code.** The scripts and the website were written with AI assistance and reviewed by the team.
+
+An early layout of the overview followed a design mockup made with ChatGPT (OpenAI); the mockup is not part of the site. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.
 
 This project is not affiliated with or endorsed by NASA.

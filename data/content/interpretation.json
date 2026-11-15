@@ -1,175 +1,403 @@
 {
  "_about": "Plain-language text shown on the dashboard. WRITTEN BY AI (Claude, Anthropic) from the PSI record text and tables in data/psi/raw/, then reviewed by the team. Every 'quote' is NASA's own wording and scripts/build_dataset.py refuses to build unless it is found word for word in the named field of the named record. Numbers are never typed here: {{...}} placeholders are filled from the computed dataset. kind: aim = what the experiment set out to do; expected = what its authors expected before flying; result = a finding the record states; stated = a fact the record states about NASA practice.",
-
  "summaries": {
   "PSI-25": {
    "did": "Astronauts burned small pieces of plastic, fabric and other solids inside a small wind tunnel on the space station, changing the fan speed and lowering the oxygen with nitrogen.",
    "points": [
-    {"kind": "expected", "text": "With enough airflow, a material burns at least as well in weightlessness as on Earth.", "field": "hypothesis", "quote": "materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity"},
-    {"kind": "stated", "text": "The Earth test NASA uses to approve materials may not be on the safe side for space.", "field": "hypothesis", "quote": "However, it may not be conservative for flammability in space."},
-    {"kind": "stated", "text": "Oxygen was only varied downward from normal air.", "field": "approach", "quote": "oxygen varied below 21% by adding nitrogen"}
+    {
+     "kind": "expected",
+     "text": "With enough airflow, a material burns at least as well in weightlessness as on Earth.",
+     "field": "hypothesis",
+     "quote": "materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity"
+    },
+    {
+     "kind": "stated",
+     "text": "The Earth test NASA uses to approve materials may not be on the safe side for space.",
+     "field": "hypothesis",
+     "quote": "However, it may not be conservative for flammability in space."
+    },
+    {
+     "kind": "stated",
+     "text": "Oxygen was only varied downward from normal air.",
+     "field": "approach",
+     "quote": "oxygen varied below 21% by adding nitrogen"
+    }
    ]
   },
   "PSI-26": {
    "did": "The first round of the same wind-tunnel experiment: plastic spheres, fabric strips and wax candles burned on the space station, some put out with nitrogen.",
    "points": [
-    {"kind": "stated", "text": "NASA selects spacecraft materials with an Earth-gravity test that does not consider low gravity.", "field": "researchImpacts", "quote": "segregates material based on 1-g behavior without consideration of low gravity effects"},
-    {"kind": "aim", "text": "Check how well an inert gas, like the one in station extinguishers, puts flames out.", "field": "objective", "quote": "Assess the effectiveness of an inert, gaseous extinguishing agent (similar to that used on ISS) in putting out flames"},
-    {"kind": "expected", "text": "With enough airflow, a material burns at least as well in weightlessness as on Earth.", "field": "hypothesis", "quote": "burn as well if not better than the same material in normal gravity"}
+    {
+     "kind": "stated",
+     "text": "NASA selects spacecraft materials with an Earth-gravity test that does not consider low gravity.",
+     "field": "researchImpacts",
+     "quote": "segregates material based on 1-g behavior without consideration of low gravity effects"
+    },
+    {
+     "kind": "aim",
+     "text": "Check how well an inert gas, like the one in station extinguishers, puts flames out.",
+     "field": "objective",
+     "quote": "Assess the effectiveness of an inert, gaseous extinguishing agent (similar to that used on ISS) in putting out flames"
+    },
+    {
+     "kind": "expected",
+     "text": "With enough airflow, a material burns at least as well in weightlessness as on Earth.",
+     "field": "hypothesis",
+     "quote": "burn as well if not better than the same material in normal gravity"
+    }
    ]
   },
   "PSI-98": {
    "did": "A fabric sheet about a metre long was set alight inside an empty cargo ship after it left the space station, a fire too large to risk on a crewed vehicle.",
    "points": [
-    {"kind": "aim", "text": "Find out how fast a large fire grows in weightlessness.", "field": "objective", "quote": "determine how rapidly a large scale fire grows in low-gravity"},
-    {"kind": "expected", "text": "Designing spacecraft fire safety from Earth fires carries a real risk, because fire behaves so differently in space.", "field": "hypothesis", "quote": "the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty"},
-    {"kind": "stated", "text": "Designers have very little space fire data to work from.", "field": "hypothesis", "quote": "There is a significant lack of microgravity data available for spacecraft designers on which to base their fire safety designs and procedures."}
+    {
+     "kind": "aim",
+     "text": "Find out how fast a large fire grows in weightlessness.",
+     "field": "objective",
+     "quote": "determine how rapidly a large scale fire grows in low-gravity"
+    },
+    {
+     "kind": "expected",
+     "text": "Designing spacecraft fire safety from Earth fires carries a real risk, because fire behaves so differently in space.",
+     "field": "hypothesis",
+     "quote": "the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty"
+    },
+    {
+     "kind": "stated",
+     "text": "Designers have very little space fire data to work from.",
+     "field": "hypothesis",
+     "quote": "There is a significant lack of microgravity data available for spacecraft designers on which to base their fire safety designs and procedures."
+    }
    ]
   },
   "PSI-99": {
    "did": "Nine smaller samples (silicone, cotton-fiberglass fabric, acrylic plastic, Nomex) were burned one after another inside an empty cargo ship. The table lists how far each burned in space and in the same test on Earth.",
    "points": [
-    {"kind": "aim", "text": "Compare what burns in weightlessness with what NASA's Earth screening test says.", "field": "objective", "quote": "investigate the low-g flammability limits compared to those obtained in NASA"},
-    {"kind": "expected", "text": "Designing spacecraft fire safety from Earth fires carries a real risk, because fire behaves so differently in space.", "field": "hypothesis", "quote": "the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty"}
+    {
+     "kind": "aim",
+     "text": "Compare what burns in weightlessness with what NASA's Earth screening test says.",
+     "field": "objective",
+     "quote": "investigate the low-g flammability limits compared to those obtained in NASA"
+    },
+    {
+     "kind": "expected",
+     "text": "Designing spacecraft fire safety from Earth fires carries a real risk, because fire behaves so differently in space.",
+     "field": "hypothesis",
+     "quote": "the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty"
+    }
    ]
   },
   "PSI-100": {
    "did": "A repeat of the large fabric fire inside an empty cargo ship, with faster airflow.",
    "points": [
-    {"kind": "aim", "text": "Find out how fast a large fire grows in weightlessness.", "field": "objective", "quote": "determine how rapidly a large scale fire grows in low-gravity"},
-    {"kind": "expected", "text": "Designing spacecraft fire safety from Earth fires carries a real risk.", "field": "hypothesis", "quote": "the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty"}
+    {
+     "kind": "aim",
+     "text": "Find out how fast a large fire grows in weightlessness.",
+     "field": "objective",
+     "quote": "determine how rapidly a large scale fire grows in low-gravity"
+    },
+    {
+     "kind": "expected",
+     "text": "Designing spacecraft fire safety from Earth fires carries a real risk.",
+     "field": "hypothesis",
+     "quote": "the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty"
+    }
    ]
   },
   "PSI-20": {
    "did": "A flat gas burner was tuned so that its flame behaves like a burning piece of plastic or liquid. It was run on the space station in still air at several oxygen levels.",
    "points": [
-    {"kind": "result", "text": "The imitation of burning plastic kept burning with no airflow at all. Switching off ventilation is a standard step for putting out a spacecraft fire.", "field": "researchImpacts", "quote": "was observed in microgravity despite the absence of air flow, where the cessation of ventilation is an established step in putting out spacecraft fires"},
-    {"kind": "result", "text": "This happened in higher-oxygen air. In normal air the same flames went out by themselves.", "field": "researchImpacts", "quote": "whereas such flames in a normal atmosphere of 21% oxygen self-extinguished in a short time"},
-    {"kind": "aim", "text": "The plan named the atmospheres NASA considers for crewed missions.", "field": "objective", "quote": "14.7 psia, 21 % oxygen: 10.2 psia, 26.5 %; and 8.2 psia, 34 % oxygen"}
+    {
+     "kind": "result",
+     "text": "The imitation of burning plastic kept burning with no airflow at all. Switching off ventilation is a standard step for putting out a spacecraft fire.",
+     "field": "researchImpacts",
+     "quote": "was observed in microgravity despite the absence of air flow, where the cessation of ventilation is an established step in putting out spacecraft fires"
+    },
+    {
+     "kind": "result",
+     "text": "This happened in higher-oxygen air. In normal air the same flames went out by themselves.",
+     "field": "researchImpacts",
+     "quote": "whereas such flames in a normal atmosphere of 21% oxygen self-extinguished in a short time"
+    },
+    {
+     "kind": "aim",
+     "text": "The plan named the atmospheres NASA considers for crewed missions.",
+     "field": "objective",
+     "quote": "14.7 psia, 21 % oxygen: 10.2 psia, 26.5 %; and 8.2 psia, 34 % oxygen"
+    }
    ]
   },
   "PSI-102": {
    "did": "Common spacecraft materials (Teflon, Kapton, silicone rubber, lamp wick) were heated until they smoked, and the smoke particles were measured on the space station.",
    "points": [
-    {"kind": "expected", "text": "Without rising air, smoke particles grow larger than on Earth.", "field": "hypothesis", "quote": "will lead to larger particles compared to those produced in 1g"},
-    {"kind": "expected", "text": "That could stop some smoke detectors from sounding the alarm.", "field": "hypothesis", "quote": "possibly result in some detectors not producing an alarm when exposed to this smoke"}
+    {
+     "kind": "expected",
+     "text": "Without rising air, smoke particles grow larger than on Earth.",
+     "field": "hypothesis",
+     "quote": "will lead to larger particles compared to those produced in 1g"
+    },
+    {
+     "kind": "expected",
+     "text": "That could stop some smoke detectors from sounding the alarm.",
+     "field": "hypothesis",
+     "quote": "possibly result in some detectors not producing an alarm when exposed to this smoke"
+    }
    ]
   },
   "PSI-101": {
    "did": "A second flight of the smoke experiment. Five materials were heated until they smoked at different airflow speeds.",
    "points": [
-    {"kind": "aim", "text": "Measure how big smoke droplets get in weightlessness.", "field": "objective", "quote": "quantify the sizes that the liquid smoke particulate achieves in low gravity"},
-    {"kind": "aim", "text": "Provide the measurements a better spacecraft fire detector needs.", "field": "researchImpacts", "quote": "technology for an advanced fire detector for future spacecraft"}
+    {
+     "kind": "aim",
+     "text": "Measure how big smoke droplets get in weightlessness.",
+     "field": "objective",
+     "quote": "quantify the sizes that the liquid smoke particulate achieves in low gravity"
+    },
+    {
+     "kind": "aim",
+     "text": "Provide the measurements a better spacecraft fire detector needs.",
+     "field": "researchImpacts",
+     "quote": "technology for an advanced fire detector for future spacecraft"
+    }
    ]
   },
   "PSI-47": {
    "did": "A preparation step for the smoke experiments: a particle counter was tried out on the space station with test dust, to see whether it works without gravity. No fire was involved.",
    "points": [
-    {"kind": "expected", "text": "The instrument was expected to fail in weightlessness unless modified.", "field": "hypothesis", "quote": "It was hypothesized that the P-Trak would not work in microgravity"},
-    {"kind": "stated", "text": "Longer missions need more reliable fire detection.", "field": "researchImpacts", "quote": "will require fire detection systems with increased reliability and sensitivity"}
+    {
+     "kind": "expected",
+     "text": "The instrument was expected to fail in weightlessness unless modified.",
+     "field": "hypothesis",
+     "quote": "It was hypothesized that the P-Trak would not work in microgravity"
+    },
+    {
+     "kind": "stated",
+     "text": "Longer missions need more reliable fire detection.",
+     "field": "researchImpacts",
+     "quote": "will require fire detection systems with increased reliability and sensitivity"
+    }
    ]
   },
   "PSI-69": {
    "did": "Single droplets of fuel were burned in a sealed chamber on the space station, in many mixtures of oxygen, nitrogen and extinguishing gases such as carbon dioxide and helium, to find the point where the flame goes out.",
    "points": [
-    {"kind": "aim", "text": "Measure how well extinguishing gases work in weightlessness.", "field": "objective", "quote": "measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6"},
-    {"kind": "aim", "text": "Find the lowest oxygen level that still supports a flame, at different pressures.", "field": "approach", "quote": "determine the Limiting Oxygen Index (LOI) as a function of ambient pressure"},
-    {"kind": "expected", "text": "Extinguishing agents will work differently in space than on Earth.", "field": "hypothesis", "quote": "will lead to significant differences in the flammability limits and suppression efficacy of various fire suppressant agents compared to normal gravity conditions"}
+    {
+     "kind": "aim",
+     "text": "Measure how well extinguishing gases work in weightlessness.",
+     "field": "objective",
+     "quote": "measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6"
+    },
+    {
+     "kind": "aim",
+     "text": "Find the lowest oxygen level that still supports a flame, at different pressures.",
+     "field": "approach",
+     "quote": "determine the Limiting Oxygen Index (LOI) as a function of ambient pressure"
+    },
+    {
+     "kind": "expected",
+     "text": "Extinguishing agents will work differently in space than on Earth.",
+     "field": "hypothesis",
+     "quote": "will lead to significant differences in the flammability limits and suppression efficacy of various fire suppressant agents compared to normal gravity conditions"
+    }
    ]
   },
   "PSI-68": {
    "did": "The follow-up droplet experiment, with more fuels and conditions closer to those inside engines. The table lists the planned range for each fuel, not single tests.",
    "points": [
-    {"kind": "aim", "text": "Extend the first droplet experiment toward real engine conditions.", "field": "objective", "quote": "extend the results of FLEX-1 to fuels and environmental conditions that mimic real combustor conditions"}
+    {
+     "kind": "aim",
+     "text": "Extend the first droplet experiment toward real engine conditions.",
+     "field": "objective",
+     "quote": "extend the results of FLEX-1 to fuels and environmental conditions that mimic real combustor conditions"
+    }
    ]
   },
   "PSI-39": {
    "did": "Droplets of a liquid fuel (dodecane) were burned on the space station to study cool flames: flames that keep burning at a much lower temperature than ordinary ones.",
    "points": [
-    {"kind": "expected", "text": "Weightlessness reveals flame behaviour that cannot be seen on Earth.", "field": "hypothesis", "quote": "revealing critical parameters like droplet extinction diameters and flame dynamics that are not observable on Earth"},
-    {"kind": "aim", "text": "Spacecraft safety is named as one of several benefits.", "field": "researchImpacts", "quote": "support the design of safer spacecraft systems"}
+    {
+     "kind": "expected",
+     "text": "Weightlessness reveals flame behaviour that cannot be seen on Earth.",
+     "field": "hypothesis",
+     "quote": "revealing critical parameters like droplet extinction diameters and flame dynamics that are not observable on Earth"
+    },
+    {
+     "kind": "aim",
+     "text": "Spacecraft safety is named as one of several benefits.",
+     "field": "researchImpacts",
+     "quote": "support the design of safer spacecraft systems"
+    }
    ]
   },
   "PSI-159": {
    "did": "Gas was fed through a small porous ball to make round flames on the space station, hunting for cool flames in gases such as ethane, propane and butane. It is the only investigation with tests at Moon Base oxygen and pressure together.",
    "points": [
-    {"kind": "aim", "text": "The purpose is better engines, not fire safety.", "field": "researchImpacts", "quote": "This should facilitate the development of more efficient internal combustion engines"},
-    {"kind": "stated", "text": "Cool flames are a recent discovery.", "field": "researchImpacts", "quote": "has grown exponentially since they were discovered in 2012"}
+    {
+     "kind": "aim",
+     "text": "The purpose is better engines, not fire safety.",
+     "field": "researchImpacts",
+     "quote": "This should facilitate the development of more efficient internal combustion engines"
+    },
+    {
+     "kind": "stated",
+     "text": "Cool flames are a recent discovery.",
+     "field": "researchImpacts",
+     "quote": "has grown exponentially since they were discovered in 2012"
+    }
    ]
   },
   "PSI-10": {
    "did": "Round gas flames on the space station, used to find the conditions under which a flame starts to make soot. One set of tests blew oxygen out of the burner into fuel gas, the reverse of a normal flame.",
    "points": [
-    {"kind": "aim", "text": "The purpose is cleaner, more efficient burners on Earth.", "field": "researchImpacts", "quote": "improving efficiency and reducing pollutant emissions in terrestrial combustors"},
-    {"kind": "expected", "text": "A perfectly round flame can hold steady in weightlessness.", "field": "hypothesis", "quote": "Steady-state spherical diffusion flames are possible"}
+    {
+     "kind": "aim",
+     "text": "The purpose is cleaner, more efficient burners on Earth.",
+     "field": "researchImpacts",
+     "quote": "improving efficiency and reducing pollutant emissions in terrestrial combustors"
+    },
+    {
+     "kind": "expected",
+     "text": "A perfectly round flame can hold steady in weightlessness.",
+     "field": "hypothesis",
+     "quote": "Steady-state spherical diffusion flames are possible"
+    }
    ]
   },
   "PSI-21": {
    "did": "Thin gas flames with a stream of air flowing alongside, run on the space station to give computer models of flames exact data to be tested against.",
    "points": [
-    {"kind": "aim", "text": "Understanding when such flames go out helps both fire suppression and engines.", "field": "researchImpacts", "quote": "is critical in the suppression of fires and in improving engine efficiency"}
+    {
+     "kind": "aim",
+     "text": "Understanding when such flames go out helps both fire suppression and engines.",
+     "field": "researchImpacts",
+     "quote": "is critical in the suppression of fires and in improving engine efficiency"
+    }
    ]
   },
   "PSI-22": {
    "did": "Gas flames on the space station were pulled and shaped with an electric field, to see how electricity can control a flame.",
    "points": [
-    {"kind": "stated", "text": "The record says plainly that it is not aimed at space use.", "field": "researchImpacts", "quote": "is not being conducted to serve any space applications"}
+    {
+     "kind": "stated",
+     "text": "The record says plainly that it is not aimed at space use.",
+     "field": "researchImpacts",
+     "quote": "is not being conducted to serve any space applications"
+    }
    ]
   },
   "PSI-23": {
    "did": "Round gas flames on the space station, measured in detail as they grow and go out, to test computer models of flame chemistry.",
    "points": [
-    {"kind": "aim", "text": "The purpose is better engines and burners.", "field": "researchImpacts", "quote": "improving performance in terms of power, efficiency, pollutant emissions, and reliability"}
+    {
+     "kind": "aim",
+     "text": "The purpose is better engines and burners.",
+     "field": "researchImpacts",
+     "quote": "improving performance in terms of power, efficiency, pollutant emissions, and reliability"
+    }
    ]
   },
   "PSI-106": {
    "did": "Small gas flames on the space station, studied for how they sit on the burner and when they lift off it.",
    "points": [
-    {"kind": "expected", "text": "Flames in weightlessness are built differently from flames on Earth.", "field": "hypothesis", "quote": "fundamentally different than flames observed on Earth"},
-    {"kind": "aim", "text": "Fire safety is named as one of several benefits.", "field": "researchImpacts", "quote": "Insights into flame stability and behavior to enhance fire safety"}
+    {
+     "kind": "expected",
+     "text": "Flames in weightlessness are built differently from flames on Earth.",
+     "field": "hypothesis",
+     "quote": "fundamentally different than flames observed on Earth"
+    },
+    {
+     "kind": "aim",
+     "text": "Fire safety is named as one of several benefits.",
+     "field": "researchImpacts",
+     "quote": "Insights into flame stability and behavior to enhance fire safety"
+    }
    ]
   },
   "PSI-107": {
    "did": "Gas flames on the space station were lengthened until they began to give off smoke, to find the smoke point of each fuel.",
    "points": [
-    {"kind": "expected", "text": "Flames without rising air behave very differently.", "field": "hypothesis", "quote": "Flame properties are expected to differ significantly from those observed under normal gravity"},
-    {"kind": "aim", "text": "Safer spacecraft are named as one of several benefits.", "field": "researchImpacts", "quote": "help design safer spacecraft environments"}
+    {
+     "kind": "expected",
+     "text": "Flames without rising air behave very differently.",
+     "field": "hypothesis",
+     "quote": "Flame properties are expected to differ significantly from those observed under normal gravity"
+    },
+    {
+     "kind": "aim",
+     "text": "Safer spacecraft are named as one of several benefits.",
+     "field": "researchImpacts",
+     "quote": "help design safer spacecraft environments"
+    }
    ]
   },
   "PSI-60": {
    "did": "A ground study that combined the smoke-point flight data with computer simulation to work out flame temperatures and soot amounts.",
    "points": [
-    {"kind": "expected", "text": "Flames in weightlessness are longer, cooler and sootier.", "field": "hypothesis", "quote": "Microgravity conditions would produce longer, more diffuse flames with lower temperatures and increased soot concentrations compared to normal gravity"}
+    {
+     "kind": "expected",
+     "text": "Flames in weightlessness are longer, cooler and sootier.",
+     "field": "hypothesis",
+     "quote": "Microgravity conditions would produce longer, more diffuse flames with lower temperatures and increased soot concentrations compared to normal gravity"
+    }
    ]
   },
   "PSI-62": {
    "did": "A computer model of a flame spreading along a solid in weightlessness, checked against the wind-tunnel experiments on the space station.",
    "points": [
-    {"kind": "aim", "text": "A tool to predict whether a spacecraft material will burn.", "field": "objective", "quote": "enable accurate prediction of flammability limits for spacecraft materials"}
+    {
+     "kind": "aim",
+     "text": "A tool to predict whether a spacecraft material will burn.",
+     "field": "objective",
+     "quote": "enable accurate prediction of flammability limits for spacecraft materials"
+    }
    ]
   },
   "PSI-115": {
    "did": "A computer study, using the smoke experiment data, of why smoke forms differently without gravity.",
    "points": [
-    {"kind": "expected", "text": "Without rising air there is less mixing, which changes the smoke.", "field": "hypothesis", "quote": "Without buoyancy, mixing and heat transfer are reduced"},
-    {"kind": "aim", "text": "The goal is better smoke detectors.", "field": "researchImpacts", "quote": "This would directly lead to better smoke detection devices"}
+    {
+     "kind": "expected",
+     "text": "Without rising air there is less mixing, which changes the smoke.",
+     "field": "hypothesis",
+     "quote": "Without buoyancy, mixing and heat transfer are reduced"
+    },
+    {
+     "kind": "aim",
+     "text": "The goal is better smoke detectors.",
+     "field": "researchImpacts",
+     "quote": "This would directly lead to better smoke detection devices"
+    }
    ]
   },
   "PSI-117": {
    "did": "A computer study, using the droplet flight data, of how small disturbances in heat and airflow decide whether a cool flame survives.",
    "points": [
-    {"kind": "aim", "text": "Fire-safety modelling is named as a possible benefit.", "field": "researchImpacts", "quote": "Potential to improve spacecraft fire-safety modeling"}
+    {
+     "kind": "aim",
+     "text": "Fire-safety modelling is named as a possible benefit.",
+     "field": "researchImpacts",
+     "quote": "Potential to improve spacecraft fire-safety modeling"
+    }
    ]
   },
   "PSI-142": {
    "did": "Laboratory and computer work on Earth, building on the droplet flight data, on how a hot flame turns into a cool flame instead of going out.",
    "points": [
-    {"kind": "result", "text": "Between hot and cool flames there is a third, 'warm' flame that governs the switch from one to the other.", "field": "researchImpacts", "quote": "the warm flame has a double reaction zone structure and plays a critical role in the transition between cool flames and hot flames"},
-    {"kind": "result", "text": "At higher pressure, cool and warm flames can exist over a wider range of conditions.", "field": "researchImpacts", "quote": "the flammable region of warm flames and cool flames expands"}
+    {
+     "kind": "result",
+     "text": "Between hot and cool flames there is a third, 'warm' flame that governs the switch from one to the other.",
+     "field": "researchImpacts",
+     "quote": "the warm flame has a double reaction zone structure and plays a critical role in the transition between cool flames and hot flames"
+    },
+    {
+     "kind": "result",
+     "text": "At higher pressure, cool and warm flames can exist over a wider range of conditions.",
+     "field": "researchImpacts",
+     "quote": "the flammable region of warm flames and cool flames expands"
+    }
    ]
   }
  },
-
  "questions": [
   {
    "id": "tested",
@@ -177,12 +405,31 @@
    "status": "partly",
    "answer": "Yes, but only {{s.rows_in_zone}} tests in one investigation, and they are gas flames studied for engine research. No solid material and no fuel droplet in PSI was burned at Moon Base oxygen and pressure together.",
    "evidence": [
-    {"inv": "PSI-159", "kind": "table", "text": "{{PSI-159.criteria.both.rows}} of its tests were run at 30 % oxygen or more and 10.2 psi or less at the same time."},
-    {"inv": "PSI-159", "kind": "record", "text": "Its stated purpose is engines.", "field": "researchImpacts", "quote": "This should facilitate the development of more efficient internal combustion engines"},
-    {"inv": "PSI-69", "kind": "table", "text": "FLEX reached {{PSI-69.criteria.oxygen.max}} % oxygen and went as low as {{PSI-69.criteria.pressure.min}} psi, but never both in the same test."},
-    {"inv": "PSI-10", "kind": "table", "text": "Flame Design reached {{PSI-10.criteria.oxygen.max}} % oxygen in one set of tests and {{PSI-10.criteria.pressure.min}} psi in another, never both together."}
+    {
+     "inv": "PSI-159",
+     "kind": "table",
+     "text": "{{PSI-159.criteria.both.rows}} of its tests were run at 30 % oxygen or more and 10.2 psi or less at the same time."
+    },
+    {
+     "inv": "PSI-159",
+     "kind": "record",
+     "text": "Its stated purpose is engines.",
+     "field": "researchImpacts",
+     "quote": "This should facilitate the development of more efficient internal combustion engines"
+    },
+    {
+     "inv": "PSI-69",
+     "kind": "table",
+     "text": "FLEX reached {{PSI-69.criteria.oxygen.max}} % oxygen and went as low as {{PSI-69.criteria.pressure.min}} psi, but never both in the same test."
+    },
+    {
+     "inv": "PSI-10",
+     "kind": "table",
+     "text": "Flame Design reached {{PSI-10.criteria.oxygen.max}} % oxygen in one set of tests and {{PSI-10.criteria.pressure.min}} psi in another, never both together."
+    }
    ],
-   "missing": "A solid-material or droplet test inside the zone. Of the {{s.rows_with_both}} tests whose row states both oxygen and pressure, only {{s.rows_in_zone}} are inside it, all of them gas flames."
+   "missing": "A solid-material or droplet test inside the zone. Of the {{s.rows_with_both}} tests whose row states both oxygen and pressure, only {{s.rows_in_zone}} are inside it, all of them gas flames.",
+   "elsewhere": []
   },
   {
    "id": "materials",
@@ -190,14 +437,57 @@
    "status": "open",
    "answer": "PSI cannot say. Every solid-material test that states its oxygen was run between {{s.o2_range_by_class.solid.min}} % and {{s.o2_range_by_class.solid.max}} %, close to normal air or below. None reaches 30 %.",
    "evidence": [
-    {"inv": "PSI-25", "kind": "table", "text": "BASS-II: {{PSI-25.tables.0.ambient_o2.numbers}} tests, oxygen from {{PSI-25.criteria.oxygen.min}} % to {{PSI-25.criteria.oxygen.max}} %."},
-    {"inv": "PSI-25", "kind": "record", "text": "Oxygen was only lowered, never raised.", "field": "approach", "quote": "oxygen varied below 21% by adding nitrogen"},
-    {"inv": "PSI-99", "kind": "table", "text": "Saffire-II writes its oxygen as text, near normal air (shown as written on its page)."},
-    {"inv": "PSI-26", "kind": "table", "text": "BASS: its table has no oxygen column."},
-    {"inv": "PSI-100", "kind": "table", "text": "Saffire-III: its table has no oxygen column."},
-    {"inv": "PSI-20", "kind": "table", "text": "The closest thing: BRE, a gas burner imitating solids, lists oxygen up to {{PSI-20.criteria.oxygen.max}} %. Its table does not state pressure."}
+    {
+     "inv": "PSI-25",
+     "kind": "table",
+     "text": "BASS-II: {{PSI-25.tables.0.ambient_o2.numbers}} tests, oxygen from {{PSI-25.criteria.oxygen.min}} % to {{PSI-25.criteria.oxygen.max}} %."
+    },
+    {
+     "inv": "PSI-25",
+     "kind": "record",
+     "text": "Oxygen was only lowered, never raised.",
+     "field": "approach",
+     "quote": "oxygen varied below 21% by adding nitrogen"
+    },
+    {
+     "inv": "PSI-99",
+     "kind": "table",
+     "text": "Saffire-II writes its oxygen as text, near normal air (shown as written on its page)."
+    },
+    {
+     "inv": "PSI-26",
+     "kind": "table",
+     "text": "BASS: its table has no oxygen column."
+    },
+    {
+     "inv": "PSI-100",
+     "kind": "table",
+     "text": "Saffire-III: its table has no oxygen column."
+    },
+    {
+     "inv": "PSI-20",
+     "kind": "table",
+     "text": "The closest thing: BRE, a gas burner imitating solids, lists oxygen up to {{PSI-20.criteria.oxygen.max}} %. Its table does not state pressure."
+    }
    ],
-   "missing": "Real solid materials at 30 % oxygen or more, at 10.2 psi or less."
+   "missing": "Real solid materials at 30 % oxygen or more, at 10.2 psi or less.",
+   "elsewhere": [
+    {
+     "title": "Preliminary Results from the Saffire VI Experiment",
+     "year": 2024,
+     "url": "https://ntrs.nasa.gov/citations/20240002981"
+    },
+    {
+     "title": "Fire-Resistant Textile Development for Exploration Vehicles With Enriched-Oxygen Cabin Environments",
+     "year": 2026,
+     "url": "https://ntrs.nasa.gov/citations/20260003042"
+    },
+    {
+     "title": "Moon to Mars (M2M): Exploration Atmosphere",
+     "year": 2024,
+     "url": "https://ntrs.nasa.gov/citations/20240003211"
+    }
+   ]
   },
   {
    "id": "earth-test",
@@ -205,12 +495,46 @@
    "status": "open",
    "answer": "NASA's own records question it, and the comparisons that exist were made near normal air, not Moon Base air. Where there is no space data, the Earth test is all there is.",
    "evidence": [
-    {"inv": "PSI-26", "kind": "record", "text": "The Earth test does not consider low gravity.", "field": "researchImpacts", "quote": "segregates material based on 1-g behavior without consideration of low gravity effects"},
-    {"inv": "PSI-25", "kind": "record", "text": "It may not be on the safe side.", "field": "hypothesis", "quote": "However, it may not be conservative for flammability in space."},
-    {"inv": "PSI-98", "kind": "record", "text": "Relying on Earth fire standards is called a risk.", "field": "hypothesis", "quote": "presents an inherent risk to the vehicle because of the significant level of uncertainty"},
-    {"inv": "PSI-99", "kind": "table", "text": "Saffire-II is the only table that lists a burn in space and on Earth for the same samples ({{PSI-99.tables.0.entries}} samples). Read the two columns on its page: at near-normal oxygen the Earth burn is not the smaller one."}
+    {
+     "inv": "PSI-26",
+     "kind": "record",
+     "text": "The Earth test does not consider low gravity.",
+     "field": "researchImpacts",
+     "quote": "segregates material based on 1-g behavior without consideration of low gravity effects"
+    },
+    {
+     "inv": "PSI-25",
+     "kind": "record",
+     "text": "It may not be on the safe side.",
+     "field": "hypothesis",
+     "quote": "However, it may not be conservative for flammability in space."
+    },
+    {
+     "inv": "PSI-98",
+     "kind": "record",
+     "text": "Relying on Earth fire standards is called a risk.",
+     "field": "hypothesis",
+     "quote": "presents an inherent risk to the vehicle because of the significant level of uncertainty"
+    },
+    {
+     "inv": "PSI-99",
+     "kind": "table",
+     "text": "Saffire-II is the only table that lists a burn in space and on Earth for the same samples ({{PSI-99.tables.0.entries}} samples). Read the two columns on its page: at near-normal oxygen the Earth burn is not the smaller one."
+    }
    ],
-   "missing": "Space-versus-Earth comparisons at 30 % oxygen or more."
+   "missing": "Space-versus-Earth comparisons at 30 % oxygen or more.",
+   "elsewhere": [
+    {
+     "title": "Combustion of Solids in Microgravity: Results from the BASS-II Experiment",
+     "year": 2014,
+     "url": "https://ntrs.nasa.gov/citations/20160000593"
+    },
+    {
+     "title": "Preliminary Results from the Saffire VI Experiment",
+     "year": 2024,
+     "url": "https://ntrs.nasa.gov/citations/20240002981"
+    }
+   ]
   },
   {
    "id": "put-out",
@@ -218,12 +542,41 @@
    "status": "partly",
    "answer": "There is real data on extinguishing gases, but for fuel droplets. For solids there is one warning: an imitation of burning plastic kept going without airflow in higher-oxygen air.",
    "evidence": [
-    {"inv": "PSI-69", "kind": "record", "text": "FLEX measured extinguishing gases on burning droplets.", "field": "objective", "quote": "measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6"},
-    {"inv": "PSI-69", "kind": "table", "text": "FLEX: {{PSI-69.tables.0.entries}} tests, {{PSI-69.tables.0.ambient_o2.at_or_above}} of them at 30 % oxygen or more."},
-    {"inv": "PSI-20", "kind": "record", "text": "Stopping the airflow did not stop the flame in higher-oxygen air.", "field": "researchImpacts", "quote": "The ongoing combustion without air flow was notably seen in elevated-oxygen atmospheres which are being considered for use in future spacecraft"},
-    {"inv": "PSI-26", "kind": "record", "text": "BASS tried an inert extinguishing gas on solids, at an oxygen level its table does not state.", "field": "objective", "quote": "Assess the effectiveness of an inert, gaseous extinguishing agent (similar to that used on ISS) in putting out flames"}
+    {
+     "inv": "PSI-69",
+     "kind": "record",
+     "text": "FLEX measured extinguishing gases on burning droplets.",
+     "field": "objective",
+     "quote": "measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6"
+    },
+    {
+     "inv": "PSI-69",
+     "kind": "table",
+     "text": "FLEX: {{PSI-69.tables.0.entries}} tests, {{PSI-69.tables.0.ambient_o2.at_or_above}} of them at 30 % oxygen or more."
+    },
+    {
+     "inv": "PSI-20",
+     "kind": "record",
+     "text": "Stopping the airflow did not stop the flame in higher-oxygen air.",
+     "field": "researchImpacts",
+     "quote": "The ongoing combustion without air flow was notably seen in elevated-oxygen atmospheres which are being considered for use in future spacecraft"
+    },
+    {
+     "inv": "PSI-26",
+     "kind": "record",
+     "text": "BASS tried an inert extinguishing gas on solids, at an oxygen level its table does not state.",
+     "field": "objective",
+     "quote": "Assess the effectiveness of an inert, gaseous extinguishing agent (similar to that used on ISS) in putting out flames"
+    }
    ],
-   "missing": "Extinguishing tests on solid materials at Moon Base oxygen and pressure."
+   "missing": "Extinguishing tests on solid materials at Moon Base oxygen and pressure.",
+   "elsewhere": [
+    {
+     "title": "Spacecraft Fire Safety Needs for Exploration",
+     "year": 2020,
+     "url": "https://ntrs.nasa.gov/citations/20205007829"
+    }
+   ]
   },
   {
    "id": "detect",
@@ -231,12 +584,39 @@
    "status": "partly",
    "answer": "Smoke was measured in weightlessness and is expected to differ from Earth smoke, which matters for detectors. The smoke tables state no oxygen or pressure, so nothing ties them to Moon Base air.",
    "evidence": [
-    {"inv": "PSI-102", "kind": "record", "text": "Larger smoke particles could leave some detectors silent.", "field": "hypothesis", "quote": "possibly result in some detectors not producing an alarm when exposed to this smoke"},
-    {"inv": "PSI-101", "kind": "table", "text": "SAME-R: {{PSI-101.tables.0.entries}} tests on {{PSI-101.tables.0.fuel.distinct}} materials. No oxygen or pressure column."},
-    {"inv": "PSI-102", "kind": "table", "text": "SAME: {{PSI-102.tables.0.entries}} sample rows. No oxygen or pressure column."},
-    {"inv": "PSI-47", "kind": "record", "text": "Longer missions need better detection.", "field": "researchImpacts", "quote": "will require fire detection systems with increased reliability and sensitivity"}
+    {
+     "inv": "PSI-102",
+     "kind": "record",
+     "text": "Larger smoke particles could leave some detectors silent.",
+     "field": "hypothesis",
+     "quote": "possibly result in some detectors not producing an alarm when exposed to this smoke"
+    },
+    {
+     "inv": "PSI-101",
+     "kind": "table",
+     "text": "SAME-R: {{PSI-101.tables.0.entries}} tests on {{PSI-101.tables.0.fuel.distinct}} materials. No oxygen or pressure column."
+    },
+    {
+     "inv": "PSI-102",
+     "kind": "table",
+     "text": "SAME: {{PSI-102.tables.0.entries}} sample rows. No oxygen or pressure column."
+    },
+    {
+     "inv": "PSI-47",
+     "kind": "record",
+     "text": "Longer missions need better detection.",
+     "field": "researchImpacts",
+     "quote": "will require fire detection systems with increased reliability and sensitivity"
+    }
    ],
-   "missing": "Smoke measurements at higher oxygen and lower pressure."
+   "missing": "Smoke measurements at higher oxygen and lower pressure.",
+   "elsewhere": [
+    {
+     "title": "Research Questions and Challenges for Improved Spacecraft Fire Detection",
+     "year": 2021,
+     "url": "https://ntrs.nasa.gov/citations/20210022143"
+    }
+   ]
   },
   {
    "id": "gravity",
@@ -244,9 +624,27 @@
    "status": "open",
    "answer": "PSI has no data on it. Every investigation was run in weightlessness or on Earth. {{s.records_mentioning_moon_or_partial_gravity}} of the {{s.investigations}} records mention the Moon, Mars or partial gravity.",
    "evidence": [
-    {"inv": "PSI-98", "kind": "record", "text": "The Saffire records say fire differs between normal and reduced gravity, and that this makes Earth-based design uncertain.", "field": "hypothesis", "quote": "due to large differences between fire behavior in normal and reduced gravity"}
+    {
+     "inv": "PSI-98",
+     "kind": "record",
+     "text": "The Saffire records say fire differs between normal and reduced gravity, and that this makes Earth-based design uncertain.",
+     "field": "hypothesis",
+     "quote": "due to large differences between fire behavior in normal and reduced gravity"
+    }
    ],
-   "missing": "Any combustion test at Moon gravity. The challenge statement itself notes PSI has no partial-gravity data yet."
+   "missing": "Any combustion test at Moon gravity. The challenge statement itself notes PSI has no partial-gravity data yet.",
+   "elsewhere": [
+    {
+     "title": "Material Flammability at Lunar and Martian Gravity",
+     "year": 2026,
+     "url": "https://ntrs.nasa.gov/citations/20260001966"
+    },
+    {
+     "title": "Flammability of Materials on the Moon",
+     "year": 2024,
+     "url": "https://ntrs.nasa.gov/citations/20240015307"
+    }
+   ]
   }
  ]
 }

@@ -1,0 +1,288 @@
+{
+ "_about": "What each investigation burned, changed and measured, and what it says it is for on Earth: the attributes the challenge statement asks a dashboard to summarize. EXTRACTED BY AI (Claude, Anthropic) from the PSI record text and table headers in data/psi/raw/, then checked by program: scripts/build_dataset.py refuses to build unless every 'quote' is found word for word in the named field of that investigation's record, and every 'column' is a real column of one of its Experimental Tables. The short 'text' beside each quote is our plain wording. null means the record does not say.",
+
+ "measures": [
+  ["camera", "Cameras", "Photographs or video of the flame or sample"],
+  ["temperature", "Temperature", "Thermocouples, pyrometry or other temperature readings"],
+  ["radiation", "Heat and radiation", "Radiometers, heat-flux sensors, radiant emission"],
+  ["gas", "Gas composition", "Oxygen, carbon dioxide or carbon monoxide in the air"],
+  ["particles", "Soot and smoke", "Soot amount or smoke particle size"],
+  ["pressure", "Pressure", "Pressure in the chamber or cabin"],
+  ["flowspeed", "Flow speed", "Measured speed of the air or gas flow"],
+  ["spectral", "Flame chemistry light", "Light given off by the flame's chemistry, seen through filters or special cameras"],
+  ["simulation", "Computer simulation", "A numerical model run alongside or instead of the experiment"]
+ ],
+
+ "investigations": {
+  "PSI-10": {
+   "sample": {"text": "Round gas flames, with fuel or oxygen fed from the centre", "field": "approach", "quote": "Perform spherical diffusion flame tests in drop towers and aboard the International Space Station."},
+   "varied": {"text": "How diluted the gases are, the flow rate, the pressure, and which gas comes from the burner", "field": "approach", "quote": "Consider a broad range of reactant dilutions, flow rates and pressures for normal and inverse convection directions."},
+   "flow": null,
+   "earth": {"text": "Cleaner, more efficient burners and power plants", "field": "researchImpacts", "quote": "it is contributing to novel designs of future coal power plants"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "Observe the flames with a broad suite of cameras, radiometers, photomultiplier tubes, and thermocouples."},
+    "radiation": {"field": "approach", "quote": "cameras, radiometers, photomultiplier tubes, and thermocouples"},
+    "temperature": {"field": "approach", "quote": "photomultiplier tubes, and thermocouples"},
+    "particles": {"field": "objective", "quote": "flame temperature, size, color, and soot volume fraction"},
+    "pressure": {"column": "pinit (atm)"}
+   }
+  },
+  "PSI-20": {
+   "sample": {"text": "A flat, porous gas burner, 25 or 50 mm across, tuned to burn like a solid", "field": "objective", "quote": "porous circular burners of 25 and 50 mm diameter"},
+   "varied": {"text": "The gas mixed in, the oxygen level and the pressure", "field": "approach", "quote": "choice of diluent, oxygen concentration, and pressure"},
+   "flow": {"text": "Still air, no airflow", "field": "objective", "quote": "establish the burning conditions in a quiescent microgravity ambient"},
+   "earth": null,
+   "measured": {
+    "temperature": {"field": "approach", "quote": "burner surface temperature and heat flux will vary"},
+    "radiation": {"field": "approach", "quote": "the temperature limit of the heat flux sensor"},
+    "simulation": {"field": "approach", "quote": "We will also pursue a CFD model for the quiescent microgravity burning."}
+   }
+  },
+  "PSI-21": {
+   "sample": {"text": "Thin methane and ethylene flames with air flowing alongside", "field": "objective", "quote": "weak coflow diffusion flames of methane and ethylene"},
+   "varied": {"text": "Flow speed and how diluted the fuel is", "field": "objective", "quote": "as a function of velocity and fuel dilution"},
+   "flow": {"text": "Air flowing alongside the flame (coflow)", "field": "objective", "quote": "Characterize the behavior of weak coflow diffusion flames"},
+   "earth": {"text": "Fire suppression and engine efficiency", "field": "researchImpacts", "quote": "is critical in the suppression of fires and in improving engine efficiency"},
+   "measured": {
+    "spectral": {"field": "approach", "quote": "measurements will be made of flame chemiluminesence of OH* and CH*"},
+    "particles": {"field": "approach", "quote": "soot luminosity and laser extinction measurements to determine soot temperatures and soot volume fractions"},
+    "temperature": {"field": "approach", "quote": "Flame temperatures in non-sooting regions will be measured using thin-filament pyrometry."}
+   }
+  },
+  "PSI-22": {
+   "sample": {"text": "Gas flames under a high-voltage mesh that creates an electric field", "field": "approach", "quote": "a flat circular mesh suspended above (i.e., downstream of) the burner"},
+   "varied": {"text": "Fuel flow, the speed of the surrounding air, and the direction of the electric field", "field": "approach", "quote": "Parameters such as fuel flow rate, coflow velocity, and field polarity"},
+   "flow": {"text": "With and without air flowing alongside", "field": "approach", "quote": "both with and without a coflow of air"},
+   "earth": {"text": "Less pollution from burning fuels", "field": "researchImpacts", "quote": "The use of electric fields to control flames can reduce the production of harmful pollutants in practical terrestrial combustion."},
+   "measured": {
+    "camera": {"field": "approach", "quote": "High-resolution cameras captured flame shape, luminosity, and soot distribution."},
+    "spectral": {"field": "approach", "quote": "Spectral imaging with filters measures chemiluminescent emissions and soot volume fraction."},
+    "particles": {"field": "approach", "quote": "chemiluminescent emissions and soot volume fraction"},
+    "radiation": {"field": "approach", "quote": "thermopile detectors to measure flame radiant emissions"}
+   }
+  },
+  "PSI-23": {
+   "sample": {"text": "Round gas flames on a porous ball-shaped burner", "field": "approach", "quote": "through a spherical porous burner"},
+   "varied": {"text": "The fuel mixture and the flow rate", "field": "objective", "quote": "for mixtures of different H2/CH4/diluent ratios (soot-free) and different C2H4/diluent ratios (sooty), for different flow rates"},
+   "flow": null,
+   "earth": {"text": "Better engines and burners", "field": "researchImpacts", "quote": "improving performance in terms of power, efficiency, pollutant emissions, and reliability"},
+   "measured": {
+    "spectral": {"field": "approach", "quote": "Synchronized measurements are to be made including spectrally resolved images"},
+    "temperature": {"field": "approach", "quote": "flame and burner temperatures"},
+    "radiation": {"field": "approach", "quote": "radiative flux measurements"},
+    "pressure": {"field": "approach", "quote": "ambient temperatures, pressures and acceleration levels"}
+   }
+  },
+  "PSI-25": {
+   "sample": {"text": "Solid samples as rods, sphere sections, slabs, films and fabric sheets", "field": "objective", "quote": "Sample geometry (rods, spherical section, slabs, films, and fabric sheets"},
+   "varied": {"text": "Airflow speed and oxygen level", "field": "approach", "quote": "Main variables are airflow speed and oxygen concentration"},
+   "flow": {"text": "A small wind tunnel, up to 40 cm/s", "field": "approach", "quote": "a small wind tunnel which could impose airflow speeds up to 40 cm/s"},
+   "earth": {"text": "Wildfires, building fires and other fires on Earth", "field": "researchImpacts", "quote": "to more accurately study flames on Earth, such as in wildfires, building fires"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "Flame appearance, flame growth, and spread rates were determined in both the opposed and concurrent flow."},
+    "gas": {"column": "Final CO2 % by vol"},
+    "radiation": {"column": "Radiometer gain   (1000   250   50   10)"}
+   }
+  },
+  "PSI-26": {
+   "sample": {"text": "Cotton and fiberglass fabric strips, plus spheres and cylinders", "field": "approach", "quote": "Custom-made fabric samples consisting of 75% cotton and 25% fiberglass"},
+   "varied": {"text": "Material, shape, preheating and airflow", "field": "objective", "quote": "different materials, geometries, preheating, and flow"},
+   "flow": {"text": "A fan-driven duct, up to 40 cm/s, with or against the flame", "field": "approach", "quote": "airflow speeds reaching as high as 40 cm/s"},
+   "earth": {"text": "Understanding fires on Earth", "field": "researchImpacts", "quote": "wide applicability to the general understanding of many terrestrial combustion problems"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "Flames were observed in the top and edge profiles and data was collected on flame size, shape, color, spread rate, and potential flame quenching."}
+   }
+  },
+  "PSI-39": {
+   "sample": {"text": "Single fuel droplets held on needles or thin fibres", "field": "approach", "quote": "Droplets of fuel are dispensed and suspended between hypodermic needles or tethered using silicon-carbide fibers."},
+   "varied": {"text": "Pressure, fuel mixture and helium dilution", "field": "objective", "quote": "at pressures ranging from 0.25 atm to 5 atm"},
+   "flow": null,
+   "earth": {"text": "Cleaner, more efficient engines", "field": "researchImpacts", "quote": "the design of advanced engines such as clean, high-efficiency Homogeneous Charge Compression Ignition (HCCI) engines"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "Flames were observed with a black-and-white camera for droplet size measurements."},
+    "spectral": {"field": "approach", "quote": "A UV camera was used for capturing the OH* radical emissions and flame size."},
+    "radiation": {"field": "approach", "quote": "Narrow-band and wide-band radiometers"}
+   }
+  },
+  "PSI-47": {
+   "sample": {"text": "Test dust in sealed bags, no fire", "field": "approach", "quote": "Arizona Red Dust (ARD) was chosen as an aerosol standard due to its ease of dispersion."},
+   "varied": null,
+   "flow": null,
+   "earth": {"text": "Smoke detection in submarines and underwater laboratories", "field": "researchImpacts", "quote": "such as submarines or underwater laboratories where accurate detection of smoke can save lives"},
+   "measured": {
+    "particles": {"field": "approach", "quote": "The modified P-Trak gathered data from counting aerosol particles"}
+   }
+  },
+  "PSI-60": {
+   "sample": {"text": "Photographs of gas flames from the SPICE experiment, analysed again", "field": "objective", "quote": "the Smoke Point in Coflow Experiment (SPICE) data available in PSI"},
+   "varied": {"text": "Burner design and gravity (normal and weightless)", "field": "approach", "quote": "Simulations were performed for both Yale and ACME burner configurations under normal and microgravity conditions."},
+   "flow": null,
+   "earth": {"text": "Cleaner energy and industry", "field": "researchImpacts", "quote": "inform the design of cleaner energy and industrial systems"},
+   "measured": {
+    "camera": {"field": "objective", "quote": "By analyzing over 1600 raw DSLR images"},
+    "temperature": {"field": "approach", "quote": "color-ratio pyrometry to extract soot temperature fields"},
+    "particles": {"field": "approach", "quote": "Absolute light calibration from SPICE was then used to calculate soot volume fractions."},
+    "simulation": {"field": "approach", "quote": "Simulations were performed for both Yale and ACME burner configurations"}
+   }
+  },
+  "PSI-62": {
+   "sample": {"text": "A computer model of flames on plastic sheets, spheres, rods and wax cylinders", "field": "approach", "quote": "flat sheets, spheres, and rod-shaped polymethyl methacrylate (PMMA) samples, as well as wax cylinders"},
+   "varied": null,
+   "flow": {"text": "Airflow in the same direction as the flame spreads", "field": "objective", "quote": "modeling techniques for concurrent flame spread in microgravity"},
+   "earth": {"text": "Fire safety on Earth", "field": "researchImpacts", "quote": "improvements to fire safety protocols on Earth"},
+   "measured": {
+    "simulation": {"field": "approach", "quote": "The approach combined high-resolution computational modeling with experimental validation"},
+    "camera": {"field": "approach", "quote": "two-color tomography methods with DSLR cameras"}
+   }
+  },
+  "PSI-68": {
+   "sample": {"text": "Single fuel droplets on a support fibre or floating free", "field": "approach", "quote": "the dispensing of a predetermined amount of fuel (based on the target droplet size) onto the support fiber"},
+   "varied": {"text": "Fuel, gas mixture, pressure and droplet size", "field": "approach", "quote": "1) Fuel type 2) Ambient gas composition 3) Ambient Pressure 4) Droplet initial diameter"},
+   "flow": {"text": "A slow flow made by moving the droplet", "column": "Flow Velocity (cm/s)"},
+   "earth": {"text": "Jet engines and cleaner fuels", "field": "researchImpacts", "quote": "Validation of jet engine models by engine manufacturers"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "track flame evolution using high speed photography"},
+    "pressure": {"field": "approach", "quote": "Pressure and temperature data of the chamber environment was also recorded in near real time."},
+    "temperature": {"field": "approach", "quote": "Pressure and temperature data of the chamber environment"}
+   }
+  },
+  "PSI-69": {
+   "sample": {"text": "Single, fairly large fuel droplets", "field": "approach", "quote": "igniting and observing the burning behavior of relatively large droplets"},
+   "varied": {"text": "The surrounding gas and how much extinguishing gas it holds", "field": "objective", "quote": "the effects of different ambient conditions and suppressant concentrations"},
+   "flow": {"text": "Still air, or a very slow flow", "field": "approach", "quote": "a small, sub-buoyant, convective flow"},
+   "earth": {"text": "Fire safety in submarines and aircraft", "field": "researchImpacts", "quote": "fire safety in confined and reduced-gravity environments, such as submarines or high-altitude aircraft"},
+   "measured": {
+    "camera": {"field": "objective", "quote": "high-resolution measurements of droplet burning rates, flame extinction behavior"},
+    "radiation": {"field": "objective", "quote": "heat radiation, soot levels, and temperature profiles"},
+    "particles": {"field": "objective", "quote": "soot levels, and temperature profiles"},
+    "temperature": {"field": "objective", "quote": "and temperature profiles"},
+    "pressure": {"column": "Ambient pressure; mmHg"}
+   }
+  },
+  "PSI-98": {
+   "sample": {"text": "One fabric sheet, about 0.94 m by 0.4 m", "field": "approach", "quote": "The sample was approximately 0.94 meters long and 0.4 meters wide"},
+   "varied": {"text": "Airflow with the flame or against it", "column": "Flow Direction "},
+   "flow": {"text": "A fan-driven duct at 20 cm/s", "field": "approach", "quote": "Saffire-I was conducted at an air flow velocity of 20 cm/s."},
+   "earth": {"text": "Fire safety in mines, aircraft and submarines", "field": "researchImpacts", "quote": "benefits fire safety and prevention efforts on Earth, including inside mines, airplanes, or submarines"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "flame images were captured using two cameras"},
+    "temperature": {"field": "approach", "quote": "thermocouples provided flow, flame, and plume temperatures"},
+    "radiation": {"field": "approach", "quote": "two radiometers recorded flame radiation"},
+    "gas": {"field": "approach", "quote": "solid state sensors were used to measure pressure, CO2 and O2 mole faction"},
+    "pressure": {"field": "approach", "quote": "solid state sensors were used to measure pressure"},
+    "flowspeed": {"field": "approach", "quote": "two anemometer tracked flow velocity"}
+   }
+  },
+  "PSI-99": {
+   "sample": {"text": "Nine samples, each 5 cm by 29 cm: fabric, silicone, acrylic plastic, Nomex", "field": "approach", "quote": "Saffire-II has a sample card that contains 9 samples, each 5 cm x 29 cm."},
+   "varied": {"text": "The material, the airflow speed and its direction", "field": "approach", "quote": "the Saffire-II investigation added more samples including SIBAL, silicone, structure PMMA, flat PMMA, and PMMA with Nomex"},
+   "flow": {"text": "A fan-driven duct at 20 or 30 cm/s, with the flame or against it", "field": "approach", "quote": "an air flow velocity of either 20 or 30 cm/s, the flow being either concurrent or opposed"},
+   "earth": {"text": "Fire safety in mines, aircraft and submarines", "field": "researchImpacts", "quote": "benefits fire safety and prevention efforts on Earth, including inside mines, airplanes, or submarines"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "flame images were captured using two cameras"},
+    "temperature": {"field": "approach", "quote": "thermocouples provided flow, flame, and plume temperatures"},
+    "radiation": {"field": "approach", "quote": "two radiometers recorded flame radiation"},
+    "gas": {"field": "approach", "quote": "solid state sensors were used to measure pressure, CO2 and O2 mole faction"},
+    "pressure": {"field": "approach", "quote": "solid state sensors were used to measure pressure"},
+    "flowspeed": {"field": "approach", "quote": "two anemometer tracked flow velocity"}
+   }
+  },
+  "PSI-100": {
+   "sample": {"text": "The same large cotton and fiberglass fabric sheet as Saffire-I", "field": "approach", "quote": "the Saffire III investigation also used SIBAL as the sample material"},
+   "varied": {"text": "Airflow with the flame or against it", "field": "approach", "quote": "The flow was either concurrent or opposed."},
+   "flow": {"text": "A fan-driven duct at 30 cm/s", "field": "approach", "quote": "the experiments were conducted at a flow velocity of 30 cm/s compared to 20 cm/s during Saffire I"},
+   "earth": {"text": "Fire safety in mines, aircraft and submarines", "field": "researchImpacts", "quote": "benefits fire safety and prevention efforts on Earth, including inside mines, airplanes, or submarines"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "flame images were captured using two cameras"},
+    "temperature": {"field": "approach", "quote": "thermocouples provided flow, flame, and plume temperatures"},
+    "radiation": {"field": "approach", "quote": "two radiometers recorded flame radiation"},
+    "gas": {"field": "approach", "quote": "solid state sensors were used to measure pressure, CO2 and O2 mole faction"},
+    "pressure": {"field": "approach", "quote": "solid state sensors were used to measure pressure"},
+    "flowspeed": {"field": "approach", "quote": "two anemometer tracked flow velocity"}
+   }
+  },
+  "PSI-101": {
+   "sample": {"text": "Spacecraft materials heated until they smoke, including a fire-retardant foam", "field": "approach", "quote": "an intumescent fire-retardant foam by Foamex, was introduced to replace DBP samples"},
+   "varied": {"text": "Heating temperature, and airflow on or off during heating", "field": "approach", "quote": "test conditions were broadened including higher heating temperatures and no-flow during sample heating time"},
+   "flow": {"text": "Slow air drawn over the heated sample", "column": "Inlet velocity (cm/s)"},
+   "earth": {"text": "Smoke detection in submarines and underwater laboratories", "field": "researchImpacts", "quote": "such as submarines or underwater laboratories"},
+   "measured": {
+    "particles": {"field": "objective", "quote": "quantify the sizes that the liquid smoke particulate achieves in low gravity"}
+   }
+  },
+  "PSI-102": {
+   "sample": {"text": "Spacecraft materials heated until they smoke", "field": "approach", "quote": "smoke generated by overheated spacecraft materials"},
+   "varied": {"text": "Sample temperature, airflow and how long the smoke ages", "field": "approach", "quote": "variables such as the sample temperature, flow field, and particle aging time were more rigorously controlled"},
+   "flow": {"text": "Slow air drawn over the heated sample", "column": "Air Flow (cm/s)"},
+   "earth": {"text": "Smoke detection in submarines and underwater laboratories", "field": "researchImpacts", "quote": "such as submarines or underwater laboratories"},
+   "measured": {
+    "particles": {"field": "approach", "quote": "analyzed using a Transmission Electron microscope (TEM) to determine primary and aggregate particle dimensions"},
+    "camera": {"field": "approach", "quote": "positioned the video cameras"}
+   }
+  },
+  "PSI-106": {
+   "sample": {"text": "Small gas flames on exchangeable burner tubes in a fan-driven duct", "field": "approach", "quote": "a fan-driven flow duct, exchangeable burner tubes, and integrated sensors to measure flow rates and temperature"},
+   "varied": {"text": "Burner size, the speed of the surrounding air, and the fuel", "field": "hypothesis", "quote": "influenced by burner diameter, coflow velocity, and fuel composition"},
+   "flow": {"text": "Air flowing alongside the flame (coflow)", "field": "approach", "quote": "observed under controlled coflow air conditions"},
+   "earth": {"text": "Cleaner, more efficient engines and industrial burners", "field": "researchImpacts", "quote": "cleaner, more efficient engines and industrial burners"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "A high resolution camera captured still images while sensor data was overlaid on these images."},
+    "temperature": {"field": "approach", "quote": "integrated sensors to measure flow rates and temperature"},
+    "flowspeed": {"field": "approach", "quote": "integrated sensors to measure flow rates"},
+    "particles": {"field": "approach", "quote": "Calibration tests for airflow velocity, soot measurement, and the fans"}
+   }
+  },
+  "PSI-107": {
+   "sample": {"text": "Gas jet flames from nozzles 0.41, 0.76 and 1.6 mm wide", "field": "approach", "quote": "burner diameters of 0.41 mm, 0.76 mm, and 1.6 mm"},
+   "varied": {"text": "The fuel flow, raised until the flame starts to smoke", "field": "approach", "quote": "Fuel flow rates were adjusted to identify the smoke point"},
+   "flow": {"text": "Air flowing alongside the flame, 5.4 to 65 cm/s", "field": "approach", "quote": "co-flow velocities ranging from 5.4 cm/s to 65 cm/s"},
+   "earth": {"text": "Better fuels and burning processes", "field": "researchImpacts", "quote": "better fuel formulations and combustion processes"},
+   "measured": {
+    "camera": {"field": "approach", "quote": "Data such as flame lengths were recorded using still and video cameras."},
+    "radiation": {"field": "approach", "quote": "Measurements included flame height, radiative heat losses, and co-flow air velocity distributions."},
+    "flowspeed": {"field": "approach", "quote": "co-flow air velocity distributions"}
+   }
+  },
+  "PSI-115": {
+   "sample": {"text": "A computer model of smoke forming from a heated sample", "field": "approach", "quote": "The formation and growth of dibutyl-phthalate (DBP) particles in Earth gravity and microgravity environments was simulated."},
+   "varied": {"text": "Gravity (Earth and weightless) and two airflow speeds", "field": "approach", "quote": "This study considered two cross-flow velocities"},
+   "flow": {"text": "Two slow cross-flows", "field": "approach", "quote": "two cross-flow velocities of sufficiently low speed"},
+   "earth": {"text": "Better smoke detectors", "field": "researchImpacts", "quote": "This would directly lead to better smoke detection devices"},
+   "measured": {
+    "simulation": {"field": "approach", "quote": "Direct numerical simulation via a Navier-Stokes nodal approach was utlilized."}
+   }
+  },
+  "PSI-117": {
+   "sample": {"text": "A computer model of cool flames around fuel droplets", "field": "approach", "quote": "a 3-D CFD model of n-alkane droplet cool flames in microgravity"},
+   "varied": {"text": "The strength and rhythm of the disturbance, the gas mixture and the pressure", "field": "approach", "quote": "parameter sweeps over forcing amplitude and frequency, ambient composition (including ozone-assisted cases), and pressure"},
+   "flow": {"text": "Slow drift of the droplet, modelled as a flow", "field": "approach", "quote": "convection alone to mimic droplet drift"},
+   "earth": {"text": "Engine knock, efficiency and emissions", "field": "researchImpacts", "quote": "engine knock, efficiency, and emissions"},
+   "measured": {
+    "simulation": {"field": "approach", "quote": "OpenFOAM was used to develop a 3-D CFD model of n-alkane droplet cool flames in microgravity"}
+   }
+  },
+  "PSI-142": {
+   "sample": {"text": "Laboratory flames between two opposed gas streams, with ozone added", "field": "objective", "quote": "ground-based experiments using ozone-sensitized counterflow flames"},
+   "varied": {"text": "Oxygen level, dilution and pressure", "field": "hypothesis", "quote": "factors such as oxygen concentration, dilution, pressure, diffusion, and convection transport processes"},
+   "flow": null,
+   "earth": {"text": "Engines that run at high pressure", "field": "researchImpacts", "quote": "many real engines operate in the 20-40 atm pressure range"},
+   "measured": {
+    "temperature": {"field": "objective", "quote": "quantitative data of extinction limit, flame temperature, and species distribution"},
+    "simulation": {"field": "approach", "quote": "three different numerical modeling schemes"}
+   }
+  },
+  "PSI-159": {
+   "sample": {"text": "Round cool flames on a porous ball-shaped burner", "field": "hypothesis", "quote": "Steady-state cool diffusion flames on spherical porous burners."},
+   "varied": {"text": "Fuel, dilution, flow rate, pressure, and which gas comes from the burner", "field": "approach", "quote": "Consider multiple fuels, a range of reactant dilutions, flow rates, and pressures for normal and inverse convection directions."},
+   "flow": null,
+   "earth": {"text": "More efficient engines", "field": "researchImpacts", "quote": "This should facilitate the development of more efficient internal combustion engines."},
+   "measured": {
+    "camera": {"field": "approach", "quote": "Observe the flames with a broad suite of cameras, radiometers, photomultiplier tubes, and thermocouples."},
+    "radiation": {"field": "approach", "quote": "cameras, radiometers, photomultiplier tubes, and thermocouples"},
+    "temperature": {"field": "approach", "quote": "photomultiplier tubes, and thermocouples"},
+    "simulation": {"field": "objective", "quote": "Support the flight tests with advanced CFD simulations."},
+    "pressure": {"column": "approx p (bar)"}
+   }
+  }
+ }
+}

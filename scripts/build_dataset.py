@@ -36,6 +36,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW = os.path.join(ROOT, "data", "psi", "raw")
 PAPERS = os.path.join(ROOT, "data", "papers", "papers.json")
 CONTENT = os.path.join(ROOT, "data", "content", "interpretation.json")
+ATTRS = os.path.join(ROOT, "data", "content", "attributes.json")
 OUT = os.path.join(ROOT, "docs", "data")
 PSI_PAGE = "https://psi.nasa.gov/physci/repo/data/investigations/"
 
@@ -323,6 +324,38 @@ def load_content(inv, summary):
             elif e["kind"] != "table" or e["inv"] not in inv:
                 sys.exit(f"content: question {q['id']}: bad evidence entry")
     return summaries, content["questions"]
+
+
+def load_attributes(inv):
+    """Reads the AI-extracted attributes (sample, what varied, airflow, what was measured,
+    Earth use) and refuses any that cannot be checked against NASA's record or table headers."""
+    content = json.load(open(ATTRS, encoding="utf-8"))
+    measures = content["measures"]
+    keys = {m[0] for m in measures}
+    if set(content["investigations"]) != set(inv):
+        sys.exit("attributes: do not cover exactly the investigations in the snapshot")
+
+    def check(acc, item, where):
+        if item is None:
+            return
+        if "column" in item:
+            if not any(item["column"] in t["header"] for t in inv[acc]["tables"]):
+                sys.exit(f"attributes: {where}: column {item['column']!r} is not in any table of {acc}")
+        elif squeeze(item["quote"]) not in squeeze(inv[acc]["text"].get(item["field"], "")):
+            sys.exit(f"attributes: {where}: quote not found word for word in {acc}.{item['field']}: {item['quote']!r}")
+
+    for acc, a in content["investigations"].items():
+        for k in ("sample", "varied", "flow", "earth"):
+            if k not in a:
+                sys.exit(f"attributes: {acc}: missing {k}")
+            check(acc, a[k], f"{acc}.{k}")
+        if a["sample"] is None:
+            sys.exit(f"attributes: {acc}: every investigation needs a sample or burner")
+        for mk, item in a["measured"].items():
+            if mk not in keys:
+                sys.exit(f"attributes: {acc}: unknown measurement {mk}")
+            check(acc, item, f"{acc}.measured.{mk}")
+    return measures, content["investigations"]
 
 
 def main():
@@ -616,6 +649,9 @@ def main():
     summaries, questions = load_content({i["id"]: i for i in investigations}, summary)
     for i in investigations:
         i["summary"] = summaries[i["id"]]
+    measures, attributes = load_attributes({i["id"]: i for i in investigations})
+    for i in investigations:
+        i["attributes"] = attributes[i["id"]]
 
     # the Experimental Tables, byte for byte, so the page can show any row it cites
     tdir = os.path.join(OUT, "tables")
@@ -642,6 +678,7 @@ def main():
             "conversions": {"mole fraction to percent": "x 100", "psi per unit": PSI_PER},
             "class_labels": CLASS_LABEL,
             "presets": PRESETS,
+            "measures": measures,
         },
         "summary": summary,
         "questions": questions,
@@ -667,6 +704,20 @@ def main():
                         c["pressure"]["value"], c["pressure"].get("min", ""), c["pressure"].get("max", ""),
                         c["both"]["value"], c["both"].get("rows", ""), sum(t["entries"] for t in i["tables"]),
                         len(i["publications"]), i["license"] or ""])
+    with open(os.path.join(OUT, "attributes.csv"), "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["psi_id", "name", "what_burns (our label)", "sample_or_burner", "what_varied", "airflow", "earth_use"]
+                   + ["measured_" + m[0] for m in measures] + ["evidence (NASA's words or table column)"])
+        for i in sorted(ranked, key=lambda x: int(x["id"].split("-")[1])):
+            a = i["attributes"]
+            ev = []
+            for k in ("sample", "varied", "flow", "earth"):
+                if a[k]:
+                    ev.append(k + ": " + (("column " + a[k]["column"].strip()) if "column" in a[k] else '"' + a[k]["quote"] + '"'))
+            for mk, item in a["measured"].items():
+                ev.append(mk + ": " + (("column " + item["column"].strip()) if "column" in item else '"' + item["quote"] + '"'))
+            w.writerow([i["id"], i["name"], i["cls_label"]] + [(a[k]["text"] if a[k] else "not stated") for k in ("sample", "varied", "flow", "earth")]
+                       + [("yes" if m[0] in a["measured"] else "") for m in measures] + [" | ".join(ev)])
     with open(os.path.join(OUT, "tests.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(["psi_id", "table_file", "spreadsheet_row", "what_burns (our label)", "fuel_or_material_as_written",

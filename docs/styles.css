@@ -429,3 +429,36 @@ details.q > ul.ev { margin: 1.1rem 1.4rem 0; max-width: none; }
 .hero { min-height: min(62vh, 620px); }
 .hero h1 { font-size: clamp(3rem, 7.2vw, 6.1rem); max-width: 13em; }
 .hero-text { padding: 2.2rem 0 2.6rem; max-width: none; }
+
+/* ---- ask the records ---- */
+.askbox { display: flex; gap: .6rem; margin: 1.3rem 0 .6rem; }
+.askbox input[type=search] { flex: 1; border: 1px solid var(--line2); background: var(--frame); padding: .85rem 1rem; font-size: 1.1rem; min-width: 0; }
+.askbox input[type=search]:focus { border-color: var(--text); }
+.askbox .btn { padding: .85rem 1.6rem; font-size: 1rem; }
+.examples { font-size: .9rem; color: var(--dim); display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin: 0 0 1rem; }
+.examples button.link { color: var(--muted); }
+.askmode { border: 1px solid var(--line2); background: var(--frame); padding: .6rem 1rem; font-size: .9rem; color: var(--muted); margin: 0 0 1.2rem; }
+.askmode b { color: var(--text); }
+.askmode.ready { border-left: 3px solid var(--red); }
+.hit { border: 1px solid var(--line2); background: var(--frame); padding: 1rem 1.3rem 1.1rem; margin: .7rem 0 0; }
+.hit blockquote { margin: .5rem 0 0; font-size: 1.08rem; max-width: 62rem; }
+.hit .papert { font-weight: 700; }
+.hit p { margin: .2rem 0 0; }
+mark { background: rgba(246, 65, 55, .32); color: inherit; padding: 0 .1em; }
+/* ---- side by side ---- */
+table.matrix th.m span { display: inline-block; max-width: 5.2rem; white-space: normal; line-height: 1.2; }
+table.matrix td { font-size: .92rem; }
+table.matrix tr.tot td { color: var(--muted); font-size: .86rem; border-top: 1px solid var(--text); }
+table.matrix tr.tot td.m { font-size: 1rem; color: var(--text); font-weight: 600; }
+h4.mh { font: 600 1.3rem var(--head); text-transform: uppercase; margin: 1.3rem 0 .2rem; }
+.crit blockquote { margin-left: 0; font-size: .95rem; }
+.elsewhere { margin: 1rem 1.4rem 1.4rem; border-top: 1px solid var(--line2); padding-top: .9rem; font-size: .94rem; }
+.elsewhere b { display: block; }
+.elsewhere span { color: var(--dim); font-size: .86rem; }
+.elsewhere ul { margin: .4rem 0 0; padding-left: 1.1rem; }
+@media (max-width: 640px) { .askbox { flex-direction: column; } }
+
+table.matrix td:nth-child(2) { min-width: 17rem; }
+table.matrix td:last-child { min-width: 11rem; }
+table.matrix .rank-name { min-width: 11rem; }
+table.matrix .rank-name span { white-space: nowrap; }
