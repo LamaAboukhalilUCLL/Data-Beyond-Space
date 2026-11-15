@@ -1,6 +1,6 @@
 # Image and font credits
 
-All three photographs are NASA images in the public domain (as listed on Wikimedia Commons). None is AI-generated and none carries a NASA logo. Each was only cropped or scaled; the page dims and rounds them with CSS.
+All three photographs are NASA images in the public domain (as listed on Wikimedia Commons). None is AI-generated and none carries a NASA logo. Each was only cropped or scaled, and the black sky around the space station was made transparent; the page dims and rounds them with CSS.
 
 ## moon.jpg
 
@@ -20,14 +20,13 @@ All three photographs are NASA images in the public domain (as listed on Wikimed
 - **Original:** 3000 x 3002 px, SHA-256 `51049ed4e34514880bfbe39d34e2dd2c56e31f55919e7f4f0b34ef1698cb9f50`, downloaded 15 November 2026.
 - **Changes:** scaled to 900 x 900 px, JPEG quality 84.
 
-## iss.jpg
+## iss-cutout.png
 
 - **What:** the "Low Earth orbit" stop on the overview.
-- **Source:** "International Space Station after undocking of STS-132.jpg" (NASA photograph S132-E-012208).
-- **Author:** NASA / crew of STS-132.
-- **Page:** https://commons.wikimedia.org/wiki/File:International_Space_Station_after_undocking_of_STS-132.jpg
-- **Original:** 3319 x 2116 px, SHA-256 `b59016d5d1f66a88778d35021c8a4174b11451a03ccbcfd31bef0b064af28500`, downloaded 15 November 2026.
-- **Changes:** centre square cropped, scaled to 900 x 900 px, JPEG quality 84.
+- **Source:** "ISS-56 International Space Station fly-around (13).jpg", photographed from a Soyuz spacecraft in October 2018.
+- **Author:** NASA / Roscosmos.
+- **Page:** https://commons.wikimedia.org/wiki/File:ISS-56_International_Space_Station_fly-around_(13).jpg
+- **Changes:** taken from the 1280 px version; the black sky around the station was made transparent (by brightness, with a small Python script), then cropped to the station and scaled to 640 px wide. The station itself is unchanged. Downloaded 15 November 2026.
 
 ## Fonts (docs/fonts/)
 

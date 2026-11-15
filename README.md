@@ -12,6 +12,7 @@ It shows coverage and gaps. It does not predict how fire behaves on the Moon.
 |---|---|
 | Overview | The finding, then a tool: choose an atmosphere and see how much of NASA's fire data fits it |
 | Explore | Every test against the chosen air: oxygen by what burns, oxygen against pressure, and a finder for materials and tests with a filtered CSV download |
+| Habitat | A schematic Moon habitat with six numbered spots, one per open fire-safety question, each showing what NASA's data can say about that part of the habitat |
 | Ranking | The 24 investigations ordered by how many of five conditions they meet for the chosen air, with the evidence for each. A second tab puts all 24 side by side: sample or burner, what was measured, use on Earth |
 | Ask | Type a question; get the sentences from NASA's records and the listed papers that match it best, by meaning. Quotations only, nothing generated |
 | Investigation pages | Each investigation in plain words, NASA's description word for word, what its table records, its publications, and a side-by-side comparison with any other |
