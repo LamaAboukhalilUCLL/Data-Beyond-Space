@@ -1226,6 +1226,14 @@
       invFocusDone = location.hash;
       setTimeout(function () { var el = main.querySelector("#verbatim mark.hl") || document.getElementById("f-" + field); if (el) el.scrollIntoView({ block: "center" }); }, 0);
     }
+    // A shared link opens this page directly, before the Ask page has loaded the passages: load them, then mark.
+    if (field && pi != null && !ASK.P) askLoad().then(function () {
+      var head = document.getElementById("f-" + field), para = head && head.nextElementSibling;
+      if (!para || hashParts()[1] !== id) return;
+      para.innerHTML = markPassage(inv.text[field], id, field, pi);
+      var m = para.querySelector("mark.hl");
+      if (m) m.scrollIntoView({ block: "center" });
+    }).catch(function () {});
     document.getElementById("cmp").addEventListener("change", function (e) { if (e.target.value) location.hash = "#/compare/" + id + "/" + e.target.value; });
     relatedLoad().then(function (R) {
       var el = document.getElementById("relm"), list = R && R.related[id];
