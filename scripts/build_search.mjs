@@ -14,14 +14,21 @@
  *
  * Needs once:   npm install          (installs @huggingface/transformers)
  * Run from the repo root, after build_dataset.py:   node scripts/build_search.mjs
- * Writes: docs/data/passages.json
+ * Writes: docs/data/passages.json   passages, their vectors, and the checked glossary
+ *         docs/data/related.json    for each investigation, the three closest by meaning
+ *
+ * The glossary (data/content/ask_glossary.json: everyday word -> NASA's term) is copied
+ * into passages.json only after a check: every NASA term must occur in the passages or
+ * in a fuel or material cell of NASA's tables. Otherwise this script stops.
  *
  * Written with AI assistance (Claude Code, Anthropic).
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 import { pipeline, env } from "@huggingface/transformers";
+const Ask = createRequire(import.meta.url)("../docs/ask.js");
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const MODEL = "Xenova/all-MiniLM-L6-v2";
@@ -68,6 +75,16 @@ for (const p of papers) {
   }
 }
 
+// ---- the glossary: every NASA term must exist in the text or tables it points to
+const G = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "content", "ask_glossary.json"), "utf8"));
+const TESTS = JSON.parse(fs.readFileSync(path.join(ROOT, "docs", "data", "tests.json"), "utf8"));
+const allText = passages.map(p => p.text.toLowerCase()).join("\n"), vocab = Ask.fuelVocabulary(TESTS);
+const missing = [];
+for (const e of G.entries) for (const t of e.nasa) {
+  if (!allText.includes(t.toLowerCase()) && !vocab[t.toLowerCase()]) missing.push(t);
+}
+if (missing.length) { console.error("Glossary terms not found in NASA's text or tables: " + missing.join(", ")); process.exit(1); }
+
 const embed = await pipeline("feature-extraction", MODEL, { dtype: "q8" });
 const vectors = [];
 for (let i = 0; i < passages.length; i += 32) {
@@ -88,9 +105,21 @@ const out = {
     records: D.investigations.length, papers: new Set(passages.filter(p => p.kind === "paper").map(p => p.doi)).size, papers_with_abstract: withAbstract,
     built_by: "scripts/build_search.mjs (written with AI assistance: Claude Code, Anthropic)",
   },
+  glossary: { drafted_by: G.about.drafted_by, checked_by: G.about.checked_by, entries: G.entries },
   passages,
   vectors_int8_base64: Buffer.from(bytes.buffer).toString("base64"),
 };
 fs.writeFileSync(path.join(ROOT, "docs", "data", "passages.json"), JSON.stringify(out));
+
+// ---- related investigations, from the stored vectors (so anyone can recompute them from passages.json)
+const rel = Ask.relatedByMeaning(passages, bytes, dims), related = {};
+for (const id of Object.keys(rel)) related[id] = rel[id].slice(0, 3).map(x => ({ id: x.id, similarity: Math.round(x.sim * 1000) / 1000 }));
+fs.writeFileSync(path.join(ROOT, "docs", "data", "related.json"), JSON.stringify({
+  about: {
+    what: "For each investigation, the three others whose PSI record text is closest in meaning: cosine similarity between the mean vectors of their record passages (objective, approach, hypothesis, research impacts).",
+    model: MODEL, built_by: "scripts/build_search.mjs (written with AI assistance: Claude Code, Anthropic)",
+  },
+  related,
+}, null, 1) + "\n");
 const rec = passages.filter(p => p.kind === "record").length;
 console.log(`\n${passages.length} passages (${rec} from NASA records, ${passages.length - rec} from ${out.about.papers} papers, ${withAbstract} with an abstract), ${dims} numbers each`);
