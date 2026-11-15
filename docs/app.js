@@ -976,11 +976,11 @@
     var el = document.getElementById("ask-mode");
     if (!el) return;
     el.className = "askmode " + ASK.model;
-    var mb = ASK.P && ASK.P.about.download_mb ? "about " + ASK.P.about.download_mb + " MB, " : "";   // counted by the build from the files served
-    el.innerHTML = ASK.model === "ready" ? "<b>Matching by meaning.</b> A small language model is running in your browser. It only matches text, it writes none, and your question stays on your computer." :
-      ASK.model === "loading" ? "<b>Loading the language model.</b> " + (mb ? "About " + ASK.P.about.download_mb + " MB, once. " : "") + "Until it is ready, results are matched by words." :
-      ASK.model === "failed" ? "<b>Matching by words.</b> The language model could not start in this browser." :
-      '<b>Matching by words.</b> <button class="link" data-smart="1">Match by meaning instead</button> A small language model (' + mb + 'downloaded once) then runs in your browser.';
+    var mb = ASK.P && ASK.P.about.download_mb ? "about " + ASK.P.about.download_mb + " MB" : "";   // counted by the build from the files served
+    el.innerHTML = ASK.model === "ready" ? "<b>Matching by meaning</b><span>a small language model in your browser · it matches, it writes nothing · your question stays on your computer</span>" :
+      ASK.model === "loading" ? "<b>Loading the language model</b><span>" + (mb ? mb + ", once · " : "") + "matching by words until it is ready</span>" :
+      ASK.model === "failed" ? "<b>Matching by words</b><span>the language model could not start in this browser</span>" :
+      '<b>Matching by words</b><button class="link" data-smart="1">Match by meaning instead</button><span>loads a small language model' + (mb ? ", " + mb + "," : "") + " once</span>";
   }
   function plural(n, one, many) { return n + " " + (n === 1 ? one : many); }
   // Everyday words in the question -> the terms NASA's text uses (a fixed list, checked by the build).
@@ -991,9 +991,9 @@
     var term = Ask.moon(q);
     if (!term) return "";
     var S = D.summary, n = S.records_mentioning_moon_or_partial_gravity, g = D.questions.filter(function (x) { return x.id === "gravity"; })[0];
-    var h = '<section class="askcard gap"><p class="kick">Outside NASA\'s data</p><h3>' + (n === 0 ? "PSI holds no test at Moon or Mars gravity" : plural(n, "PSI record mentions", "PSI records mention") + " the Moon, Mars or partial gravity") + "</h3>";
-    h += "<p>Your question mentions “" + esc(term) + "”. <b>" + n + " of the " + S.investigations + "</b> PSI records mention the Moon, Mars or partial gravity, and every test was run in weightlessness or on Earth. The passages below come from those tests, not from the Moon.</p>";
-    if (g) h += '<p><a href="#/questions/gravity">Open question: ' + esc(g.question) + "</a>" + (g.elsewhere && g.elsewhere.length ? " It lists " + plural(g.elsewhere.length, "NASA document", "NASA documents") + " on this from outside PSI." : "") + "</p>";
+    var h = '<section class="askcard gap"><p class="kick">Outside NASA\'s data · you mentioned “' + esc(term) + "”</p><h3>" + (n === 0 ? "PSI holds no test at Moon or Mars gravity" : plural(n, "PSI record mentions", "PSI records mention") + " the Moon, Mars or partial gravity") + "</h3>";
+    h += "<p><b>" + n + " of " + S.investigations + "</b> records mention the Moon, Mars or partial gravity. Every test ran in weightlessness or on Earth, so the passages below are not Moon results.</p>";
+    if (g) h += '<p class="small"><a href="#/questions/gravity">Open question: ' + esc(g.question) + "</a>" + (g.elsewhere && g.elsewhere.length ? ' <span class="muted">· ' + plural(g.elsewhere.length, "NASA document", "NASA documents") + " outside PSI</span>" : "") + "</p>";
     return h + "</section>";
   }
   // A question about conditions or counts: the numbers, counted from NASA's tables for the tests it names.
@@ -1003,28 +1003,35 @@
     if (!it) return "";
     var o2 = it.o2 != null ? it.o2 : ATM.o2, p = it.p != null ? it.p : ATM.p, a = Ask.answer(Ask.scopeTests(TESTS, it), o2, p, Recount);
     var scope = [];
-    if (it.fuels.length) scope.push("whose fuel or material cell contains " + it.fuels.map(function (f) { return '<span class="asw">' + esc(f) + "</span>"; }).join(" or "));
+    if (it.fuels.length) scope.push("with " + it.fuels.map(function (f) { return '<span class="asw">' + esc(f) + "</span>"; }).join(" or ") + " in the fuel or material cell");
     if (it.cls) scope.push("of the kind “" + esc(D.about.class_labels[it.cls]) + "”");
     if (it.invs.length) scope.push("in " + it.invs.map(function (id) { return invLink(id); }).join(", "));
     var h = '<section class="askcard count"><p class="kick">Counted from NASA\'s tables</p><h3>' + (scope.length ? plural(a.tests, "test", "tests") + " " + scope.join(", ") : "All " + a.tests + " tests in NASA's tables") + "</h3>";
     if (!a.tests) return h + "<p>No row of NASA's Experimental Tables matches, so there is nothing to count.</p></section>";
-    h += "<ul>";
-    if (!it.invs.length || it.invs.length > 1) h += "<li>They are in " + plural(a.invs.length, "investigation", "investigations") + ": " + a.invs.slice(0, 6).map(function (x) { return invLink(x.id) + " (" + x.tests + ")"; }).join(", ") + (a.invs.length > 6 ? ", and " + (a.invs.length - 6) + " more" : "") + ".</li>";
-    h += "<li><b>Oxygen.</b> " + (a.oxygen.stated ? plural(a.oxygen.stated, "test states", "tests state") + " the oxygen around the flame as a plain number, from " + num(a.oxygen.min) + " to " + num(a.oxygen.max) + " %. <b>" + a.oxygen.atOrAbove + "</b> of them " + (a.oxygen.atOrAbove === 1 ? "is" : "are") + " at " + num(o2) + " % or more." : "None of these tests states the oxygen around the flame as a plain number.") + "</li>";
-    h += "<li><b>Pressure.</b> " + (a.pressure.stated ? plural(a.pressure.stated, "test states", "tests state") + " pressure as a plain number, from " + num(a.pressure.min) + " to " + num(a.pressure.max) + " psi. <b>" + a.pressure.atOrBelow + "</b> of them " + (a.pressure.atOrBelow === 1 ? "is" : "are") + " at " + num(p) + " psi or less." : "None of these tests states pressure as a plain number.") + "</li>";
-    h += "<li><b>Both together.</b> " + (a.both.stated ? plural(a.both.stated, "test states", "tests state") + " both. <b>" + a.both.inAir + "</b> of them " + (a.both.inAir === 1 ? "is" : "are") + " at " + num(o2) + " % oxygen or more and " + num(p) + " psi or less" + (a.both.invs.length ? ", in " + a.both.invs.map(function (id) { return invLink(id); }).join(", ") : "") + "." : "None states both, so none can be placed inside or outside this atmosphere.") + "</li></ul>";
-    var from = it.o2 != null && it.p != null ? "both limits are the numbers in your question" : it.o2 != null ? "the oxygen limit is the number in your question, the pressure limit is from " + esc(ATM.name) : it.p != null ? "the pressure limit is the number in your question, the oxygen limit is from " + esc(ATM.name) : "the limits are those of " + esc(ATM.name);
+    if (!it.invs.length || it.invs.length > 1) h += '<p class="invs">' + a.invs.slice(0, 6).map(function (x) { return invLink(x.id) + ' <span class="muted">' + x.tests + "</span>"; }).join(" · ") + (a.invs.length > 6 ? ' <span class="muted">· and ' + (a.invs.length - 6) + " more</span>" : "") + "</p>";
+    // one tile per condition: the count, what it counts, and out of how many tests that state it
+    function tile(label, val, of, rest, none) {
+      if (!of) return '<div class="na"><b>–</b><span>' + label + '</span><small>' + none + "</small></div>";
+      return '<div class="' + (val === 0 ? "zero" : "") + '"><b>' + val + "</b><span>" + label + "</span><small>of " + plural(of, "test", "tests") + " that state it" + (rest ? " · " + rest : "") + "</small></div>";
+    }
+    h += '<div class="stats">' +
+      tile("at " + num(o2) + " % oxygen or more", a.oxygen.atOrAbove, a.oxygen.stated, a.oxygen.stated ? "tested " + num(a.oxygen.min) + " to " + num(a.oxygen.max) + " %" : "", "no test states oxygen as a number") +
+      tile("at " + num(p) + " psi or less", a.pressure.atOrBelow, a.pressure.stated, a.pressure.stated ? "tested " + num(a.pressure.min) + " to " + num(a.pressure.max) + " psi" : "", "no test states pressure as a number") +
+      tile("inside both limits", a.both.inAir, a.both.stated, a.both.invs.length ? "in " + a.both.invs.map(function (id) { return invLink(id); }).join(", ") : "", "no test states both, so none can be placed") +
+      "</div>";
+    var from = it.o2 != null && it.p != null ? "both limits from your question" : it.o2 != null ? "oxygen limit from your question, pressure from " + esc(ATM.name) : it.p != null ? "pressure limit from your question, oxygen from " + esc(ATM.name) : "limits of " + esc(ATM.name);
     var fq = it.fuels.length === 1 && !it.invs.length ? it.fuels[0] : it.invs.length === 1 && !it.fuels.length ? BY_ID[it.invs[0]].name : "";
-    h += '<p class="small muted">Counted by this page from NASA\'s Experimental Tables; ' + from + ". Cells NASA wrote as text are not counted." + (fq ? ' <button class="link" data-findq="' + esc(fq) + '">See these rows</button>' : "") + "</p>";
+    h += '<p class="small muted">Counted by this page from NASA\'s Experimental Tables · ' + from + " · cells written as text are not counted" + (fq ? ' · <button class="link" data-findq="' + esc(fq) + '">See these rows</button>' : "") + "</p>";
     return h + "</section>";
   }
   // How many of the investigations behind the passages have a test in the chosen atmosphere.
   function askReach(top) {
     var r = Ask.reach(top, ASK.P.passages, RK), n = r.invs.length;
     if (!n) return "";
-    var h = '<section class="reach"><p><b>How far this evidence reaches.</b> These passages come from ' + plural(n, "investigation", "investigations") + ". <b>" + r.yes + "</b> of them " + (r.yes === 1 ? "has" : "have") + " a test at " + airWords() + " (" + esc(ATM.name) + ")" +
-      (r.rowsOf ? ": " + r.rowsIn + " of the " + plural(r.rowsOf, "test", "tests") + " that state both" : "") + "." +
-      (r.unknown ? " " + plural(r.unknown, "investigation", "investigations") + " cannot be placed, because " + (r.unknown === 1 ? "its table does" : "their tables do") + " not state both oxygen and pressure as numbers." : "") + "</p><ul>";
+    var h = '<section class="reach' + (r.yes ? "" : " none") + '"><div class="reach-head"><span class="big">' + r.yes + "<small>/" + n + "</small></span><p><b>investigations behind these passages have a test in " + esc(ATM.name) + "</b>" +
+      '<span>' + airWords() + (r.rowsOf ? " · " + r.rowsIn + " of the " + plural(r.rowsOf, "test", "tests") + " that state both" : "") +
+      (r.unknown ? " · " + r.unknown + " cannot be placed: " + (r.unknown === 1 ? "its table does" : "their tables do") + " not state both oxygen and pressure as numbers" : "") + "</span></p></div>";
+    h += "<details><summary>Per investigation</summary><ul>";
     r.invs.forEach(function (x) {
       var judged = x.value === "yes" || x.value === "no", t;
       if (judged) t = x.rows + " of " + plural(x.of, "test", "tests") + " in this air";
@@ -1032,7 +1039,7 @@
       else t = (x.oxygen.max != null ? "oxygen up to " + num(x.oxygen.max) + " %" : "oxygen: " + VALUE_WORD[x.oxygen.value].toLowerCase()) + "; " + (x.pressure.min != null ? "pressure down to " + num(x.pressure.min) + " psi" : "pressure: " + VALUE_WORD[x.pressure.value].toLowerCase());
       h += '<li class="' + (x.value === "yes" ? "in" : judged ? "out" : "unk") + '"><i></i>' + invLink(x.id) + "<span>" + t + "</span></li>";
     });
-    return h + "</ul></section>";
+    return h + "</ul></details></section>";
   }
   function mark(text, q) {
     var qs = {}; words(q).forEach(function (w) { qs[w] = 1; });
@@ -1048,9 +1055,9 @@
       var top = askRank(q, qvec), P = ASK.P.passages;
       probe("show " + (qvec ? "meaning" : "words") + " top=" + top.length);
       var cards = askMoonCard(q) + askNumberCard(q), ex = askExpand(q);
-      if (ex.length) cards += '<p class="also">Also searched for ' + ex.map(function (e) { return e.nasa.map(function (t) { return "<b>" + esc(t) + "</b>"; }).join(", ") + " (you wrote “" + esc(e.said) + "”)"; }).join("; ") + '. <span>From a fixed word list drafted with AI; each term is checked to be in NASA\'s text or tables.</span></p>';
-      if (!top.length) { box.innerHTML = cards + '<p class="muted">Nothing in NASA\'s records or the listed papers matches that closely. Try other words, or a simpler question.</p>'; return; }
-      var h = cards + '<p class="find-sum">The <b>' + top.length + "</b> closest passages, out of " + P.length + ", " + (qvec ? "matched by meaning." : "matched by words.") + "</p>" + askReach(top);
+      var also = ex.length ? '<p class="also"><span class="lab">Also searched</span>' + ex.map(function (e) { return e.nasa.map(function (t) { return '<span class="tag">' + esc(t) + "</span>"; }).join("") + '<span class="for">for “' + esc(e.said) + "”</span>"; }).join("") + '<span class="note" title="A fixed word list drafted with AI; the build checks that each term is in NASA\'s text or tables.">fixed word list, AI-drafted, checked against NASA\'s text</span></p>' : "";
+      if (!top.length) { box.innerHTML = cards + also + '<p class="muted">Nothing in NASA\'s records or the listed papers matches that closely. Try other words, or a simpler question.</p>'; return; }
+      var h = cards + askReach(top) + '<p class="find-sum"><b>' + top.length + "</b> closest passages of " + P.length + ", " + (qvec ? "matched by meaning" : "matched by words") + "</p>" + also;
       var qm = q + " " + Ask.expansionText(ex);
       top.forEach(function (x) {
         var p = P[x.i];
