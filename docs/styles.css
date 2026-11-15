@@ -756,3 +756,15 @@ table.an-near td, table.an-near th { font-size: .88rem; white-space: nowrap; }
 #simbox-inv { margin: -.4rem 0 1.4rem; }
 #simbox-inv:empty { display: none; }
 .simsvg .sn text { paint-order: stroke; stroke: #000; stroke-width: 3px; stroke-linejoin: round; }
+
+/* shared hardware */
+.simmode { display: flex; align-items: center; gap: .4rem; margin: 0 0 .6rem; font-size: .88rem; color: var(--muted); }
+.simmode span { margin-right: .3rem; }
+.simmode .tabbtn { margin-right: 0; padding: .35rem .8rem; font-size: .86rem; }
+.simsvg .sn circle.hw-ground { stroke: #959599; stroke-width: 1.5; }
+.legend .sw.hw-ground { border: 1px solid #959599; }
+.hw-h { margin-top: 1.6rem; }
+table.hwt td { vertical-align: top; font-size: .92rem; }
+table.hwt td:first-child { white-space: nowrap; }
+.hw-sw { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: .5rem; vertical-align: -1px; }
+@media (max-width: 700px) { table.hwt td:first-child { white-space: normal; } }

@@ -684,11 +684,42 @@
     return h;
   }
 
+  // ------------------------------------------------- shared hardware
+  // Groups investigations by the hardware their NASA record names (the record's "hardware" field, by keyword).
+  // The record's own wording is shown on hover; nothing is added that the record does not say.
+  var HW_GROUPS = [
+    { id: "acme", label: "ACME insert in the Combustion Integrated Rack (CIR)", re: /\bACME\b/, color: "#0cc9ac" },
+    { id: "mdca", label: "Droplet apparatus (MDCA) in the Combustion Integrated Rack", re: /MDCA|Droplet Combustion/i, color: "#609af6" },
+    { id: "msg", label: "Microgravity Science Glovebox (MSG)", re: /Glovebox|\bMSG\b/i, color: "#f29d49" },
+    { id: "cygnus", label: "Saffire enclosure in a Cygnus cargo ship", re: /Cygnus/i, color: "#f5af0c" },
+    { id: "csd", label: "Comparative Soot Diagnostics hardware", re: /Soot Diagnostic/i, color: "#b9b9bb" },
+    { id: "ground", label: "Ground study: laboratory or computer model", re: null, color: "#2a2a2e" },
+    { id: "other", label: "Other hardware, or none named in the record", re: null, color: "#6b6b70" }
+  ];
+  function hwGroup(inv) {
+    var t = inv.hardware || "";
+    for (var k = 0; k < HW_GROUPS.length; k++) if (HW_GROUPS[k].re && HW_GROUPS[k].re.test(t)) return HW_GROUPS[k];
+    return inv.ground ? HW_GROUPS[5] : HW_GROUPS[6];
+  }
+  function hwMembers(g) {
+    return D.investigations.filter(function (i) { return hwGroup(i) === g; }).sort(function (a, b) { return +a.id.slice(4) - +b.id.slice(4); });
+  }
+  function hwLink(i) { return '<a href="#/inv/' + i.id + '" title="' + esc("Hardware in NASA's record: " + (i.hardware || "not stated")) + '">' + esc(i.name) + "</a>"; }
+  function hwTable() {
+    var h = '<h3 class="hw-h">Same hardware</h3><div class="tablewrap"><table class="hwt"><thead><tr><th>Hardware</th><th class="num">Investigations</th><th>Which</th></tr></thead><tbody>';
+    HW_GROUPS.forEach(function (g) {
+      var m = hwMembers(g);
+      if (!m.length) return;
+      h += '<tr><td><i class="sw hw-sw" style="background:' + g.color + '"></i>' + esc(g.label) + '</td><td class="num">' + m.length + "</td><td>" + m.map(hwLink).join(", ") + "</td></tr>";
+    });
+    return h + '</tbody></table></div><p class="src">Grouped from the hardware field of each NASA record, by the words it uses (ACME, MDCA, Glovebox, Cygnus, Soot Diagnostic). Hover a name for the record\'s own wording. Investigations that name the same hardware were run in the same kind of facility, which makes their tests easier to compare.</p>';
+  }
+
   // ------------------------------------------------- a map of the investigations by meaning
   // Each investigation is joined to the three whose NASA record text is closest in meaning (the same
   // similarities as related.json, recomputed here from the stored vectors). A spring layout turns those
   // links into distances: the closer the text, the shorter the line. Drag a dot; the others follow.
-  var SIMMAP = null;
+  var SIMMAP = null, SIM_COLOUR = "cls";
   function simLoad() {
     if (SIMMAP) return Promise.resolve(SIMMAP);
     return askLoad().then(function () {
@@ -754,12 +785,12 @@
     });
     M.ids.forEach(function (id) {
       var n = M.nodes[id], inv = BY_ID[id], cls = id === focus ? " focus" : near[id] ? " near" : "";
-      s += '<g class="sn' + cls + '" data-sim="' + id + '" transform="translate(' + n.x.toFixed(1) + " " + n.y.toFixed(1) + ')" tabindex="0" role="link" aria-label="' + esc(inv.name) + '"><circle r="' + (id === focus ? 11 : 7) + '" fill="' + COLOR[inv.cls] + '"/><text x="' + (id === focus ? 16 : 12) + '" y="4">' + esc(inv.name) + "</text></g>";
+      s += '<g class="sn' + cls + '" data-sim="' + id + '" transform="translate(' + n.x.toFixed(1) + " " + n.y.toFixed(1) + ')" tabindex="0" role="link" aria-label="' + esc(inv.name) + '"><circle r="' + (id === focus ? 11 : 7) + '" fill="' + (SIM_COLOUR === "hw" ? hwGroup(inv).color : COLOR[inv.cls]) + '"' + (SIM_COLOUR === "hw" && hwGroup(inv).id === "ground" ? ' class="hw-ground"' : "") + '/><text x="' + (id === focus ? 16 : 12) + '" y="4">' + esc(inv.name) + "</text></g>";
     });
     return s + "</svg>";
   }
   function simNote(M) {
-    return "Each dot is one investigation, coloured by what burns. A line joins each one to the three whose NASA record text is closest in meaning, as measured by the site's language model when the page loads. " +
+    return "Each dot is one investigation, coloured by " + (SIM_COLOUR === "hw" ? "the hardware its NASA record names" : "what burns") + ". A line joins each one to the three whose NASA record text is closest in meaning, as measured by the site's language model when the page loads. " +
       "The shorter the line, the closer the text, compared with the other pairs: every pair of records falls between " + fx(M.pmin, 2) + " and " + fx(M.pmax, 2) + " in similarity, so the map stretches a small range. It shows wording and topic, not test results. Drag a dot to move it; choose one to open it.";
   }
   // after the SVG is on the page: hover highlights a dot and its neighbours, drag moves it and the springs pull the rest
@@ -801,9 +832,15 @@
     simLoad().then(function (M) {
       var box = document.getElementById(boxId);
       if (!box) return;
-      box.innerHTML = '<div class="chart simmap">' + simSvg(M, focus) + '</div><p class="legend">' + ["solid", "emulated", "smoke", "aerosol", "gas", "droplet"].map(function (c) {
+      var legend = SIM_COLOUR === "hw" ? HW_GROUPS.filter(function (g) { return hwMembers(g).length; }).map(function (g) {
+        return '<span><i class="sw hw-sw' + (g.id === "ground" ? " hw-ground" : "") + '" style="background:' + g.color + '"></i>' + esc(g.label) + "</span>";
+      }).join("") : ["solid", "emulated", "smoke", "aerosol", "gas", "droplet"].map(function (c) {
         return '<span><i class="sw" style="background:' + COLOR[c] + '"></i>' + esc(D.about.class_labels[c]) + "</span>";
-      }).join("") + '</p><p class="src">' + simNote(M) + "</p>";
+      }).join("");
+      var modes = '<div class="simmode" role="group" aria-label="Colour the dots by"><span>Colour by</span>' + [["cls", "What burns"], ["hw", "Hardware"]].map(function (m) {
+        return '<button class="tabbtn' + (SIM_COLOUR === m[0] ? " on" : "") + '" aria-pressed="' + (SIM_COLOUR === m[0]) + '" data-simmode="' + m[0] + '" data-box="' + boxId + '" data-focus="' + (focus || "") + '">' + m[1] + "</button>";
+      }).join("") + "</div>";
+      box.innerHTML = modes + '<div class="chart simmap">' + simSvg(M, focus) + '</div><p class="legend">' + legend + '</p><p class="src">' + simNote(M) + "</p>";
       simWire(box, M, focus);
     }).catch(function () {});
   }
@@ -1070,7 +1107,7 @@
       return '<a role="tab" href="#/explore/' + t[0] + '" class="' + (exploreTab === t[0] ? "on" : "") + '" aria-selected="' + (exploreTab === t[0]) + '">' + t[1] + "</a>";
     }).join("") + '</div><div class="tabpanel">';
     if (exploreTab === "similar") {
-      h += '<div class="panel-head"><p class="figt">The ' + D.summary.investigations + ' investigations, placed by how close their NASA record text is in meaning</p></div><div id="simbox-all"><p class="loading">Loading NASA\'s text…</p></div>';
+      h += '<div class="panel-head"><p class="figt">The ' + D.summary.investigations + ' investigations, placed by how close their NASA record text is in meaning</p></div><div id="simbox-all"><p class="loading">Loading NASA\'s text…</p></div>' + hwTable();
       setTimeout(function () { simShow("simbox-all", null); }, 0);
     }
     else if (exploreTab === "oxygen") {
@@ -1441,6 +1478,8 @@
         return '<option value="' + i.id + '">' + esc(i.name) + "</option>";
       }).join("") + "</select></label></div>";
 
+    var hg = hwGroup(inv), same = hwMembers(hg).filter(function (x) { return x.id !== id; });
+    if (hg.id !== "other" && same.length) h += '<p class="relm"><b>' + (hg.id === "ground" ? "Also a ground study" : "Same hardware") + '</b> <span class="muted">' + (hg.id === "ground" ? "" : esc(hg.label) + ": ") + "</span>" + same.map(hwLink).join(", ") + ' <a class="link" href="#/explore/similar">All hardware groups</a></p>';
     h += '<p class="relm" id="relm" data-for="' + esc(id) + '"></p><div id="simbox-inv"></div>';
     h += '<div class="grid2"><div class="panel"><h2>In plain words</h2><p class="ai" style="margin:-.3rem 0 .8rem">AI-written from the PSI record</p><p>' + esc(inv.summary.did) + '</p><ul class="clean">';
     inv.summary.points.forEach(function (p) { h += '<li><span class="kind ' + p.kind + '">' + KIND[p.kind] + "</span>" + esc(p.text) + quote(inv.id, p.field, p.quote) + "</li>"; });
@@ -1740,6 +1779,7 @@
       var done = function (ok) { note.textContent = ok ? "Link copied." : link; };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(function () { done(true); }, function () { done(false); }); else done(false);
     }
+    else if (b.dataset.simmode) { SIM_COLOUR = b.dataset.simmode; simShow(b.dataset.box, b.dataset.focus || null); }
     else if (b.dataset.simopen) { var sb = document.getElementById("simbox-inv"); if (sb.innerHTML) sb.innerHTML = ""; else simShow("simbox-inv", b.dataset.simopen); }
     else if (b.dataset.anfuel) { AN.fuel = b.dataset.anfuel; AN.v.d0 = anMedianSize(); rerender(); }
     else if (b.dataset.dl === "find") downloadFind();
