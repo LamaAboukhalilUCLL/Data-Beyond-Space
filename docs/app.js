@@ -941,7 +941,10 @@
   // A question is matched to passages of NASA's text. With the language model loaded, the match is by
   // meaning (vectors); without it, by shared words. Either way the page only quotes; it writes nothing.
   var ASK = { P: null, vec: null, dims: 0, ix: null, model: "off", embed: null, q: "", seq: 0 };
-  var ASK_EXAMPLES = ["Does smoke behave differently without gravity?", "What happens to a flame when the airflow stops?", "How well do extinguishing gases work in space?", "Is the Earth test for materials safe enough for space?", "Which experiments burned plastic?", "How many tests burned PMMA at 21 % oxygen or more?", "Does Moon gravity change how a material burns?"];
+  // One example per thing Ask can do (each checked against ask.js and the built index, 15 Nov):
+  // Moon card + counted answer, counts with numbers, droplets (near misses), NASA's material test,
+  // the word list (cloth, catch fire / fire alarm, without gravity / put out), and plain matching by meaning.
+  var ASK_EXAMPLES = ["Will cabin materials burn in Moon Base air?", "How many tests were run at 30 % oxygen and 10.2 psi or less?", "Which tests burned droplets at 30 % oxygen or more?", "Is the Earth test for materials safe enough for space?", "Can cotton cloth catch fire in a spacecraft?", "Does a fire alarm work without gravity?", "Which experiments used helium or carbon dioxide to put out a flame?", "Why does a flame in space look like a ball?"];
   var words = Ask.words;   // the matching itself is in ask.js, shared with the scripts that test and score it
   function askLoad() {
     if (ASK.P) return Promise.resolve();
