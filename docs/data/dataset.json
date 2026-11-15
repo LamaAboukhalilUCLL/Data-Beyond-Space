@@ -25,7 +25,53 @@
    "droplet": "Liquid fuel droplets",
    "gas": "Gas flames",
    "aerosol": "Dust and aerosol instrument test"
-  }
+  },
+  "presets": [
+   {
+    "id": "moon",
+    "name": "Moon Base and pressurized rovers",
+    "o2": 30.0,
+    "p": 10.2,
+    "source": "Space Apps challenge statement: 30 % oxygen or more, at 10.2 psi or less"
+   },
+   {
+    "id": "c34",
+    "name": "Cabin at 8.2 psia",
+    "o2": 34.0,
+    "p": 8.2,
+    "source": "An atmosphere NASA considers for human missions, named in PSI record PSI-20",
+    "record": "PSI-20",
+    "field": "objective",
+    "quote": "8.2 psia, 34 % oxygen"
+   },
+   {
+    "id": "c265",
+    "name": "Cabin at 10.2 psia",
+    "o2": 26.5,
+    "p": 10.2,
+    "source": "An atmosphere NASA considers for human missions, named in PSI record PSI-20",
+    "record": "PSI-20",
+    "field": "objective",
+    "quote": "10.2 psia, 26.5 %"
+   },
+   {
+    "id": "earth",
+    "name": "Earth air",
+    "o2": 21.0,
+    "p": 14.7,
+    "source": "Sea-level air, also named in PSI record PSI-20",
+    "record": "PSI-20",
+    "field": "objective",
+    "quote": "14.7 psia, 21 % oxygen"
+   },
+   {
+    "id": "suit",
+    "name": "Spacesuit",
+    "o2": 100.0,
+    "p": 4.3,
+    "source": "Space Apps challenge statement: 100 % oxygen at 4.3 psi"
+   }
+  ]
  },
  "summary": {
   "investigations": 24,
@@ -417,7 +463,7 @@
      "score": 1,
      "min": 10.177,
      "max": 44.8594,
-     "detail": "1 of 273 rows with a plain number. Lowest: 10.2 psi"
+     "detail": "1 of 273 rows with a plain number. Lowest: 10.18 psi"
     },
     "both": {
      "value": "no",

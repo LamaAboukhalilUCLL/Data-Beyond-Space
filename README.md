@@ -10,12 +10,14 @@ It shows coverage and gaps. It does not predict how fire behaves on the Moon.
 
 | View | What it shows |
 |---|---|
-| Overview | The headline numbers and the gap in one picture |
-| Coverage map | Every test placed by oxygen level and by what burns, and by oxygen and pressure together, with the Moon Base zone marked |
-| Ranking | The 24 investigations ordered by how many of five Moon Base conditions they meet, with the evidence for each |
+| Overview | The finding, then a tool: choose an atmosphere and see how much of NASA's fire data fits it |
+| Explore | Every test against the chosen air: oxygen by what burns, oxygen against pressure, and a finder for materials and tests with a filtered CSV download |
+| Ranking | The 24 investigations ordered by how many of five conditions they meet for the chosen air, with the evidence for each |
 | Investigation pages | Each investigation in plain words, NASA's description word for word, what its table records, its publications, and a side-by-side comparison with any other |
 | Open questions | Six fire-safety questions for a Moon Base, each marked open or partly answered, with NASA's own words and table rows as evidence |
 | Data and method | Downloads of the cleaned tables, the rules every number follows, and the references |
+
+**Choose an atmosphere.** The Moon Base (30 % oxygen or more, 10.2 psi or less) is the default. The reader can switch to a spacesuit, to the three cabin atmospheres NASA names in PSI record PSI-20, or type their own oxygen and pressure. Counts, charts and the ranking are recounted in the browser. A link can carry the choice: `#/explore/pressure?atm=c34` or `#/rank?o2=28&p=9`.
 
 Any mark on a chart opens the row of NASA's table it comes from.
 
@@ -39,6 +41,7 @@ python scripts/fetch_snapshot.py    # only if data/psi/raw/ is missing: download
 python scripts/fetch_papers.py      # optional: titles, years and abstracts of the listed publications
 python scripts/build_dataset.py     # snapshot -> docs/data/
 python scripts/validate.py          # independent checks; fails loudly if anything is off
+node scripts/check_recount.js       # the in-browser recount must equal the build, number for number
 ```
 
 ## Structure
@@ -60,6 +63,7 @@ docs/                    the website; docs/data/ is written by build_dataset.py
 - **Quotations are checked by program.** The build fails unless every quoted sentence is found word for word in the NASA record it is attributed to.
 - **No number is typed by hand.** Figures in the texts are inserted from the computed data.
 - **Headline numbers are counted twice**, by separate code in `validate.py`.
+- **The recount for other atmospheres is checked too.** `docs/recount.js` follows the same rules, and `check_recount.js` fails unless it reproduces the build exactly for the Moon Base.
 
 ## Data and references
 

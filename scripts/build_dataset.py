@@ -44,6 +44,24 @@ MOON_O2_MIN = 30.0     # percent oxygen, "30% or more"
 MOON_P_MAX = 10.2      # psi, "10.2 psi or less"
 PSI_PER = {"atm": 14.6959, "bar": 14.5038, "mmHg": 0.0193368}
 
+# Atmospheres a reader can pick. "At least this much oxygen, at most this much pressure."
+# (id, name, oxygen %, pressure psi, where the figures come from, PSI record and quote if any)
+PRESETS = [
+    {"id": "moon", "name": "Moon Base and pressurized rovers", "o2": MOON_O2_MIN, "p": MOON_P_MAX,
+     "source": "Space Apps challenge statement: 30 % oxygen or more, at 10.2 psi or less"},
+    {"id": "c34", "name": "Cabin at 8.2 psia", "o2": 34.0, "p": 8.2,
+     "source": "An atmosphere NASA considers for human missions, named in PSI record PSI-20",
+     "record": "PSI-20", "field": "objective", "quote": "8.2 psia, 34 % oxygen"},
+    {"id": "c265", "name": "Cabin at 10.2 psia", "o2": 26.5, "p": 10.2,
+     "source": "An atmosphere NASA considers for human missions, named in PSI record PSI-20",
+     "record": "PSI-20", "field": "objective", "quote": "10.2 psia, 26.5 %"},
+    {"id": "earth", "name": "Earth air", "o2": 21.0, "p": 14.7,
+     "source": "Sea-level air, also named in PSI record PSI-20",
+     "record": "PSI-20", "field": "objective", "quote": "14.7 psia, 21 % oxygen"},
+    {"id": "suit", "name": "Spacesuit", "o2": 100.0, "p": 4.3,
+     "source": "Space Apps challenge statement: 100 % oxygen at 4.3 psi"},
+]
+
 # ---------------------------------------------------------------- our reading
 # What burns. Our own label, written after reading each record.
 #   solid     real solid materials are burned
@@ -326,6 +344,10 @@ def main():
     for (t, col, kind, unit, why) in COLUMNS:
         declared[t][kind] = (col, unit, why)
 
+    for pr in PRESETS:
+        if pr.get("quote") and squeeze(pr["quote"]) not in squeeze(recs[pr["record"]].get(pr["field"])):
+            sys.exit(f"preset {pr['id']}: its figures are not found word for word in {pr['record']}.{pr['field']}")
+
     papers = json.load(open(PAPERS, encoding="utf-8")) if os.path.exists(PAPERS) else []
     paper_by_doi = {p["doi"]: p for p in papers}
 
@@ -435,8 +457,9 @@ def main():
                 info["other_cells"] = counted(oth, 30) if kind != "pressure" else counted(oth + lists, 30)
                 tinfo[kind] = info
 
-            # one point per entry row, for the map and the download
-            if "ambient_o2" in d or "burner_o2" in d or "pressure" in d:
+            # one entry per table row: for the charts, the test finder and the download.
+            # Tables with no oxygen, pressure or fuel column (pointers to figures) are left out.
+            if d or t in FUEL:
                 for n, r in entries:
                     p = {"inv": acc, "table": t, "row": n, "cls": cls}
                     if fuel_i is not None:
@@ -488,11 +511,11 @@ def main():
                     parts.append(f"{n_ge} of {len(o2['numbers'])} rows with a plain number")
                 if o2["list_rows"]:
                     parts.append(f"listed on {o2['list_rows_ge']} of {o2['list_rows']} rows that list several values")
-                crit["oxygen"] = {"value": "yes", "score": 1, "detail": "; ".join(parts) + f". Highest: {max(vals):.4g} %",
+                crit["oxygen"] = {"value": "yes", "score": 1, "detail": "; ".join(parts) + f". Highest: {show(max(vals))} %",
                                   "max": r4(max(vals)), "min": r4(min(vals))}
             elif vals:
                 crit["oxygen"] = {"value": "no", "score": 0, "max": r4(max(vals)), "min": r4(min(vals)),
-                                  "detail": f"Highest ambient oxygen stated: {max(vals):.4g} %"}
+                                  "detail": f"Highest ambient oxygen stated: {show(max(vals))} %"}
             elif o2["has_column"]:
                 crit["oxygen"] = {"value": "text", "score": 0, "detail": "Stated only as text, not counted: "
                                   + "; ".join(k for k, _ in o2["other"].most_common(6))}
@@ -502,10 +525,10 @@ def main():
             if pr["numbers"] and min(pr["numbers"]) <= MOON_P_MAX:
                 n_le = sum(1 for v in pr["numbers"] if v <= MOON_P_MAX)
                 crit["pressure"] = {"value": "yes", "score": 1, "min": r4(min(pr["numbers"])), "max": r4(max(pr["numbers"])),
-                                    "detail": f"{n_le} of {len(pr['numbers'])} rows with a plain number. Lowest: {min(pr['numbers']):.3g} psi"}
+                                    "detail": f"{n_le} of {len(pr['numbers'])} rows with a plain number. Lowest: {show(min(pr['numbers']))} psi"}
             elif pr["numbers"]:
                 crit["pressure"] = {"value": "no", "score": 0, "min": r4(min(pr["numbers"])), "max": r4(max(pr["numbers"])),
-                                    "detail": f"Lowest pressure stated: {min(pr['numbers']):.3g} psi"}
+                                    "detail": f"Lowest pressure stated: {show(min(pr['numbers']))} psi"}
             elif pr["has_column"]:
                 crit["pressure"] = {"value": "text", "score": 0, "detail": "Stated only as text, not counted: "
                                     + "; ".join(k.strip() for k, _ in pr["other"].most_common(7))}
@@ -618,6 +641,7 @@ def main():
                           "source": "NASA Space Apps 2026 challenge statement, Flame in Freefall"},
             "conversions": {"mole fraction to percent": "x 100", "psi per unit": PSI_PER},
             "class_labels": CLASS_LABEL,
+            "presets": PRESETS,
         },
         "summary": summary,
         "questions": questions,
@@ -655,7 +679,7 @@ def main():
                         t.get("burner_o2_raw", ""), t.get("burner_o2", ""), t.get("p_raw", ""), t.get("p_unit", ""),
                         t.get("p_psi", ""), t.get("in_zone", ""), t.get("outcome", "")])
 
-    print(f"{len(investigations)} investigations, {len(tests)} table rows with oxygen or pressure")
+    print(f"{len(investigations)} investigations, {len(tests)} table rows")
     print("summary:", json.dumps(summary, indent=1))
     print("rank:", ", ".join(f"{i['rank']}. {i['name']} ({i['score']:g})" for i in ranked))
 
