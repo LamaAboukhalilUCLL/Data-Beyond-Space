@@ -585,3 +585,19 @@ table.an-near td, table.an-near th { font-size: .88rem; white-space: nowrap; }
 @media (max-width: 560px) { .an-res { grid-template-columns: 1fr; } .an-res > div + div { border-left: 0; border-top: 1px solid var(--line2); } }
 .an-res b.words { font-size: 2rem; line-height: 1.1; text-transform: uppercase; margin: .5rem 0 .6rem; }
 .an-find b { white-space: nowrap; }
+
+/* Earth tests at Moon Base pressure (the one table that is not from PSI) */
+.earth-chart svg text { font-family: var(--sans); }
+.earth-chart .cat { font: 600 15px var(--head); fill: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.earth-chart .name { font-size: 13px; fill: var(--soft); }
+.earth-chart .say { font: 12px var(--mono); fill: var(--muted); }
+.earth-chart .bar { fill: #e3e3e3; }
+.earth-chart .more { fill: rgba(227,227,227,.3); }
+.earth-chart .fail { fill: #6b6b70; }
+.earth-chart .row.burn .bar { fill: #6b6b70; }
+.earth-chart .row.burn .name, .earth-chart .row.burn .say { fill: var(--dim); }
+.earth-chart .row.untested .bar, .earth-chart .row.untested .fail { fill: none; stroke: #b9b9bb; stroke-width: 1; }
+.earth-chart .you { stroke: var(--red); stroke-width: 2; }
+.earth-chart .youlab { fill: var(--red-soft); font-size: 13px; font-weight: 700; }
+.legend .sw.sq { border-radius: 0; width: 18px; height: 10px; }
+.legend .sw.ring { border: 1px solid #b9b9bb; }

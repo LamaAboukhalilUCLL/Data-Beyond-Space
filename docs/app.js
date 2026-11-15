@@ -502,6 +502,71 @@
     main.innerHTML = h;
   }
 
+  // ------------------------------------------------- Earth tests at Moon Base pressure (not from PSI)
+  // NASA White Sands Test Facility, 2007. scripts/build_external.py reads the thresholds from the paper's text.
+  var EARTH = null;
+  function earthLoad() {
+    if (EARTH) return Promise.resolve();
+    return fetch("data/earth_tests.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (E) { EARTH = E; });
+  }
+  // What the paper lets us say about one sample at one oxygen level. It tested in steps, from 30 % upward.
+  function earthStatus(r, o2) {
+    var step = EARTH.about.oxygen_step_percent;
+    if (r.kind === "below") return o2 >= r.limit ? "burn" : "untested";
+    if (r.kind === "above") return o2 <= r.limit ? "out" : "untested";
+    return o2 <= r.limit ? "out" : o2 >= r.limit + step ? "burn" : "untested";
+  }
+  function earthChart(o2) {
+    var rows = EARTH.rows, cats = [], W = 1000, L = 372, R = 150, lo = 28, hi = 50, x = scaleLin(lo, hi, L, W - R), y = 44, s = "", body = "";
+    rows.forEach(function (r) { if (cats.indexOf(r.category) < 0) cats.push(r.category); });
+    cats.forEach(function (c) {
+      body += '<text class="cat" x="0" y="' + (y + 12) + '">' + esc(c) + "</text>";
+      y += 24;
+      rows.filter(function (r) { return r.category === c; }).forEach(function (r) {
+        var st = earthStatus(r, o2), end = Math.min(r.limit, hi), say = r.kind === "below" ? "burned at " + num(r.limit) + " %" : r.kind === "above" ? "above " + num(r.limit) + " %" : "up to " + num(r.limit) + " %";
+        body += '<g class="row ' + st + '"><title>' + esc(r.label + (r.config ? ", " + r.config : "") + ": " + r.composition + ". As printed: ULOI " + r.uloi + ", MOC " + r.moc) + '</title><text class="name" x="' + (L - 12) + '" y="' + (y + 11) + '" text-anchor="end">' +
+          esc(r.label + (r.config ? ", " + r.config : "")) + "</text>";
+        if (r.kind !== "below") body += '<rect class="bar" x="' + x(lo) + '" y="' + (y + 1) + '" width="' + (x(end) - x(lo)) + '" height="12"/>';
+        if (r.kind === "above" && r.limit < hi) body += '<rect class="more" x="' + x(r.limit) + '" y="' + (y + 1) + '" width="' + (x(hi) - x(r.limit)) + '" height="12"/>';
+        if (r.kind === "below") body += '<circle class="fail" cx="' + x(r.limit) + '" cy="' + (y + 7) + '" r="5"/>';
+        body += '<text class="say" x="' + (W - R + 12) + '" y="' + (y + 11) + '">' + say + "</text></g>";
+        y += 22;
+      });
+      y += 8;
+    });
+    var H = y + 6;
+    s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Highest oxygen level at which each of ' + rows.length + ' material samples put itself out in NASA\'s upward-flame test on Earth, at ' + num(EARTH.about.pressure_kpa) + ' kilopascal">';
+    for (var v = 30; v <= hi; v += 5) s += '<line class="grid" x1="' + x(v) + '" x2="' + x(v) + '" y1="34" y2="' + (H - 6) + '"/><text class="tick" x="' + x(v) + '" y="26" text-anchor="middle">' + v + " %</text>";
+    s += '<text class="tick" x="' + (L - 12) + '" y="26" text-anchor="end">Oxygen in the test chamber</text>' + body;
+    if (o2 >= lo && o2 <= hi) s += '<line class="you" x1="' + x(o2) + '" x2="' + x(o2) + '" y1="34" y2="' + (H - 6) + '"/><text class="youlab" x="' + x(o2) + '" y="10" text-anchor="middle">Your air, ' + num(o2) + " %</text>";
+    return s + "</svg>";
+  }
+  function earthSection() {
+    if (!EARTH) return '<p class="loading">Loading the Earth tests…</p>';
+    var A = EARTH.about, rows = EARTH.rows, o2 = ATM.o2, n = { out: 0, burn: 0, untested: 0 }, solid = COUNTS.byCls.solid;
+    rows.forEach(function (r) { n[earthStatus(r, o2)]++; });
+    var h = '<h2 id="earth">On Earth, solids were tested at Moon Base pressure</h2>';
+    h += '<p class="sub2"><strong>This table is not from PSI.</strong> NASA\'s White Sands Test Facility burned ' + rows.length + " material samples on Earth, at " + num(A.pressure_kpa) + " kPa (" + num(A.pressure_psi) +
+      " psi), and recorded the highest oxygen level at which each one still put itself out. It follows the air you chose above.</p>";
+    h += '<div class="counters"><div><b>' + n.out + "</b><span>of " + rows.length + " samples put themselves out at " + num(o2) + " % oxygen, in NASA's upward-flame test on Earth." + (n.untested ? " " + n.untested + " were not tested at this level." : "") + "</span></div>";
+    h += "<div><b>" + n.burn + "</b><span>did not reliably put themselves out at " + num(o2) + " % oxygen." + (n.burn ? " Among them: " + esc(rows.filter(function (r) { return earthStatus(r, o2) === "burn"; }).slice(0, 3).map(function (r) { return r.label; }).join(", ")) + "." : "") + "</span></div>";
+    h += '<div class="hot"><b>' + solid.atOrAbove + "</b><span>of " + solid.rows + " solid-material tests in PSI, run in weightlessness, reach " + num(o2) + " % oxygen. " +
+      (solid.atOrAbove ? "" : "Nothing measured in space confirms the Earth result, and NASA's own records say the Earth test <a href=\"#/questions/earth-test\">may not be on the safe side</a> in space.") + "</span></div></div>";
+    if (Math.abs(ATM.p - A.pressure_psi) > 0.5) h += '<p class="an-support warn"><b>Different pressure.</b> You chose ' + num(ATM.p) + " psi. Every test in this table was run at " + num(A.pressure_psi) + " psi, so it does not speak for your pressure.</p>";
+    h += '<div class="chart earth-chart">' + earthChart(o2) + '</div><p class="legend"><span><i class="sw sq" style="background:#e3e3e3"></i>Put itself out at your oxygen level</span><span><i class="sw sq" style="background:#6b6b70"></i>Did not reliably put itself out</span><span><i class="sw sq ring"></i>Not tested at that level</span><span><i class="sw sq" style="background:rgba(227,227,227,.3)"></i>Passed at the highest level tested; limit not found</span></p>';
+    h += '<p class="src">Source: ' + esc(A.source.authors) + ", " + A.source.year + ', <a href="' + A.source.url + '">' + esc(A.source.title) + "</a>, Table 2. A bar ends at the paper's MOC, the highest oxygen level at which the sample consistently put itself out. Earth gravity. " +
+      "The materials were candidates for an earlier NASA programme, not a list of what a Moon Base will use.</p>";
+    h += '<details class="sect"><summary>How to read this table, in NASA\'s words</summary><ul>' +
+      "<li><strong>The test.</strong> “" + esc(A.quotes.test) + "” “" + esc(A.quotes.pass) + ".”</li>" +
+      "<li><strong>The limit.</strong> “" + esc(A.quotes.moc) + ".”</li>" +
+      "<li><strong>Below 30 and above 40.</strong> “" + esc(A.quotes.below) + "”</li>" +
+      "<li><strong>Not final.</strong> “" + esc(A.quotes.conclusion) + "”</li>" +
+      "<li><strong>Our reading.</strong> A sample counts as putting itself out at any oxygen level up to its limit, and as not reliably doing so from one test step (" + num(A.oxygen_step_percent) + " %) above it. Levels the paper did not test are shown as not tested.</li>" +
+      "<li><strong>No hand-typed numbers.</strong> A program reads every threshold from the text of the paper, which is stored with the site's source code together with the PDF and its checksum.</li></ul>" +
+      '<p><a class="more" href="data/earth_tests.json">Download this table (JSON)</a> <a class="more" style="margin-left:1rem" href="' + A.source.pdf_url + '">The paper (PDF, NASA)</a></p></details>';
+    return h;
+  }
+
   // ---------------------------------------------------------------- habitat
   // A schematic habitat. Each numbered spot is one of the six open questions, placed where it matters.
   var HAB_SPOT = { tested: [142, 166], materials: [212, 248], "earth-test": [398, 188], "put-out": [486, 262], detect: [470, 172], gravity: [812, 268] };
@@ -557,7 +622,9 @@
       ' <span class="ai">(AI-written, checked against NASA\'s tables)</span></p><h4>What NASA\'s data holds</h4><ul>' + q.evidence.slice(0, 3).map(function (x) { return "<li>" + esc(x.text) + "</li>"; }).join("") +
       '</ul><p><a class="more" href="#/questions/' + q.id + '">Read the evidence</a></p></div></div>';
     h += '<p class="src">The drawing is a schematic, not a NASA design. It shows which questions were tested, not how a fire would behave.</p>';
+    h += '<div id="earth-tests">' + earthSection() + "</div>";
     main.innerHTML = h;
+    if (!EARTH) earthLoad().then(function () { var el = document.getElementById("earth-tests"); if (el) el.innerHTML = earthSection(); });
   }
 
   // ---------------------------------------------------------------- ranking
@@ -1139,7 +1206,8 @@
     h += "<p>Conditions 3 to 5 are counted from NASA's tables. Conditions 1 and 2 are this team's reading of each record: for condition 1 the sentence it rests on is quoted on every investigation page, and the build fails if that sentence is not in NASA's record word for word. Purpose: " +
       (S.purpose_counts.primary || 0) + " main purpose, " + (S.purpose_counts.benefit || 0) + " named as a benefit, " + (S.purpose_counts.none || 0) + " not their purpose.</p></details>";
 
-    h += '<details class="sect"><summary>The droplet model on the Analysis page</summary><p>The <a href="#/analysis">Analysis</a> page fits a plain statistical model (ordinary least squares) to the FLEX table. It is statistics, not a language model: <code>scripts/analyze_flex.py</code> fits it with the Python standard library, and <code>scripts/check_model.cjs</code>, written separately in JavaScript, reads the CSV from NASA again, refits it and fails unless it gets the same coefficients, errors and counts. The fitted model is in <a href="data/flex_model.json">data/flex_model.json</a>.</p></details>' +
+    h += '<details class="sect"><summary>The one table that is not from PSI</summary><p>The <a href="#/habitat">Habitat</a> page shows Earth tests of 26 material samples at Moon Base pressure, from a NASA White Sands Test Facility paper of 2007 (<a href="https://ntrs.nasa.gov/citations/20070018178">NTRS 20070018178</a>, public use permitted). The PDF, its extracted text and their checksums are stored with the source code. <code>scripts/build_external.py</code> reads every threshold from that text and stops if a sample name, a number or a quoted sentence is not found exactly. Nothing from it is mixed into the PSI counts.</p></details>' +
+      '<details class="sect"><summary>The droplet model on the Analysis page</summary><p>The <a href="#/analysis">Analysis</a> page fits a plain statistical model (ordinary least squares) to the FLEX table. It is statistics, not a language model: <code>scripts/analyze_flex.py</code> fits it with the Python standard library, and <code>scripts/check_model.cjs</code>, written separately in JavaScript, reads the CSV from NASA again, refits it and fails unless it gets the same coefficients, errors and counts. The fitted model is in <a href="data/flex_model.json">data/flex_model.json</a>.</p></details>' +
       '<details class="sect"><summary>How AI was used</summary><p>AI does four jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
       "<li><strong>It reads NASA's records.</strong> An AI model (Claude, Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. Before the site is built, a program checks that every quotation exists word for word in the named NASA record, that every table column exists, and that the texts contain no hand-typed numbers.</li>" +
       "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (all-MiniLM-L6-v2) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer.</li>" +
