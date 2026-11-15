@@ -940,24 +940,16 @@
   // ------------------------------------------------------------ ask the records
   // A question is matched to passages of NASA's text. With the language model loaded, the match is by
   // meaning (vectors); without it, by shared words. Either way the page only quotes; it writes nothing.
-  var ASK = { P: null, vec: null, dims: 0, idf: null, toks: null, model: "off", embed: null, q: "", seq: 0 };
-  var STOP = {}; "a an and are as at be been but by can did do does for from had has have how if in into is it its of on or that the their them there these this to was were what when where which while who why will with would than then so not no about over under more most much many any some such also only other out up down very".split(" ").forEach(function (w) { STOP[w] = 1; });
-  var ASK_EXAMPLES = ["Does smoke behave differently without gravity?", "What happens to a flame when the airflow stops?", "How well do extinguishing gases work in space?", "Is the Earth test for materials safe enough for space?", "Which experiments burned plastic?"];
-  function words(text) {
-    return (text.toLowerCase().match(/[a-z0-9]+/g) || []).filter(function (w) { return w.length > 1 && !STOP[w]; }).map(function (w) {
-      return w.length > 4 ? w.replace(/(ies)$/, "y").replace(/(ing|ed|es|s)$/, "") : w;   // a light stem: fires, burning, burned
-    });
-  }
+  var ASK = { P: null, vec: null, dims: 0, ix: null, model: "off", embed: null, q: "", seq: 0 };
+  var ASK_EXAMPLES = ["Does smoke behave differently without gravity?", "What happens to a flame when the airflow stops?", "How well do extinguishing gases work in space?", "Is the Earth test for materials safe enough for space?", "Which experiments burned plastic?", "How many tests burned PMMA at 21 % oxygen or more?", "Does Moon gravity change how a material burns?"];
+  var words = Ask.words;   // the matching itself is in ask.js, shared with the scripts that test and score it
   function askLoad() {
     if (ASK.P) return Promise.resolve();
     return fetch("data/passages.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (P) {
       var bin = atob(P.vectors_int8_base64), n = bin.length, v = new Int8Array(n);
       for (var i = 0; i < n; i++) v[i] = bin.charCodeAt(i) << 24 >> 24;
       ASK.P = P; ASK.vec = v; ASK.dims = P.about.dims;
-      var df = {};
-      ASK.toks = P.passages.map(function (p) { var t = words(p.text), seen = {}; t.forEach(function (w) { if (!seen[w]) { seen[w] = 1; df[w] = (df[w] || 0) + 1; } }); return t; });
-      ASK.idf = {};
-      Object.keys(df).forEach(function (w) { ASK.idf[w] = Math.log(1 + (P.passages.length - df[w] + 0.5) / (df[w] + 0.5)); });
+      ASK.ix = Ask.index(P.passages);
     });
   }
   function probe(m) { if (location.search.indexOf("probe") >= 0) fetch("/__probe?" + encodeURIComponent(m)).catch(function () {}); }
@@ -986,31 +978,57 @@
       ASK.model === "failed" ? "<b>Matching by words.</b> The language model could not start in this browser." :
       '<b>Matching by words.</b> <button class="link" data-smart="1">Match by meaning instead</button> A small language model (about 50 MB, downloaded once) then runs in your browser.';
   }
-  function askRank(q, qvec) {
-    var P = ASK.P.passages, qt = words(q), n = P.length, out = [], avg = 28;
-    for (var i = 0; i < n; i++) {
-      var toks = ASK.toks[i], tf = {}, kw = 0;
-      for (var k = 0; k < toks.length; k++) tf[toks[k]] = (tf[toks[k]] || 0) + 1;
-      qt.forEach(function (w) { if (tf[w]) kw += ASK.idf[w] * tf[w] * 2.2 / (tf[w] + 1.2 * (0.25 + 0.75 * toks.length / avg)); });
-      var sem = 0;
-      if (qvec) { var o = i * ASK.dims; for (var d = 0; d < ASK.dims; d++) sem += qvec[d] * ASK.vec[o + d]; sem /= 127; }
-      out.push({ i: i, kw: kw, sem: sem });
-    }
-    var maxKw = Math.max.apply(null, out.map(function (x) { return x.kw; })) || 1;
-    out.forEach(function (x) {
-      var p = P[x.i];
-      x.score = qvec ? x.sem + 0.2 * x.kw / maxKw : x.kw / maxKw;      // meaning first, shared words as a tie-breaker
-      if (p.kind === "paper" && p.part === "title") x.score *= 0.9;     // a title says less than a sentence
+  function plural(n, one, many) { return n + " " + (n === 1 ? one : many); }
+  // Everyday words in the question -> the terms NASA's text uses (a fixed list, checked by the build).
+  function askExpand(q) { return Ask.SETTINGS.glossary === "off" ? [] : Ask.expand(q, ASK.P.glossary ? ASK.P.glossary.entries : []); }
+  function askRank(q, qvec) { return Ask.rank(ASK.ix, ASK.P.passages, ASK.vec, ASK.dims, q, qvec, { extra: Ask.expansionText(askExpand(q)) }); }
+  // A question that names the Moon, Mars or partial gravity: PSI has no such data, and the page says so.
+  function askMoonCard(q) {
+    var term = Ask.moon(q);
+    if (!term) return "";
+    var S = D.summary, n = S.records_mentioning_moon_or_partial_gravity, g = D.questions.filter(function (x) { return x.id === "gravity"; })[0];
+    var h = '<section class="askcard gap"><p class="kick">Outside NASA\'s data</p><h3>' + (n === 0 ? "PSI holds no test at Moon or Mars gravity" : plural(n, "PSI record mentions", "PSI records mention") + " the Moon, Mars or partial gravity") + "</h3>";
+    h += "<p>Your question mentions “" + esc(term) + "”. <b>" + n + " of the " + S.investigations + "</b> PSI records mention the Moon, Mars or partial gravity, and every test was run in weightlessness or on Earth. The passages below come from those tests, not from the Moon.</p>";
+    if (g) h += '<p><a href="#/questions/gravity">Open question: ' + esc(g.question) + "</a>" + (g.elsewhere && g.elsewhere.length ? " It lists " + plural(g.elsewhere.length, "NASA document", "NASA documents") + " on this from outside PSI." : "") + "</p>";
+    return h + "</section>";
+  }
+  // A question about conditions or counts: the numbers, counted from NASA's tables for the tests it names.
+  function askNumberCard(q) {
+    if (!ASK.vocab) ASK.vocab = Ask.fuelVocabulary(TESTS);
+    var it = Ask.intent(q, D.investigations, ASK.vocab, Ask.expansionText(askExpand(q)));
+    if (!it) return "";
+    var o2 = it.o2 != null ? it.o2 : ATM.o2, p = it.p != null ? it.p : ATM.p, a = Ask.answer(Ask.scopeTests(TESTS, it), o2, p, Recount);
+    var scope = [];
+    if (it.fuels.length) scope.push("whose fuel or material cell contains " + it.fuels.map(function (f) { return '<span class="asw">' + esc(f) + "</span>"; }).join(" or "));
+    if (it.cls) scope.push("of the kind “" + esc(D.about.class_labels[it.cls]) + "”");
+    if (it.invs.length) scope.push("in " + it.invs.map(function (id) { return invLink(id); }).join(", "));
+    var h = '<section class="askcard count"><p class="kick">Counted from NASA\'s tables</p><h3>' + (scope.length ? plural(a.tests, "test", "tests") + " " + scope.join(", ") : "All " + a.tests + " tests in NASA's tables") + "</h3>";
+    if (!a.tests) return h + "<p>No row of NASA's Experimental Tables matches, so there is nothing to count.</p></section>";
+    h += "<ul>";
+    if (!it.invs.length || it.invs.length > 1) h += "<li>They are in " + plural(a.invs.length, "investigation", "investigations") + ": " + a.invs.slice(0, 6).map(function (x) { return invLink(x.id) + " (" + x.tests + ")"; }).join(", ") + (a.invs.length > 6 ? ", and " + (a.invs.length - 6) + " more" : "") + ".</li>";
+    h += "<li><b>Oxygen.</b> " + (a.oxygen.stated ? plural(a.oxygen.stated, "test states", "tests state") + " the oxygen around the flame as a plain number, from " + num(a.oxygen.min) + " to " + num(a.oxygen.max) + " %. <b>" + a.oxygen.atOrAbove + "</b> of them " + (a.oxygen.atOrAbove === 1 ? "is" : "are") + " at " + num(o2) + " % or more." : "None of these tests states the oxygen around the flame as a plain number.") + "</li>";
+    h += "<li><b>Pressure.</b> " + (a.pressure.stated ? plural(a.pressure.stated, "test states", "tests state") + " pressure as a plain number, from " + num(a.pressure.min) + " to " + num(a.pressure.max) + " psi. <b>" + a.pressure.atOrBelow + "</b> of them " + (a.pressure.atOrBelow === 1 ? "is" : "are") + " at " + num(p) + " psi or less." : "None of these tests states pressure as a plain number.") + "</li>";
+    h += "<li><b>Both together.</b> " + (a.both.stated ? plural(a.both.stated, "test states", "tests state") + " both. <b>" + a.both.inAir + "</b> of them " + (a.both.inAir === 1 ? "is" : "are") + " at " + num(o2) + " % oxygen or more and " + num(p) + " psi or less" + (a.both.invs.length ? ", in " + a.both.invs.map(function (id) { return invLink(id); }).join(", ") : "") + "." : "None states both, so none can be placed inside or outside this atmosphere.") + "</li></ul>";
+    var from = it.o2 != null && it.p != null ? "both limits are the numbers in your question" : it.o2 != null ? "the oxygen limit is the number in your question, the pressure limit is from " + esc(ATM.name) : it.p != null ? "the pressure limit is the number in your question, the oxygen limit is from " + esc(ATM.name) : "the limits are those of " + esc(ATM.name);
+    var fq = it.fuels.length === 1 && !it.invs.length ? it.fuels[0] : it.invs.length === 1 && !it.fuels.length ? BY_ID[it.invs[0]].name : "";
+    h += '<p class="small muted">Counted by this page from NASA\'s Experimental Tables; ' + from + ". Cells NASA wrote as text are not counted." + (fq ? ' <button class="link" data-findq="' + esc(fq) + '">See these rows</button>' : "") + "</p>";
+    return h + "</section>";
+  }
+  // How many of the investigations behind the passages have a test in the chosen atmosphere.
+  function askReach(top) {
+    var r = Ask.reach(top, ASK.P.passages, RK), n = r.invs.length;
+    if (!n) return "";
+    var h = '<section class="reach"><p><b>How far this evidence reaches.</b> These passages come from ' + plural(n, "investigation", "investigations") + ". <b>" + r.yes + "</b> of them " + (r.yes === 1 ? "has" : "have") + " a test at " + airWords() + " (" + esc(ATM.name) + ")" +
+      (r.rowsOf ? ": " + r.rowsIn + " of the " + plural(r.rowsOf, "test", "tests") + " that state both" : "") + "." +
+      (r.unknown ? " " + plural(r.unknown, "investigation", "investigations") + " cannot be placed, because " + (r.unknown === 1 ? "its table does" : "their tables do") + " not state both oxygen and pressure as numbers." : "") + "</p><ul>";
+    r.invs.forEach(function (x) {
+      var judged = x.value === "yes" || x.value === "no", t;
+      if (judged) t = x.rows + " of " + plural(x.of, "test", "tests") + " in this air";
+      else if (x.value === "no table") t = "no table in PSI";
+      else t = (x.oxygen.max != null ? "oxygen up to " + num(x.oxygen.max) + " %" : "oxygen: " + VALUE_WORD[x.oxygen.value].toLowerCase()) + "; " + (x.pressure.min != null ? "pressure down to " + num(x.pressure.min) + " psi" : "pressure: " + VALUE_WORD[x.pressure.value].toLowerCase());
+      h += '<li class="' + (x.value === "yes" ? "in" : judged ? "out" : "unk") + '"><i></i>' + invLink(x.id) + "<span>" + t + "</span></li>";
     });
-    out.sort(function (a, b) { return b.score - a.score; });
-    var seen = {}, top = [], floor = qvec ? 0.3 : 0.2;
-    for (var j = 0; j < out.length && top.length < 8; j++) {
-      var x = out[j], p2 = P[x.i], key = p2.kind === "record" ? p2.inv : p2.doi;
-      if (x.score < floor) break;
-      seen[key] = (seen[key] || 0) + 1;
-      if (seen[key] <= 2) top.push(x);
-    }
-    return top;
+    return h + "</ul></section>";
   }
   function mark(text, q) {
     var qs = {}; words(q).forEach(function (w) { qs[w] = 1; });
@@ -1025,17 +1043,20 @@
       if (seq !== ASK.seq) return;
       var top = askRank(q, qvec), P = ASK.P.passages;
       probe("show " + (qvec ? "meaning" : "words") + " top=" + top.length);
-      if (!top.length) { box.innerHTML = '<p class="muted">Nothing in NASA\'s records or the listed papers matches that closely. Try other words, or a simpler question.</p>'; return; }
-      var h = '<p class="find-sum">The <b>' + top.length + "</b> closest passages, out of " + P.length + ", " + (qvec ? "matched by meaning." : "matched by words.") + "</p>";
+      var cards = askMoonCard(q) + askNumberCard(q), ex = askExpand(q);
+      if (ex.length) cards += '<p class="also">Also searched for ' + ex.map(function (e) { return e.nasa.map(function (t) { return "<b>" + esc(t) + "</b>"; }).join(", ") + " (you wrote “" + esc(e.said) + "”)"; }).join("; ") + '. <span>From a fixed word list drafted with AI; each term is checked to be in NASA\'s text or tables.</span></p>';
+      if (!top.length) { box.innerHTML = cards + '<p class="muted">Nothing in NASA\'s records or the listed papers matches that closely. Try other words, or a simpler question.</p>'; return; }
+      var h = cards + '<p class="find-sum">The <b>' + top.length + "</b> closest passages, out of " + P.length + ", " + (qvec ? "matched by meaning." : "matched by words.") + "</p>" + askReach(top);
+      var qm = q + " " + Ask.expansionText(ex);
       top.forEach(function (x) {
         var p = P[x.i];
         if (p.kind === "record") {
           var inv = BY_ID[p.inv];
-          h += '<article class="hit"><div class="ev-head">' + invLink(p.inv) + chip(inv.cls) + '<span class="small muted">NASA PSI record ' + esc(p.inv) + ", " + FIELD[p.field] + "</span></div><blockquote>“" + mark(p.text, q) + "”</blockquote></article>";
+          h += '<article class="hit"><div class="ev-head">' + invLink(p.inv) + chip(inv.cls) + '<span class="small muted">NASA PSI record ' + esc(p.inv) + ", " + FIELD[p.field] + "</span></div><blockquote>“" + mark(p.text, qm) + "”</blockquote></article>";
         } else {
           h += '<article class="hit"><div class="ev-head"><span class="papert">' + esc(p.title) + '</span></div><p class="small muted">Paper' + (p.year ? ", " + p.year : "") + (p.venue ? ", " + esc(p.venue) : "") + ". Listed by PSI under " +
             p.psi.map(function (id) { return invLink(id); }).join(", ") + '. <a href="https://doi.org/' + esc(p.doi) + '" target="_blank" rel="noopener">Read it</a></p>' +
-            (p.part === "abstract" ? "<blockquote>“" + mark(p.text, q) + "”<cite>From the paper's abstract</cite></blockquote>" : '<p class="small muted">Matched on its title. PSI lists no abstract for it.</p>') + "</article>";
+            (p.part === "abstract" ? "<blockquote>“" + mark(p.text, qm) + "”<cite>From the paper's abstract</cite></blockquote>" : '<p class="small muted">Matched on its title. PSI lists no abstract for it.</p>') + "</article>";
         }
       });
       box.innerHTML = h;
@@ -1142,6 +1163,7 @@
         return '<option value="' + i.id + '">' + esc(i.name) + "</option>";
       }).join("") + "</select></label></div>";
 
+    h += '<p class="relm" id="relm" data-for="' + esc(id) + '"></p>';
     h += '<div class="grid2"><div class="panel"><h2>In plain words</h2><p class="ai" style="margin:-.3rem 0 .8rem">AI-written from the PSI record</p><p>' + esc(inv.summary.did) + '</p><ul class="clean">';
     inv.summary.points.forEach(function (p) { h += '<li><span class="kind ' + p.kind + '">' + KIND[p.kind] + "</span>" + esc(p.text) + quote(inv.id, p.field, p.quote) + "</li>"; });
     h += '</ul><p class="small muted">Aim: what it set out to do. Expected: what its authors expected beforehand. Result: a finding the record states. The quotations are NASA\'s words, checked by program against the record.</p></div>';
@@ -1175,8 +1197,20 @@
     h += "</details>";
     main.innerHTML = h;
     document.getElementById("cmp").addEventListener("change", function (e) { if (e.target.value) location.hash = "#/compare/" + id + "/" + e.target.value; });
+    relatedLoad().then(function (R) {
+      var el = document.getElementById("relm"), list = R && R.related[id];
+      if (!el || !list || !list.length || el.getAttribute("data-for") !== id) return;
+      el.innerHTML = "<b>Closest by meaning</b> " + list.filter(function (x) { return BY_ID[x.id]; }).map(function (x) { return invLink(x.id) + ' <span class="muted">' + x.similarity.toFixed(2) + "</span>"; }).join(", ") +
+        '<span class="relnote">The records whose NASA text is nearest to this one, as measured by the language model when the site is built (1 would be the same text). A match of wording and topic, not a judgement by NASA.</span>';
+    });
     var f = main.querySelector("[data-findinv]");
     if (f) f.addEventListener("click", function () { find.q = f.getAttribute("data-findinv"); find.cls = "all"; find.only = false; });
+  }
+
+  var REL = null;
+  function relatedLoad() {
+    if (REL) return Promise.resolve(REL);
+    return fetch("data/related.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (R) { REL = R; return R; }).catch(function () { return null; });
   }
 
   function viewCompare(a, b) {
@@ -1267,9 +1301,10 @@
 
     h += '<details class="sect"><summary>The one table that is not from PSI</summary><p>The <a href="#/habitat">Habitat</a> page shows Earth tests of 26 material samples at Moon Base pressure, from a NASA White Sands Test Facility paper of 2007 (<a href="https://ntrs.nasa.gov/citations/20070018178">NTRS 20070018178</a>, public use permitted). The PDF, its extracted text and their checksums are stored with the source code. <code>scripts/build_external.py</code> reads every threshold from that text and stops if a sample name, a number or a quoted sentence is not found exactly. Nothing from it is mixed into the PSI counts.</p></details>' +
       '<details class="sect"><summary>The droplet model on the Analysis page</summary><p>The <a href="#/analysis">Analysis</a> page fits a plain statistical model (ordinary least squares) to the FLEX table. It is statistics, not a language model: <code>scripts/analyze_flex.py</code> fits it with the Python standard library, and <code>scripts/check_model.cjs</code>, written separately in JavaScript, reads the CSV from NASA again, refits it and fails unless it gets the same coefficients, errors and counts. The fitted model is in <a href="data/flex_model.json">data/flex_model.json</a>.</p></details>' +
+      '<details class="sect"><summary>How well Ask finds the right record</summary><div id="ask-eval"><p class="muted">Loading the test results…</p></div></details>' +
       '<details class="sect"><summary>How AI was used</summary><p>AI does four jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
       "<li><strong>It reads NASA's records.</strong> An AI model (Claude, Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. Before the site is built, a program checks that every quotation exists word for word in the named NASA record, that every table column exists, and that the texts contain no hand-typed numbers.</li>" +
-      "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (all-MiniLM-L6-v2) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer.</li>" +
+      "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (all-MiniLM-L6-v2) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer. The numbers the Ask page shows beside the quotations are counted from NASA's tables by ordinary code, not by the model. A short fixed list links everyday words to NASA's terms (for example plastic and PMMA); it was drafted with AI, and the build stops if a term is not in NASA's text or tables.</li>" +
       "<li><strong>It helped write the code.</strong> The scripts and this website were written with AI assistance and reviewed by the team.</li>" +
       "<li><strong>It drew the pictures that are not photographs.</strong> The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance. Each drawing on a page carries a note saying so. The three photographs are NASA's and are not AI-generated.</li></ol>" +
       "<p>An early layout of the overview followed a design mockup made with ChatGPT (OpenAI); the mockup itself is not used. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.</p></details>";
@@ -1293,6 +1328,19 @@
       '<li><a href="https://github.com/nasa/hds-core" target="_blank" rel="noopener">NASA Horizon Design System</a> (the colour values: NASA Red, the Carbon greys and the chart palette for dark backgrounds)</li>' +
       '<li><a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2" target="_blank" rel="noopener">all-MiniLM-L6-v2</a> language model (Apache-2.0), run with <a href="https://github.com/huggingface/transformers.js" target="_blank" rel="noopener">Transformers.js</a> (Apache-2.0) and <a href="https://github.com/microsoft/onnxruntime" target="_blank" rel="noopener">ONNX Runtime Web</a> (MIT); all three are served with this site</li></ul>';
     h += '<p>Images, all NASA photographs in the public domain, none AI-generated: the Moon is the <a href="' + MOON.page + '" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter near-side mosaic</a> (' + esc(MOON.credit) + '); Earth is <a href="https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" target="_blank" rel="noopener">The Earth seen from Apollo 17</a> (NASA, Apollo 17 crew); the space station is <a href="https://commons.wikimedia.org/wiki/File:International_Space_Station_after_undocking_of_STS-132.jpg" target="_blank" rel="noopener">photograph S132-E-012208</a> (NASA, crew of STS-132).</p>';
+    fetch("data/ask_eval.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (E) {
+      var el = document.getElementById("ask-eval");
+      if (!el) return;
+      function row(name, s) { return "<tr><td>" + name + "</td><td>" + s.hit1 + " of " + s.questions + " (" + s.hit1_share.toFixed(2) + ")</td><td>" + s.hit3 + " of " + s.questions + " (" + s.hit3_share.toFixed(2) + ")</td></tr>"; }
+      var m = E.site.by_meaning, w = E.site.by_words, st = E.site_settings;
+      var off = E.compared_settings.filter(function (c) { return c.matching === "meaning" && c.bonus === st.bonus && c.stem === st.stem && c.glossary === "off"; })[0];
+      var t = "<p>" + m.all.questions + " test questions were written, and for each one the investigations that answer it were listed. A script then ranks NASA's passages for every question with the same code and the same index this site uses (<code>scripts/eval_ask.mjs</code>, <code>ask.js</code>). A question counts as found when a passage shown comes from one of its investigations.</p>";
+      t += '<div class="tablewrap"><table><thead><tr><th>Matching</th><th>Right investigation first</th><th>Among the first three</th></tr></thead><tbody>' + row("By meaning (language model loaded)", m.all) + row("By words (no model)", w.all) + "</tbody></table></div>";
+      t += "<p><strong>Read this score with care.</strong> The questions and their expected answers were labelled by " + esc(E.about.labelled_by) + (E.about.checked_by ? " Checked by " + esc(E.about.checked_by) + "." : "") + " " + esc(E.about.caution) + "</p>";
+      if (off && st.glossary !== "off") t += "<p>" + m.everyday_words.questions + " of the questions use everyday words that NASA's text does not use. For those, the word list finds the right investigation first in " + m.everyday_words.hit1 + " and among the first three in " + m.everyday_words.hit3 + "; without the list it is " + off.everyday_words.hit1 + " and " + off.everyday_words.hit3 + ". The word list was drafted by the same AI that wrote the questions, so this comparison flatters it.</p>";
+      t += '<p>The questions, the expected investigations and the result for each are in <a href="data/ask_eval.json">data/ask_eval.json</a>, with the scores of the other settings that were tried.</p>';
+      el.innerHTML = t;
+    }).catch(function () { var el = document.getElementById("ask-eval"); if (el) el.innerHTML = '<p class="muted">The test results could not be loaded.</p>'; });
     h += '<p>Typefaces, all under the SIL Open Font License 1.1 and served with the site: <a href="https://github.com/jpt/barlow" target="_blank" rel="noopener">Barlow Condensed</a>, <a href="https://github.com/uswds/public-sans" target="_blank" rel="noopener">Public Sans</a> and <a href="https://github.com/googlefonts/dm-mono" target="_blank" rel="noopener">DM Mono</a>.</p></details>';
     main.innerHTML = h;
   }
@@ -1382,6 +1430,7 @@
     else if (b.dataset.mat) { matOpen[b.dataset.mat] = !matOpen[b.dataset.mat]; rerender(); }
     else if (b.dataset.ask) { location.hash = "#/ask/" + encodeURIComponent(b.dataset.ask); }
     else if (b.dataset.smart) { askSmart(true); }
+    else if (b.dataset.findq) { find.q = b.dataset.findq; find.cls = "all"; find.only = false; find.limit = 60; location.hash = "#/explore/find"; }
     else if (b.dataset.open && drawRank) { rankState.open[b.dataset.open] = !rankState.open[b.dataset.open]; drawRank(); }
     else if (b.dataset.sort) { rankState.sort = b.dataset.sort; rerender(); }
     else if (b.dataset.cls) { rankState.cls = b.dataset.cls; rerender(); }

@@ -654,3 +654,27 @@ table.an-near td, table.an-near th { font-size: .88rem; white-space: nowrap; }
   .habx svg .lead, .habx svg .end { display: none; }
   .hab .hab-six { border-right: 0; border-bottom: 1px solid var(--line2); }
 }
+
+/* Ask: cards computed from the data, evidence reach, glossary line, related investigations */
+.askcard { border: 1px solid var(--line2); border-left: 3px solid var(--muted); background: var(--frame); padding: 1rem 1.3rem 1.1rem; margin: 0 0 .9rem; max-width: 62rem; }
+.askcard.gap { border-left-color: var(--red); }
+.askcard .kick { margin: 0 0 .3rem; font-size: .84rem; }
+.askcard h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
+.askcard p { margin: .4rem 0 0; }
+.askcard ul { margin: .5rem 0 .2rem; padding-left: 1.1rem; }
+.askcard li { margin: .25rem 0; }
+.also { font-size: .92rem; color: var(--muted); margin: 0 0 .9rem; }
+.also b { color: var(--text); }
+.also span { color: var(--dim); font-size: .84rem; }
+.reach { border-top: 1px solid var(--line2); border-bottom: 1px solid var(--line2); padding: .8rem 0 .9rem; margin: 0 0 .4rem; font-size: .95rem; color: var(--soft); max-width: 62rem; }
+.reach p { margin: 0 0 .6rem; }
+.reach ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; }
+.reach li { display: flex; align-items: baseline; gap: .45rem; font-size: .9rem; }
+.reach li i { width: .6rem; height: .6rem; border-radius: 50%; border: 1.5px solid var(--dim); flex: none; align-self: center; }
+.reach li.in i { background: var(--red); border-color: var(--red); }
+.reach li.unk i { border-style: dashed; }
+.reach li span { color: var(--dim); }
+.relm { font-size: .95rem; margin: 0 0 1.2rem; color: var(--soft); }
+.relm:empty { display: none; }
+.relm b { margin-right: .5rem; }
+.relm .relnote { display: block; color: var(--dim); font-size: .84rem; margin-top: .25rem; max-width: 52rem; }
