@@ -1,10 +1,11 @@
 {
   "name": "data-beyond-space",
   "private": true,
-  "description": "Flame in Freefall: Moon Base fire data coverage. Node is only needed to rebuild the search index and to run the recount check.",
+  "description": "Flame in Freefall: Moon Base fire data coverage. Node is only needed to rebuild the search index, to score the Ask page and to run the checks.",
   "scripts": {
     "search": "node scripts/build_search.mjs",
-    "check": "node scripts/check_recount.cjs"
+    "check": "node scripts/check_recount.cjs && node scripts/check_ask.cjs",
+    "eval": "node scripts/eval_ask.mjs"
   },
   "devDependencies": {
     "@huggingface/transformers": "4.3.2"

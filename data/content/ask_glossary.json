@@ -1,0 +1,29 @@
+{
+  "about": {
+    "what": "Everyday words and the terms NASA's records, papers and tables use for the same thing. When a question contains a word under `say`, the Ask page also searches for the terms under `nasa`, and says so.",
+    "drafted_by": "Claude (Anthropic). To be checked by a team member.",
+    "checked_by": null,
+    "rule": "Every `nasa` term must occur in the searched passages or in a fuel or material cell of NASA's tables. scripts/build_search.mjs stops if one does not.",
+    "written_with": "AI assistance (Claude Code, Anthropic)"
+  },
+  "entries": [
+    { "say": ["plastic", "plexiglass", "plexiglas", "perspex", "acrylic"], "nasa": ["PMMA", "polymethylmethacrylate"] },
+    { "say": ["fire alarm", "smoke alarm", "alarm"], "nasa": ["smoke detector", "detection"] },
+    { "say": ["wind", "breeze", "draft", "moving air"], "nasa": ["airflow", "flow velocity", "forced flow"] },
+    { "say": ["put out", "puts out", "putting out", "fire extinguisher"], "nasa": ["extinguish", "extinction", "suppression"] },
+    { "say": ["cloth", "textile"], "nasa": ["fabric", "cotton", "fiberglass"] },
+    { "say": ["drop", "bead"], "nasa": ["droplet"] },
+    { "say": ["alcohol"], "nasa": ["methanol"] },
+    { "say": ["weightless", "weightlessness", "zero gravity", "zero g", "no gravity", "without gravity"], "nasa": ["microgravity"] },
+    { "say": ["wire", "cable", "coating"], "nasa": ["Teflon", "Kapton"] },
+    { "say": ["still air", "no airflow", "airflow stops"], "nasa": ["quiescent"] },
+    { "say": ["voltage", "electricity"], "nasa": ["electric field"] },
+    { "say": ["candle"], "nasa": ["wax"] },
+    { "say": ["on the ground", "on earth"], "nasa": ["normal gravity"] },
+    { "say": ["catch fire", "catches fire", "set alight"], "nasa": ["ignition", "flammability"] },
+    { "say": ["ethylene"], "nasa": ["C2H4"] },
+    { "say": ["methane"], "nasa": ["CH4"] },
+    { "say": ["propane"], "nasa": ["C3H8"] },
+    { "say": ["dodecane"], "nasa": ["C12H26"] }
+  ]
+}

@@ -15,7 +15,7 @@ It shows coverage and gaps. It does not predict how fire behaves on the Moon.
 | Habitat | The main tool. On a drawing of a habitat the reader sets the air and the material of four parts; each part shows whether that material passed NASA's flame test on Earth at that oxygen level (NASA White Sands, 2007, the one source outside PSI) and that no test in space confirms it. Gives a downloadable evidence report and a link to the same habitat. Six numbered spots open the fire-safety questions |
 | Analysis | A statistical model of NASA's 274 FLEX droplet tests: what oxygen, pressure and extinguishing gases change in the burning rate, how the tests ended at each oxygen level, an estimator with its uncertainty, and the real tests nearest to any condition |
 | Ranking | The 24 investigations ordered by how many of five conditions they meet for the chosen air, with the evidence for each. A second tab puts all 24 side by side: sample or burner, what was measured, use on Earth |
-| Ask | Type a question; get the sentences from NASA's records and the listed papers that match it best, by meaning. Quotations only, nothing generated |
+| Ask | Type a question; get the sentences from NASA's records and the listed papers that match it best, by meaning. Questions about oxygen, pressure or numbers also get counts from NASA's tables; every answer says how many of its investigations were tested in the chosen air; Moon, Mars and partial-gravity questions get a notice that PSI holds no such test. Quotations and counts only, nothing generated |
 | Investigation pages | Each investigation in plain words, NASA's description word for word, what its table records, its publications, and a side-by-side comparison with any other |
 | Open questions | Six fire-safety questions for a Moon Base, each marked open or partly answered, with NASA's own words and table rows as evidence |
 | Data and method | Downloads of the cleaned tables, the rules every number follows, and the references |
@@ -49,7 +49,10 @@ python scripts/build_external.py    # reads the Earth-test table from the NASA W
 python scripts/analyze_flex.py      # fits the droplet model of the Analysis page (standard library only)
 node scripts/check_model.cjs        # refits it independently from NASA's CSV; must get the same numbers
 npm install                         # once, only for the next line
-node scripts/build_search.mjs       # passages and their meaning vectors for the Ask page
+node scripts/build_search.mjs       # passages and their meaning vectors for the Ask page; also the checked glossary and related.json
+node scripts/tune_ask.mjs           # optional: compares Ask settings and models on the tuning half -> data/eval/ask_tuning.json
+node scripts/eval_ask.mjs           # scores the Ask page on the test questions -> docs/data/ask_eval.json
+node scripts/check_ask.cjs          # the Ask page's counts, Moon card, glossary and published score (no model needed)
 ```
 
 ## Structure
@@ -73,6 +76,7 @@ docs/models/, docs/vendor/   the language model and the library that runs it in 
 - **No number is typed by hand.** Figures in the texts are inserted from the computed data.
 - **Headline numbers are counted twice**, by separate code in `validate.py`.
 - **The recount for other atmospheres is checked too.** `docs/recount.js` follows the same rules, and `check_recount.cjs` fails unless it reproduces the build exactly for the Moon Base.
+- **The Ask page counts, it does not write.** Its matching, its counts and its "how far the evidence reaches" line are in `docs/ask.js`. `check_ask.cjs` compares its numbers with the build, with `recount.js` and with a separate count from `tests.csv`. `eval_ask.mjs` scores it with that same code on the questions in `data/content/ask_eval_questions.json`; the questions and the glossary (`data/content/ask_glossary.json`) were drafted with AI and say in the file whether a team member has checked them.
 
 ## Data and references
 
@@ -83,7 +87,7 @@ docs/models/, docs/vendor/   the language model and the library that runs it in 
 - OpenAlex (publication year, journal and abstracts): https://openalex.org
 - Photographs (Moon, Earth, space station): NASA, public domain, via Wikimedia Commons; sources, checksums and changes in `docs/img/CREDITS.md`
 - Typefaces: Barlow Condensed, Public Sans and DM Mono, SIL Open Font License 1.1, from https://fontsource.org (details in `docs/img/CREDITS.md`)
-- Language model all-MiniLM-L6-v2 (Apache-2.0): https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 , in the ONNX build https://huggingface.co/Xenova/all-MiniLM-L6-v2
+- Language model snowflake-arctic-embed-s (Snowflake, Apache-2.0), with its quantised ONNX file: https://huggingface.co/Snowflake/snowflake-arctic-embed-s . It replaced all-MiniLM-L6-v2 (Apache-2.0; https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 , ONNX build https://huggingface.co/Xenova/all-MiniLM-L6-v2 ), which is kept in `docs/models/` only so that `scripts/tune_ask.mjs` can compare the two
 - Transformers.js 4.3.2 (Apache-2.0): https://github.com/huggingface/transformers.js , with ONNX Runtime Web (MIT): https://github.com/microsoft/onnxruntime
 - D. B. Hirsch et al., "Oxygen Concentration Flammability Thresholds of Selected Aerospace Materials Considered for the Constellation Program", NASA White Sands Test Facility, 2007 (public use permitted): https://ntrs.nasa.gov/citations/20070018178 . Source of the Earth-test table on the Habitat page; PDF and extracted text in `data/external/wstf2007/`
 - pypdf 7.1.0 (BSD-3-Clause), used once to extract that PDF's text: https://github.com/py-pdf/pypdf
@@ -95,7 +99,7 @@ docs/models/, docs/vendor/   the language model and the library that runs it in 
 AI does four jobs here, and each is checked or limited so that it cannot invent anything.
 
 1. **It reads NASA's records.** Claude (Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. The build fails unless every quotation is found word for word in the NASA record, every table column exists, and the texts hold no hand-typed numbers.
-2. **It matches a question to NASA's sentences.** On the Ask page a small open language model, all-MiniLM-L6-v2, runs in the reader's browser. It turns the question and 925 passages into vectors and shows the closest passages. It writes nothing, and the question never leaves the reader's computer.
+2. **It matches a question to NASA's sentences.** On the Ask page a small open language model, snowflake-arctic-embed-s, runs in the reader's browser. It turns the question and 925 passages into vectors and shows the closest passages. It writes nothing, and the question never leaves the reader's computer.
 3. **It helped write the code.** The scripts and the website were written with AI assistance and reviewed by the team.
 4. **It drew the pictures that are not photographs.** The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance; each drawing on a page carries a visible note saying so. The three photographs are NASA's and are not AI-generated.
 

@@ -1,0 +1,722 @@
+{
+ "about": {
+  "what": "How often the Ask page shows a passage from a right investigation first (hit at 1) or among the first three (hit at 3), for a fixed list of test questions.",
+  "questions_file": "data/content/ask_eval_questions.json",
+  "labelled_by": "Claude (Anthropic), from the PSI records. To be checked by a team member.",
+  "checked_by": null,
+  "split": {
+   "seed": 20261115,
+   "method": "mulberry32 shuffle of the everyday-word questions, then of the others, dealt alternately to the tuning and the held-out half",
+   "made_by": "scripts/split_eval.mjs"
+  },
+  "same_code_as_site": "docs/ask.js and docs/data/passages.json",
+  "caution": "All the questions were written by the same AI that built the page, and an earlier setting (the word bonus) was chosen on all of them before they were split. So even the held-out score is on the generous side, and with 20 questions in a half one question is 5 points.",
+  "built_by": "scripts/eval_ask.mjs (written with AI assistance: Claude Code, Anthropic)"
+ },
+ "site_settings": {
+  "bonus": 0.2,
+  "fusion": "bonus",
+  "title": 0.9,
+  "group": "passage",
+  "header": "none",
+  "glossary": "words",
+  "stem": "plural-e",
+  "model": "Snowflake/snowflake-arctic-embed-s"
+ },
+ "site": {
+  "by_meaning": {
+   "all": {
+    "questions": 40,
+    "hit1": 27,
+    "hit3": 33,
+    "hit1_share": 0.675,
+    "hit3_share": 0.825
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 13,
+    "hit3": 17,
+    "hit1_share": 0.65,
+    "hit3_share": 0.85
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 14,
+    "hit3": 16,
+    "hit1_share": 0.7,
+    "hit3_share": 0.8
+   },
+   "everyday_words": {
+    "questions": 11,
+    "hit1": 8,
+    "hit3": 11,
+    "hit1_share": 0.727,
+    "hit3_share": 1
+   },
+   "other": {
+    "questions": 29,
+    "hit1": 19,
+    "hit3": 22,
+    "hit1_share": 0.655,
+    "hit3_share": 0.759
+   }
+  },
+  "by_meaning_alone": {
+   "all": {
+    "questions": 40,
+    "hit1": 25,
+    "hit3": 31,
+    "hit1_share": 0.625,
+    "hit3_share": 0.775
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 14,
+    "hit3": 17,
+    "hit1_share": 0.7,
+    "hit3_share": 0.85
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 11,
+    "hit3": 14,
+    "hit1_share": 0.55,
+    "hit3_share": 0.7
+   },
+   "everyday_words": {
+    "questions": 11,
+    "hit1": 7,
+    "hit3": 9,
+    "hit1_share": 0.636,
+    "hit3_share": 0.818
+   },
+   "other": {
+    "questions": 29,
+    "hit1": 18,
+    "hit3": 22,
+    "hit1_share": 0.621,
+    "hit3_share": 0.759
+   }
+  },
+  "by_words": {
+   "all": {
+    "questions": 40,
+    "hit1": 27,
+    "hit3": 32,
+    "hit1_share": 0.675,
+    "hit3_share": 0.8
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 14,
+    "hit3": 16,
+    "hit1_share": 0.7,
+    "hit3_share": 0.8
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 13,
+    "hit3": 16,
+    "hit1_share": 0.65,
+    "hit3_share": 0.8
+   },
+   "everyday_words": {
+    "questions": 11,
+    "hit1": 8,
+    "hit3": 10,
+    "hit1_share": 0.727,
+    "hit3_share": 0.909
+   },
+   "other": {
+    "questions": 29,
+    "hit1": 19,
+    "hit3": 22,
+    "hit1_share": 0.655,
+    "hit3_share": 0.759
+   }
+  },
+  "by_meaning_without_word_list": {
+   "all": {
+    "questions": 40,
+    "hit1": 24,
+    "hit3": 31,
+    "hit1_share": 0.6,
+    "hit3_share": 0.775
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 12,
+    "hit3": 16,
+    "hit1_share": 0.6,
+    "hit3_share": 0.8
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 12,
+    "hit3": 15,
+    "hit1_share": 0.6,
+    "hit3_share": 0.75
+   },
+   "everyday_words": {
+    "questions": 11,
+    "hit1": 5,
+    "hit3": 8,
+    "hit1_share": 0.455,
+    "hit3_share": 0.727
+   },
+   "other": {
+    "questions": 29,
+    "hit1": 19,
+    "hit3": 23,
+    "hit1_share": 0.655,
+    "hit3_share": 0.793
+   }
+  }
+ },
+ "other_model": {
+  "model": "Xenova/all-MiniLM-L6-v2",
+  "from": "data/eval/ask_tuning.json",
+  "with_bonus": {
+   "all": {
+    "questions": 40,
+    "hit1": 28,
+    "hit3": 32
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 13,
+    "hit3": 16
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 15,
+    "hit3": 16
+   }
+  },
+  "meaning_alone": {
+   "all": {
+    "questions": 40,
+    "hit1": 19,
+    "hit3": 25
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 9,
+    "hit3": 10
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 10,
+    "hit3": 15
+   }
+  }
+ },
+ "questions": [
+  {
+   "q": "Does smoke behave differently without gravity?",
+   "expect": [
+    "PSI-102",
+    "PSI-101",
+    "PSI-115"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": "microgravity",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "What happens to a flame when the airflow stops?",
+   "expect": [
+    "PSI-25",
+    "PSI-26",
+    "PSI-62",
+    "PSI-20"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": "quiescent",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "How well do extinguishing gases work in space?",
+   "expect": [
+    "PSI-69",
+    "PSI-26",
+    "PSI-25"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 2
+  },
+  {
+   "q": "Is the Earth test for materials safe enough for space?",
+   "expect": [
+    "PSI-25",
+    "PSI-26",
+    "PSI-98",
+    "PSI-99",
+    "PSI-100"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Which experiments burned plastic?",
+   "expect": [
+    "PSI-25",
+    "PSI-26",
+    "PSI-99"
+   ],
+   "half": "tuning",
+   "everyday": true,
+   "also_searched": "PMMA polymethylmethacrylate",
+   "first_right_by_meaning": 2,
+   "first_right_by_words": 2
+  },
+  {
+   "q": "How do smoke detectors perform on the space station?",
+   "expect": [
+    "PSI-102",
+    "PSI-101",
+    "PSI-47",
+    "PSI-115"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "What size are smoke particles in microgravity?",
+   "expect": [
+    "PSI-102",
+    "PSI-101",
+    "PSI-115",
+    "PSI-47"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Can a large fire be tested safely in space?",
+   "expect": [
+    "PSI-98",
+    "PSI-99",
+    "PSI-100"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "How fast does a flame spread over fabric?",
+   "expect": [
+    "PSI-98",
+    "PSI-100",
+    "PSI-99",
+    "PSI-25",
+    "PSI-26"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "What is a cool flame?",
+   "expect": [
+    "PSI-39",
+    "PSI-69",
+    "PSI-117",
+    "PSI-142",
+    "PSI-159"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Can a droplet keep burning without a visible flame?",
+   "expect": [
+    "PSI-39",
+    "PSI-69",
+    "PSI-117",
+    "PSI-142",
+    "PSI-68"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Does an electric field change a flame?",
+   "expect": [
+    "PSI-22"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "When does a flame start to produce soot?",
+   "expect": [
+    "PSI-10",
+    "PSI-107",
+    "PSI-60"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "What is the smoke point of a fuel?",
+   "expect": [
+    "PSI-107",
+    "PSI-60"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Why do flames lift off a burner?",
+   "expect": [
+    "PSI-106"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": null,
+   "first_right_by_words": null
+  },
+  {
+   "q": "Can a gas burner imitate a burning solid?",
+   "expect": [
+    "PSI-20"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Do round flames go out by themselves?",
+   "expect": [
+    "PSI-23",
+    "PSI-159",
+    "PSI-10"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": null,
+   "first_right_by_words": null
+  },
+  {
+   "q": "How does carbon dioxide affect a burning droplet?",
+   "expect": [
+    "PSI-69",
+    "PSI-68"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Testing a particle counter with dust",
+   "expect": [
+    "PSI-47"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "What happens to a burning candle in weightlessness?",
+   "expect": [
+    "PSI-26",
+    "PSI-25"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": "microgravity wax",
+   "first_right_by_meaning": 4,
+   "first_right_by_words": null
+  },
+  {
+   "q": "Does lowering oxygen with nitrogen put a flame out?",
+   "expect": [
+    "PSI-25",
+    "PSI-26",
+    "PSI-69"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 5,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Computer model of flame spread over a solid",
+   "expect": [
+    "PSI-62"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 2,
+   "first_right_by_words": 3
+  },
+  {
+   "q": "How hot are the flames and how much soot do they hold?",
+   "expect": [
+    "PSI-60",
+    "PSI-107"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": null,
+   "first_right_by_words": null
+  },
+  {
+   "q": "Fuels like those burned in engines, at high pressure",
+   "expect": [
+    "PSI-68"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 4,
+   "first_right_by_words": 5
+  },
+  {
+   "q": "A fire lit inside a cargo ship after it left the station",
+   "expect": [
+    "PSI-98",
+    "PSI-99",
+    "PSI-100"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Does silicone burn?",
+   "expect": [
+    "PSI-99",
+    "PSI-102",
+    "PSI-101"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Which materials give off smoke when they overheat?",
+   "expect": [
+    "PSI-102",
+    "PSI-101"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Flames with a stream of air flowing alongside",
+   "expect": [
+    "PSI-21",
+    "PSI-106",
+    "PSI-107"
+   ],
+   "half": "tuning",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 7,
+   "first_right_by_words": 4
+  },
+  {
+   "q": "Does Nomex burn in space?",
+   "expect": [
+    "PSI-99",
+    "PSI-25"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 3,
+   "first_right_by_words": 4
+  },
+  {
+   "q": "How does fan speed change the way a sample burns?",
+   "expect": [
+    "PSI-25",
+    "PSI-26"
+   ],
+   "half": "held_out",
+   "everyday": false,
+   "also_searched": null,
+   "first_right_by_meaning": 2,
+   "first_right_by_words": 2
+  },
+  {
+   "q": "Does plexiglass burn in space?",
+   "expect": [
+    "PSI-25",
+    "PSI-26",
+    "PSI-99"
+   ],
+   "half": "held_out",
+   "everyday": true,
+   "also_searched": "PMMA polymethylmethacrylate",
+   "first_right_by_meaning": 3,
+   "first_right_by_words": 3
+  },
+  {
+   "q": "Do fire alarms work in space?",
+   "expect": [
+    "PSI-102",
+    "PSI-101",
+    "PSI-47"
+   ],
+   "half": "tuning",
+   "everyday": true,
+   "also_searched": "smoke detector detection",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Does a fire in space die when the wind stops?",
+   "expect": [
+    "PSI-25",
+    "PSI-26"
+   ],
+   "half": "tuning",
+   "everyday": true,
+   "also_searched": "airflow flow velocity forced flow",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "How do you put out a fire in space?",
+   "expect": [
+    "PSI-69",
+    "PSI-26",
+    "PSI-25"
+   ],
+   "half": "tuning",
+   "everyday": true,
+   "also_searched": "extinguish extinction suppression",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Does the coating on electric wires smoke?",
+   "expect": [
+    "PSI-102",
+    "PSI-101"
+   ],
+   "half": "tuning",
+   "everyday": true,
+   "also_searched": "Teflon Kapton",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Burning drops of alcohol",
+   "expect": [
+    "PSI-69",
+    "PSI-68"
+   ],
+   "half": "tuning",
+   "everyday": true,
+   "also_searched": "droplet methanol",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Does a flame need moving air to survive?",
+   "expect": [
+    "PSI-25",
+    "PSI-26",
+    "PSI-20"
+   ],
+   "half": "held_out",
+   "everyday": true,
+   "also_searched": "airflow flow velocity forced flow",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 4
+  },
+  {
+   "q": "How big do flames get on a sheet of cloth?",
+   "expect": [
+    "PSI-98",
+    "PSI-100"
+   ],
+   "half": "held_out",
+   "everyday": true,
+   "also_searched": "fabric cotton fiberglass",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Tiny burning beads of fuel",
+   "expect": [
+    "PSI-69",
+    "PSI-39",
+    "PSI-68"
+   ],
+   "half": "held_out",
+   "everyday": true,
+   "also_searched": "droplet",
+   "first_right_by_meaning": 2,
+   "first_right_by_words": 1
+  },
+  {
+   "q": "Using voltage to steer a flame",
+   "expect": [
+    "PSI-22"
+   ],
+   "half": "held_out",
+   "everyday": true,
+   "also_searched": "electric field",
+   "first_right_by_meaning": 1,
+   "first_right_by_words": 1
+  }
+ ]
+}

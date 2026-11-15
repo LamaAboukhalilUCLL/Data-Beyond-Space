@@ -228,6 +228,8 @@ ul.clean { list-style: none; padding: 0; margin: .3rem 0; } ul.clean li { paddin
 .ev-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem 1rem; margin-bottom: .15rem; }
 .ev-head a { font-weight: 700; text-decoration: none; }
 .ev-head a:hover { text-decoration: underline; }
+.ev-head a.ctx { font-weight: 400; text-decoration: underline; }   /* "Read it in context", like the papers' "Read it" */
+details.sect .verbatim mark.hl { color: var(--text, inherit); }
 .q .missing { margin-top: 1rem; color: var(--red-soft); font-size: .97rem; max-width: 50rem; }
 
 /* table viewer */
@@ -374,6 +376,7 @@ i.sw { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%;
 .find-controls input[type=search] { flex: 1 1 22rem; border: 1px solid var(--line2); padding: .6rem .8rem; font-size: 1rem; }
 .find-controls select { border: 1px solid var(--line2); padding: .6rem .6rem; min-width: 12rem; }
 .find-sum { font-size: 1rem; color: var(--soft); margin: .9rem 0 .8rem; }
+#ask-out .find-sum { font-size: .95rem; color: var(--muted); margin: .9rem 0 .6rem; }
 .find-sum b { color: var(--text); font-size: 1.15rem; }
 .find-table { max-height: 27rem; overflow: auto; background: none; }
 .find-table td { font-size: .92rem; vertical-align: middle; }
@@ -435,16 +438,22 @@ details.q > ul.ev { margin: 1.1rem 1.4rem 0; max-width: none; }
 .askbox input[type=search] { flex: 1; border: 1px solid var(--line2); background: var(--frame); padding: .85rem 1rem; font-size: 1.1rem; min-width: 0; }
 .askbox input[type=search]:focus { border-color: var(--text); }
 .askbox .btn { padding: .85rem 1.6rem; font-size: 1rem; }
-.examples { font-size: .9rem; color: var(--dim); display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin: 0 0 1rem; }
-.examples button.link { color: var(--muted); }
-.askmode { border: 1px solid var(--line2); background: var(--frame); padding: .6rem 1rem; font-size: .9rem; color: var(--muted); margin: 0 0 1.2rem; }
-.askmode b { color: var(--text); }
-.askmode.ready { border-left: 3px solid var(--red); }
+.examples { font-size: .84rem; color: var(--dim); display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; margin: 0 0 1rem; }
+.examples button.link { color: var(--soft); text-decoration: none; border: 1px solid var(--line2); border-radius: 999px; background: var(--frame); padding: .32rem .8rem; font-size: .84rem; line-height: 1.3; text-align: left; }
+.examples button.link:hover { border-color: var(--text); color: var(--text); }
+.askmode { display: flex; flex-wrap: wrap; align-items: baseline; gap: .15rem .8rem; font-size: .84rem; color: var(--dim); margin: 0 0 1.4rem; }
+.askmode b { color: var(--soft); font-weight: 600; display: inline-flex; align-items: center; gap: .45rem; }
+.askmode b::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; border: 1.5px solid var(--dim); }
+.askmode.ready b { color: var(--text); }
+.askmode.ready b::before { background: var(--red); border-color: var(--red); }
+.askmode.loading b::before { border-style: dashed; }
 .hit { border: 1px solid var(--line2); background: var(--frame); padding: 1rem 1.3rem 1.1rem; margin: .7rem 0 0; }
 .hit blockquote { margin: .5rem 0 0; font-size: 1.08rem; max-width: 62rem; }
 .hit .papert { font-weight: 700; }
 .hit p { margin: .2rem 0 0; }
 mark { background: rgba(246, 65, 55, .32); color: inherit; padding: 0 .1em; }
+.hit mark { background: none; color: var(--text); padding: 0; text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.hit .ev-head .small { font-size: .8rem; }
 /* ---- side by side ---- */
 table.matrix th.m span { display: inline-block; max-width: 5.2rem; white-space: normal; line-height: 1.2; }
 table.matrix td { font-size: .92rem; }
@@ -654,3 +663,49 @@ table.an-near td, table.an-near th { font-size: .88rem; white-space: nowrap; }
   .habx svg .lead, .habx svg .end { display: none; }
   .hab .hab-six { border-right: 0; border-bottom: 1px solid var(--line2); }
 }
+
+/* Ask: cards computed from the data, evidence reach, glossary line, related investigations */
+.askcard { border: 1px solid var(--line2); border-left: 3px solid var(--muted); background: var(--frame); padding: 1rem 1.3rem 1.1rem; margin: 0 0 .9rem; max-width: 62rem; }
+.askcard.gap { border-left-color: var(--red); }
+.askcard .kick { margin: 0 0 .3rem; font-size: .84rem; }
+.askcard h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
+.askcard p { margin: .4rem 0 0; }
+.askcard ul { margin: .5rem 0 .2rem; padding-left: 1.1rem; }
+.askcard li { margin: .25rem 0; }
+.askcard .invs { font-size: .88rem; margin: 0 0 .8rem; }
+.askcard .stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line2); margin: 0 0 .7rem; }
+.askcard .stats > div { padding: .75rem .95rem .8rem; border-left: 1px solid var(--line2); display: flex; flex-direction: column; gap: .2rem; }
+.askcard .stats > div:first-child { border-left: 0; }
+.askcard .stats b { font: 600 2.8rem/.9 var(--head); color: var(--text); }
+.askcard .stats .zero b { color: var(--red-soft); }
+.askcard .stats .na b { color: var(--dim); }
+.askcard .stats span { font-size: .9rem; color: var(--soft); font-weight: 600; }
+.askcard .stats small { font-size: .78rem; color: var(--dim); line-height: 1.4; }
+@media (max-width: 640px) { .askcard .stats { grid-template-columns: 1fr; } .askcard .stats > div { border-left: 0; border-top: 1px solid var(--line2); } .askcard .stats > div:first-child { border-top: 0; } .reach-head .big { font-size: 2.4rem; } }
+.also { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .45rem; font-size: .84rem; color: var(--dim); margin: -.3rem 0 .6rem; }
+.also .lab { color: var(--muted); margin-right: .2rem; }
+.also .tag { color: var(--text); border: 1px solid var(--line2); border-radius: 999px; padding: .12rem .6rem; }
+.also .for { margin-right: .6rem; }
+.also .note { flex-basis: 100%; font-size: .78rem; color: var(--dim); }
+.reach { border: 1px solid var(--line2); border-left: 3px solid var(--red); background: var(--frame); padding: .85rem 1.3rem .7rem; margin: 0 0 1.4rem; color: var(--soft); max-width: 62rem; }
+.reach.none { border-left-color: var(--muted); }
+.reach-head { display: flex; align-items: center; gap: 1.1rem; }
+.reach-head .big { font: 600 3rem/.9 var(--head); color: var(--text); white-space: nowrap; }
+.reach.none .reach-head .big { color: var(--red-soft); }
+.reach-head .big small { font-size: 1.5rem; color: var(--dim); }
+.reach-head p { margin: 0; font-size: .95rem; line-height: 1.45; }
+.reach-head p b { color: var(--text); font-weight: 600; }
+.reach-head p span { display: block; color: var(--dim); font-size: .84rem; margin-top: .15rem; }
+.reach details { margin-top: .55rem; }
+.reach summary { cursor: pointer; font-size: .84rem; color: var(--muted); }
+.reach summary:hover { color: var(--text); }
+.reach ul { list-style: none; margin: .55rem 0 .2rem; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; }
+.reach li { display: flex; align-items: baseline; gap: .45rem; font-size: .9rem; }
+.reach li i { width: .6rem; height: .6rem; border-radius: 50%; border: 1.5px solid var(--dim); flex: none; align-self: center; }
+.reach li.in i { background: var(--red); border-color: var(--red); }
+.reach li.unk i { border-style: dashed; }
+.reach li span { color: var(--dim); }
+.relm { font-size: .95rem; margin: 0 0 1.2rem; color: var(--soft); }
+.relm:empty { display: none; }
+.relm b { margin-right: .5rem; }
+.relm .relnote { display: block; color: var(--dim); font-size: .84rem; margin-top: .25rem; max-width: 52rem; }
