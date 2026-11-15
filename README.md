@@ -53,6 +53,7 @@ node scripts/build_search.mjs       # passages and their meaning vectors for the
 node scripts/tune_ask.mjs           # optional: compares Ask settings and models on the tuning half -> data/eval/ask_tuning.json
 node scripts/eval_ask.mjs           # scores the Ask page on the test questions -> docs/data/ask_eval.json
 node scripts/check_ask.cjs          # the Ask page's counts, Moon card, glossary and published score (no model needed)
+node scripts/build_topics.mjs       # checks the topic labels, counts passages per fire question, scores the search per question
 ```
 
 ## Structure
@@ -96,12 +97,13 @@ docs/models/, docs/vendor/   the language model and the library that runs it in 
 
 ## Use of AI
 
-AI does four jobs here, and each is checked or limited so that it cannot invent anything.
+AI does five jobs here, and each is checked or limited so that it cannot invent anything.
 
 1. **It reads NASA's records.** Claude (Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. The build fails unless every quotation is found word for word in the NASA record, every table column exists, and the texts hold no hand-typed numbers.
 2. **It matches a question to NASA's sentences.** On the Ask page a small open language model, snowflake-arctic-embed-s, runs in the reader's browser. It turns the question and 925 passages into vectors and shows the closest passages. It writes nothing, and the question never leaves the reader's computer.
-3. **It helped write the code.** The scripts and the website were written with AI assistance and reviewed by the team.
-4. **It drew the pictures that are not photographs.** The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance; each drawing on a page carries a visible note saying so. The three photographs are NASA's and are not AI-generated.
+3. **It sorted NASA's text by fire question.** Claude (Anthropic) read all 925 passages of the records and the listed papers and labelled each with the fire questions it addresses (`data/content/topic_labels.json`, guide in `data/content/question_topics.json`). Every label quotes the words that justify it; `scripts/build_topics.mjs` checks each quote and fails if a passage changed. The same script measures the Ask search against these labels and publishes the score.
+4. **It helped write the code.** The scripts and the website were written with AI assistance and reviewed by the team.
+5. **It drew the pictures that are not photographs.** The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance; each drawing on a page carries a visible note saying so. The three photographs are NASA's and are not AI-generated.
 
 An early layout of the overview followed a design mockup made with ChatGPT (OpenAI); the mockup is not part of the site. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.
 
