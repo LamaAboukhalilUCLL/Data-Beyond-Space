@@ -314,7 +314,7 @@
     var lo = Math.min.apply(null, Object.keys(R).map(function (k) { return R[k].min; })), hi = Math.max.apply(null, Object.keys(R).map(function (k) { return R[k].max; }));
     var s = '<svg viewBox="0 0 1160 330" role="img" aria-label="Route from Earth to low Earth orbit to the Moon Base. ' + L.earth.length + " investigations ran on Earth, " + L.orbit.length + ' in low Earth orbit, none beyond.">';
     s += '<defs><clipPath id="clip-earth"><circle cx="193.3" cy="185" r="77"/></clipPath><clipPath id="clip-moon"><circle cx="966.7" cy="175" r="74"/></clipPath></defs>';
-    s += '<path class="way" d="M263 125 C 383 40, 390 60, 482 116"/>';
+    s += '<path class="way" d="M263 125 C 383 40, 390 60, 482 116"/><path class="way red" d="M678 122 C 780 90, 777 70, 887 155"/>';
     s += '<text x="407" y="52" text-anchor="middle">' + L.orbit.length + ' investigations flew</text><text class="red" x="783" y="62" text-anchor="middle">No investigation in NASA\'s repository was run beyond this point</text>';
     s += '<image href="img/earth.jpg" x="109.3" y="101" width="168" height="168" clip-path="url(#clip-earth)" preserveAspectRatio="xMidYMid slice"/>';
     s += '<image href="img/iss-cutout.png" x="490" y="64" width="180" height="111"/>';
