@@ -34,7 +34,7 @@ All three photographs are NASA images in the public domain (as listed on Wikimed
 All under the SIL Open Font License 1.1, Latin subsets from the Fontsource project (https://fontsource.org), served with the site so no outside request is made.
 
 - **Barlow Condensed** (headlines): Copyright 2017 The Barlow Project Authors, https://github.com/jpt/barlow
-- **Public Sans** (text): Copyright 2015 Impallari Type, adapted by the U.S. General Services Administration, https://github.com/uswds/public-sans
+- **Public Sans** (text): Copyright 2015 The Public Sans Project Authors, https://github.com/uswds/public-sans
 - **DM Mono** (cells quoted from NASA's tables): Copyright 2020 The DM Mono Project Authors, https://github.com/googlefonts/dm-mono
 
 ## Logo
