@@ -49,7 +49,9 @@ python scripts/build_external.py    # reads the Earth-test table from the NASA W
 python scripts/analyze_flex.py      # fits the droplet model of the Analysis page (standard library only)
 node scripts/check_model.cjs        # refits it independently from NASA's CSV; must get the same numbers
 npm install                         # once, only for the next line
-node scripts/build_search.mjs       # passages and their meaning vectors for the Ask page
+node scripts/build_search.mjs       # passages and their meaning vectors for the Ask page; also the checked glossary and related.json
+node scripts/eval_ask.mjs           # scores the Ask page on the test questions -> docs/data/ask_eval.json
+node scripts/check_ask.cjs          # the Ask page's counts, Moon card, glossary and published score (no model needed)
 ```
 
 ## Structure
@@ -73,6 +75,7 @@ docs/models/, docs/vendor/   the language model and the library that runs it in 
 - **No number is typed by hand.** Figures in the texts are inserted from the computed data.
 - **Headline numbers are counted twice**, by separate code in `validate.py`.
 - **The recount for other atmospheres is checked too.** `docs/recount.js` follows the same rules, and `check_recount.cjs` fails unless it reproduces the build exactly for the Moon Base.
+- **The Ask page counts, it does not write.** Its matching, its counts and its "how far the evidence reaches" line are in `docs/ask.js`. `check_ask.cjs` compares its numbers with the build, with `recount.js` and with a separate count from `tests.csv`. `eval_ask.mjs` scores it with that same code on the questions in `data/content/ask_eval_questions.json`; the questions and the glossary (`data/content/ask_glossary.json`) were drafted with AI and say in the file whether a team member has checked them.
 
 ## Data and references
 
