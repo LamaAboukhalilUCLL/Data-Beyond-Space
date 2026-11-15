@@ -409,7 +409,7 @@
    "id": "tested",
    "question": "Has any fire been tested in Moon Base air at all?",
    "status": "partly",
-   "answer": "Yes, but only {{s.rows_in_zone}} tests in one investigation, and they are gas flames studied for engine research. No solid material and no fuel droplet in PSI was burned at Moon Base oxygen and pressure together.",
+   "answer": "Yes, but only {{s.rows_in_zone}} tests in one investigation meet both limits, and they are gas flames studied for engine research. {{s.rows_near_zone}} fuel-droplet tests in FLEX miss the pressure limit narrowly: 30 % oxygen or more at {{s.near_zone_pressure_min}} to {{s.near_zone_pressure_max}} psi. No solid material in PSI was burned anywhere near Moon Base air.",
    "evidence": [
     {
      "inv": "PSI-159",
@@ -426,7 +426,7 @@
     {
      "inv": "PSI-69",
      "kind": "table",
-     "text": "FLEX reached {{PSI-69.criteria.oxygen.max}} % oxygen and went as low as {{PSI-69.criteria.pressure.min}} psi, but never both in the same test."
+     "text": "FLEX reached {{PSI-69.criteria.oxygen.max}} % oxygen and went as low as {{PSI-69.criteria.pressure.min}} psi. {{s.rows_near_zone}} of its tests at 30 % oxygen or more ran at {{s.near_zone_pressure_min}} to {{s.near_zone_pressure_max}} psi, just above the 10.2 psi limit."
     },
     {
      "inv": "PSI-10",
@@ -434,7 +434,7 @@
      "text": "Flame Design reached {{PSI-10.criteria.oxygen.max}} % oxygen in one set of tests and {{PSI-10.criteria.pressure.min}} psi in another, never both together."
     }
    ],
-   "missing": "A solid-material or droplet test inside the zone. Of the {{s.rows_with_both}} tests whose row states both oxygen and pressure, only {{s.rows_in_zone}} are inside it, all of them gas flames.",
+   "missing": "A solid-material test anywhere near the zone, and a droplet test inside it. Of the {{s.rows_with_both}} tests whose row states both oxygen and pressure, only {{s.rows_in_zone}} are inside it, all of them gas flames.",
    "elsewhere": []
   },
   {
@@ -499,7 +499,7 @@
    "id": "earth-test",
    "question": "Can the Earth test for approving materials be trusted there?",
    "status": "open",
-   "answer": "NASA's own records question it. The one direct comparison, made near normal air, found the Earth burns at least as long as those in space; nothing was compared in Moon Base air. Where there is no space data, the Earth test is all there is.",
+   "answer": "NASA's own records question it. The one direct comparison, made near normal air, found that, wherever the table gives both, the sample burned at least as far on Earth as in space; nothing was compared in Moon Base air. Where there is no space data, the Earth test is all there is.",
    "evidence": [
     {
      "inv": "PSI-26",
@@ -525,7 +525,7 @@
     {
      "inv": "PSI-99",
      "kind": "table",
-     "text": "Saffire-II is the only table that lists a burn in space and on Earth for the same samples ({{PSI-99.tables.0.entries}} samples). Wherever the table gives both for the same material, it burned at least as far on Earth as in space, so near normal air the Earth test was on the safe side. No such comparison exists at 30 % oxygen or more."
+     "text": "Saffire-II is the only table that lists a burn in space and on Earth for the same samples ({{PSI-99.tables.0.entries}} samples). Wherever the table gives both for the same material, it burned at least as far on Earth as in space, so near normal air the burn on Earth was the larger one. No such comparison exists at 30 % oxygen or more."
     }
    ],
    "missing": "Space-versus-Earth comparisons at 30 % oxygen or more.",

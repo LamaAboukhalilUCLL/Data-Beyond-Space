@@ -73,7 +73,8 @@ BOTH = [
     ("PSI-159_table_1.csv", " XO2 before test", 100, "approx p (bar)", 14.5038),
     ("PSI-10_table_1.csv", "XO2 (init)", 100, "pinit (atm)", 14.6959),
 ]
-both = zone = 0
+both = zone = near = 0
+near_files = set()
 for name, ocol, scale, pcol, f in BOTH:
     head, rows = table(name)
     for r in rows:
@@ -81,8 +82,13 @@ for name, ocol, scale, pcol, f in BOTH:
         if o is not None and p is not None and p > 0:
             both += 1
             zone += (o * scale >= 30 and p * f <= 10.2)
+            if o * scale >= 30 and 10.2 < p * f <= 10.2 + S["near_zone_margin_psi"]:
+                near += 1
+                near_files.add(name.split("_")[0])
 check(both == S["rows_with_both"], f"tests stating both oxygen and pressure: {both} (page says {S['rows_with_both']})")
 check(zone == S["rows_in_zone"], f"tests inside the Moon Base zone: {zone} (page says {S['rows_in_zone']})")
+check(near == S["rows_near_zone"] and sorted(near_files) == sorted(S["near_zone_investigations"]), f"tests that narrowly miss the pressure limit: {near} from {sorted(near_files)} (page says {S['rows_near_zone']})")
+check(S["near_zone_investigations"] == ["PSI-69"], "the texts name FLEX as the only investigation with near misses")
 
 head, rows = table("PSI-25_table_1.csv")
 solid = [number(r[head.index("Calibrated  initial O2 % by vol ")]) for r in rows]

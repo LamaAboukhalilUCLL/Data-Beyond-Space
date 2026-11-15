@@ -1,3 +1,5 @@
 # The PSI snapshot must be stored byte for byte, so its SHA-256 checksums in manifest.json stay true
 data/psi/raw/** -text
 docs/data/tables/** -text
+data/external/**/*.pdf -text
+data/external/**/*.txt -text

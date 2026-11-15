@@ -43,6 +43,7 @@ PSI_PAGE = "https://psi.nasa.gov/physci/repo/data/investigations/"
 # The Moon Base atmosphere, from the challenge statement.
 MOON_O2_MIN = 30.0     # percent oxygen, "30% or more"
 MOON_P_MAX = 10.2      # psi, "10.2 psi or less"
+NEAR_MARGIN_PSI = 0.5         # "narrowly misses the pressure limit": our own margin, stated wherever it is used
 PSI_PER = {"atm": 14.6959, "bar": 14.5038, "mmHg": 0.0193368}
 
 # Atmospheres a reader can pick. "At least this much oxygen, at most this much pressure."
@@ -619,6 +620,8 @@ def main():
     by_cls = collections.defaultdict(list)
     for t in amb:
         by_cls[t["cls"]].append(t["o2"])
+    # tests that meet the oxygen level and miss the pressure limit by NEAR_MARGIN_PSI or less
+    near = [t for t in both if t["o2"] >= MOON_O2_MIN and MOON_P_MAX < t["p_psi"] <= MOON_P_MAX + NEAR_MARGIN_PSI]
     summary = {
         "investigations": len(investigations),
         "with_table": sum(1 for i in investigations if i["tables"]),
@@ -629,6 +632,9 @@ def main():
         "rows_with_plain_ambient_o2": len(amb),
         "rows_with_o2_at_or_above": sum(1 for t in amb if t["o2"] >= MOON_O2_MIN),
         "rows_with_both": len(both), "rows_in_zone": len(zone),
+        "rows_near_zone": len(near), "near_zone_margin_psi": NEAR_MARGIN_PSI,
+        "near_zone_pressure_min": min(t["p_psi"] for t in near) if near else None, "near_zone_pressure_max": max(t["p_psi"] for t in near) if near else None,
+        "near_zone_investigations": sorted({t["inv"] for t in near}, key=lambda a: int(a.split("-")[1])),
         "investigations_in_zone": sorted({t["inv"] for t in zone}, key=lambda a: int(a.split("-")[1])),
         "classes_in_zone": sorted({t["cls"] for t in zone}),
         "o2_range_by_class": {c: {"min": r4(min(v)), "max": r4(max(v)), "rows": len(v),

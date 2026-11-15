@@ -1,0 +1,346 @@
+
+=== page 1 ===
+OXYGEN CONCENTRATION FLAMMABILITY THRESHOLDS OF SELECTED 
+AEROSPACE MATERIALS CONSIDERED FOR THE CONSTELLATION PROGRAM 
+ 
+David B. Hirsch(1), James H. Williams(2), Susana A. Harper(2), Harold Beeson(2) and Michael D. Pedley(3) 
+ 
+(1)NASA Test and Evaluation Contract, P.O. Box 20, Las Cruces, New Mexico (USA) 88004,  
+Email: david.b.hirsch@nasa.gov 
+(2)NASA Johnson Space Center White Sands Test Facility, P.O. Box 20, Las Cruces, New Mexico (USA) 88004,  
+Email: james.h.williams@nasa.gov, susana.a.harper@nasa.gov, harold.d.beeson@nasa.gov 
+(3)NASA Johnson Space Center, 2101 NASA Road One, Houston, Texas (USA) 77095, Email: michael.d.pedley@nasa.gov 
+ 
+ABSTRACT 
+ 
+Materials selection for spacecraft is based on an 
+upward flammability test conducted in a quiescent 
+environment in the highest expected oxygen 
+concentration environment. The test conditions and 
+its pass/fail test logic do not provide sufficient 
+quantitative materials flammability information for 
+an advanced space explora tion program. A modified 
+approach has been suggested – determination of 
+materials self-extinguishment limits. The 
+flammability threshold information will allow NASA 
+to identify materials with increased flammability risk 
+from oxygen concentration and total pressure 
+changes, minimize potential impacts, and allow for 
+development of sound requirements for new 
+spacecraft and extraterrestrial landers and habitats. 
+This paper provides data on oxygen concentration 
+self-extinguishment limits under quiescent conditions 
+for selected materials considered for the 
+Constellation Program. 
+ 
+Keywords: test methods, flammability, aerospace 
+materials, combustion, microgravity 
+ 
+1. INTRODUCTION 
+ 
+Spacecraft fire safety emphasizes fire prevention, 
+which is achieved primarily through the use of fire-
+resistant materials. NASA STD 6001 Test 1 [1] is the 
+major method used to evaluate flammability of 
+materials intended for use in the habitable 
+environments of U.S. spacecraft. The method is an 
+upward flame propagation test in a quiescent 
+environment using a well-defined igniter flame at the 
+bottom of a vertically mounted sample. A material 
+passes this test if the vertical burn length is less than 
+15.2 cm and there is no evidence of transfer of 
+burning debris [1]. The upward flammability test is 
+conducted in the most severe flaming combustion 
+environment expected in the spacecraft.  
+ 
+Historically, the Apollo program used an oxygen 
+concentration of 100 % by volume and Skylab used 
+70 % oxygen. Since then, NASA programs have used 
+much lower oxygen concentrations to reduce the fire 
+risk as much as possible. The Space Shuttle 
+atmosphere is nominally air at ambient pressure, 
+except during prebreathe operations for 
+extravehicular activity (EVA) when it contains 30 % 
+oxygen at 70.1 kPa; the International Space Station 
+(ISS) atmosphere is also nominally air (maximum 
+oxygen concentration 24.1% by volume), except in 
+the airlock, which has the same 30 % oxygen, 
+70.1 kPa environment as the Shuttle for EVA 
+prebreathe. For the new Constellation program, initial 
+operations to ISS will occur in a nominally air 
+environment. However, for the planned missions to 
+the moon, frequent and extensive lunar EVAs are 
+planned and oxygen concentrations will be somewhat 
+higher to minimize prebr eathe times. The current 
+baseline is 30 % oxygen maximum for the Orion 
+Crew Exploration Module and 34 % oxygen 
+maximum for the Lunar Surface Access Module 
+(LSAM); however, these numbers may change. 
+ 
+The existing materials flammability database contains 
+mostly data from Space Shuttle testing in oxygen 
+concentration of 30 % by volume and 70.1 kPa total 
+pressure. Thus, unknown fire risks impede selection 
+for the Constellation Program of environments with 
+higher oxygen content at lower total pressures, which 
+would be more advantageous for important mission 
+operations such as extravehicular activities. 
+ 
+A modified NASA STD Test 1 method has been 
+suggested by NASA Johnson Space Center (JSC) 
+White Sands Test Facility (WSTF) – determination of 
+materials self-extinguishment limits [2]. For the 
+Constellation Program, the flammability threshold 
+information will allow NASA to identify materials 
+with increased flammability risk from oxygen 
+concentration changes, minimize potential impacts, 
+and allow for development of sound requirements for 
+extraterrestrial landers and habitats [3]. This 
+approach will also eliminate the need to retest 
+materials if the baseline maximum oxygen 
+concentration is increased at a later date. This paper 
+provides oxygen concentration flammability 
+=== page 2 ===
+threshold information on selected materials intended 
+for the Constellation Program.  
+ 
+2. EXPERIMENTAL 
+ 
+The materials evaluated were selected by NASA JSC 
+Materials and Processes and are described in Tab. 1. 
+The test system consisted of a 1400-L flammability 
+chamber connected to a vacuum pump, with air, 
+oxygen, and nitrogen supplies. Flammability 
+threshold testing in quiescent environments was 
+conducted following NASA STD 6001 Test 1 
+procedures. The testing was conducted sequentially 
+as recommended by ASTM D 2863 [5], and using a 
+step size of 1 % oxygen by volume. The Upward 
+Limiting Oxygen Indices (ULOIs) were calculated 
+with the “up-and-down method,” which has been 
+adopted by both ISO 4589 [4] and ASTM D 2863 for 
+determining the “minimum oxygen concentration 
+required to support combustion of plastics.” The 
+ULOI represents the oxygen concentration at which a 
+material passes the NASA STD 6001 Test 1 burn 
+length criteria approximately half the time. 
+ 
+ 
+Table 1. Materials Tested 
+Generic or Trade Name Chemical Name or Composition Sample size, mm  
+length x width x thickness 
+Rigid Plastics 
+Lexan® a 6006 polycarbonate 152 x 64 x 1.6 
+Lexan F-6000 flame-retarded polycarbonate 152 x 64 x 3.2 
+Kydex® b 100 polyvinyl chloride/polymethylmetacrylate alloy 152 x 64 x 1.5 
+Ultem® a 1668 polyetherimide 152 x 64 x 2.5 
+Ultem 2300, 2310, CRS5301 30% glass-filled polyetherimide 152 x 23 x 3.2 
+SYGEF® c polyvinylidene difluoride 152 x 64 x 1.5 
+Torlon® d 4203 polyamideimide 152 x 25 x 3.2 
+P1700 polysulfone 152 x 10 x 1.6 
+Ryton® e R-4-06 polyphenylene sulfide   152 x 64 x 1.6 
+Fabrics 
+Nomex® f HT90-40 single layer aromatic polyamide 305 x 64 x 0.3 (See Note 1) 
+Nomex HT90-40 double layer aromatic polyamide 305 x 64 x 0.6 (See Note 1) 
+Armalon TG4060 fluorocarbon/fiberglass 152 x 64 x 0.2 
+Composites/Laminates 
+Fiberite HMF 5-322/54-2A 
+B.G. 
+graphite/epoxy composite 152 x 50 x 2.1 
+Bismaleimide/graphite bismaleimide/graphite composite 152 x 50 x 2.1 
+Glass-filled PEEK® g 25% glass-filled polyetheretherketone 178 x 30 x 3.2 
+FL 74-24 polyimide/fiberglass laminate 152 x 64 x 2.1 
+307404 copper clad laminate 152 x 64 x 0.2 
+CTD-528 graphite/epoxy laminate 152 x 10 x 1.4 
+CTD-112P graphite/epoxy laminate 152 x 10 x 1.5 
+Melamine glass laminate grade 
+G-9-818, Mil-P-15037 
+amine-formaldehyde glass-filled laminate 152 x 64 x 0.9 
+Foams 
+Zotek® h F30 polyvinylidene difluoride 152 x 64 x 26 
+Solimide® i AC-530 polyimide 152 x 64 x 51 
+a Lexan® and Ultem® are registered trademarks of General Electric Company, Pittsfield, Massachusetts. 
+b Kydex® is a registered trademark of Kleerdex Company, Mount Laurel, New Jersey.  
+c SYGEF® is a registered trademark of George Fischer Limited, Schaffhausen Switzerland.  
+d Torlon® is a registered trademark of Amoco Chemicals Corporation, Chicago, Illinois. 
+e Ryton® is a registered trademark of Chevron Phillips Chemical Company, The Woodlands, Texas. 
+f Nomex® is a registered trademark of E. I. du Pont de Nemours and Company, Wilmington, Delaware. 
+g PEEK® is a registered trademark of Whitford Worldwide Company, Wilmington, Delaware. 
+h Zotek® is a registered tradmark of Zotefoams PLC, Surrey, United Kingdom. 
+i Solimide® is a registered trademark of Imi-Tech Corporation, Grove Village, Illinois. 
+Notes: 1 Nomex was tested in a “J” configuration and at 15 degrees from vertical. The vertical length of the longer leg of “J” 
+configuration was approximately 20 cm. The sample tested at 15 degrees had a length of ~ 30 cm. 
+=== page 3 ===
+For each material, the oxygen concentration was 
+lowered in 1 % steps to determine the maximum 
+oxygen concentration (MOC) that consistently resulted 
+in self-extinguishment. The MOC was the oxygen 
+concentration where at least three samples passed the 
+NASA-STD-6001 burning criteria of less than 15.2 cm 
+burn length; with very few exceptions, the MOC 
+occurred at an oxygen concentration 1 to 3 % below the 
+ULOI. The oxygen concentration flammability 
+thresholds were determined at a fixed total pressure of 
+70.1 kPa. Most materials we re tested in the standard 
+NASA-STD-6001 configuration consisting of vertical 
+samples with the igniter installed approximately 0.6 cm 
+below the leading edge and geometrically centered. 
+Nomex was evaluated in two special configurations. A 
+“J” configuration was used with the igniter placed 
+parallel with the plane of the legs and geometrically 
+centered approximately 0.6 cm below the sample. 
+Samples installed at 15 degrees from vertical were 
+tested with the igniter at approximately 2.5 cm from the 
+lower edge and 0.6 cm underneath the sample. The 
+testing on a material was concluded if at least one 
+sample failed in 30 % oxygen.  
+ 
+3. RESULTS AND DISCUSSION 
+ 
+The experimental test results are summarized in Tab. 2. 
+The materials reported with ULOIs and MOCs less 
+than 30 burned at least 15.2 cm in 30 % oxygen, while 
+the materials reported with ULOIs and MOCs larger 
+than 40 burned less than 15.2 cm in 40 % oxygen. 
+ 
+Among the rigid plastics, polyetherimide, 
+polyamideimide, and polyphenylene sulfide had MOCs 
+larger than 40. Among the fabrics, a 
+fluorocarbon/fiberglass fabric had an MOC larger than 
+40, while Nomex (an aramid) failed in 30 % oxygen in 
+J-configuration in both single and double layers and at 
+15 degrees from vertical as a single layer.  
+The double-layer Nomex installed at 15 degrees from 
+vertical had an MOC of 36. Among the composites, 
+some graphite/epoxies, glass-filled PEEK, 
+polyimide/fiberglass, and copper clad laminate had 
+MOCs larger than 40. Of the two foams tested, a 
+polyvinylidene difluoride (Zotek F30) passed the 15.2 
+cm burn length criteria in 40 % oxygen. Most rigid 
+plastics melted, transferred burning material, and 
+burned with flame jets; none of the fabrics showed this 
+behavior. None of the composites tested melted or 
+transferred burning material, but most burned with 
+flame jets. 
+ 
+4. CONCLUSIONS AND 
+RECOMMENDATIONS 
+ 
+Many of the materials evaluated passed the 15.2 cm 
+burn criteria in 40 % oxygen  at 70.1 kPa. Some of 
+these materials included rigid plastics such as 
+polyetherimide, polyamideimide, and polyphenylene 
+sulfide. A fluorocarbon/fiberglass fabric, a 
+polyvinylidene difluoride foam (Zotek F30) and 
+composites such as glass-filled PEEK, 
+polyimide/fiberglass, copper clad laminate and some 
+graphite/epoxies had also MOCs larger than 40. The 
+results suggest that suitable commercial polymeric 
+materials can be found for most applications in oxygen 
+concentrations above 30 % and that it will be possible 
+to design the Constellation LSAM for internal oxygen 
+concentrations up to the current baseline of 34 % by 
+volume or somewhat higher concentrations if 
+necessary. The specific materials that will be used in 
+LSAM have not yet been selected, so additional testing 
+will certainly be required; but the results are extremely 
+promising. 
+ 
+Additional testing is recommended to determine the 
+oxygen concentration thresholds at higher oxygen 
+concentrations than 40 % by volume, and at different 
+pressures than 70.1 kPa. This approach will allow 
+selection of best materials from the flammability 
+resistance viewpoint. The flammability threshold 
+information will be valuab le for new spacecraft and 
+extraterrestrial habitation module designs. In the long 
+term, the data will allow be tter evaluation of spacecraft 
+fire risks and increased flexibility in selecting 
+spacecraft internal atmospheres, which could lead to 
+increased efficiency of mission operations. 
+ 
+5. REFERENCES 
+ 
+1. Flammability, Odor, Offgassing, and 
+Compatibility Requirements and Test Procedures 
+for Materials in Environments that Support 
+Combustion, NASA STD 6001, Test 1, “Upward 
+Flame Propagation,” February 9, 1998.  
+2. Hirsch, D.B. and Beeson, H.D. “Test Method to 
+Determine Flammability of Aerospace Materials,” 
+Journal of Testing and Evaluation, JTEVA,  
+Vol. 30, No. 2, March 2002, pp. 156-159. 
+3. Henninger, D. and P. Campbell, Recommendations 
+for Exploration Spacecraft Internal Atmospheres – 
+The Final Report of the NASA Exploration 
+Atmospheres Working Group,  JSC 63309, NASA 
+Johnson Space Center, Houston, Texas, January, 
+2006. 
+4. ISO 4589-2. Plastics – Determination of Burning 
+Behavior by Oxygen Index – Part 2: Ambient-
+Temperature Test,  International Organization for 
+Standardization, Geneva, Switzerland, 1996. 
+5. ASTM. Standard Test Method for Measuring the 
+Minimum Oxygen Concentration to Support 
+Candle-Like Combustion of Plastics (Oxygen 
+Index), ASTM D2863-06a, Am erican Society for 
+Testing and Materials International, West 
+Conshohocken, Pennsylvania, 2006.  
+ 
+=== page 4 ===
+Table 2. Upward Limiting Oxygen Indices (ULOI) and Maximum Oxygen Concentrations 
+when Self-Extinguishment Occurs (MOC) for Selected Materials at 70.1 kPa Total Pressures 
+Generic or trade name ULOI  MOC Additional test observations at the 
+MOC  (See Note 6)  
+Rigid plastics 
+Lexan® 6006 < 30 < 30 flame jets, melting, burning 
+material falling 
+Lexan F-6000 41.4 39 flame jets, melting, burning 
+material falling 
+Kydex® 100 34.4 33 flame jets 
+Ultem® 1668 42.5 39* flame jets 
+Ultem 2300 (See Note 2) 45.2 42 flame jets 
+Ultem 2310 (See Note 2) 46.4 44 flame jets 
+Ultem CRS5301 (See Note 2) 45.1 44 flame jets 
+SYGEF® 37.3 34 flame jets, melting, burning 
+material falling 
+Torlon® 4203 (See Note 2) > 40 > 40 none 
+P1700 31.7 29 flame jets, melting, burning 
+material falling 
+Ryton® R-4-06 > 40 > 40* flame jets 
+Fabrics 
+Nomex® HT90-40 single layer (See 
+Notes 3 and 4) 
+< 30 < 30 none 
+Nomex HT90-40 single layer (See 
+Note 5) 
+< 30 < 30 none 
+Nomex HT90-40 double layer (See 
+Notes 3 and 4) 
+< 30 < 30 none 
+Nomex HT90-40 double layer (See 
+Notes 3 and 5) 
+37.1 36 none 
+Armalon TG4060 > 40 > 40* none 
+Composites/Laminates 
+Fiberite HMF 5-322/54-2A B.G. > 99.5 > 99.5 none 
+Bismaleimide/graphite > 99.5 > 99.5 none 
+Glass-filled PEEK® (See Note 2) 46.8 45 flame jets 
+FL 74-24 > 99.5 > 99.5 none 
+307404 > 40 > 40* flame jets 
+CTD-528 (See Note 2) < 30 < 30 flame jets 
+CTD-112P (See Note 2) < 30 < 30 flame jets 
+Melamine glass laminate grade G-9-818 41.6 36.0 flame jets 
+Foams 
+Zotek® F30 (See Note 3) 46.2 45 Melting, burning material falling 
+Solimide® AC-530 (See Note 3) 35.3 33 None 
+Notes:  1 Except as noted, all materials were tested in a wing-nut fixture in a standard (vertical) 
+configuration. 
+ 2 The samples were held with a single clamp at the top. 
+ 3 The samples were tested in a needle rake. 
+ 4 The samples were tested in a “J” configuration. 
+ 5 The samples were tested at 15 degrees from vertical. 
+ 6 Additional test observations for materials with oxygen concentration thresholds > 40 and < 30 
+were obtained for tests in 40 and 30 % oxygen, respectively. 
+ 7 MOCs identified with * passed the NASA STD 6001 burn length criteria on 5 samples. 
+ 

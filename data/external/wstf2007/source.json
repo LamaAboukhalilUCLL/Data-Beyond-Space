@@ -1,0 +1,59 @@
+{
+ "id": "wstf2007",
+ "title": "Oxygen Concentration Flammability Thresholds of Selected Aerospace Materials Considered for the Constellation Program",
+ "authors": "D. B. Hirsch, J. H. Williams, S. A. Harper, H. Beeson (NASA White Sands Test Facility) and M. D. Pedley (NASA Johnson Space Center)",
+ "year": 2007,
+ "venue": "2nd IAASS Conference, Space Safety in a Global World, Chicago, 14 to 16 May 2007",
+ "url": "https://ntrs.nasa.gov/citations/20070018178",
+ "pdf_url": "https://ntrs.nasa.gov/api/citations/20070018178/downloads/20070018178.pdf",
+ "rights": "NASA Technical Reports Server: Distribution Limits: Public. Copyright: Work of the US Gov. Public Use Permitted.",
+ "retrieved": "2026-11-15",
+ "files": {
+  "NTRS-20070018178.pdf": "38ed26fb37ce1c84307182e06349fefa1c2aa45d0d44d6c43cda880cffbac28d",
+  "NTRS-20070018178.txt": "332418c0a41022c8783f45bde44e043e26fa4d43b9204bd9de39d9abcd7ed064"
+ },
+ "text_note": "NTRS-20070018178.txt is the text of the PDF, extracted with the Python library pypdf 7.1.0, unedited. The build reads every threshold from this text; none is typed by hand.",
+ "table": "Table 2. Upward Limiting Oxygen Indices (ULOI) and Maximum Oxygen Concentrations when Self-Extinguishment Occurs (MOC) for Selected Materials at 70.1 kPa Total Pressures",
+ "pressure_kpa_quote": "The oxygen concentration flammability thresholds were determined at a fixed total pressure of 70.1 kPa.",
+ "quotes": {
+  "method": "Flammability threshold testing in quiescent environments was conducted following NASA STD 6001 Test 1 procedures.",
+  "test": "The method is an upward flame propagation test in a quiescent environment using a well-defined igniter flame at the bottom of a vertically mounted sample.",
+  "pass": "A material passes this test if the vertical burn length is less than 15.2 cm and there is no evidence of transfer of burning debris",
+  "moc": "The MOC was the oxygen concentration where at least three samples passed the NASA-STD-6001 burning criteria of less than 15.2 cm burn length",
+  "below": "The materials reported with ULOIs and MOCs less than 30 burned at least 15.2 cm in 30 % oxygen, while the materials reported with ULOIs and MOCs larger than 40 burned less than 15.2 cm in 40 % oxygen.",
+  "conclusion": "The specific materials that will be used in LSAM have not yet been selected, so additional testing will certainly be required; but the results are extremely promising.",
+  "step": "the oxygen concentration was lowered in 1 % steps"
+ },
+ "config_quotes": {
+  "J configuration": "The samples were tested in a “J” configuration.",
+  "15 degrees from vertical": "The samples were tested at 15 degrees from vertical."
+ },
+ "rows": [
+  {"name": "Lexan® 6006", "category": "Rigid plastics", "composition": "polycarbonate"},
+  {"name": "Lexan F-6000", "category": "Rigid plastics", "composition": "flame-retarded polycarbonate"},
+  {"name": "Kydex® 100", "category": "Rigid plastics", "composition": "polyvinyl chloride/polymethylmetacrylate alloy"},
+  {"name": "Ultem® 1668", "category": "Rigid plastics", "composition": "polyetherimide"},
+  {"name": "Ultem 2300 (See Note 2)", "category": "Rigid plastics", "composition": "30% glass-filled polyetherimide"},
+  {"name": "Ultem 2310 (See Note 2)", "category": "Rigid plastics", "composition": "30% glass-filled polyetherimide"},
+  {"name": "Ultem CRS5301 (See Note 2)", "category": "Rigid plastics", "composition": "30% glass-filled polyetherimide"},
+  {"name": "SYGEF®", "category": "Rigid plastics", "composition": "polyvinylidene difluoride"},
+  {"name": "Torlon® 4203 (See Note 2)", "category": "Rigid plastics", "composition": "polyamideimide"},
+  {"name": "P1700", "category": "Rigid plastics", "composition": "polysulfone"},
+  {"name": "Ryton® R-4-06", "category": "Rigid plastics", "composition": "polyphenylene sulfide"},
+  {"name": "Nomex® HT90-40 single layer (See Notes 3 and 4)", "category": "Fabrics", "composition": "aromatic polyamide", "config": "J configuration"},
+  {"name": "Nomex HT90-40 single layer (See Note 5)", "category": "Fabrics", "composition": "aromatic polyamide", "config": "15 degrees from vertical"},
+  {"name": "Nomex HT90-40 double layer (See Notes 3 and 4)", "category": "Fabrics", "composition": "aromatic polyamide", "config": "J configuration"},
+  {"name": "Nomex HT90-40 double layer (See Notes 3 and 5)", "category": "Fabrics", "composition": "aromatic polyamide", "config": "15 degrees from vertical"},
+  {"name": "Armalon TG4060", "category": "Fabrics", "composition": "fluorocarbon/fiberglass"},
+  {"name": "Fiberite HMF 5-322/54-2A B.G.", "category": "Composites/Laminates", "composition": "graphite/epoxy composite"},
+  {"name": "Bismaleimide/graphite", "category": "Composites/Laminates", "composition": "bismaleimide/graphite composite"},
+  {"name": "Glass-filled PEEK® (See Note 2)", "category": "Composites/Laminates", "composition": "25% glass-filled polyetheretherketone"},
+  {"name": "FL 74-24", "category": "Composites/Laminates", "composition": "polyimide/fiberglass laminate"},
+  {"name": "307404", "category": "Composites/Laminates", "composition": "copper clad laminate"},
+  {"name": "CTD-528 (See Note 2)", "category": "Composites/Laminates", "composition": "graphite/epoxy laminate"},
+  {"name": "CTD-112P (See Note 2)", "category": "Composites/Laminates", "composition": "graphite/epoxy laminate"},
+  {"name": "Melamine glass laminate grade G-9-818", "category": "Composites/Laminates", "composition": "amine-formaldehyde glass-filled laminate"},
+  {"name": "Zotek® F30 (See Note 3)", "category": "Foams", "composition": "polyvinylidene difluoride"},
+  {"name": "Solimide® AC-530 (See Note 3)", "category": "Foams", "composition": "polyimide"}
+ ]
+}

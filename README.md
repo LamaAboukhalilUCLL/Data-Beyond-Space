@@ -12,7 +12,8 @@ It shows coverage and gaps. It does not predict how fire behaves on the Moon.
 |---|---|
 | Overview | The finding, then a tool: choose an atmosphere and see how much of NASA's fire data fits it |
 | Explore | Every test against the chosen air: oxygen by what burns, oxygen against pressure, and a finder for materials and tests with a filtered CSV download |
-| Habitat | A schematic Moon habitat with six numbered spots, one per open fire-safety question, each showing what NASA's data can say about that part of the habitat |
+| Habitat | The main tool. On a drawing of a habitat the reader sets the air and the material of four parts; each part shows whether that material passed NASA's flame test on Earth at that oxygen level (NASA White Sands, 2007, the one source outside PSI) and that no test in space confirms it. Gives a downloadable evidence report and a link to the same habitat. Six numbered spots open the fire-safety questions |
+| Analysis | A statistical model of NASA's 274 FLEX droplet tests: what oxygen, pressure and extinguishing gases change in the burning rate, how the tests ended at each oxygen level, an estimator with its uncertainty, and the real tests nearest to any condition |
 | Ranking | The 24 investigations ordered by how many of five conditions they meet for the chosen air, with the evidence for each. A second tab puts all 24 side by side: sample or burner, what was measured, use on Earth |
 | Ask | Type a question; get the sentences from NASA's records and the listed papers that match it best, by meaning. Quotations only, nothing generated |
 | Investigation pages | Each investigation in plain words, NASA's description word for word, what its table records, its publications, and a side-by-side comparison with any other |
@@ -44,6 +45,9 @@ python scripts/fetch_papers.py      # optional: titles, years and abstracts of t
 python scripts/build_dataset.py     # snapshot -> docs/data/
 python scripts/validate.py          # independent checks; fails loudly if anything is off
 node scripts/check_recount.cjs      # the in-browser recount must equal the build, number for number
+python scripts/build_external.py    # reads the Earth-test table from the NASA White Sands paper in data/external/
+python scripts/analyze_flex.py      # fits the droplet model of the Analysis page (standard library only)
+node scripts/check_model.cjs        # refits it independently from NASA's CSV; must get the same numbers
 npm install                         # once, only for the next line
 node scripts/build_search.mjs       # passages and their meaning vectors for the Ask page
 ```
@@ -81,6 +85,8 @@ docs/models/, docs/vendor/   the language model and the library that runs it in 
 - Typefaces: Barlow Condensed, Public Sans and DM Mono, SIL Open Font License 1.1, from https://fontsource.org (details in `docs/img/CREDITS.md`)
 - Language model all-MiniLM-L6-v2 (Apache-2.0): https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 , in the ONNX build https://huggingface.co/Xenova/all-MiniLM-L6-v2
 - Transformers.js 4.3.2 (Apache-2.0): https://github.com/huggingface/transformers.js , with ONNX Runtime Web (MIT): https://github.com/microsoft/onnxruntime
+- D. B. Hirsch et al., "Oxygen Concentration Flammability Thresholds of Selected Aerospace Materials Considered for the Constellation Program", NASA White Sands Test Facility, 2007 (public use permitted): https://ntrs.nasa.gov/citations/20070018178 . Source of the Earth-test table on the Habitat page; PDF and extracted text in `data/external/wstf2007/`
+- pypdf 7.1.0 (BSD-3-Clause), used once to extract that PDF's text: https://github.com/py-pdf/pypdf
 - NASA Technical Reports Server, for the reading lists outside PSI: https://ntrs.nasa.gov
 - Python 3 standard library: https://docs.python.org/3/library/
 

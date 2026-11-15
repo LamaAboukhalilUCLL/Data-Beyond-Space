@@ -108,8 +108,12 @@
   function counters() {
     var c = COUNTS, solid = c.byCls.solid, n5 = RANKED.filter(function (x) { return x.score === 5; }).length;
     var names = c.invsInZone.map(function (id) { return BY_ID[id].name; });
+    // tests that meet the oxygen level and miss the pressure limit by half a psi or less
+    var nearP = TESTS.filter(function (t) { return t.o2 != null && t.p_psi != null && t.o2 >= ATM.o2 && t.p_psi > ATM.p && t.p_psi <= ATM.p + 0.5; }), nearInv = {};
+    nearP.forEach(function (t) { nearInv[BY_ID[t.inv].name] = 1; });
     var h = '<div class="counters">';
-    h += '<div class="hot"><b>' + c.inZone + "</b><span>of " + c.both + " tests that state both oxygen and pressure are in this air." + (names.length ? " " + (names.length === 1 ? "All from " : "From ") + esc(names.join(", ")) + "." : "") + "</span></div>";
+    h += '<div class="hot"><b>' + c.inZone + "</b><span>of " + c.both + " tests that state both oxygen and pressure are in this air." + (names.length ? " " + (names.length === 1 ? "All from " : "From ") + esc(names.join(", ")) + "." : "") +
+      (nearP.length ? " <strong>" + nearP.length + " more</strong> miss the pressure limit by 0.5 psi or less (" + esc(Object.keys(nearInv).join(", ")) + ')' + (nearInv.FLEX ? ', see the <a href="#/analysis">analysis</a>' : "") + "." : "") + "</span></div>";
     h += "<div><b>" + solid.atOrAbove + "</b><span>of " + solid.rows + " solid-material tests reach " + num(ATM.o2) + " % oxygen. Solid materials were tested from " + num(solid.min) + " to " + num(solid.max) + " %.</span></div>";
     h += "<div><b>" + n5 + "</b><span>of " + D.summary.investigations + " investigations meet all five conditions for this air. The closest meet " + num(RANKED[0].score) + ".</span></div>";
     return h + "</div>";
@@ -341,24 +345,262 @@
     return '<div class="routemap">' + s + '<p class="ai-mark">Drawing made with AI assistance. The photographs are NASA\'s.</p>' + cols + '<div class="stop-chips" id="stop-chips">' + stopChips() + "</div></div>";
   }
 
+  // ---------------------------------------------------------------- analysis
+  // The FLEX droplet model (scripts/analyze_flex.py fits it; model.js evaluates it here).
+  var AN = { data: null, fuel: "Heptane", v: null };
+  var AN_SLIDER = { o2: [10, 45, 0.5], co2: [0, 70, 1], he: [0, 45, 1], p: [8, 20, 0.1], d0: [1, 5, 0.1] };
+  var AN_GAS = { n2: ["Nitrogen only", "#609af6"], co2: ["With carbon dioxide", "#f29d49"], he: ["With helium", "#0cc9ac"] };
+  function fx(x, d) { return (+x).toFixed(d == null ? 2 : d); }
+  function pct(x) { return String(Math.round(Math.max(0, Math.min(1, x)) * 100)); }
+  function anLoad() {
+    if (AN.data) return Promise.resolve();
+    return fetch("data/flex_model.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (M) { AN.data = M; });
+  }
+  function anRows() { return AN.data.rows.filter(function (r) { return r.fuel === AN.fuel; }); }
+  function anMedianSize() { var d = anRows().map(function (r) { return r.d0; }).sort(function (a, b) { return a - b; }); return d[Math.floor(d.length / 2)]; }
+  function anStart() {
+    var S = AN_SLIDER;
+    AN.v = { o2: Math.max(S.o2[0], Math.min(S.o2[1], ATM.o2)), co2: 0, he: 0, p: Math.max(S.p[0], Math.min(S.p[1], ATM.p)), d0: anMedianSize() };
+  }
+  function anGas(r) { return r.he > 0 ? "he" : r.co2 > 0 ? "co2" : "n2"; }
+  function anFeature(k) { return AN.data.about.features.filter(function (f) { return f[0] === k; })[0]; }
+  // what the estimate rests on: inside the tested range or not, and the nearest real tests
+  function anSupport() {
+    var F = AN.data.fuels[AN.fuel], out = FlexModel.outside(F.range, AN.v), e = FlexModel.estimate(F.models.rate, AN.v);
+    if (out.length) return '<p class="an-support warn"><b>Outside what FLEX tested.</b> ' + out.map(function (o) {
+      var f = anFeature(o.key);
+      return esc(f[1]) + " " + num(o.value) + " " + f[2] + " is " + o.side + " the " + (o.side === "above" ? "highest" : "lowest") + " tested for this fuel (" + num(o.limit) + " " + f[2] + ")";
+    }).join("; ") + ". The model is a straight line, so outside the tested range the figures are an extension of the trend, not evidence.</p>";
+    if (e.unusual) return '<p class="an-support warn"><b>Inside the tested ranges, but an unusual combination.</b> Each setting was tested, yet few FLEX tests combine them like this, so the ranges are wide.</p>';
+    return '<p class="an-support ok"><b>Inside the conditions FLEX tested</b> for ' + esc(AN.fuel.toLowerCase()) + " droplets.</p>";
+  }
+  function anOut() {
+    var F = AN.data.fuels[AN.fuel], v = AN.v, r = FlexModel.estimate(F.models.rate, v), mr = F.models.rate;
+    var near = FlexModel.nearest(AN.data.rows, AN.fuel, v, F.range, 5), ends = {};
+    near.forEach(function (x) { ends[x.row.end] = (ends[x.row.end] || 0) + 1; });
+    var h = '<div class="an-res"><div><span>Burning rate, model estimate</span><b>' + fx(Math.max(0, r.value)) + "</b><small>A single test would likely fall between " + fx(Math.max(0, r.low)) + " and " + fx(Math.max(0, r.high)) +
+      " (95 % range). FLEX measured " + fx(mr.min) + " to " + fx(mr.max) + ' for this fuel.</small></div><div><span>How the five closest real tests ended</span><b class="words">' +
+      Object.keys(ends).sort(function (a, b) { return ends[b] - ends[a]; }).map(function (e) { return ends[e] + " " + esc(e.toLowerCase()); }).join(", ") +
+      "</b><small>NASA's labels. Extinction: the flame went out at a finite droplet size. Completion: the droplet burned to completion. Disruption is not explained in the table. Measured, not modelled.</small></div></div>" + anSupport();
+    h += '<h3>The five real FLEX tests closest to this condition</h3><div class="tablewrap"><table class="an-near"><thead><tr><th>Test</th><th class="num">Oxygen</th><th class="num">CO2</th><th class="num">Helium</th><th class="num">Pressure</th><th class="num">Size</th><th class="num">Burning rate</th><th class="num">Fuel left</th><th>How it ended</th><th></th></tr></thead><tbody>' +
+      near.map(function (x) {
+        var t = x.row;
+        return "<tr><td>" + esc(t.id) + '</td><td class="num">' + num(t.o2) + ' %</td><td class="num">' + num(t.co2) + ' %</td><td class="num">' + num(t.he) + ' %</td><td class="num">' + num(t.p) + ' psi</td><td class="num">' + num(t.d0) +
+          ' mm</td><td class="num">' + (t.rate == null ? "" : num(t.rate)) + '</td><td class="num">' + (t.left == null ? "" : pct(t.left) + " %") + "</td><td>" + esc(t.end) + '</td><td><button class="link" data-table="' + AN.data.about.source_table + '" data-row="' + t.row + '">NASA\'s row</button></td></tr>';
+      }).join("") + "</tbody></table></div>";
+    return h;
+  }
+  // Measured burning rate against oxygen, with the model's line for the chosen settings.
+  function anChart() {
+    var F = AN.data.fuels[AN.fuel], m = F.models.rate, rows = anRows().filter(function (r) { return r.rate != null; });
+    var W = 1000, H = 400, L = 62, R = 24, T = 20, B = 52, x = scaleLin(10, 46, L, W - R), ymax = Math.ceil(Math.max(m.max, 1) * 10) / 10 + 0.1, y = scaleLin(0, ymax, H - B, T);
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Measured burning rate against oxygen for ' + esc(AN.fuel) + ' droplets, with the model line">';
+    for (var g = 0; g <= ymax + 1e-9; g += 0.2) s += '<line class="grid" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(g) + '" y2="' + y(g) + '"/><text class="tick" x="' + (L - 10) + '" y="' + (y(g) + 4) + '" text-anchor="end">' + fx(g, 1) + "</text>";
+    for (var o = 10; o <= 45; o += 5) s += '<text class="tick" x="' + x(o) + '" y="' + (H - B + 22) + '" text-anchor="middle">' + o + " %</text>";
+    s += '<text class="axis-title" x="' + ((L + W - R) / 2) + '" y="' + (H - 8) + '" text-anchor="middle">Oxygen in the gas around the droplet</text><text class="axis-title" x="12" y="13">Burning rate</text>';
+    // tested oxygen range, then the model's 95 % band and line across it
+    s += '<rect class="an-range" x="' + x(F.range.o2[0]) + '" y="' + T + '" width="' + (x(F.range.o2[1]) - x(F.range.o2[0])) + '" height="' + (H - B - T) + '"/>';
+    var up = [], dn = [], mid = [], lo = 10, hi = 46, cl = function (v) { return Math.max(0, Math.min(ymax, v)); };
+    for (var k = 0; k <= 36; k++) {
+      var ox = lo + (hi - lo) * k / 36, e = FlexModel.estimate(m, { o2: ox, co2: AN.v.co2, he: AN.v.he, p: AN.v.p, d0: AN.v.d0 });
+      up.push(x(ox) + "," + y(cl(e.high))); dn.unshift(x(ox) + "," + y(cl(e.low))); mid.push(x(ox) + "," + y(cl(e.value)));
+    }
+    s += '<polygon class="an-band" points="' + up.concat(dn).join(" ") + '"/><polyline class="an-line" points="' + mid.join(" ") + '"/>';
+    rows.forEach(function (r) {
+      s += '<circle cx="' + x(r.o2).toFixed(1) + '" cy="' + y(r.rate).toFixed(1) + '" r="4.5" fill="' + AN_GAS[anGas(r)][1] + '" fill-opacity=".8" stroke="#000" stroke-width=".7"><title>' + esc(r.id + ": " + num(r.o2) + " % oxygen, " +
+        num(r.co2) + " % CO2, " + num(r.he) + " % helium, " + num(r.p) + " psi, burning rate " + num(r.rate)) + "</title></circle>";
+    });
+    var cur = FlexModel.estimate(m, AN.v), cx = x(Math.max(10, Math.min(46, AN.v.o2)));
+    s += '<line class="an-now" x1="' + cx + '" x2="' + cx + '" y1="' + T + '" y2="' + (H - B) + '"/><circle class="an-dot" cx="' + cx + '" cy="' + y(cl(cur.value)) + '" r="7"/>';
+    return s + "</svg>";
+  }
+  function anDraw() {
+    var a = document.getElementById("an-out"), b = document.getElementById("an-chart");
+    if (a) a.innerHTML = anOut();
+    if (b) b.innerHTML = anChart();
+  }
+  function viewAnalysis() {
+    setTitle("Analysis");
+    if (!AN.data) {
+      main.innerHTML = '<p class="loading">Loading the model…</p>';
+      anLoad().then(function () { if (hashParts()[0] === "analysis") route(true); });
+      return;
+    }
+    if (!AN.v) anStart();
+    var M = AN.data, F = M.fuels[AN.fuel], mr = F.models.rate, mb = D.about.moon_base, R = D.summary.o2_range_by_class;
+    var earth = D.about.presets.filter(function (p) { return p.id === "earth"; })[0], gap = mb.o2_min_percent - earth.o2;
+    var base = { o2: earth.o2, co2: 0, he: 0, p: Math.max(mb.pressure_max_psi, F.range.p[0]), d0: anMedianSize() }, top = { o2: mb.o2_min_percent, co2: 0, he: 0, p: base.p, d0: base.d0 };
+    var r0 = FlexModel.estimate(mr, base).value, r1 = FlexModel.estimate(mr, top).value;
+    var h = '<p class="kick">Analysis</p><h1 class="wide">What oxygen does to a burning droplet</h1>';
+    h += '<p class="lead wide">FLEX is the one investigation in NASA\'s repository that burned fuel at ' + num(mb.o2_min_percent) + " % oxygen and more, close to Moon Base pressure, and recorded how every test ended. We fitted a simple statistical model to its " +
+      M.about.rows_in_table + " tests to measure what oxygen, pressure and extinguishing gases change. It covers fuel droplets only. For solid materials no such analysis is possible: their tests stop at " + num(R.solid.max) + " % oxygen.</p>";
+    h += '<div class="tabs" role="group" aria-label="Fuel">' + Object.keys(M.fuels).map(function (f) {
+      return '<button class="tabbtn' + (f === AN.fuel ? " on" : "") + '" data-anfuel="' + esc(f) + '" aria-pressed="' + (f === AN.fuel) + '">' + esc(f) + " droplets, " + M.fuels[f].tests + " tests</button>";
+    }).join("") + "</div>";
+    // the same comparison measured directly: nitrogen-only tests near Moon Base pressure
+    var direct = function (lo, hi) {
+      var v = anRows().filter(function (t) { return t.rate != null && !t.co2 && !t.he && t.p <= mb.pressure_max_psi + 0.5 && t.o2 >= lo - 1e-9 && t.o2 <= hi + 1e-9; }).map(function (t) { return t.rate; });
+      return { n: v.length, mean: v.length ? v.reduce(function (a, b) { return a + b; }, 0) / v.length : null };
+    };
+    var d0 = direct(earth.o2 - 1, earth.o2), d1 = direct(mb.o2_min_percent, mb.o2_min_percent);
+    var E = F.endings, endOf = function (b) { var c = E.filter(function (x) { return x.band === b; })[0].counts, n = 0; Object.keys(c).forEach(function (k) { n += c[k]; }); return { ext: c.Extinction || 0, n: n }; };
+    var eLow = endOf("below"), eHigh = endOf("at_or_above");
+    h += '<div class="counters an-find"><div class="hot"><b>+' + Math.round((r1 - r0) / r0 * 100) + " %</b><span>faster burning at " + num(mb.o2_min_percent) + " % oxygen than at " + num(earth.o2) + " %, in nitrogen at " + num(base.p) +
+      " psi (model). Each extra point of oxygen raised the burning rate by " + fx(mr.beta[1], 3) + " (95 % range " + fx(mr.ci_low[1], 3) + " to " + fx(mr.ci_high[1], 3) + ")." +
+      (d0.n && d1.n ? " Measured directly: " + fx(d0.mean) + " at " + num(earth.o2 - 1) + " to " + num(earth.o2) + " % (" + d0.n + " tests) against " + fx(d1.mean) + " at " + num(mb.o2_min_percent) + " % (" + d1.n + " tests)." : "") + "</span></div>";
+    h += "<div><b>" + eHigh.ext + " of " + eHigh.n + "</b><span>flames went out on their own at " + num(mb.o2_min_percent) + " % oxygen or more. Below " + num(earth.o2) + " % oxygen, " + eLow.ext + " of " + eLow.n +
+      " did. Counted from NASA's table, no model. NASA picked the conditions of each test, so this is what happened in these tests, not a rate for all fires.</span></div>";
+    h += "<div><b>" + (mr.beta[2] > 0 ? "+" : "") + fx(mr.beta[2] * 10, 2) + "</b><span>change in burning rate for every 10 points of carbon dioxide in the gas (95 % range " + fx(mr.ci_low[2] * 10, 2) + " to " + fx(mr.ci_high[2] * 10, 2) +
+      "), against " + (mr.beta[1] > 0 ? "+" : "") + fx(mr.beta[1] * 10, 2) + " for 10 points of oxygen. Helium " + (mr.ci_low[3] > 0 ? "raised" : mr.ci_high[3] < 0 ? "lowered" : "did not clearly change") + " the burning rate.</span></div></div>";
+    h += '<p class="src">From NASA\'s FLEX table (PSI-69), ' + esc(AN.fuel.toLowerCase()) + " droplets. These describe burning fuel droplets in weightlessness. They are not a forecast for cabin materials or for Moon gravity.</p>";
+
+    h += "<h2>Try a condition</h2><p class=\"sub2\">Move a setting. The estimate, its range, and the real tests behind it update at once. It starts at the atmosphere you chose on the overview.</p>";
+    h += '<div class="an-grid"><div class="an-ctl">' + FlexModel.KEYS.map(function (k) {
+      var f = anFeature(k), S = AN_SLIDER[k];
+      return '<label><span>' + esc(f[1]) + ' <b id="an-val-' + k + '">' + num(AN.v[k]) + " " + f[2] + '</b></span><input type="range" data-an="' + k + '" min="' + S[0] + '" max="' + S[1] + '" step="' + S[2] + '" value="' + AN.v[k] +
+        '"><small>FLEX tested ' + num(F.range[k][0]) + " to " + num(F.range[k][1]) + " " + f[2] + "</small></label>";
+    }).join("") + '<p class="small muted">The rest of the gas is nitrogen.</p></div><div id="an-out">' + anOut() + "</div></div>";
+
+    h += '<h2>Measured burning rate against oxygen</h2><p class="sub2">Each point is one FLEX test. The line is the model for the settings above, the band is where a single test would likely fall, and the lighter area is the oxygen range FLEX tested.</p>';
+    h += '<div class="chart" id="an-chart">' + anChart() + '</div><p class="legend">' + Object.keys(AN_GAS).map(function (k) { return '<span><i class="sw" style="background:' + AN_GAS[k][1] + '"></i>' + AN_GAS[k][0] + "</span>"; }).join("") + "</p>";
+
+    var endNames = Object.keys(E[0].counts), bandName = { below: "Below " + num(earth.o2) + " % oxygen", between: num(earth.o2) + " % to below " + num(mb.o2_min_percent) + " %", at_or_above: num(mb.o2_min_percent) + " % oxygen or more" };
+    h += "<h2>How the tests ended</h2><p class=\"sub2\">Counted from NASA's column \"Test end\", by oxygen level. Extinction means the flame went out at a finite droplet size, completion that the droplet burned to completion (the FLEX record's words). The table does not explain \"Disruption\".</p>";
+    h += '<div class="tablewrap"><table><thead><tr><th>Oxygen</th>' + endNames.map(function (e) { return '<th class="num">' + esc(e) + "</th>"; }).join("") + '<th class="num">Tests</th><th class="num">Went out on their own</th></tr></thead><tbody>' +
+      E.map(function (b) {
+        var n = 0; endNames.forEach(function (e) { n += b.counts[e]; });
+        return "<tr><td>" + bandName[b.band] + "</td>" + endNames.map(function (e) { return '<td class="num">' + b.counts[e] + "</td>"; }).join("") + '<td class="num">' + n + '</td><td class="num"><b>' + (n ? Math.round(b.counts.Extinction / n * 100) + " %" : "") + "</b></td></tr>";
+      }).join("") + "</tbody></table></div>";
+
+    h += '<h2>How good is the model</h2><p class="sub2">We hid tests from the model and asked it to predict them: one test at a time, and one whole test day at a time. The error should be clearly smaller than the error of always guessing the average.</p>';
+    h += '<div class="tablewrap"><table><thead><tr><th>Outcome</th><th class="num">Tests</th><th class="num">Share of variation explained</th><th class="num">Error, one test hidden</th><th class="num">Error, one day hidden</th><th class="num">Error of guessing the average</th></tr></thead><tbody>' +
+      Object.keys(F.models).map(function (k) {
+        var m = F.models[k];
+        return "<tr><td>" + esc(M.about.outcomes[k].label) + '</td><td class="num">' + m.n + '</td><td class="num">' + Math.round(m.r2 * 100) + ' %</td><td class="num">' + fx(m.rmse_leave_one_out, 3) + '</td><td class="num">' + fx(m.rmse_leave_one_day_out, 3) +
+          " <span class=\"muted\">(" + m.test_days + ' days)</span></td><td class="num">' + fx(m.rmse_of_guessing_the_mean, 3) + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    h += '<h3>What each setting changes</h3><div class="tablewrap"><table><thead><tr><th>One step more of</th>' + Object.keys(F.models).map(function (k) { return '<th class="num">Change in ' + esc(M.about.outcomes[k].label.toLowerCase()) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      FlexModel.KEYS.map(function (k, i) {
+        var f = anFeature(k);
+        return "<tr><td>" + esc(f[1]) + ' <span class="muted">(+1 ' + (f[2] === "%" ? "point" : f[2]) + ")</span></td>" + Object.keys(F.models).map(function (o) {
+          var m = F.models[o], a = i + 1, clear = m.ci_low[a] > 0 || m.ci_high[a] < 0;
+          return '<td class="num">' + (clear ? "<b>" : '<span class="muted">') + (m.beta[a] > 0 ? "+" : "") + fx(m.beta[a], 4) + (clear ? "</b>" : "</span>") + ' <span class="muted">(' + fx(m.ci_low[a], 4) + " to " + fx(m.ci_high[a], 4) + ")</span></td>";
+        }).join("") + "</tr>";
+      }).join("") + '</tbody></table></div><p class="src">Change in the outcome for one step more of a setting, the others held fixed, with the 95 % range. Grey: the range includes zero, so the data shows no clear effect.</p>';
+
+    h += '<details class="sect"><summary>Method and limits</summary><ul>' +
+      "<li><strong>Data.</strong> " + M.about.rows_used + " of the " + M.about.rows_in_table + " tests in NASA's FLEX table are used. Left out: " + Object.keys(M.about.rows_skipped).map(function (k) { return M.about.rows_skipped[k] + " with " + k; }).join(", ") + ".</li>" +
+      "<li><strong>Model.</strong> Ordinary least squares, one model per fuel: burning rate = constant + oxygen + carbon dioxide + helium + pressure + droplet size. Nitrogen is the rest of the gas and so the reference.</li>" +
+      "<li><strong>Burning rate</strong> is NASA's column \"Burning rate; mm\"; the table does not complete the unit. For droplets it is normally the shrink rate of the diameter squared, in mm² per second.</li>" +
+      "<li><strong>Fuel left</strong> in the list of closest tests is (extinction diameter / starting diameter) cubed, for tests NASA marks as ended by extinction. It is shown per test and not modelled: at " + num(mb.o2_min_percent) + " % oxygen almost no test ended in extinction, so there is nothing to model there.</li>" +
+      "<li><strong>Inside or outside.</strong> A setting counts as outside when it lies beyond the range FLEX tested for that fuel by more than 1 % of that range. An unusual combination is one whose leverage is above three times the average.</li>" +
+      "<li><strong>Ranges.</strong> The 95 % range for a single test comes from the scatter of the tests around the line and grows as a condition moves away from the bulk of the tests.</li>" +
+      "<li><strong>Not causal proof.</strong> NASA chose the test conditions for its own goals, not at random. The model describes this set of tests.</li>" +
+      "<li><strong>Scope.</strong> Fuel droplets in weightlessness. Not solid materials, not smoke, not Moon gravity.</li>" +
+      '<li><strong>Checked twice.</strong> A Python script fits the model; a separate JavaScript script reads NASA\'s CSV again, refits it and must get the same numbers. See <a href="#/data">Data and method</a>.</li></ul>' +
+      '<p><button class="btn sm ghost" data-table="' + M.about.source_table + '">Open NASA\'s FLEX table</button> <a class="more" style="margin-left:1rem" href="data/flex_model.json">Download the model (JSON)</a> <a class="more" style="margin-left:1rem" href="#/inv/' + M.about.investigation + '">About FLEX</a></p></details>';
+    main.innerHTML = h;
+  }
+
+  // ------------------------------------------------- Earth tests at Moon Base pressure (not from PSI)
+  // NASA White Sands Test Facility, 2007. scripts/build_external.py reads the thresholds from the paper's text.
+  var EARTH = null;
+  function earthLoad() {
+    if (EARTH) return Promise.resolve();
+    return fetch("data/earth_tests.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (E) { EARTH = E; });
+  }
+  // What the paper lets us say about one sample at one oxygen level. It tested in steps, from 30 % upward.
+  function earthStatus(r, o2) {
+    var step = EARTH.about.oxygen_step_percent;
+    if (r.kind === "below") return o2 >= r.limit ? "burn" : "untested";
+    if (r.kind === "above") return o2 <= r.limit ? "out" : "untested";
+    return o2 <= r.limit ? "out" : o2 >= r.limit + step ? "burn" : "untested";
+  }
+  function earthChart(o2) {
+    var rows = EARTH.rows, cats = [], W = 1000, L = 372, R = 150, lo = 28, hi = 50, x = scaleLin(lo, hi, L, W - R), y = 44, s = "", body = "";
+    rows.forEach(function (r) { if (cats.indexOf(r.category) < 0) cats.push(r.category); });
+    cats.forEach(function (c) {
+      body += '<text class="cat" x="0" y="' + (y + 12) + '">' + esc(c) + "</text>";
+      y += 24;
+      rows.filter(function (r) { return r.category === c; }).forEach(function (r) {
+        var st = earthStatus(r, o2), end = Math.min(r.limit, hi), say = r.kind === "below" ? "burned at " + num(r.limit) + " %" : r.kind === "above" ? "above " + num(r.limit) + " %" : "up to " + num(r.limit) + " %";
+        body += '<g class="row ' + st + '"><title>' + esc(r.label + (r.config ? ", " + r.config : "") + ": " + r.composition + ". As printed: ULOI " + r.uloi + ", MOC " + r.moc) + '</title><text class="name" x="' + (L - 12) + '" y="' + (y + 11) + '" text-anchor="end">' +
+          esc(r.label + (r.config ? ", " + r.config : "")) + "</text>";
+        if (r.kind !== "below") body += '<rect class="bar" x="' + x(lo) + '" y="' + (y + 1) + '" width="' + (x(end) - x(lo)) + '" height="12"/>';
+        if (r.kind === "above" && r.limit < hi) body += '<rect class="more" x="' + x(r.limit) + '" y="' + (y + 1) + '" width="' + (x(hi) - x(r.limit)) + '" height="12"/>';
+        if (r.kind === "below") body += '<circle class="fail" cx="' + x(r.limit) + '" cy="' + (y + 7) + '" r="5"/>';
+        body += '<text class="say" x="' + (W - R + 12) + '" y="' + (y + 11) + '">' + say + "</text></g>";
+        y += 22;
+      });
+      y += 8;
+    });
+    var H = y + 6;
+    s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Highest oxygen level at which each of ' + rows.length + ' material samples put itself out in NASA\'s upward-flame test on Earth, at ' + num(EARTH.about.pressure_kpa) + ' kilopascal">';
+    for (var v = 30; v <= hi; v += 5) s += '<line class="grid" x1="' + x(v) + '" x2="' + x(v) + '" y1="34" y2="' + (H - 6) + '"/><text class="tick" x="' + x(v) + '" y="26" text-anchor="middle">' + v + " %</text>";
+    s += '<text class="tick" x="' + (L - 12) + '" y="26" text-anchor="end">Oxygen in the test chamber</text>' + body;
+    if (o2 >= lo && o2 <= hi) s += '<line class="you" x1="' + x(o2) + '" x2="' + x(o2) + '" y1="34" y2="' + (H - 6) + '"/><text class="youlab" x="' + x(o2) + '" y="10" text-anchor="middle">Your air, ' + num(o2) + " %</text>";
+    return s + "</svg>";
+  }
+  // All 26 samples, folded away under the habitat check.
+  function earthAll() {
+    var A = EARTH.about, o2 = ATM.o2;
+    var h = '<details class="sect"><summary>All ' + EARTH.rows.length + ' samples NASA tested on Earth</summary><p class="sub2" style="margin-top:.4rem"><strong>This table is not from PSI.</strong> NASA\'s White Sands Test Facility burned ' + EARTH.rows.length +
+      " material samples on Earth, at " + num(A.pressure_kpa) + " kPa (" + num(A.pressure_psi) + " psi), and recorded the highest oxygen level at which each one still put itself out.</p>";
+    h += '<div class="chart earth-chart">' + earthChart(o2) + '</div><p class="legend"><span><i class="sw sq" style="background:#e3e3e3"></i>Put itself out at your oxygen level</span><span><i class="sw sq" style="background:#6b6b70"></i>Did not reliably put itself out</span><span><i class="sw sq ring"></i>Not tested at that level</span><span><i class="sw sq" style="background:rgba(227,227,227,.3)"></i>Passed at the highest level tested; limit not found</span></p>';
+    h += '<p class="src">Source: ' + esc(A.source.authors) + ", " + A.source.year + ', <a href="' + A.source.url + '">' + esc(A.source.title) + "</a>, Table 2. A bar ends at the paper's MOC, the highest oxygen level at which the sample consistently put itself out. Earth gravity. " +
+      "The materials were candidates for an earlier NASA programme, not a list of what a Moon Base will use.</p></details>";
+    h += '<details class="sect"><summary>How to read the Earth tests, in NASA\'s words</summary><ul>' +
+      "<li><strong>The test.</strong> “" + esc(A.quotes.test) + "” “" + esc(A.quotes.pass) + ".”</li>" +
+      "<li><strong>The limit.</strong> “" + esc(A.quotes.moc) + ".”</li>" +
+      "<li><strong>Below 30 and above 40.</strong> “" + esc(A.quotes.below) + "”</li>" +
+      "<li><strong>Not final.</strong> “" + esc(A.quotes.conclusion) + "”</li>" +
+      "<li><strong>Our reading.</strong> A sample counts as putting itself out at any oxygen level up to its limit, and as not reliably doing so from one test step (" + num(A.oxygen_step_percent) + " %) above it. Levels the paper did not test are shown as not tested.</li>" +
+      "<li><strong>No hand-typed numbers.</strong> A program reads every threshold from the text of the paper, which is stored with the site's source code together with the PDF and its checksum.</li></ul>" +
+      '<p><a class="more" href="data/earth_tests.json">Download this table (JSON)</a> <a class="more" style="margin-left:1rem" href="' + A.source.pdf_url + '">The paper (PDF, NASA)</a></p></details>';
+    return h;
+  }
+
   // ---------------------------------------------------------------- habitat
-  // A schematic habitat. Each numbered spot is one of the six open questions, placed where it matters.
+  // One drawing is the whole tool. The reader sets the air and one material for four parts of the habitat,
+  // in boxes tied to those parts; each part then shows what NASA has tested for it. The numbered spots are the six open questions.
   var HAB_SPOT = { tested: [142, 166], materials: [212, 248], "earth-test": [398, 188], "put-out": [486, 262], detect: [470, 172], gravity: [812, 268] };
-  function habitatDrawing(sel) {
-    var s = '<svg viewBox="40 100 810 340" role="img" aria-label="Cross-section of a Moon habitat with six numbered fire questions">';
+  var HAB_SLOT = [   // category in the White Sands table, the part it stands for here, box position, where its line ends
+    { cat: "Foams", part: "foam", title: "Mattress and padding", x: 205, to: [232, 281] },
+    { cat: "Fabrics", part: "fabric", title: "Curtain and bedding", x: 365, to: [320, 150] },
+    { cat: "Rigid plastics", part: "plastic", title: "Equipment rack", x: 525, to: [576, 160] },
+    { cat: "Composites/Laminates", part: "laminate", title: "Hull and wall panels", x: 685, to: [664, 205] }
+  ];
+  var habPick = null;   // one row index of EARTH.rows per slot
+  function habRows(cat) { return EARTH.rows.map(function (r, i) { return { r: r, i: i }; }).filter(function (x) { return x.r.category === cat; }); }
+  function habLabel(r) { return r.label + (r.config ? ", " + r.config : ""); }
+  function habStart() {
+    habPick = HAB_SLOT.map(function (sl) { return habRows(sl.cat)[0].i; });      // the first sample of each group, in the paper's order
+    var m = /[?&]m=([\d,]+)/.exec(location.hash);
+    if (m) m[1].split(",").forEach(function (v, k) { var r = EARTH.rows[+v]; if (k < HAB_SLOT.length && r && r.category === HAB_SLOT[k].cat) habPick[k] = +v; });
+  }
+  var HAB_WORD = { burn: "Fails on Earth", out: "Passes on Earth, not confirmed in space", untested: "Not tested at this oxygen level" };
+  function habLimit(r) {
+    return r.kind === "below" ? "Burned at " + num(r.limit) + " %, the lowest level tested" : r.kind === "above" ? "Put itself out at " + num(r.limit) + " %, the highest level tested" : "Put itself out up to " + num(r.limit) + " % oxygen";
+  }
+  function habitatDrawing(sel, st) {
+    var s = '<svg viewBox="40 -5 810 445" role="img" aria-label="Cross-section of a Moon habitat. Boxes above set the air and four materials; six numbered spots are open fire questions.">';
     s += '<path class="d" d="M0 392 H860 M70 392 q22 9 44 0 M300 392 q30 10 60 0 M610 392 q16 7 32 0 M770 392 q26 9 52 0"/>';
-    // shell, inner wall, floor, legs
-    s += '<rect class="shell" x="70" y="120" width="600" height="250" rx="125"/><rect class="d" x="82" y="132" width="576" height="226" rx="113"/>';
+    // shell, inner wall (the laminate part), floor, legs
+    s += '<rect class="shell" x="70" y="120" width="600" height="250" rx="125"/><rect class="d part ' + st[3] + '" x="82" y="132" width="576" height="226" rx="113"/>';
+    // lines from the boxes to the parts they set
+    s += '<path class="lead" d="M120 62 V148"/>';
+    HAB_SLOT.forEach(function (sl, k) { s += '<path class="lead ' + st[k] + '" d="M' + (sl.x + 75) + " 62 L" + sl.to[0] + " " + sl.to[1] + '"/><circle class="end ' + st[k] + '" cx="' + sl.to[0] + '" cy="' + sl.to[1] + '" r="4"/>'; });
     s += '<path class="l" d="M112 318 H628"/><path class="d" d="M150 334 H590 M190 318 V334 M270 318 V334 M350 318 V334 M430 318 V334 M510 318 V334"/>';
     s += '<path class="l" d="M210 370 L198 392 M186 392 H212 M530 370 L542 392 M528 392 H556"/>';
     // airlock, hatch and steps
     s += '<rect class="shell thin" x="670" y="204" width="92" height="114" rx="8"/><circle class="l" cx="716" cy="258" r="30"/><circle class="d" cx="716" cy="258" r="22"/><path class="d" d="M716 236 V280 M694 258 H738"/>';
-    s += '<path class="d" d="M762 318 L792 392 M750 318 L780 392 M765 340 H771 M774 362 H780"/><text x="716" y="196" text-anchor="middle">AIRLOCK</text>';
+    s += '<path class="d" d="M762 318 L792 392 M750 318 L780 392 M765 340 H771 M774 362 H780"/><text x="716" y="340" text-anchor="middle">AIRLOCK</text>';
     // window
     s += '<circle class="l" cx="128" cy="210" r="17"/><circle class="d" cx="128" cy="210" r="11"/>';
-    // bunk with blanket and pillow, curtain
-    s += '<path class="l" d="M150 296 H282 M156 296 V318 M276 296 V318"/><rect class="l" x="154" y="282" width="36" height="13" rx="5"/><path class="l" d="M190 288 C 215 276, 240 294, 280 284 V296"/>';
-    s += '<path class="d" transform="translate(12 0)" d="M296 150 V300 M296 150 C 302 190, 290 220, 300 300 M306 152 C 314 200, 300 240, 312 300 M286 150 H318"/>';
+    // bunk frame, then mattress and pillow (the foam part)
+    s += '<path class="l" d="M150 296 H282 M156 296 V318 M276 296 V318"/><g class="part ' + st[0] + '"><rect class="l" x="154" y="282" width="36" height="13" rx="5"/><path class="l" d="M190 288 C 215 276, 240 294, 280 284 V296"/></g>';
+    // curtain (the fabric part)
+    s += '<path class="l part ' + st[1] + '" transform="translate(12 0)" d="M296 150 V300 M296 150 C 302 190, 290 220, 300 300 M306 152 C 314 200, 300 240, 312 300 M286 150 H318"/>';
     // table, container, laptop
     s += '<path class="l" d="M330 290 H420 M375 290 V318"/><rect class="l" x="340" y="270" width="28" height="20" rx="2"/><path class="l" d="M384 290 L390 272 H412"/>';
     // the approval sheet on a clipboard
@@ -367,11 +609,10 @@
     s += '<path class="l" d="M446 133 a24 13 0 0 0 48 0 M462 142 h16"/>';
     // extinguisher on a wall bracket
     s += '<rect class="l" x="444" y="266" width="18" height="46" rx="7"/><path class="l" d="M450 266 v-8 h6 v8 M456 260 h10 l4 6 M440 278 h26 M440 300 h26"/>';
-    // equipment rack with panels and cables
-    s += '<rect class="l" x="530" y="160" width="92" height="158"/><path class="l" d="M530 200 H622 M530 240 H622 M530 280 H622 M576 160 V200 M576 240 V280"/>';
+    // equipment rack with panels and cables (the plastic part)
+    s += '<g class="part ' + st[2] + '"><rect class="l" x="530" y="160" width="92" height="158"/><path class="l" d="M530 200 H622 M530 240 H622 M530 280 H622 M576 160 V200 M576 240 V280"/></g>';
     s += '<path class="d" d="M540 172 h22 M540 180 h14 M586 172 h24 M586 180 h16 M542 216 h66 M542 224 h40 M542 254 h20 M588 254 h22 M542 296 h64"/><path class="d" d="M622 176 C 640 190, 636 230, 622 244 M622 256 C 644 270, 640 300, 622 306"/>';
-    // the air inside, and gravity
-    s += '<text class="w" x="168" y="158">AIR INSIDE</text><text x="168" y="173">' + num(ATM.o2) + ' % OXYGEN OR MORE</text><text x="168" y="188">' + num(ATM.p) + " PSI OR LESS</text>";
+    // gravity
     s += '<path class="l" d="M812 296 V372 M804 362 L812 374 L820 362"/><text x="812" y="412" text-anchor="middle">MOON</text><text x="812" y="426" text-anchor="middle">GRAVITY</text>';
     D.questions.forEach(function (q, k) {
       var p = HAB_SPOT[q.id];
@@ -381,21 +622,67 @@
     });
     return s + "</svg>";
   }
+  function habBox(x, inner, cls) { return '<div class="hab-box ' + (cls || "") + '" style="left:' + ((x - 40) / 810 * 100).toFixed(2) + '%">' + inner + "</div>"; }
+  function habReportText(picked, n, solid) {
+    var A = EARTH.about, L = [];
+    L.push("Evidence report for a habitat", "Flame in Freefall, Data Beyond Space, NASA Space Apps Challenge 2026", location.href, "");
+    L.push("Air: " + num(ATM.o2) + " % oxygen or more, at " + num(ATM.p) + " psi or less (" + ATM.name + ")", "");
+    picked.forEach(function (x) { L.push(x.sl.title + ": " + habLabel(x.r) + " (" + x.r.composition + ")", "  On Earth, at " + num(A.pressure_psi) + " psi: " + habLimit(x.r) + ". As printed: ULOI " + x.r.uloi + ", MOC " + x.r.moc + ".", "  In space: no solid-material test in NASA PSI at " + num(ATM.o2) + " % oxygen (the highest is " + num(solid.max) + " %).", "  Evidence for this air: " + HAB_WORD[x.st] + ".", ""); });
+    L.push("Summary: " + n.burn + " of " + picked.length + " fail on Earth, " + n.out + " pass on Earth, " + n.untested + " not tested at this level, 0 confirmed in space.");
+    L.push("Tests in NASA PSI that state both oxygen and pressure and were run in this air: " + COUNTS.inZone + " of " + COUNTS.both + ".", "");
+    if (Math.abs(ATM.p - A.pressure_psi) > 0.5) L.push("Note: the Earth tests were all run at " + num(A.pressure_psi) + " psi, not at " + num(ATM.p) + " psi.", "");
+    L.push("Open questions:");
+    D.questions.forEach(function (q, k) { L.push("  " + (k + 1) + ". " + q.question + " [" + WORD[q.status] + "]"); });
+    L.push("", "Sources:", "  Space: NASA Physical Sciences Informatics (PSI) repository, Combustion Science. " + D.about.source_url, "  Earth: " + A.source.authors + ", " + A.source.year + ", " + A.source.title + ". " + A.source.url,
+      "", "The Earth tests are in normal gravity, on materials considered for an earlier NASA programme. This report shows what was tested. It does not predict how a fire behaves.");
+    return L.join("\r\n");
+  }
+  var habReport = "";
   function viewHabitat(sel) {
     setTitle("Habitat");
+    if (!EARTH) {
+      main.innerHTML = '<p class="loading">Loading the habitat…</p>';
+      earthLoad().then(function () { if (hashParts()[0] === "habitat") route(true); });
+      return;
+    }
+    if (!habPick) habStart();
+    sel = (sel || "").split("?")[0];
     var Q = D.questions, q = Q.filter(function (x) { return x.id === sel; })[0] || Q.filter(function (x) { return x.id === "materials"; })[0] || Q[0];
-    var h = '<p class="kick">Habitat</p><h1 class="wide">Your habitat, six fire questions</h1>';
-    h += '<p class="lead wide">Choose the air inside, then choose a number. Each one is a fire question for that part of the habitat, with what NASA\'s data can say about it today.</p>' + atmBar();
-    h += '<p class="hab-count"><b>' + COUNTS.inZone + " of " + COUNTS.both + "</b> NASA tests that state both oxygen and pressure used this air." +
-      (ATM.id !== "moon" ? " The six answers below were written for Moon Base air. For another air, only this count changes." : "") + "</p>";
-    h += '<div class="hab"><div class="hab-draw">' + habitatDrawing(q.id) + '<p class="ai-mark">Schematic drawn with AI assistance; not a NASA design.</p><p class="hab-leg"><i class="o"></i>Open: NASA cannot answer it from this data<i class="p"></i>Partly answered</p><div class="hab-six">' +
-      Q.map(function (x, n) {
-        return '<a href="#/habitat/' + x.id + '" class="' + x.status + (x === q ? " on" : "") + '"><span class="k">' + (n + 1) + "</span><span><em>" + WORD[x.status] + "</em>" + esc(x.question) + "</span></a>";
-      }).join("") + "</div></div>";
+    var A = EARTH.about, solid = COUNTS.byCls.solid, n = { out: 0, burn: 0, untested: 0 };
+    var picked = HAB_SLOT.map(function (sl, k) { var r = EARTH.rows[habPick[k]], st = earthStatus(r, ATM.o2); n[st]++; return { sl: sl, r: r, st: st }; });
+    habReport = habReportText(picked, n, solid);
+    var h = '<p class="kick">Habitat</p><h1 class="wide">Check your habitat</h1>';
+    h += '<p class="lead wide">Set the air and what four parts are made of, in the boxes on the drawing. Each part then shows what NASA has tested for it. The numbers are six fire questions you can open.</p>';
+
+    // the boxes: air, then one material per part
+    var air = '<label>The air inside<select data-habair="1" aria-label="The air inside">' + D.about.presets.map(function (p) {
+      return '<option value="' + p.id + '"' + (ATM.id === p.id ? " selected" : "") + ">" + esc(p.name) + "</option>";
+    }).join("") + (ATM.id === "custom" ? '<option value="custom" selected>Your own</option>' : "") + "</select></label><p>" + num(ATM.o2) + " % oxygen or more<br>" + num(ATM.p) + " psi or less</p>";
+    var boxes = habBox(45, air, "air") + picked.map(function (x, k) {
+      return habBox(x.sl.x, "<label>" + x.sl.title + '<select data-habpick="' + k + '" aria-label="' + esc(x.sl.title) + '">' + habRows(x.sl.cat).map(function (o) {
+        return '<option value="' + o.i + '"' + (o.i === habPick[k] ? " selected" : "") + ">" + esc(habLabel(o.r)) + "</option>";
+      }).join("") + '</select></label><p class="verdict ' + x.st + '"><i></i>' + HAB_WORD[x.st] + "</p><p>" + habLimit(x.r) + "</p>", x.st);
+    }).join("");
+    h += '<div class="habx"><div class="habx-draw">' + boxes + habitatDrawing(q.id, picked.map(function (x) { return x.st; })) + "</div>";
+    h += '<p class="hab-leg"><i class="b"></i>Fails NASA\'s flame test on Earth<i class="w"></i>Passes on Earth, not confirmed in space<i class="o"></i>Open question<i class="p"></i>Partly answered<span class="ai-mark">Schematic drawn with AI assistance; not a NASA design. The parts are examples; the materials are samples NASA tested.</span></p>';
+
+    // the result, in one strip
+    h += '<div class="counters hab-sum"><div><b>' + n.burn + "</b><span>of your " + picked.length + " materials " + (n.burn === 1 ? "fails" : "fail") + " NASA's flame test on Earth at " + num(ATM.o2) + " % oxygen." + (n.untested ? " " + n.untested + " were not tested at this level." : "") + "</span></div>";
+    h += "<div><b>" + n.out + "</b><span>" + (n.out === 1 ? "passes" : "pass") + " on Earth, at " + num(A.pressure_psi) + " psi and normal gravity. Tested by NASA White Sands, not part of PSI.</span></div>";
+    h += '<div class="hot"><b>0</b><span>are confirmed in space. Of ' + solid.rows + " solid-material tests in weightlessness, " + solid.atOrAbove + " reach " + num(ATM.o2) + " % oxygen. NASA's records say the Earth test <a href=\"#/questions/earth-test\">may not be on the safe side</a> in space.</span></div></div>";
+    if (Math.abs(ATM.p - A.pressure_psi) > 0.5) h += '<p class="an-support warn"><b>Different pressure.</b> You chose ' + num(ATM.p) + " psi. Every Earth test here was run at " + num(A.pressure_psi) + " psi, so it does not speak for your pressure.</p>";
+    h += '<p class="row hab-act"><button class="btn" data-habdl="1">Download this report</button><button class="btn ghost" data-habcopy="1">Copy a link to this habitat</button><span class="muted small" id="hab-copied" role="status"></span><span class="muted small">' +
+      COUNTS.inZone + " of " + COUNTS.both + " NASA tests that state both oxygen and pressure used this air.</span></p>";
+
+    // the six questions
+    h += "<h2>Six fire questions for this habitat</h2><p class=\"sub2\">Choose a number on the drawing or in the list." + (ATM.id !== "moon" ? " The answers were written for Moon Base air." : "") + "</p>";
+    h += '<div class="hab"><div class="hab-six">' + Q.map(function (x, k) {
+      return '<a href="#/habitat/' + x.id + '" class="' + x.status + (x === q ? " on" : "") + '"><span class="k">' + (k + 1) + "</span><span><em>" + WORD[x.status] + "</em>" + esc(x.question) + "</span></a>";
+    }).join("") + "</div>";
     h += '<div class="hab-panel ' + q.status + '"><span class="no">' + (Q.indexOf(q) + 1) + '</span><p class="st">' + WORD[q.status] + "</p><h3>" + esc(q.question) + "</h3><p>" + esc(q.answer) +
       ' <span class="ai">(AI-written, checked against NASA\'s tables)</span></p><h4>What NASA\'s data holds</h4><ul>' + q.evidence.slice(0, 3).map(function (x) { return "<li>" + esc(x.text) + "</li>"; }).join("") +
       '</ul><p><a class="more" href="#/questions/' + q.id + '">Read the evidence</a></p></div></div>';
-    h += '<p class="src">The drawing is a schematic, not a NASA design. It shows which questions were tested, not how a fire would behave.</p>';
+    h += earthAll();
     main.innerHTML = h;
   }
 
@@ -445,7 +732,7 @@
     h += '<div><span class="no">2</span><div><h3>Fire gets easier</h3><p>More oxygen makes materials burn more easily. NASA\'s own records call relying on Earth fire standards <a href="#/questions/earth-test"><b>a risk</b></a>.</p></div></div>';
     h += '<div class="hot"><span class="no">3</span><div><h3>The data stops short</h3><p>Of ' + S.rows_with_both + " tests that state their air, <b>" + S.rows_in_zone + " used Moon Base air</b>. None of them burned a solid material.</p></div></div></div></section>";
     h += "<h2>Where the fire tests were run</h2>" + routeMap();
-    h += '<p class="row" style="margin-top:1.6rem"><a class="btn" href="#/check">Check your own atmosphere</a><a class="btn ghost" href="#/habitat">Open the habitat</a><a class="btn ghost" href="#/questions">See the six open questions</a></p>';
+    h += '<p class="row" style="margin-top:1.6rem"><a class="btn" href="#/habitat">Check your habitat</a><a class="btn ghost" href="#/check">Check your own atmosphere</a><a class="btn ghost" href="#/questions">See the six open questions</a></p>';
 
     h += '<h2 id="check">How much of NASA\'s fire data fits your atmosphere</h2><p class="sub2">Pick the air you are planning for. Every count below is recounted from ' + TESTS.length + " rows of NASA's tables.</p>" + atmBar();
     h += '<div class="console">' + counters() + '<div class="console-fig"><p class="figt">Oxygen levels tested, by what burns</p><div class="chart" id="chart-bars">' + fuelBars() + "</div></div></div>";
@@ -978,7 +1265,9 @@
     h += "<p>Conditions 3 to 5 are counted from NASA's tables. Conditions 1 and 2 are this team's reading of each record: for condition 1 the sentence it rests on is quoted on every investigation page, and the build fails if that sentence is not in NASA's record word for word. Purpose: " +
       (S.purpose_counts.primary || 0) + " main purpose, " + (S.purpose_counts.benefit || 0) + " named as a benefit, " + (S.purpose_counts.none || 0) + " not their purpose.</p></details>";
 
-    h += '<details class="sect"><summary>How AI was used</summary><p>AI does four jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
+    h += '<details class="sect"><summary>The one table that is not from PSI</summary><p>The <a href="#/habitat">Habitat</a> page shows Earth tests of 26 material samples at Moon Base pressure, from a NASA White Sands Test Facility paper of 2007 (<a href="https://ntrs.nasa.gov/citations/20070018178">NTRS 20070018178</a>, public use permitted). The PDF, its extracted text and their checksums are stored with the source code. <code>scripts/build_external.py</code> reads every threshold from that text and stops if a sample name, a number or a quoted sentence is not found exactly. Nothing from it is mixed into the PSI counts.</p></details>' +
+      '<details class="sect"><summary>The droplet model on the Analysis page</summary><p>The <a href="#/analysis">Analysis</a> page fits a plain statistical model (ordinary least squares) to the FLEX table. It is statistics, not a language model: <code>scripts/analyze_flex.py</code> fits it with the Python standard library, and <code>scripts/check_model.cjs</code>, written separately in JavaScript, reads the CSV from NASA again, refits it and fails unless it gets the same coefficients, errors and counts. The fitted model is in <a href="data/flex_model.json">data/flex_model.json</a>.</p></details>' +
+      '<details class="sect"><summary>How AI was used</summary><p>AI does four jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
       "<li><strong>It reads NASA's records.</strong> An AI model (Claude, Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. Before the site is built, a program checks that every quotation exists word for word in the named NASA record, that every table column exists, and that the texts contain no hand-typed numbers.</li>" +
       "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (all-MiniLM-L6-v2) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer.</li>" +
       "<li><strong>It helped write the code.</strong> The scripts and this website were written with AI assistance and reviewed by the team.</li>" +
@@ -1030,6 +1319,7 @@
     else if (name === "rank") viewRank(parts[1]);
     else if (name === "ask") viewAsk(parts.slice(1).join("/"));
     else if (name === "habitat") viewHabitat(parts[1]);
+    else if (name === "analysis") viewAnalysis();
     else if (name === "inv") viewInv(parts[1]);
     else if (name === "table" && BY_ID[(parts[1] || "").split("_")[0]]) {   // #/table/<file>/<row>: a link straight to one NASA table row
       viewInv(parts[1].split("_")[0]);
@@ -1073,6 +1363,16 @@
       rerender();
     }
     else if (b.dataset.table) openTable(b.dataset.table, +b.dataset.row || 0);
+    else if (b.dataset.habdl) {
+      var blob = new Blob([habReport], { type: "text/plain;charset=utf-8" }), a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = "habitat-evidence-report.txt"; document.body.appendChild(a); a.click(); a.remove();
+    }
+    else if (b.dataset.habcopy) {
+      var link = location.href.split("#")[0] + "#/habitat?" + (ATM.id === "custom" ? "o2=" + ATM.o2 + "&p=" + ATM.p : "atm=" + ATM.id) + "&m=" + habPick.join(","), note = document.getElementById("hab-copied");
+      var done = function (ok) { note.textContent = ok ? "Link copied." : link; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(function () { done(true); }, function () { done(false); }); else done(false);
+    }
+    else if (b.dataset.anfuel) { AN.fuel = b.dataset.anfuel; AN.v.d0 = anMedianSize(); rerender(); }
     else if (b.dataset.dl === "find") downloadFind();
     else if (b.dataset.more === "find") { find.limit += 200; drawFinder(); }
     else if (b.dataset.stop) {
@@ -1085,6 +1385,23 @@
     else if (b.dataset.open && drawRank) { rankState.open[b.dataset.open] = !rankState.open[b.dataset.open]; drawRank(); }
     else if (b.dataset.sort) { rankState.sort = b.dataset.sort; rerender(); }
     else if (b.dataset.cls) { rankState.cls = b.dataset.cls; rerender(); }
+  });
+  // the boxes on the habitat drawing
+  main.addEventListener("change", function (e) {
+    var d = e.target.dataset || {};
+    if (d.habpick != null) { habPick[+d.habpick] = +e.target.value; rerender(); }
+    else if (d.habair) {
+      var p = D.about.presets.filter(function (x) { return x.id === e.target.value; })[0];
+      if (p) { setAtm({ id: p.id, name: p.name, o2: p.o2, p: p.p, source: p.source }); rerender(); }
+    }
+  });
+  // the sliders of the analysis page
+  main.addEventListener("input", function (e) {
+    var k = e.target.dataset ? e.target.dataset.an : null;
+    if (!k) return;
+    AN.v[k] = +e.target.value;
+    document.getElementById("an-val-" + k).textContent = num(AN.v[k]) + " " + anFeature(k)[2];
+    anDraw();
   });
   // the reader's own atmosphere; a decimal comma ("30,5") is read as a point
   function readNum(t) { var v = parseFloat(String(t).trim().replace(",", ".")); return isNaN(v) ? NaN : v; }
