@@ -4,37 +4,98 @@
   "questions_file": "data/content/ask_eval_questions.json",
   "labelled_by": "Claude (Anthropic), from the PSI records. To be checked by a team member.",
   "checked_by": null,
+  "split": {
+   "seed": 20261115,
+   "method": "mulberry32 shuffle of the everyday-word questions, then of the others, dealt alternately to the tuning and the held-out half",
+   "made_by": "scripts/split_eval.mjs"
+  },
   "same_code_as_site": "docs/ask.js and docs/data/passages.json",
-  "caution": "The same questions were used to choose the site's settings, so the score is on the generous side.",
+  "caution": "All the questions were written by the same AI that built the page, and an earlier setting (the word bonus) was chosen on all of them before they were split. So even the held-out score is on the generous side, and with 20 questions in a half one question is 5 points.",
   "built_by": "scripts/eval_ask.mjs (written with AI assistance: Claude Code, Anthropic)"
  },
  "site_settings": {
   "bonus": 0.2,
+  "fusion": "bonus",
+  "title": 0.9,
+  "group": "passage",
+  "header": "none",
   "glossary": "words",
-  "stem": "plural-e"
+  "stem": "plural-e",
+  "model": "Snowflake/snowflake-arctic-embed-s"
  },
  "site": {
   "by_meaning": {
    "all": {
     "questions": 40,
-    "hit1": 28,
-    "hit3": 32,
+    "hit1": 27,
+    "hit3": 33,
+    "hit1_share": 0.675,
+    "hit3_share": 0.825
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 13,
+    "hit3": 17,
+    "hit1_share": 0.65,
+    "hit3_share": 0.85
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 14,
+    "hit3": 16,
     "hit1_share": 0.7,
     "hit3_share": 0.8
    },
    "everyday_words": {
     "questions": 11,
     "hit1": 8,
-    "hit3": 9,
+    "hit3": 11,
     "hit1_share": 0.727,
+    "hit3_share": 1
+   },
+   "other": {
+    "questions": 29,
+    "hit1": 19,
+    "hit3": 22,
+    "hit1_share": 0.655,
+    "hit3_share": 0.759
+   }
+  },
+  "by_meaning_alone": {
+   "all": {
+    "questions": 40,
+    "hit1": 25,
+    "hit3": 31,
+    "hit1_share": 0.625,
+    "hit3_share": 0.775
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 14,
+    "hit3": 17,
+    "hit1_share": 0.7,
+    "hit3_share": 0.85
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 11,
+    "hit3": 14,
+    "hit1_share": 0.55,
+    "hit3_share": 0.7
+   },
+   "everyday_words": {
+    "questions": 11,
+    "hit1": 7,
+    "hit3": 9,
+    "hit1_share": 0.636,
     "hit3_share": 0.818
    },
    "other": {
     "questions": 29,
-    "hit1": 20,
-    "hit3": 23,
-    "hit1_share": 0.69,
-    "hit3_share": 0.793
+    "hit1": 18,
+    "hit3": 22,
+    "hit1_share": 0.621,
+    "hit3_share": 0.759
    }
   },
   "by_words": {
@@ -43,6 +104,20 @@
     "hit1": 27,
     "hit3": 32,
     "hit1_share": 0.675,
+    "hit3_share": 0.8
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 14,
+    "hit3": 16,
+    "hit1_share": 0.7,
+    "hit3_share": 0.8
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 13,
+    "hit3": 16,
+    "hit1_share": 0.65,
     "hit3_share": 0.8
    },
    "everyday_words": {
@@ -59,6 +134,81 @@
     "hit1_share": 0.655,
     "hit3_share": 0.759
    }
+  },
+  "by_meaning_without_word_list": {
+   "all": {
+    "questions": 40,
+    "hit1": 24,
+    "hit3": 31,
+    "hit1_share": 0.6,
+    "hit3_share": 0.775
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 12,
+    "hit3": 16,
+    "hit1_share": 0.6,
+    "hit3_share": 0.8
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 12,
+    "hit3": 15,
+    "hit1_share": 0.6,
+    "hit3_share": 0.75
+   },
+   "everyday_words": {
+    "questions": 11,
+    "hit1": 5,
+    "hit3": 8,
+    "hit1_share": 0.455,
+    "hit3_share": 0.727
+   },
+   "other": {
+    "questions": 29,
+    "hit1": 19,
+    "hit3": 23,
+    "hit1_share": 0.655,
+    "hit3_share": 0.793
+   }
+  }
+ },
+ "other_model": {
+  "model": "Xenova/all-MiniLM-L6-v2",
+  "from": "data/eval/ask_tuning.json",
+  "with_bonus": {
+   "all": {
+    "questions": 40,
+    "hit1": 28,
+    "hit3": 32
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 13,
+    "hit3": 16
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 15,
+    "hit3": 16
+   }
+  },
+  "meaning_alone": {
+   "all": {
+    "questions": 40,
+    "hit1": 19,
+    "hit3": 25
+   },
+   "held_out": {
+    "questions": 20,
+    "hit1": 9,
+    "hit3": 10
+   },
+   "tuning": {
+    "questions": 20,
+    "hit1": 10,
+    "hit3": 15
+   }
   }
  },
  "questions": [
@@ -69,6 +219,7 @@
     "PSI-101",
     "PSI-115"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": "microgravity",
    "first_right_by_meaning": 1,
@@ -82,6 +233,7 @@
     "PSI-62",
     "PSI-20"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": "quiescent",
    "first_right_by_meaning": 1,
@@ -94,6 +246,7 @@
     "PSI-26",
     "PSI-25"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -108,6 +261,7 @@
     "PSI-99",
     "PSI-100"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -120,9 +274,10 @@
     "PSI-26",
     "PSI-99"
    ],
+   "half": "tuning",
    "everyday": true,
    "also_searched": "PMMA polymethylmethacrylate",
-   "first_right_by_meaning": null,
+   "first_right_by_meaning": 2,
    "first_right_by_words": 2
   },
   {
@@ -133,6 +288,7 @@
     "PSI-47",
     "PSI-115"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -146,6 +302,7 @@
     "PSI-115",
     "PSI-47"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -158,6 +315,7 @@
     "PSI-99",
     "PSI-100"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -172,6 +330,7 @@
     "PSI-25",
     "PSI-26"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -186,6 +345,7 @@
     "PSI-142",
     "PSI-159"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -200,6 +360,7 @@
     "PSI-142",
     "PSI-68"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -210,6 +371,7 @@
    "expect": [
     "PSI-22"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -222,6 +384,7 @@
     "PSI-107",
     "PSI-60"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -233,6 +396,7 @@
     "PSI-107",
     "PSI-60"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -243,6 +407,7 @@
    "expect": [
     "PSI-106"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": null,
@@ -253,6 +418,7 @@
    "expect": [
     "PSI-20"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -265,9 +431,10 @@
     "PSI-159",
     "PSI-10"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
-   "first_right_by_meaning": 3,
+   "first_right_by_meaning": null,
    "first_right_by_words": null
   },
   {
@@ -276,6 +443,7 @@
     "PSI-69",
     "PSI-68"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -286,6 +454,7 @@
    "expect": [
     "PSI-47"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -297,9 +466,10 @@
     "PSI-26",
     "PSI-25"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": "microgravity wax",
-   "first_right_by_meaning": 7,
+   "first_right_by_meaning": 4,
    "first_right_by_words": null
   },
   {
@@ -309,9 +479,10 @@
     "PSI-26",
     "PSI-69"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
-   "first_right_by_meaning": null,
+   "first_right_by_meaning": 5,
    "first_right_by_words": 1
   },
   {
@@ -319,9 +490,10 @@
    "expect": [
     "PSI-62"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
-   "first_right_by_meaning": 1,
+   "first_right_by_meaning": 2,
    "first_right_by_words": 3
   },
   {
@@ -330,9 +502,10 @@
     "PSI-60",
     "PSI-107"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
-   "first_right_by_meaning": 5,
+   "first_right_by_meaning": null,
    "first_right_by_words": null
   },
   {
@@ -340,9 +513,10 @@
    "expect": [
     "PSI-68"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
-   "first_right_by_meaning": null,
+   "first_right_by_meaning": 4,
    "first_right_by_words": 5
   },
   {
@@ -352,6 +526,7 @@
     "PSI-99",
     "PSI-100"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -364,6 +539,7 @@
     "PSI-102",
     "PSI-101"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -375,6 +551,7 @@
     "PSI-102",
     "PSI-101"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 1,
@@ -387,9 +564,10 @@
     "PSI-106",
     "PSI-107"
    ],
+   "half": "tuning",
    "everyday": false,
    "also_searched": null,
-   "first_right_by_meaning": 2,
+   "first_right_by_meaning": 7,
    "first_right_by_words": 4
   },
   {
@@ -398,9 +576,10 @@
     "PSI-99",
     "PSI-25"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
-   "first_right_by_meaning": 4,
+   "first_right_by_meaning": 3,
    "first_right_by_words": 4
   },
   {
@@ -409,6 +588,7 @@
     "PSI-25",
     "PSI-26"
    ],
+   "half": "held_out",
    "everyday": false,
    "also_searched": null,
    "first_right_by_meaning": 2,
@@ -421,6 +601,7 @@
     "PSI-26",
     "PSI-99"
    ],
+   "half": "held_out",
    "everyday": true,
    "also_searched": "PMMA polymethylmethacrylate",
    "first_right_by_meaning": 3,
@@ -433,6 +614,7 @@
     "PSI-101",
     "PSI-47"
    ],
+   "half": "tuning",
    "everyday": true,
    "also_searched": "smoke detector detection",
    "first_right_by_meaning": 1,
@@ -444,6 +626,7 @@
     "PSI-25",
     "PSI-26"
    ],
+   "half": "tuning",
    "everyday": true,
    "also_searched": "airflow flow velocity forced flow",
    "first_right_by_meaning": 1,
@@ -456,6 +639,7 @@
     "PSI-26",
     "PSI-25"
    ],
+   "half": "tuning",
    "everyday": true,
    "also_searched": "extinguish extinction suppression",
    "first_right_by_meaning": 1,
@@ -467,6 +651,7 @@
     "PSI-102",
     "PSI-101"
    ],
+   "half": "tuning",
    "everyday": true,
    "also_searched": "Teflon Kapton",
    "first_right_by_meaning": 1,
@@ -478,6 +663,7 @@
     "PSI-69",
     "PSI-68"
    ],
+   "half": "tuning",
    "everyday": true,
    "also_searched": "droplet methanol",
    "first_right_by_meaning": 1,
@@ -490,6 +676,7 @@
     "PSI-26",
     "PSI-20"
    ],
+   "half": "held_out",
    "everyday": true,
    "also_searched": "airflow flow velocity forced flow",
    "first_right_by_meaning": 1,
@@ -501,9 +688,10 @@
     "PSI-98",
     "PSI-100"
    ],
+   "half": "held_out",
    "everyday": true,
    "also_searched": "fabric cotton fiberglass",
-   "first_right_by_meaning": null,
+   "first_right_by_meaning": 1,
    "first_right_by_words": 1
   },
   {
@@ -513,9 +701,10 @@
     "PSI-39",
     "PSI-68"
    ],
+   "half": "held_out",
    "everyday": true,
    "also_searched": "droplet",
-   "first_right_by_meaning": 1,
+   "first_right_by_meaning": 2,
    "first_right_by_words": 1
   },
   {
@@ -523,1132 +712,11 @@
    "expect": [
     "PSI-22"
    ],
+   "half": "held_out",
    "everyday": true,
    "also_searched": "electric field",
    "first_right_by_meaning": 1,
    "first_right_by_words": 1
-  }
- ],
- "compared_settings": [
-  {
-   "setting": "words only, stem v1, glossary off",
-   "matching": "words",
-   "bonus": 0,
-   "glossary": "off",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 22,
-    "hit3": 29,
-    "hit1_share": 0.55,
-    "hit3_share": 0.725
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 6,
-    "hit1_share": 0.364,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 18,
-    "hit3": 23,
-    "hit1_share": 0.621,
-    "hit3_share": 0.793
-   }
-  },
-  {
-   "setting": "words only, stem v1, glossary words",
-   "matching": "words",
-   "bonus": 0,
-   "glossary": "words",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 26,
-    "hit3": 34,
-    "hit1_share": 0.65,
-    "hit3_share": 0.85
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 11,
-    "hit1_share": 0.727,
-    "hit3_share": 1
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 18,
-    "hit3": 23,
-    "hit1_share": 0.621,
-    "hit3_share": 0.793
-   }
-  },
-  {
-   "setting": "words only, stem plural-e, glossary off",
-   "matching": "words",
-   "bonus": 0,
-   "glossary": "off",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 23,
-    "hit3": 28,
-    "hit1_share": 0.575,
-    "hit3_share": 0.7
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 6,
-    "hit1_share": 0.364,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 22,
-    "hit1_share": 0.655,
-    "hit3_share": 0.759
-   }
-  },
-  {
-   "setting": "words only, stem plural-e, glossary words",
-   "matching": "words",
-   "bonus": 0,
-   "glossary": "words",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 27,
-    "hit3": 32,
-    "hit1_share": 0.675,
-    "hit3_share": 0.8
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 10,
-    "hit1_share": 0.727,
-    "hit3_share": 0.909
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 22,
-    "hit1_share": 0.655,
-    "hit3_share": 0.759
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0, stem v1, glossary off",
-   "matching": "meaning",
-   "bonus": 0,
-   "glossary": "off",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 18,
-    "hit3": 25,
-    "hit1_share": 0.45,
-    "hit3_share": 0.625
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 6,
-    "hit1_share": 0.364,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 14,
-    "hit3": 19,
-    "hit1_share": 0.483,
-    "hit3_share": 0.655
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0, stem v1, glossary words",
-   "matching": "meaning",
-   "bonus": 0,
-   "glossary": "words",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 18,
-    "hit3": 25,
-    "hit1_share": 0.45,
-    "hit3_share": 0.625
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 6,
-    "hit1_share": 0.364,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 14,
-    "hit3": 19,
-    "hit1_share": 0.483,
-    "hit3_share": 0.655
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0, stem v1, glossary both",
-   "matching": "meaning",
-   "bonus": 0,
-   "glossary": "both",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 21,
-    "hit3": 26,
-    "hit1_share": 0.525,
-    "hit3_share": 0.65
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 7,
-    "hit3": 7,
-    "hit1_share": 0.636,
-    "hit3_share": 0.636
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 14,
-    "hit3": 19,
-    "hit1_share": 0.483,
-    "hit3_share": 0.655
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.1, stem v1, glossary off",
-   "matching": "meaning",
-   "bonus": 0.1,
-   "glossary": "off",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 19,
-    "hit3": 30,
-    "hit1_share": 0.475,
-    "hit3_share": 0.75
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 3,
-    "hit3": 9,
-    "hit1_share": 0.273,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 16,
-    "hit3": 21,
-    "hit1_share": 0.552,
-    "hit3_share": 0.724
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.1, stem v1, glossary words",
-   "matching": "meaning",
-   "bonus": 0.1,
-   "glossary": "words",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 22,
-    "hit3": 29,
-    "hit1_share": 0.55,
-    "hit3_share": 0.725
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 6,
-    "hit3": 8,
-    "hit1_share": 0.545,
-    "hit3_share": 0.727
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 16,
-    "hit3": 21,
-    "hit1_share": 0.552,
-    "hit3_share": 0.724
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.1, stem v1, glossary both",
-   "matching": "meaning",
-   "bonus": 0.1,
-   "glossary": "both",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 25,
-    "hit3": 29,
-    "hit1_share": 0.625,
-    "hit3_share": 0.725
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 8,
-    "hit1_share": 0.727,
-    "hit3_share": 0.727
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 17,
-    "hit3": 21,
-    "hit1_share": 0.586,
-    "hit3_share": 0.724
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.2, stem v1, glossary off",
-   "matching": "meaning",
-   "bonus": 0.2,
-   "glossary": "off",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 24,
-    "hit3": 29,
-    "hit1_share": 0.6,
-    "hit3_share": 0.725
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 6,
-    "hit1_share": 0.364,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 23,
-    "hit1_share": 0.69,
-    "hit3_share": 0.793
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.2, stem v1, glossary words",
-   "matching": "meaning",
-   "bonus": 0.2,
-   "glossary": "words",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 28,
-    "hit3": 32,
-    "hit1_share": 0.7,
-    "hit3_share": 0.8
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 9,
-    "hit1_share": 0.727,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 23,
-    "hit1_share": 0.69,
-    "hit3_share": 0.793
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.2, stem v1, glossary both",
-   "matching": "meaning",
-   "bonus": 0.2,
-   "glossary": "both",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 28,
-    "hit3": 33,
-    "hit1_share": 0.7,
-    "hit3_share": 0.825
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 9,
-    "hit1_share": 0.727,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 24,
-    "hit1_share": 0.69,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.3, stem v1, glossary off",
-   "matching": "meaning",
-   "bonus": 0.3,
-   "glossary": "off",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 24,
-    "hit3": 31,
-    "hit1_share": 0.6,
-    "hit3_share": 0.775
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 7,
-    "hit1_share": 0.364,
-    "hit3_share": 0.636
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 24,
-    "hit1_share": 0.69,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.3, stem v1, glossary words",
-   "matching": "meaning",
-   "bonus": 0.3,
-   "glossary": "words",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 28,
-    "hit3": 33,
-    "hit1_share": 0.7,
-    "hit3_share": 0.825
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 9,
-    "hit1_share": 0.727,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 24,
-    "hit1_share": 0.69,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.3, stem v1, glossary both",
-   "matching": "meaning",
-   "bonus": 0.3,
-   "glossary": "both",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 28,
-    "hit3": 33,
-    "hit1_share": 0.7,
-    "hit3_share": 0.825
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 9,
-    "hit1_share": 0.727,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 24,
-    "hit1_share": 0.69,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.5, stem v1, glossary off",
-   "matching": "meaning",
-   "bonus": 0.5,
-   "glossary": "off",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 24,
-    "hit3": 31,
-    "hit1_share": 0.6,
-    "hit3_share": 0.775
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 7,
-    "hit1_share": 0.364,
-    "hit3_share": 0.636
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 24,
-    "hit1_share": 0.69,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.5, stem v1, glossary words",
-   "matching": "meaning",
-   "bonus": 0.5,
-   "glossary": "words",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 28,
-    "hit3": 34,
-    "hit1_share": 0.7,
-    "hit3_share": 0.85
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 10,
-    "hit1_share": 0.727,
-    "hit3_share": 0.909
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 24,
-    "hit1_share": 0.69,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.5, stem v1, glossary both",
-   "matching": "meaning",
-   "bonus": 0.5,
-   "glossary": "both",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 28,
-    "hit3": 34,
-    "hit1_share": 0.7,
-    "hit3_share": 0.85
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 10,
-    "hit1_share": 0.727,
-    "hit3_share": 0.909
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 24,
-    "hit1_share": 0.69,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 1, stem v1, glossary off",
-   "matching": "meaning",
-   "bonus": 1,
-   "glossary": "off",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 23,
-    "hit3": 30,
-    "hit1_share": 0.575,
-    "hit3_share": 0.75
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 6,
-    "hit1_share": 0.364,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 1, stem v1, glossary words",
-   "matching": "meaning",
-   "bonus": 1,
-   "glossary": "words",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 27,
-    "hit3": 33,
-    "hit1_share": 0.675,
-    "hit3_share": 0.825
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 9,
-    "hit1_share": 0.727,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 1, stem v1, glossary both",
-   "matching": "meaning",
-   "bonus": 1,
-   "glossary": "both",
-   "stem": "v1",
-   "all": {
-    "questions": 40,
-    "hit1": 28,
-    "hit3": 34,
-    "hit1_share": 0.7,
-    "hit3_share": 0.85
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 9,
-    "hit3": 10,
-    "hit1_share": 0.818,
-    "hit3_share": 0.909
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0, stem plural-e, glossary off",
-   "matching": "meaning",
-   "bonus": 0,
-   "glossary": "off",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 18,
-    "hit3": 25,
-    "hit1_share": 0.45,
-    "hit3_share": 0.625
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 6,
-    "hit1_share": 0.364,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 14,
-    "hit3": 19,
-    "hit1_share": 0.483,
-    "hit3_share": 0.655
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0, stem plural-e, glossary words",
-   "matching": "meaning",
-   "bonus": 0,
-   "glossary": "words",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 18,
-    "hit3": 25,
-    "hit1_share": 0.45,
-    "hit3_share": 0.625
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 6,
-    "hit1_share": 0.364,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 14,
-    "hit3": 19,
-    "hit1_share": 0.483,
-    "hit3_share": 0.655
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0, stem plural-e, glossary both",
-   "matching": "meaning",
-   "bonus": 0,
-   "glossary": "both",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 21,
-    "hit3": 26,
-    "hit1_share": 0.525,
-    "hit3_share": 0.65
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 7,
-    "hit3": 7,
-    "hit1_share": 0.636,
-    "hit3_share": 0.636
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 14,
-    "hit3": 19,
-    "hit1_share": 0.483,
-    "hit3_share": 0.655
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.1, stem plural-e, glossary off",
-   "matching": "meaning",
-   "bonus": 0.1,
-   "glossary": "off",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 19,
-    "hit3": 27,
-    "hit1_share": 0.475,
-    "hit3_share": 0.675
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 3,
-    "hit3": 6,
-    "hit1_share": 0.273,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 16,
-    "hit3": 21,
-    "hit1_share": 0.552,
-    "hit3_share": 0.724
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.1, stem plural-e, glossary words",
-   "matching": "meaning",
-   "bonus": 0.1,
-   "glossary": "words",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 23,
-    "hit3": 29,
-    "hit1_share": 0.575,
-    "hit3_share": 0.725
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 7,
-    "hit3": 8,
-    "hit1_share": 0.636,
-    "hit3_share": 0.727
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 16,
-    "hit3": 21,
-    "hit1_share": 0.552,
-    "hit3_share": 0.724
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.1, stem plural-e, glossary both",
-   "matching": "meaning",
-   "bonus": 0.1,
-   "glossary": "both",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 25,
-    "hit3": 29,
-    "hit1_share": 0.625,
-    "hit3_share": 0.725
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 8,
-    "hit1_share": 0.727,
-    "hit3_share": 0.727
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 17,
-    "hit3": 21,
-    "hit1_share": 0.586,
-    "hit3_share": 0.724
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.2, stem plural-e, glossary off",
-   "matching": "meaning",
-   "bonus": 0.2,
-   "glossary": "off",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 24,
-    "hit3": 29,
-    "hit1_share": 0.6,
-    "hit3_share": 0.725
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 6,
-    "hit1_share": 0.364,
-    "hit3_share": 0.545
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 23,
-    "hit1_share": 0.69,
-    "hit3_share": 0.793
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.2, stem plural-e, glossary words",
-   "matching": "meaning",
-   "bonus": 0.2,
-   "glossary": "words",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 28,
-    "hit3": 32,
-    "hit1_share": 0.7,
-    "hit3_share": 0.8
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 9,
-    "hit1_share": 0.727,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 23,
-    "hit1_share": 0.69,
-    "hit3_share": 0.793
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.2, stem plural-e, glossary both",
-   "matching": "meaning",
-   "bonus": 0.2,
-   "glossary": "both",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 28,
-    "hit3": 32,
-    "hit1_share": 0.7,
-    "hit3_share": 0.8
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 8,
-    "hit1_share": 0.727,
-    "hit3_share": 0.727
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 20,
-    "hit3": 24,
-    "hit1_share": 0.69,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.3, stem plural-e, glossary off",
-   "matching": "meaning",
-   "bonus": 0.3,
-   "glossary": "off",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 23,
-    "hit3": 31,
-    "hit1_share": 0.575,
-    "hit3_share": 0.775
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 7,
-    "hit1_share": 0.364,
-    "hit3_share": 0.636
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.3, stem plural-e, glossary words",
-   "matching": "meaning",
-   "bonus": 0.3,
-   "glossary": "words",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 27,
-    "hit3": 33,
-    "hit1_share": 0.675,
-    "hit3_share": 0.825
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 9,
-    "hit1_share": 0.727,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.3, stem plural-e, glossary both",
-   "matching": "meaning",
-   "bonus": 0.3,
-   "glossary": "both",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 27,
-    "hit3": 33,
-    "hit1_share": 0.675,
-    "hit3_share": 0.825
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 9,
-    "hit1_share": 0.727,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.5, stem plural-e, glossary off",
-   "matching": "meaning",
-   "bonus": 0.5,
-   "glossary": "off",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 23,
-    "hit3": 31,
-    "hit1_share": 0.575,
-    "hit3_share": 0.775
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 7,
-    "hit1_share": 0.364,
-    "hit3_share": 0.636
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.5, stem plural-e, glossary words",
-   "matching": "meaning",
-   "bonus": 0.5,
-   "glossary": "words",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 26,
-    "hit3": 34,
-    "hit1_share": 0.65,
-    "hit3_share": 0.85
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 7,
-    "hit3": 10,
-    "hit1_share": 0.636,
-    "hit3_share": 0.909
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 0.5, stem plural-e, glossary both",
-   "matching": "meaning",
-   "bonus": 0.5,
-   "glossary": "both",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 27,
-    "hit3": 34,
-    "hit1_share": 0.675,
-    "hit3_share": 0.85
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 10,
-    "hit1_share": 0.727,
-    "hit3_share": 0.909
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 1, stem plural-e, glossary off",
-   "matching": "meaning",
-   "bonus": 1,
-   "glossary": "off",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 23,
-    "hit3": 31,
-    "hit1_share": 0.575,
-    "hit3_share": 0.775
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 4,
-    "hit3": 7,
-    "hit1_share": 0.364,
-    "hit3_share": 0.636
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 1, stem plural-e, glossary words",
-   "matching": "meaning",
-   "bonus": 1,
-   "glossary": "words",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 27,
-    "hit3": 33,
-    "hit1_share": 0.675,
-    "hit3_share": 0.825
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 9,
-    "hit1_share": 0.727,
-    "hit3_share": 0.818
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
-  },
-  {
-   "setting": "meaning, word bonus 1, stem plural-e, glossary both",
-   "matching": "meaning",
-   "bonus": 1,
-   "glossary": "both",
-   "stem": "plural-e",
-   "all": {
-    "questions": 40,
-    "hit1": 27,
-    "hit3": 34,
-    "hit1_share": 0.675,
-    "hit3_share": 0.85
-   },
-   "everyday_words": {
-    "questions": 11,
-    "hit1": 8,
-    "hit3": 10,
-    "hit1_share": 0.727,
-    "hit3_share": 0.909
-   },
-   "other": {
-    "questions": 29,
-    "hit1": 19,
-    "hit3": 24,
-    "hit1_share": 0.655,
-    "hit3_share": 0.828
-   }
   }
  ]
 }

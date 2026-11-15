@@ -9,7 +9,9 @@
  *     an independent count from tests.csv;
  *   - every glossary term exists in NASA's text or tables;
  *   - related.json and the word-matching score in ask_eval.json are what the current
- *     code and index give (the meaning score needs the language model: run eval_ask.mjs).
+ *     code and index give (the meaning score needs the language model: run eval_ask.mjs);
+ *   - the index was built with the model the site loads, the download size stated is the
+ *     size of the files served, and the test questions are split into two halves.
  *
  * Needs no language model and no npm install.
  * Run from the repo root, after build_dataset.py and build_search.mjs:   node scripts/check_ask.cjs
@@ -102,6 +104,18 @@ check(same && Object.keys(R.related).length === D.investigations.length, `relate
 // ---- the published score
 check(JSON.stringify(E.site_settings) === JSON.stringify(Ask.SETTINGS), "ask_eval.json was scored with the settings the site uses: " + JSON.stringify(Ask.SETTINGS));
 check(E.questions.length === Q.questions.length && E.questions.every((q, i) => q.q === Q.questions[i].q && q.expect.join() === Q.questions[i].expect.join()), `ask_eval.json covers the current ${Q.questions.length} test questions`);
+check(P.about.model === Ask.SETTINGS.model && P.about.header === Ask.SETTINGS.header && !!Ask.MODELS[P.about.model] && P.about.pooling === Ask.MODELS[P.about.model].pooling && P.about.query_prefix === Ask.MODELS[P.about.model].queryPrefix,
+  `the index was built with the model the site loads (${Ask.SETTINGS.model}), with its pooling and question prefix`);
+const mdir = path.join(docs, "models", Ask.SETTINGS.model);
+check(fs.existsSync(path.join(mdir, "onnx", "model_quantized.onnx")) && fs.existsSync(path.join(mdir, "tokenizer.json")), "that model is served with the site (docs/models/)");
+const sizeOf = f => fs.statSync(f).size;
+const served = ["onnx/model_quantized.onnx", "tokenizer.json", "tokenizer_config.json", "config.json"].reduce((a, f) => a + sizeOf(path.join(mdir, f)), 0) + fs.readdirSync(path.join(docs, "vendor")).reduce((a, f) => a + sizeOf(path.join(docs, "vendor", f)), 0);
+check(P.about.download_mb === Math.round(served / 1e6), `the download size the page states (${P.about.download_mb} MB) is the size of the files served`);
+const halves = h => Q.questions.filter(q => q.half === h);
+check(halves("tuning").length + halves("held_out").length === Q.questions.length && Math.abs(halves("tuning").length - halves("held_out").length) <= 1 && Math.abs(halves("tuning").filter(q => q.everyday).length - halves("held_out").filter(q => q.everyday).length) <= 1 && Q.about.split && Q.about.split.seed != null,
+  `the questions are split into a tuning half (${halves("tuning").length}) and a held-out half (${halves("held_out").length}), each with its share of everyday-word questions, seed recorded`);
+check(E.questions.every((q, i) => q.half === Q.questions[i].half) && ["by_meaning", "by_words"].every(k => E.site[k].tuning.hit1 + E.site[k].held_out.hit1 === E.site[k].all.hit1 && E.site[k].tuning.hit3 + E.site[k].held_out.hit3 === E.site[k].all.hit3),
+  "ask_eval.json uses that split, and its two halves add up to its totals");
 const ix = Ask.index(P.passages);
 let h1 = 0, h3 = 0;
 Q.questions.forEach(q => {
