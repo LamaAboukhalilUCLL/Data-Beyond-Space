@@ -943,8 +943,8 @@
   var ASK = { P: null, vec: null, dims: 0, ix: null, model: "off", embed: null, q: "", seq: 0 };
   // One example per thing Ask can do (each checked against ask.js and the built index, 15 Nov):
   // Moon card + counted answer, counts with numbers, droplets (near misses), NASA's material test,
-  // the word list (cloth, catch fire / fire alarm, without gravity / put out), and plain matching by meaning.
-  var ASK_EXAMPLES = ["Will cabin materials burn in Moon Base air?", "How many tests were run at 30 % oxygen and 10.2 psi or less?", "Which tests burned droplets at 30 % oxygen or more?", "Is the Earth test for materials safe enough for space?", "Can cotton cloth catch fire in a spacecraft?", "Does a fire alarm work without gravity?", "Which experiments used helium or carbon dioxide to put out a flame?", "Why does a flame in space look like a ball?"];
+  // the word list (smoke alarm, cable / put out), and plain matching by meaning.
+  var ASK_EXAMPLES = ["Will cabin materials burn in Moon Base air?", "How many tests were run at 30 % oxygen and 10.2 psi or less?", "Which tests burned droplets at 30 % oxygen or more?", "Is the Earth test for materials safe enough for space?", "Would a smoke alarm notice an overheating cable?", "Which experiments used helium or carbon dioxide to put out a flame?", "Why does a flame in space look like a ball?"];
   var words = Ask.words;   // the matching itself is in ask.js, shared with the scripts that test and score it
   function askLoad() {
     if (ASK.P) return Promise.resolve();
