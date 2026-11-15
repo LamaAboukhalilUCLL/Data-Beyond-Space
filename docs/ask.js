@@ -24,11 +24,26 @@
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
 
-  // The settings the site uses. scripts/eval_ask.mjs scores exactly these, and compares them with others.
+  // The settings the site uses. scripts/eval_ask.mjs scores exactly these; scripts/tune_ask.mjs compares
+  // them with others on the tuning half of the test questions.
   //   bonus     how much of the shared-word score is added to the meaning score (0 = meaning only)
+  //   fusion    "bonus": meaning + bonus x words.  "rrf": reciprocal rank fusion of the two rankings
+  //   title     weight of a passage that is only a paper's title
+  //   group     "passage": best passages first.  "investigation": investigations ordered by their
+  //             best two passages, each followed by those passages
+  //   header    what is put in front of a passage before the model reads it (see embedText)
   //   glossary  where the glossary terms are added: "off", "words" (word matching only) or "both"
   //   stem      "plural-e" also drops a final e, so "flames" and "flame" meet; "v1" is the earlier rule
-  var SETTINGS = { bonus: 0.2, glossary: "words", stem: "plural-e" };
+  //   model     the language model, one of MODELS
+  var SETTINGS = { bonus: 0.2, fusion: "bonus", title: 0.9, group: "passage", header: "none", glossary: "words", stem: "plural-e", model: "Xenova/all-MiniLM-L6-v2" };
+  // How each model wants its text: how token vectors are pooled, what a question is prefixed with
+  // (passages get no prefix), and the score below which a passage is not shown. The models spread
+  // their similarities differently, so each has its own floor: 0.65 for arctic lies below the first
+  // right passage of every tuning question and above the best passage of most unrelated questions.
+  var MODELS = {
+    "Xenova/all-MiniLM-L6-v2": { pooling: "mean", queryPrefix: "", floor: 0.3 },
+    "Snowflake/snowflake-arctic-embed-s": { pooling: "cls", queryPrefix: "Represent this sentence for searching relevant passages: ", floor: 0.65 }
+  };
 
   var STOP = {};
   "a an and are as at be been but by can did do does for from had has have how if in into is it its of on or that the their them there these this to was were what when where which while who why will with would than then so not no about over under more most much many any some such also only other out up down very".split(" ").forEach(function (w) { STOP[w] = 1; });
@@ -55,10 +70,10 @@
     return { toks: toks, idf: idf };
   }
   // Every passage scored, best first. `qvec` is the question's vector from the language model, or null.
-  // opt.bonus: weight of the shared-word score beside the meaning score. opt.extra: glossary terms for the word match.
+  // opt overrides SETTINGS (bonus, fusion, title); opt.extra: glossary terms for the word match.
   function scoreAll(ix, passages, vec, dims, q, qvec, opt) {
     opt = opt || {};
-    var bonus = opt.bonus == null ? SETTINGS.bonus : opt.bonus;
+    var bonus = opt.bonus == null ? SETTINGS.bonus : opt.bonus, fusion = opt.fusion || SETTINGS.fusion, title = opt.title == null ? SETTINGS.title : opt.title;
     var qt = words(q + (opt.extra ? " " + opt.extra : "")), n = passages.length, out = [], avg = 28, seenQ = {};
     qt = qt.filter(function (w) { if (seenQ[w]) return false; seenQ[w] = 1; return true; });
     for (var i = 0; i < n; i++) {
@@ -72,24 +87,68 @@
     var maxKw = 0;
     out.forEach(function (x) { if (x.kw > maxKw) maxKw = x.kw; });
     maxKw = maxKw || 1;
-    out.forEach(function (x) {
-      var p = passages[x.i];
-      x.score = qvec ? x.sem + bonus * x.kw / maxKw : x.kw / maxKw;
-      if (p.kind === "paper" && p.part === "title") x.score *= 0.9;     // a title says less than a sentence
-    });
+    function weight(x) { var p = passages[x.i]; return p.kind === "paper" && p.part === "title" ? (qvec ? title : 0.9) : 1; }   // a title says less than a sentence
+    // `rel` decides whether a passage is shown at all; `score` decides the order
+    out.forEach(function (x) { x.score = (qvec ? x.sem + bonus * x.kw / maxKw : x.kw / maxKw) * weight(x); x.rel = x.score; });
+    if (qvec && fusion === "rrf") {
+      var K = 60, bySem = out.slice().sort(function (a, b) { return b.sem - a.sem || a.i - b.i; }), byKw = out.filter(function (x) { return x.kw > 0; }).sort(function (a, b) { return b.kw - a.kw || a.i - b.i; });
+      out.forEach(function (x) { x.score = 0; });
+      bySem.forEach(function (x, r) { x.score += 1 / (K + r + 1); });
+      byKw.forEach(function (x, r) { x.score += 1 / (K + r + 1); });
+      out.forEach(function (x) { x.score *= weight(x); });
+    }
     out.sort(function (a, b) { return b.score - a.score || a.i - b.i; });
     return out;
   }
   // The passages shown: at most eight, at most two from one record or paper, none below a floor.
   function rank(ix, passages, vec, dims, q, qvec, opt) {
-    var out = scoreAll(ix, passages, vec, dims, q, qvec, opt), seen = {}, top = [], floor = qvec ? 0.3 : 0.2;
+    opt = opt || {};
+    var out = scoreAll(ix, passages, vec, dims, q, qvec, opt), group = qvec ? (opt.group || SETTINGS.group) : "passage";
+    var floor = qvec ? (opt.floor == null ? MODELS[SETTINGS.model].floor : opt.floor) : 0.2;
+    out = out.filter(function (x) { return x.rel >= floor; });
+    if (group === "investigation") out = byInvestigation(out, passages);
+    var seen = {}, top = [];
     for (var j = 0; j < out.length && top.length < 8; j++) {
       var x = out[j], p = passages[x.i], key = p.kind === "record" ? p.inv : p.doi;
-      if (x.score < floor) break;
       seen[key] = (seen[key] || 0) + 1;
       if (seen[key] <= 2) top.push(x);
     }
     return top;
+  }
+  // Reorders scored passages: investigations by (best passage + half of the second best), each
+  // followed by its two best passages. A paper counts for every investigation PSI lists it under.
+  function byInvestigation(out, passages) {
+    var best = {}, ids = [];
+    out.forEach(function (x) {
+      invsOf(passages[x.i]).forEach(function (id) {
+        if (!best[id]) { best[id] = []; ids.push(id); }
+        if (best[id].length < 2) best[id].push(x);
+      });
+    });
+    function val(id) { var b = best[id]; return b[0].score + (b[1] ? 0.5 * b[1].score : 0); }
+    ids.sort(function (a, b) { return val(b) - val(a) || (a < b ? -1 : 1); });
+    var done = {}, res = [];
+    ids.forEach(function (id) { best[id].forEach(function (x) { if (!done[x.i]) { done[x.i] = 1; res.push(x); } }); });
+    out.forEach(function (x) { if (!done[x.i]) { done[x.i] = 1; res.push(x); } });
+    return res;
+  }
+  // The text the language model reads for a passage. The page always shows NASA's text as it is;
+  // a header only tells the model where the passage comes from.
+  //   "none"   the passage alone
+  //   "name"   investigation name, what burns, and the field (or the paper's title)
+  //   "attrs"  the same, plus the sample or burner from the checked attributes
+  var FIELD_NAME = { objective: "Objective", approach: "Approach", hypothesis: "Hypothesis", researchImpacts: "Research impacts" };
+  function embedText(p, byId, header) {
+    header = header || SETTINGS.header;
+    if (header === "none") return p.text;
+    function about(id) {
+      var i = byId[id], s = i.name + " (" + i.cls_label;
+      if (header === "attrs" && i.attributes && i.attributes.sample && i.attributes.sample.text) s += "; " + i.attributes.sample.text;
+      return s + ")";
+    }
+    if (p.kind === "record") return about(p.inv) + ". " + FIELD_NAME[p.field] + ": " + p.text;
+    var names = p.psi.map(function (id) { return p.psi.length === 1 ? about(id) : byId[id].name; }).join(", ");
+    return names + ". " + (p.part === "title" ? "Paper: " + p.text : "Paper: " + p.title + ". " + p.text);
   }
   // The investigations a passage belongs to: its record, or the records PSI lists the paper under.
   function invsOf(p) { return p.kind === "record" ? [p.inv] : (p.psi || []); }
@@ -287,7 +346,7 @@
 
   return {
     relatedByMeaning: relatedByMeaning, relatedByWords: relatedByWords,
-    SETTINGS: SETTINGS, MOON_PATTERN: MOON_PATTERN,
+    SETTINGS: SETTINGS, MODELS: MODELS, embedText: embedText, MOON_PATTERN: MOON_PATTERN,
     words: words, index: index, scoreAll: scoreAll, rank: rank, invsOf: invsOf,
     moon: moon, expand: expand, expansionText: expansionText,
     fuelVocabulary: fuelVocabulary, fuelTokens: fuelTokens, intent: intent, scopeTests: scopeTests, answer: answer,
