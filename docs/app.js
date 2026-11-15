@@ -962,7 +962,7 @@
       T.env.localModelPath = "./models/";
       T.env.backends.onnx.wasm.wasmPaths = new URL("./vendor/", location.href).href;
       T.env.backends.onnx.wasm.numThreads = 1;
-      return T.pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { dtype: "q8", device: "wasm" });
+      return T.pipeline("feature-extraction", Ask.SETTINGS.model, { dtype: "q8", device: "wasm" });
     }).then(function (ex) {
       ASK.embed = ex; ASK.model = "ready";
       try { localStorage.setItem("ask-smart", "1"); } catch (e) {}
@@ -973,10 +973,11 @@
     var el = document.getElementById("ask-mode");
     if (!el) return;
     el.className = "askmode " + ASK.model;
+    var mb = ASK.P && ASK.P.about.download_mb ? "about " + ASK.P.about.download_mb + " MB, " : "";   // counted by the build from the files served
     el.innerHTML = ASK.model === "ready" ? "<b>Matching by meaning.</b> A small language model is running in your browser. It only matches text, it writes none, and your question stays on your computer." :
-      ASK.model === "loading" ? "<b>Loading the language model.</b> About 50 MB, once. Until it is ready, results are matched by words." :
+      ASK.model === "loading" ? "<b>Loading the language model.</b> " + (mb ? "About " + ASK.P.about.download_mb + " MB, once. " : "") + "Until it is ready, results are matched by words." :
       ASK.model === "failed" ? "<b>Matching by words.</b> The language model could not start in this browser." :
-      '<b>Matching by words.</b> <button class="link" data-smart="1">Match by meaning instead</button> A small language model (about 50 MB, downloaded once) then runs in your browser.';
+      '<b>Matching by words.</b> <button class="link" data-smart="1">Match by meaning instead</button> A small language model (' + mb + 'downloaded once) then runs in your browser.';
   }
   function plural(n, one, many) { return n + " " + (n === 1 ? one : many); }
   // Everyday words in the question -> the terms NASA's text uses (a fixed list, checked by the build).
@@ -1064,7 +1065,7 @@
     }
     show(null);
     var embed = ASK.embed;   // called on its own: the pipeline must not see ASK as "this"
-    if (ASK.model === "ready") embed([q], { pooling: "mean", normalize: true }).then(function (o) { show(o.tolist()[0]); }).catch(function (e) { console.error(e); probe("embed failed: " + e + " " + (e && e.stack || "").slice(0, 300)); });
+    if (ASK.model === "ready") embed([Ask.MODELS[Ask.SETTINGS.model].queryPrefix + q], { pooling: Ask.MODELS[Ask.SETTINGS.model].pooling, normalize: true }).then(function (o) { show(o.tolist()[0]); }).catch(function (e) { console.error(e); probe("embed failed: " + e + " " + (e && e.stack || "").slice(0, 300)); });
   }
   function viewAsk(q) {
     setTitle("Ask");
@@ -1085,6 +1086,7 @@
     askLoad().then(function () {
       var box = document.getElementById("ask-out");
       if (box) box.innerHTML = "";
+      drawAskMode();
       runAsk();
       var saved = false;
       try { saved = localStorage.getItem("ask-smart") === "1"; } catch (e) {}
@@ -1304,7 +1306,7 @@
       '<details class="sect"><summary>How well Ask finds the right record</summary><div id="ask-eval"><p class="muted">Loading the test results…</p></div></details>' +
       '<details class="sect"><summary>How AI was used</summary><p>AI does four jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
       "<li><strong>It reads NASA's records.</strong> An AI model (Claude, Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. Before the site is built, a program checks that every quotation exists word for word in the named NASA record, that every table column exists, and that the texts contain no hand-typed numbers.</li>" +
-      "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (all-MiniLM-L6-v2) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer. The numbers the Ask page shows beside the quotations are counted from NASA's tables by ordinary code, not by the model. A short fixed list links everyday words to NASA's terms (for example plastic and PMMA); it was drafted with AI, and the build stops if a term is not in NASA's text or tables.</li>" +
+      "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (snowflake-arctic-embed-s) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer. The numbers the Ask page shows beside the quotations are counted from NASA's tables by ordinary code, not by the model. A short fixed list links everyday words to NASA's terms (for example plastic and PMMA); it was drafted with AI, and the build stops if a term is not in NASA's text or tables.</li>" +
       "<li><strong>It helped write the code.</strong> The scripts and this website were written with AI assistance and reviewed by the team.</li>" +
       "<li><strong>It drew the pictures that are not photographs.</strong> The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance. Each drawing on a page carries a note saying so. The three photographs are NASA's and are not AI-generated.</li></ol>" +
       "<p>An early layout of the overview followed a design mockup made with ChatGPT (OpenAI); the mockup itself is not used. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.</p></details>";
@@ -1326,19 +1328,22 @@
       '<li><a href="https://ntrs.nasa.gov/citations/20205007829" target="_blank" rel="noopener">G. A. Ruff, Spacecraft Fire Safety Needs for Exploration, NASA Glenn, 2020</a> (roadmap listing Saffire IV to VI with elevated oxygen)</li>' +
       '<li><a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (year and journal of the publications PSI lists)</li>' +
       '<li><a href="https://github.com/nasa/hds-core" target="_blank" rel="noopener">NASA Horizon Design System</a> (the colour values: NASA Red, the Carbon greys and the chart palette for dark backgrounds)</li>' +
-      '<li><a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2" target="_blank" rel="noopener">all-MiniLM-L6-v2</a> language model (Apache-2.0), run with <a href="https://github.com/huggingface/transformers.js" target="_blank" rel="noopener">Transformers.js</a> (Apache-2.0) and <a href="https://github.com/microsoft/onnxruntime" target="_blank" rel="noopener">ONNX Runtime Web</a> (MIT); all three are served with this site</li></ul>';
+      '<li><a href="https://huggingface.co/Snowflake/snowflake-arctic-embed-s" target="_blank" rel="noopener">snowflake-arctic-embed-s</a> language model (Snowflake, Apache-2.0), run with <a href="https://github.com/huggingface/transformers.js" target="_blank" rel="noopener">Transformers.js</a> (Apache-2.0) and <a href="https://github.com/microsoft/onnxruntime" target="_blank" rel="noopener">ONNX Runtime Web</a> (MIT); all three are served with this site</li></ul>';
     h += '<p>Images, all NASA photographs in the public domain, none AI-generated: the Moon is the <a href="' + MOON.page + '" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter near-side mosaic</a> (' + esc(MOON.credit) + '); Earth is <a href="https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" target="_blank" rel="noopener">The Earth seen from Apollo 17</a> (NASA, Apollo 17 crew); the space station is <a href="https://commons.wikimedia.org/wiki/File:International_Space_Station_after_undocking_of_STS-132.jpg" target="_blank" rel="noopener">photograph S132-E-012208</a> (NASA, crew of STS-132).</p>';
     fetch("data/ask_eval.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (E) {
       var el = document.getElementById("ask-eval");
       if (!el) return;
-      function row(name, s) { return "<tr><td>" + name + "</td><td>" + s.hit1 + " of " + s.questions + " (" + s.hit1_share.toFixed(2) + ")</td><td>" + s.hit3 + " of " + s.questions + " (" + s.hit3_share.toFixed(2) + ")</td></tr>"; }
-      var m = E.site.by_meaning, w = E.site.by_words, st = E.site_settings;
-      var off = E.compared_settings.filter(function (c) { return c.matching === "meaning" && c.bonus === st.bonus && c.stem === st.stem && c.glossary === "off"; })[0];
-      var t = "<p>" + m.all.questions + " test questions were written, and for each one the investigations that answer it were listed. A script then ranks NASA's passages for every question with the same code and the same index this site uses (<code>scripts/eval_ask.mjs</code>, <code>ask.js</code>). A question counts as found when a passage shown comes from one of its investigations.</p>";
-      t += '<div class="tablewrap"><table><thead><tr><th>Matching</th><th>Right investigation first</th><th>Among the first three</th></tr></thead><tbody>' + row("By meaning (language model loaded)", m.all) + row("By words (no model)", w.all) + "</tbody></table></div>";
+      function cell(s) { return "<td>" + s.hit1 + " of " + s.questions + "</td><td>" + s.hit3 + " of " + s.questions + "</td>"; }
+      function row(name, x) { return "<tr><td>" + name + "</td>" + cell(x.held_out) + cell(x.all) + "</tr>"; }
+      var m = E.site.by_meaning, w = E.site.by_words, off = E.site.by_meaning_without_word_list, o = E.other_model;
+      var t = "<p>" + m.all.questions + " test questions were written, and for each one the investigations that answer it were listed. A script ranks NASA's passages for every question with the same code and the same index this site uses (<code>scripts/eval_ask.mjs</code>, <code>ask.js</code>). A question counts as found when a passage shown comes from one of its investigations.</p>";
+      t += "<p>The questions were split at random, with a fixed seed, into two halves. Every ranking setting was decided on one half only. The other half, <strong>held out</strong>, was not used to choose settings, so its score is the more honest one. The two language models were then compared on the held-out half, and the one that matches better by meaning alone was kept.</p>";
+      t += '<div class="tablewrap"><table><thead><tr><th rowspan="2">Matching</th><th colspan="2">Held-out half</th><th colspan="2">All questions</th></tr><tr><th>Right first</th><th>In first three</th><th>Right first</th><th>In first three</th></tr></thead><tbody>' +
+        row("By meaning, with shared words as a bonus (language model loaded)", m) + (E.site.by_meaning_alone ? row("By meaning alone (not used on the site)", E.site.by_meaning_alone) : "") + row("By words (no model)", w) +
+        (o ? row("The earlier model, " + esc(o.model.split("/").pop()) + ", by meaning with the bonus", o.with_bonus) + row("The earlier model, by meaning alone", o.meaning_alone) : "") + "</tbody></table></div>";
       t += "<p><strong>Read this score with care.</strong> The questions and their expected answers were labelled by " + esc(E.about.labelled_by) + (E.about.checked_by ? " Checked by " + esc(E.about.checked_by) + "." : "") + " " + esc(E.about.caution) + "</p>";
-      if (off && st.glossary !== "off") t += "<p>" + m.everyday_words.questions + " of the questions use everyday words that NASA's text does not use. For those, the word list finds the right investigation first in " + m.everyday_words.hit1 + " and among the first three in " + m.everyday_words.hit3 + "; without the list it is " + off.everyday_words.hit1 + " and " + off.everyday_words.hit3 + ". The word list was drafted by the same AI that wrote the questions, so this comparison flatters it.</p>";
-      t += '<p>The questions, the expected investigations and the result for each are in <a href="data/ask_eval.json">data/ask_eval.json</a>, with the scores of the other settings that were tried.</p>';
+      if (off) t += "<p>" + m.everyday_words.questions + " of the questions use everyday words that NASA's text does not use. For those, the word list finds the right investigation first in " + m.everyday_words.hit1 + " and among the first three in " + m.everyday_words.hit3 + "; without the list it is " + off.everyday_words.hit1 + " and " + off.everyday_words.hit3 + ". The word list was drafted by the same AI that wrote the questions, so this comparison flatters it.</p>";
+      t += '<p>The questions, their halves, the expected investigations and the result for each are in <a href="data/ask_eval.json">data/ask_eval.json</a>.</p>';
       el.innerHTML = t;
     }).catch(function () { var el = document.getElementById("ask-eval"); if (el) el.innerHTML = '<p class="muted">The test results could not be loaded.</p>'; });
     h += '<p>Typefaces, all under the SIL Open Font License 1.1 and served with the site: <a href="https://github.com/jpt/barlow" target="_blank" rel="noopener">Barlow Condensed</a>, <a href="https://github.com/uswds/public-sans" target="_blank" rel="noopener">Public Sans</a> and <a href="https://github.com/googlefonts/dm-mono" target="_blank" rel="noopener">DM Mono</a>.</p></details>';

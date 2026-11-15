@@ -35,7 +35,7 @@
   //   glossary  where the glossary terms are added: "off", "words" (word matching only) or "both"
   //   stem      "plural-e" also drops a final e, so "flames" and "flame" meet; "v1" is the earlier rule
   //   model     the language model, one of MODELS
-  var SETTINGS = { bonus: 0.2, fusion: "bonus", title: 0.9, group: "passage", header: "none", glossary: "words", stem: "plural-e", model: "Xenova/all-MiniLM-L6-v2" };
+  var SETTINGS = { bonus: 0.2, fusion: "bonus", title: 0.9, group: "passage", header: "none", glossary: "words", stem: "plural-e", model: "Snowflake/snowflake-arctic-embed-s" };
   // How each model wants its text: how token vectors are pooled, what a question is prefixed with
   // (passages get no prefix), and the score below which a passage is not shown. The models spread
   // their similarities differently, so each has its own floor: 0.65 for arctic lies below the first

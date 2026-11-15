@@ -1,344 +1,344 @@
 {
  "about": {
   "what": "For each investigation, the three others whose PSI record text is closest in meaning: cosine similarity between the mean vectors of their record passages (objective, approach, hypothesis, research impacts).",
-  "model": "Xenova/all-MiniLM-L6-v2",
+  "model": "Snowflake/snowflake-arctic-embed-s",
   "built_by": "scripts/build_search.mjs (written with AI assistance: Claude Code, Anthropic)"
  },
  "related": {
   "PSI-69": [
    {
-    "id": "PSI-20",
-    "similarity": 0.861
+    "id": "PSI-68",
+    "similarity": 0.97
    },
    {
     "id": "PSI-117",
-    "similarity": 0.821
+    "similarity": 0.967
    },
    {
-    "id": "PSI-100",
-    "similarity": 0.817
+    "id": "PSI-20",
+    "similarity": 0.964
    }
   ],
   "PSI-159": [
    {
-    "id": "PSI-23",
-    "similarity": 0.819
+    "id": "PSI-10",
+    "similarity": 0.951
    },
    {
     "id": "PSI-142",
-    "similarity": 0.819
+    "similarity": 0.949
    },
    {
-    "id": "PSI-21",
-    "similarity": 0.816
+    "id": "PSI-23",
+    "similarity": 0.949
    }
   ],
   "PSI-20": [
    {
-    "id": "PSI-69",
-    "similarity": 0.861
-   },
-   {
     "id": "PSI-25",
-    "similarity": 0.847
+    "similarity": 0.968
    },
    {
     "id": "PSI-26",
-    "similarity": 0.843
+    "similarity": 0.967
+   },
+   {
+    "id": "PSI-69",
+    "similarity": 0.964
    }
   ],
   "PSI-25": [
    {
     "id": "PSI-26",
-    "similarity": 0.912
+    "similarity": 0.984
    },
    {
     "id": "PSI-20",
-    "similarity": 0.847
+    "similarity": 0.968
    },
    {
-    "id": "PSI-62",
-    "similarity": 0.821
+    "id": "PSI-69",
+    "similarity": 0.964
    }
   ],
   "PSI-26": [
    {
     "id": "PSI-25",
-    "similarity": 0.912
-   },
-   {
-    "id": "PSI-107",
-    "similarity": 0.859
+    "similarity": 0.984
    },
    {
     "id": "PSI-20",
-    "similarity": 0.843
+    "similarity": 0.967
+   },
+   {
+    "id": "PSI-100",
+    "similarity": 0.965
    }
   ],
   "PSI-98": [
    {
     "id": "PSI-100",
-    "similarity": 0.974
+    "similarity": 0.991
    },
    {
     "id": "PSI-99",
-    "similarity": 0.969
+    "similarity": 0.991
    },
    {
     "id": "PSI-26",
-    "similarity": 0.831
+    "similarity": 0.964
    }
   ],
   "PSI-99": [
    {
     "id": "PSI-100",
-    "similarity": 0.98
+    "similarity": 0.992
    },
    {
     "id": "PSI-98",
-    "similarity": 0.969
+    "similarity": 0.991
    },
    {
-    "id": "PSI-69",
-    "similarity": 0.798
+    "id": "PSI-26",
+    "similarity": 0.958
    }
   ],
   "PSI-100": [
    {
     "id": "PSI-99",
-    "similarity": 0.98
+    "similarity": 0.992
    },
    {
     "id": "PSI-98",
-    "similarity": 0.974
+    "similarity": 0.991
    },
    {
-    "id": "PSI-69",
-    "similarity": 0.817
+    "id": "PSI-26",
+    "similarity": 0.965
    }
   ],
   "PSI-101": [
    {
     "id": "PSI-102",
-    "similarity": 0.882
+    "similarity": 0.978
    },
    {
-    "id": "PSI-99",
-    "similarity": 0.685
+    "id": "PSI-69",
+    "similarity": 0.937
    },
    {
-    "id": "PSI-100",
-    "similarity": 0.678
+    "id": "PSI-26",
+    "similarity": 0.937
    }
   ],
   "PSI-102": [
    {
     "id": "PSI-101",
-    "similarity": 0.882
+    "similarity": 0.978
+   },
+   {
+    "id": "PSI-68",
+    "similarity": 0.949
    },
    {
     "id": "PSI-115",
-    "similarity": 0.687
-   },
-   {
-    "id": "PSI-107",
-    "similarity": 0.672
+    "similarity": 0.949
    }
   ],
   "PSI-10": [
    {
-    "id": "PSI-21",
-    "similarity": 0.861
-   },
-   {
     "id": "PSI-23",
-    "similarity": 0.847
+    "similarity": 0.961
    },
    {
-    "id": "PSI-142",
-    "similarity": 0.844
+    "id": "PSI-21",
+    "similarity": 0.956
+   },
+   {
+    "id": "PSI-159",
+    "similarity": 0.951
    }
   ],
   "PSI-62": [
    {
+    "id": "PSI-117",
+    "similarity": 0.963
+   },
+   {
     "id": "PSI-26",
-    "similarity": 0.837
+    "similarity": 0.961
    },
    {
-    "id": "PSI-107",
-    "similarity": 0.826
-   },
-   {
-    "id": "PSI-25",
-    "similarity": 0.821
+    "id": "PSI-23",
+    "similarity": 0.957
    }
   ],
   "PSI-115": [
    {
-    "id": "PSI-107",
-    "similarity": 0.689
-   },
-   {
     "id": "PSI-102",
-    "similarity": 0.687
+    "similarity": 0.949
    },
    {
     "id": "PSI-68",
-    "similarity": 0.623
+    "similarity": 0.934
+   },
+   {
+    "id": "PSI-26",
+    "similarity": 0.933
    }
   ],
   "PSI-68": [
    {
-    "id": "PSI-39",
-    "similarity": 0.81
+    "id": "PSI-69",
+    "similarity": 0.97
    },
    {
-    "id": "PSI-69",
-    "similarity": 0.81
+    "id": "PSI-23",
+    "similarity": 0.963
    },
    {
     "id": "PSI-117",
-    "similarity": 0.776
+    "similarity": 0.96
    }
   ],
   "PSI-47": [
    {
-    "id": "PSI-101",
-    "similarity": 0.644
+    "id": "PSI-102",
+    "similarity": 0.932
    },
    {
-    "id": "PSI-102",
-    "similarity": 0.63
+    "id": "PSI-101",
+    "similarity": 0.93
    },
    {
     "id": "PSI-69",
-    "similarity": 0.57
+    "similarity": 0.918
    }
   ],
   "PSI-21": [
    {
     "id": "PSI-23",
-    "similarity": 0.908
-   },
-   {
-    "id": "PSI-10",
-    "similarity": 0.861
+    "similarity": 0.978
    },
    {
     "id": "PSI-106",
-    "similarity": 0.859
+    "similarity": 0.968
+   },
+   {
+    "id": "PSI-107",
+    "similarity": 0.967
    }
   ],
   "PSI-39": [
    {
     "id": "PSI-106",
-    "similarity": 0.845
+    "similarity": 0.955
    },
    {
     "id": "PSI-107",
-    "similarity": 0.837
+    "similarity": 0.954
    },
    {
     "id": "PSI-23",
-    "similarity": 0.828
+    "similarity": 0.953
    }
   ],
   "PSI-60": [
    {
     "id": "PSI-107",
-    "similarity": 0.883
+    "similarity": 0.966
    },
    {
     "id": "PSI-106",
-    "similarity": 0.851
+    "similarity": 0.961
    },
    {
     "id": "PSI-21",
-    "similarity": 0.843
+    "similarity": 0.959
    }
   ],
   "PSI-106": [
    {
     "id": "PSI-107",
-    "similarity": 0.911
+    "similarity": 0.977
    },
    {
     "id": "PSI-21",
-    "similarity": 0.859
+    "similarity": 0.968
    },
    {
-    "id": "PSI-60",
-    "similarity": 0.851
+    "id": "PSI-23",
+    "similarity": 0.966
    }
   ],
   "PSI-107": [
    {
     "id": "PSI-106",
-    "similarity": 0.911
+    "similarity": 0.977
+   },
+   {
+    "id": "PSI-21",
+    "similarity": 0.967
    },
    {
     "id": "PSI-60",
-    "similarity": 0.883
-   },
-   {
-    "id": "PSI-26",
-    "similarity": 0.859
+    "similarity": 0.966
    }
   ],
   "PSI-117": [
    {
     "id": "PSI-69",
-    "similarity": 0.821
+    "similarity": 0.967
    },
    {
     "id": "PSI-62",
-    "similarity": 0.778
+    "similarity": 0.963
    },
    {
     "id": "PSI-68",
-    "similarity": 0.776
+    "similarity": 0.96
    }
   ],
   "PSI-142": [
    {
     "id": "PSI-21",
-    "similarity": 0.847
+    "similarity": 0.957
    },
    {
-    "id": "PSI-10",
-    "similarity": 0.844
+    "id": "PSI-117",
+    "similarity": 0.956
    },
    {
-    "id": "PSI-106",
-    "similarity": 0.834
+    "id": "PSI-23",
+    "similarity": 0.955
    }
   ],
   "PSI-22": [
    {
-    "id": "PSI-107",
-    "similarity": 0.836
-   },
-   {
     "id": "PSI-106",
-    "similarity": 0.836
+    "similarity": 0.945
    },
    {
-    "id": "PSI-21",
-    "similarity": 0.785
+    "id": "PSI-107",
+    "similarity": 0.943
+   },
+   {
+    "id": "PSI-26",
+    "similarity": 0.94
    }
   ],
   "PSI-23": [
    {
     "id": "PSI-21",
-    "similarity": 0.908
-   },
-   {
-    "id": "PSI-10",
-    "similarity": 0.847
+    "similarity": 0.978
    },
    {
     "id": "PSI-106",
-    "similarity": 0.836
+    "similarity": 0.966
+   },
+   {
+    "id": "PSI-68",
+    "similarity": 0.963
    }
   ]
  }

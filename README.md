@@ -50,6 +50,7 @@ python scripts/analyze_flex.py      # fits the droplet model of the Analysis pag
 node scripts/check_model.cjs        # refits it independently from NASA's CSV; must get the same numbers
 npm install                         # once, only for the next line
 node scripts/build_search.mjs       # passages and their meaning vectors for the Ask page; also the checked glossary and related.json
+node scripts/tune_ask.mjs           # optional: compares Ask settings and models on the tuning half -> data/eval/ask_tuning.json
 node scripts/eval_ask.mjs           # scores the Ask page on the test questions -> docs/data/ask_eval.json
 node scripts/check_ask.cjs          # the Ask page's counts, Moon card, glossary and published score (no model needed)
 ```
@@ -86,7 +87,7 @@ docs/models/, docs/vendor/   the language model and the library that runs it in 
 - OpenAlex (publication year, journal and abstracts): https://openalex.org
 - Photographs (Moon, Earth, space station): NASA, public domain, via Wikimedia Commons; sources, checksums and changes in `docs/img/CREDITS.md`
 - Typefaces: Barlow Condensed, Public Sans and DM Mono, SIL Open Font License 1.1, from https://fontsource.org (details in `docs/img/CREDITS.md`)
-- Language model all-MiniLM-L6-v2 (Apache-2.0): https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 , in the ONNX build https://huggingface.co/Xenova/all-MiniLM-L6-v2
+- Language model snowflake-arctic-embed-s (Snowflake, Apache-2.0), with its quantised ONNX file: https://huggingface.co/Snowflake/snowflake-arctic-embed-s . It replaced all-MiniLM-L6-v2 (Apache-2.0; https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 , ONNX build https://huggingface.co/Xenova/all-MiniLM-L6-v2 ), which is kept in `docs/models/` only so that `scripts/tune_ask.mjs` can compare the two
 - Transformers.js 4.3.2 (Apache-2.0): https://github.com/huggingface/transformers.js , with ONNX Runtime Web (MIT): https://github.com/microsoft/onnxruntime
 - D. B. Hirsch et al., "Oxygen Concentration Flammability Thresholds of Selected Aerospace Materials Considered for the Constellation Program", NASA White Sands Test Facility, 2007 (public use permitted): https://ntrs.nasa.gov/citations/20070018178 . Source of the Earth-test table on the Habitat page; PDF and extracted text in `data/external/wstf2007/`
 - pypdf 7.1.0 (BSD-3-Clause), used once to extract that PDF's text: https://github.com/py-pdf/pypdf
@@ -98,7 +99,7 @@ docs/models/, docs/vendor/   the language model and the library that runs it in 
 AI does four jobs here, and each is checked or limited so that it cannot invent anything.
 
 1. **It reads NASA's records.** Claude (Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. The build fails unless every quotation is found word for word in the NASA record, every table column exists, and the texts hold no hand-typed numbers.
-2. **It matches a question to NASA's sentences.** On the Ask page a small open language model, all-MiniLM-L6-v2, runs in the reader's browser. It turns the question and 925 passages into vectors and shows the closest passages. It writes nothing, and the question never leaves the reader's computer.
+2. **It matches a question to NASA's sentences.** On the Ask page a small open language model, snowflake-arctic-embed-s, runs in the reader's browser. It turns the question and 925 passages into vectors and shows the closest passages. It writes nothing, and the question never leaves the reader's computer.
 3. **It helped write the code.** The scripts and the website were written with AI assistance and reviewed by the team.
 4. **It drew the pictures that are not photographs.** The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance; each drawing on a page carries a visible note saying so. The three photographs are NASA's and are not AI-generated.
 

@@ -5,7 +5,8 @@
  * It cuts NASA's record text (objective, approach, hypothesis, research impacts
  * of the 24 investigations) and the paper abstracts and titles PSI lists into
  * short passages, and computes for each passage a vector that captures its
- * meaning, with the small open language model all-MiniLM-L6-v2 (22 MB, Apache-2.0).
+ * meaning, with the small open language model named in docs/ask.js (SETTINGS.model:
+ * snowflake-arctic-embed-s, Apache-2.0, served from docs/models/).
  * The same model runs in the reader's browser to turn a question into a vector;
  * the passages whose vectors point the same way are the answer.
  *
@@ -29,9 +30,10 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { pipeline, env } from "@huggingface/transformers";
 const Ask = createRequire(import.meta.url)("../docs/ask.js");
+const MODEL = Ask.SETTINGS.model, SPEC = Ask.MODELS[MODEL];     // the model the site uses, and how it wants its text
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const MODEL = "Xenova/all-MiniLM-L6-v2";
+
 env.allowRemoteModels = false;                       // use the copy served with the site
 env.localModelPath = path.join(ROOT, "docs", "models") + path.sep;
 
@@ -85,11 +87,18 @@ for (const e of G.entries) for (const t of e.nasa) {
 }
 if (missing.length) { console.error("Glossary terms not found in NASA's text or tables: " + missing.join(", ")); process.exit(1); }
 
+const BY_ID = {};
+D.investigations.forEach(i => (BY_ID[i.id] = i));
+// what a reader's browser downloads, once, to match by meaning: the model, its tokenizer and the runtime
+const size = f => fs.statSync(path.join(ROOT, "docs", f)).size;
+const downloadBytes = ["onnx/model_quantized.onnx", "tokenizer.json", "tokenizer_config.json", "config.json"].reduce((a, f) => a + size("models/" + MODEL + "/" + f), 0) +
+  fs.readdirSync(path.join(ROOT, "docs", "vendor")).reduce((a, f) => a + size("vendor/" + f), 0);
+
 const embed = await pipeline("feature-extraction", MODEL, { dtype: "q8" });
 const vectors = [];
 for (let i = 0; i < passages.length; i += 32) {
-  const batch = passages.slice(i, i + 32).map(p => p.text);
-  const out = await embed(batch, { pooling: "mean", normalize: true });
+  const batch = passages.slice(i, i + 32).map(p => Ask.embedText(p, BY_ID, Ask.SETTINGS.header));
+  const out = await embed(batch, { pooling: SPEC.pooling, normalize: true });
   vectors.push(...out.tolist());
   process.stdout.write(`\r  embedded ${Math.min(i + 32, passages.length)} of ${passages.length}`);
 }
@@ -100,7 +109,8 @@ vectors.forEach((v, r) => v.forEach((x, c) => { bytes[r * dims + c] = Math.max(-
 
 const out = {
   about: {
-    model: MODEL, model_license: "Apache-2.0", dims,
+    model: MODEL, model_license: "Apache-2.0", dims, pooling: SPEC.pooling, query_prefix: SPEC.queryPrefix, header: Ask.SETTINGS.header,
+    download_mb: Math.round(downloadBytes / 1e6),
     what: "Passages from NASA PSI record text and from the abstracts and titles of the publications PSI lists (abstracts via OpenAlex).",
     records: D.investigations.length, papers: new Set(passages.filter(p => p.kind === "paper").map(p => p.doi)).size, papers_with_abstract: withAbstract,
     built_by: "scripts/build_search.mjs (written with AI assistance: Claude Code, Anthropic)",
