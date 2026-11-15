@@ -654,23 +654,3 @@ table.an-near td, table.an-near th { font-size: .88rem; white-space: nowrap; }
   .habx svg .lead, .habx svg .end { display: none; }
   .hab .hab-six { border-right: 0; border-bottom: 1px solid var(--line2); }
 }
-
-/* what NASA has written about each question */
-.topic-chart svg text { font-family: var(--sans); }
-.topic-chart .tq { font: 600 19px var(--head); fill: var(--text); text-transform: uppercase; letter-spacing: .03em; }
-.topic-chart .tq.low, .topic-chart .tn.low { fill: var(--red-soft); }
-.topic-chart .tr { fill: #e3e3e3; }
-.topic-chart .tp { fill: #6b6b70; }
-.topic-chart .tn { font: 600 20px var(--head); fill: var(--text); }
-.topic-chart .ts { font-size: 13px; fill: var(--muted); }
-.topic-chart a:hover .tq { text-decoration: underline; }
-.topic-find { margin-top: 1rem; }
-.topic-find .link { font-size: .9rem; color: var(--text); }
-.topic-ex { border-top: 1px solid var(--line2); margin: 0 1.4rem 1.3rem; padding-top: .9rem; }
-#topic-show .topic-ex { border: 1px solid var(--line2); background: var(--frame); margin: 1rem 0 0; padding: .9rem 1.2rem .6rem; }
-.topic-ex p { margin: 0 0 .5rem; font-size: .95rem; color: var(--soft); }
-.topic-ex ul { margin: 0; padding-left: 1.1rem; }
-.topic-ex li { margin: 0 0 .75rem; font-size: .93rem; color: var(--soft); line-height: 1.5; }
-.topic-ex li b { color: var(--text); }
-.topic-ex li span { display: block; font-size: .82rem; color: var(--dim); margin-top: .15rem; }
-.topic-none { margin: 0 1.4rem 1.3rem; color: var(--red-soft); font-weight: 600; }
