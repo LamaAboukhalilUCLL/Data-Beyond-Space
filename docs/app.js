@@ -330,7 +330,7 @@
         '<button class="link" data-stop="orbit">Show these investigations</button>') +
       col("moon", "Moon Base", S.records_mentioning_moon_or_partial_gravity, "Moon gravity. Air expected: " + num(mb.o2_min_percent) + " % oxygen or more, at " + num(mb.pressure_max_psi) + " psi or less. Only " + S.rows_in_zone + " of " +
         S.rows_with_both + " tests elsewhere used this air, all on gas flames.", '<a class="link" href="#/questions">See what is still open</a>') + "</div>";
-    return '<div class="routemap">' + s + cols + '<div class="stop-chips" id="stop-chips">' + stopChips() + "</div></div>";
+    return '<div class="routemap">' + s + '<p class="ai-mark">Drawing made with AI assistance. The photographs are NASA\'s.</p>' + cols + '<div class="stop-chips" id="stop-chips">' + stopChips() + "</div></div>";
   }
 
   // ---------------------------------------------------------------- habitat
@@ -380,7 +380,7 @@
     h += '<p class="lead wide">Choose the air inside, then choose a number. Each one is a fire question for that part of the habitat, with what NASA\'s data can say about it today.</p>' + atmBar();
     h += '<p class="hab-count"><b>' + COUNTS.inZone + " of " + COUNTS.both + "</b> NASA tests that state both oxygen and pressure used this air." +
       (ATM.id !== "moon" ? " The six answers below were written for Moon Base air. For another air, only this count changes." : "") + "</p>";
-    h += '<div class="hab"><div class="hab-draw">' + habitatDrawing(q.id) + '<p class="hab-leg"><i class="o"></i>Open: NASA cannot answer it from this data<i class="p"></i>Partly answered</p><div class="hab-six">' +
+    h += '<div class="hab"><div class="hab-draw">' + habitatDrawing(q.id) + '<p class="ai-mark">Schematic drawn with AI assistance; not a NASA design.</p><p class="hab-leg"><i class="o"></i>Open: NASA cannot answer it from this data<i class="p"></i>Partly answered</p><div class="hab-six">' +
       Q.map(function (x, n) {
         return '<a href="#/habitat/' + x.id + '" class="' + x.status + (x === q ? " on" : "") + '"><span class="k">' + (n + 1) + "</span><span><em>" + WORD[x.status] + "</em>" + esc(x.question) + "</span></a>";
       }).join("") + "</div></div>";
@@ -970,10 +970,11 @@
     h += "<p>Conditions 3 to 5 are counted from NASA's tables. Conditions 1 and 2 are this team's reading of each record: for condition 1 the sentence it rests on is quoted on every investigation page, and the build fails if that sentence is not in NASA's record word for word. Purpose: " +
       (S.purpose_counts.primary || 0) + " main purpose, " + (S.purpose_counts.benefit || 0) + " named as a benefit, " + (S.purpose_counts.none || 0) + " not their purpose.</p></details>";
 
-    h += '<details class="sect"><summary>How AI was used</summary><p>AI does three jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
+    h += '<details class="sect"><summary>How AI was used</summary><p>AI does four jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
       "<li><strong>It reads NASA's records.</strong> An AI model (Claude, Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. Before the site is built, a program checks that every quotation exists word for word in the named NASA record, that every table column exists, and that the texts contain no hand-typed numbers.</li>" +
       "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (all-MiniLM-L6-v2) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer.</li>" +
-      "<li><strong>It helped write the code.</strong> The scripts and this website were written with AI assistance and reviewed by the team.</li></ol>" +
+      "<li><strong>It helped write the code.</strong> The scripts and this website were written with AI assistance and reviewed by the team.</li>" +
+      "<li><strong>It drew the pictures that are not photographs.</strong> The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance. Each drawing on a page carries a note saying so. The three photographs are NASA's and are not AI-generated.</li></ol>" +
       "<p>An early layout of the overview followed a design mockup made with ChatGPT (OpenAI); the mockup itself is not used. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.</p></details>";
 
     h += '<details class="sect"><summary>Limits</summary><ul>';

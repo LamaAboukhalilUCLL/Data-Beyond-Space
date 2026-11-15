@@ -86,11 +86,12 @@ docs/models/, docs/vendor/   the language model and the library that runs it in 
 
 ## Use of AI
 
-AI does three jobs here, and each is checked or limited so that it cannot invent anything.
+AI does four jobs here, and each is checked or limited so that it cannot invent anything.
 
 1. **It reads NASA's records.** Claude (Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. The build fails unless every quotation is found word for word in the NASA record, every table column exists, and the texts hold no hand-typed numbers.
 2. **It matches a question to NASA's sentences.** On the Ask page a small open language model, all-MiniLM-L6-v2, runs in the reader's browser. It turns the question and 925 passages into vectors and shows the closest passages. It writes nothing, and the question never leaves the reader's computer.
 3. **It helped write the code.** The scripts and the website were written with AI assistance and reviewed by the team.
+4. **It drew the pictures that are not photographs.** The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance; each drawing on a page carries a visible note saying so. The three photographs are NASA's and are not AI-generated.
 
 An early layout of the overview followed a design mockup made with ChatGPT (OpenAI); the mockup is not part of the site. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.
 

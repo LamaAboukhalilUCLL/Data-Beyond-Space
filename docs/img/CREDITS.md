@@ -39,3 +39,7 @@ All under the SIL Open Font License 1.1, Latin subsets from the Fontsource proje
 ## Logo
 
 The circular "Data Beyond Space" mark is drawn in code (SVG in `docs/index.html`), written with AI assistance. It contains no NASA insignia.
+
+## Drawings
+
+The route map on the overview and the habitat schematic on the Habitat page are drawn in code (SVG in `docs/app.js`) with AI assistance (Claude, Anthropic). Each carries a visible note under it saying so, and the footer of every page names them. The habitat is a schematic, not a NASA design.

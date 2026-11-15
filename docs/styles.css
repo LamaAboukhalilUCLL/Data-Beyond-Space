@@ -177,6 +177,7 @@ label.check { display: inline-flex; gap: .5rem; align-items: center; font-size: 
 blockquote { margin: .5rem 0 .3rem 1.3rem; padding: 0; color: var(--soft); font-size: 1.02rem; line-height: 1.5; }
 blockquote cite { display: block; color: var(--dim); font-style: normal; font-size: .8rem; margin-top: .15rem; }
 .ai { font-size: .84rem; color: var(--dim); font-weight: 400; }
+.ai-mark { font-size: .78rem; color: var(--dim); margin: .35rem .9rem .5rem; max-width: none; }
 .asw { font: 400 .84rem var(--mono); background: #1c1c20; padding: .05rem .35rem; color: var(--soft); }
 details { border-top: 1px solid var(--line2); padding: .7rem 0; }
 details summary { cursor: pointer; font-weight: 600; }
