@@ -32,7 +32,8 @@
   var FIELD = { objective: "Objective", approach: "Approach", hypothesis: "Hypothesis", researchImpacts: "Research impacts" };
   var KIND = { aim: "Aim", expected: "Expected", result: "Result", stated: "Stated" };
   var LANES = ["solid", "smoke", "emulated", "droplet", "gas"];
-  var COLOR = { solid: "#e8964a", emulated: "#c9b07a", droplet: "#7ea7d8", gas: "#9c9cc4", smoke: "#8e97a6", aerosol: "#6f7787", burner: "#c98aa0" };
+  // NASA's chart palette for dark backgrounds (Horizon Design System, github.com/nasa/hds-core)
+  var COLOR = { solid: "#f29d49", emulated: "#c2b47c", droplet: "#609af6", gas: "#79a3ad", smoke: "#959599", aerosol: "#77777a", burner: "#fa8c87" };
 
   // ---------------------------------------------------------------- helpers
   function esc(s) {
@@ -171,7 +172,7 @@
         // phones: the lane name is enough; counts are in the tooltip and the text above
       } else if (!opts.compact) {
         s += '<text x="28" y="' + (y0 + 42) + '">' + esc(sub) + "</text>";
-        if (cls !== "burner" && missing) s += '<text x="28" y="' + (y0 + 58) + '" fill="#7481a3">' + missing + " of " + invs.length + " investigations not plotted</text>";
+        if (cls !== "burner" && missing) s += '<text x="28" y="' + (y0 + 58) + '" fill="#959599">' + missing + " of " + invs.length + " investigations not plotted</text>";
       } else {
         s += '<text x="28" y="' + (y0 + 40) + '">' + esc(sub) + "</text>";
       }
@@ -677,7 +678,8 @@
     h += '<ul><li><a href="https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/" target="_blank" rel="noopener">NASA Space Apps Challenge 2026: Flame in Freefall</a> (the Moon Base atmosphere figures)</li>' +
       '<li><a href="https://www.nasa.gov/moonbase" target="_blank" rel="noopener">NASA: Moon Base</a></li>' +
       '<li><a href="https://ntrs.nasa.gov/citations/20205007829" target="_blank" rel="noopener">G. A. Ruff, Spacecraft Fire Safety Needs for Exploration, NASA Glenn, 2020</a> (roadmap listing Saffire IV to VI with elevated oxygen)</li>' +
-      '<li><a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (year and journal of the publications PSI lists)</li></ul>';
+      '<li><a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (year and journal of the publications PSI lists)</li>' +
+      '<li><a href="https://github.com/nasa/hds-core" target="_blank" rel="noopener">NASA Horizon Design System</a> (the colour values: NASA Red, the Carbon greys and the chart palette for dark backgrounds)</li></ul>';
     h += '<p>Images, all NASA photographs in the public domain, none AI-generated: the Moon is the <a href="' + MOON.page + '" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter near-side mosaic</a> (' + esc(MOON.credit) + '); Earth is <a href="https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" target="_blank" rel="noopener">The Earth seen from Apollo 17</a> (NASA, Apollo 17 crew); the space station is <a href="https://commons.wikimedia.org/wiki/File:International_Space_Station_after_undocking_of_STS-132.jpg" target="_blank" rel="noopener">photograph S132-E-012208</a> (NASA, crew of STS-132).</p>';
     h += '<p>Typefaces, all under the SIL Open Font License 1.1 and served with the site: <a href="https://github.com/CatharsisFonts/Cormorant" target="_blank" rel="noopener">Cormorant Garamond</a>, <a href="https://github.com/rsms/inter" target="_blank" rel="noopener">Inter</a> and <a href="https://github.com/googlefonts/dm-mono" target="_blank" rel="noopener">DM Mono</a>.</p>';
     main.innerHTML = h;
