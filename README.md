@@ -12,8 +12,7 @@ It shows coverage and gaps. It does not predict how fire behaves on the Moon.
 |---|---|
 | Overview | The finding, then a tool: choose an atmosphere and see how much of NASA's fire data fits it |
 | Explore | Every test against the chosen air: oxygen by what burns, oxygen against pressure, and a finder for materials and tests with a filtered CSV download |
-| Habitat | A schematic Moon habitat with six numbered spots, one per open fire-safety question, each showing what NASA's data can say about that part of the habitat |
-| Habitat, lower part | Earth tests of 26 material samples at Moon Base pressure (NASA White Sands Test Facility, 2007): the one table that is not from PSI, marked as such |
+| Habitat | The main tool. On a drawing of a habitat the reader sets the air and the material of four parts; each part shows whether that material passed NASA's flame test on Earth at that oxygen level (NASA White Sands, 2007, the one source outside PSI) and that no test in space confirms it. Gives a downloadable evidence report and a link to the same habitat. Six numbered spots open the fire-safety questions |
 | Analysis | A statistical model of NASA's 274 FLEX droplet tests: what oxygen, pressure and extinguishing gases change in the burning rate, how the tests ended at each oxygen level, an estimator with its uncertainty, and the real tests nearest to any condition |
 | Ranking | The 24 investigations ordered by how many of five conditions they meet for the chosen air, with the evidence for each. A second tab puts all 24 side by side: sample or burner, what was measured, use on Earth |
 | Ask | Type a question; get the sentences from NASA's records and the listed papers that match it best, by meaning. Quotations only, nothing generated |
