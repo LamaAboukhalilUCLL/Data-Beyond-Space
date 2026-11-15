@@ -87,7 +87,7 @@
     s += '<rect class="zone" x="' + x(zone) + '" y="' + (T - 14) + '" width="' + (W - Rt - x(zone)) + '" height="' + (rows.length * rowH + 14) + '" rx="8"/>';
     var r0 = R.solid, gy = T + rows.indexOf("solid") * rowH;
     if (r0.max < zone) s += '<rect x="' + x(r0.max) + '" y="' + (gy - 4) + '" width="' + (x(zone) - x(r0.max)) + '" height="' + (rowH - 8) + '" fill="url(#hatch)"/>';
-    s += '<line x1="' + x(21) + '" x2="' + x(21) + '" y1="' + (T - 14) + '" y2="' + yb + '" stroke="var(--blue)" stroke-dasharray="4 5" stroke-width="1.5"/>';
+    s += '<line x1="' + x(21) + '" x2="' + x(21) + '" y1="' + (T - 14) + '" y2="' + yb + '" class="earth"/>';
     s += '<text class="earth-label strong" x="' + x(21) + '" y="' + (T - 24) + '" text-anchor="middle">Earth air 21 %</text>';
     s += '<rect x="' + (x(zone) - 1.5) + '" y="' + (T - 14) + '" width="3" height="' + (yb - T + 14) + '" class="zone-line"/>';
     s += '<text class="zone-label strong" x="' + (x(zone) + (nw ? 6 : 20)) + '" y="' + (T - 24) + '">Moon Base: ' + num(zone) + " % +</text>";
@@ -126,7 +126,7 @@
     s += '<text x="' + L + '" y="42">' + d0 + "</text>" + '<text x="' + x(thr) + '" y="42" text-anchor="middle" class="zone-label">' + num(thr) + "</text>" + '<text x="' + (W - R) + '" y="42" text-anchor="end">' + d1 + " " + unit + "</text>";
     return s + "</svg>";
   }
-  function setTitle(t) { document.title = t + " · Flame in Freefall"; }
+  function setTitle(t) { document.title = "Flame in Freefall: " + t; }
 
   // ----------------------------------------------------------------- charts
   function scaleLin(d0, d1, r0, r1) { return function (v) { return r0 + (v - d0) / (d1 - d0) * (r1 - r0); }; }
@@ -250,7 +250,7 @@
       if (t.p_psi != null) h += "<span>Pressure: " + num(t.p_psi) + " psi (as written: " + esc(t.p_raw) + " " + esc(t.p_unit) + ")</span>";
       else if (t.p_raw) h += "<span>Pressure as written: " + esc(t.p_raw) + "</span>";
       if (t.outcome) h += "<span>" + esc(t.outcome) + "</span>";
-      h += "<span>Table row " + t.row + " · click to open</span>";
+      h += "<span>Table row " + t.row + ". Click to open it.</span>";
       tip.innerHTML = h; tip.hidden = false;
       var px = Math.min(e.clientX + 14, window.innerWidth - 310), py = e.clientY + 16;
       if (py > window.innerHeight - 160) py = e.clientY - 150;
@@ -299,7 +299,7 @@
       catch (e) { text = new TextDecoder("windows-1252").decode(buf); }
       var rows = parseCSV(text), h = "";
       h += '<p class="small muted">File <span class="asw">' + esc(info.psi_file_name) + "</span>, exactly as downloaded from PSI on " + esc(info.retrieved.slice(0, 10)) +
-        '. One row is one ' + esc(info.row_meaning) + '. <a href="' + inv.psi_url + '" target="_blank" rel="noopener">Open this investigation on NASA PSI</a> · <a href="data/tables/' + file + '" download>Download this table</a></p>';
+        '. One row is one ' + esc(info.row_meaning) + '. <a href="' + inv.psi_url + '" target="_blank" rel="noopener">Open this investigation on NASA PSI</a>. <a href="data/tables/' + file + '" download>Download this table</a></p>';
       h += '<div class="tablewrap"><table><thead><tr><th>Row</th>' + rows[0].map(function (c) { return "<th>" + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>";
       for (var i = 1; i < rows.length; i++) {
         if (!rows[i].some(function (c) { return c.trim(); })) continue;
@@ -337,14 +337,14 @@
   function journey() {
     var stops = [["earth", "Earth", "normal gravity"], ["orbit", "Low Earth orbit", "weightless"], ["moon", "Moon Base", "where the data is needed"]];
     return '<div class="journey"><div class="track" role="tablist" aria-label="Where the evidence was gathered">' + stops.map(function (x) {
-      return '<button class="stop' + (stopState === x[0] ? " on" : "") + '" data-stop="' + x[0] + '" role="tab" aria-selected="' + (stopState === x[0]) + '"><span class="node ' + x[0] + '"></span><b>' + x[1] + "</b><span>" + x[2] + "</span></button>";
+      return '<button class="stop' + (stopState === x[0] ? " on" : "") + '" data-stop="' + x[0] + '" role="tab" aria-selected="' + (stopState === x[0]) + '"><span class="node ' + x[0] + '"></span><b>' + x[1] + "</b><span class=\"sub\">" + x[2] + "</span></button>";
     }).join("") + '</div><div class="stop-detail" id="stop-detail" role="tabpanel">' + stopDetail() + "</div></div>";
   }
 
   function viewHome() {
     setTitle("Overview");
     var S = D.summary, solid = S.o2_range_by_class.solid, zone = D.about.moon_base.o2_min_percent;
-    var h = '<section class="hero"><div><p class="eyebrow">NASA Space Apps Challenge 2026 · Flame in Freefall</p>';
+    var h = '<section class="hero"><div><p class="eyebrow">NASA Space Apps Challenge 2026</p>';
     h += '<h1 class="hero-title">Solid-material evidence <em>stops before</em> Moon Base air.</h1>';
     h += '<p class="lead">NASA\'s Moon Base is expected to hold air with ' + num(zone) + " % oxygen or more. In NASA's microgravity fire data, solid-material tests reach " + num(solid.max) + " %.</p>";
     h += '<div class="row"><a class="btn" href="#/map">See the coverage map</a><a class="btn ghost" href="#/rank">Explore the ' + S.investigations + " investigations</a></div>";
@@ -459,7 +459,7 @@
         t += '<tr class="pick' + (open ? " on" : "") + '" data-open="' + i.id + '" tabindex="0" aria-expanded="' + open + '"><td class="num">' + i.rank +
           '</td><td class="rank-name"><span class="swatch" style="background:' + COLOR[i.cls] + '"></span>' + esc(i.name) + "<small>" + esc(i.cls_label) + "</small></td>" +
           CRIT.map(function (c) { return '<td class="sqc">' + cell(i.criteria[c[0]], c[1]) + "</td>"; }).join("") + '<td class="num"><span class="score">' + num(i.score) + "</span></td></tr>";
-        if (open) t += '<tr class="detail"><td colspan="8"><p><span class="ai">AI-written summary</span> ' + esc(i.summary.did) + "</p>" + critDetail(i) +
+        if (open) t += '<tr class="detail"><td colspan="8"><p>' + esc(i.summary.did) + ' <span class="ai">AI-written summary</span></p>' + critDetail(i) +
           '<p style="margin-top:.7rem"><a class="btn sm" href="#/inv/' + i.id + '">Open ' + esc(i.name) + "</a></p></td></tr>";
       });
       if (!list.length) t += '<tr><td colspan="8" class="muted">Nothing matches.</td></tr>';
@@ -474,7 +474,7 @@
     if (!list || !list.length) return "";
     return list.slice(0, limit || 12).map(function (c) {
       return '<span class="asw">' + esc(c.text) + "</span>" + (c.rows > 1 ? " ×" + c.rows : "");
-    }).join(" · ") + (list.length > (limit || 12) ? " · and " + (list.length - (limit || 12)) + " more" : "");
+    }).join(", ") + (list.length > (limit || 12) ? ", and " + (list.length - (limit || 12)) + " more" : "");
   }
   function o2Text(t) {
     var a = t.ambient_o2;
@@ -522,7 +522,7 @@
     var inv = BY_ID[id];
     if (!inv) return viewHome();
     setTitle(inv.name);
-    var h = '<p class="small"><a href="#/rank">← Ranking</a></p><div class="inv-head"><div><p class="eyebrow">' + esc(inv.id) + " · rank " + inv.rank + " of " + D.summary.investigations + "</p><h1>" + esc(inv.name) + "</h1>";
+    var h = '<p class="small"><a href="#/rank">← Ranking</a></p><div class="inv-head"><div><p class="eyebrow">' + esc(inv.id) + ", rank " + inv.rank + " of " + D.summary.investigations + "</p><h1>" + esc(inv.name) + "</h1>";
     h += '<p class="lead">' + esc(inv.title) + (inv.name_is_ours ? ' <span class="small muted">(PSI gives no acronym; the short name is ours)</span>' : "") + "</p>";
     h += '<div class="row">' + chip(inv.cls) + '<span class="chip">' + esc(inv.project_type) + '</span><span class="chip">' + esc(inv.gravity) + "</span>" +
       (inv.flight_program ? '<span class="chip">' + esc(inv.flight_program) + "</span>" : "") + "</div></div>";
@@ -540,7 +540,7 @@
     h += '<div class="tile"><b class="sm">Oxygen</b>' + (co.min != null ? rangeBar(co.min, co.max, 10, 45, D.about.moon_base.o2_min_percent, "above", "%") + "<span>tested " + num(co.min) + " to " + num(co.max) + " %</span>" : "<span>" + esc(VALUE_WORD[co.value]) + "</span>") + "</div>";
     h += '<div class="tile"><b class="sm">Pressure</b>' + (cp.min != null ? rangeBar(cp.min, cp.max, 0, 50, D.about.moon_base.pressure_max_psi, "below", "psi") + "<span>tested " + num(cp.min) + " to " + num(cp.max) + " psi</span>" : "<span>" + esc(VALUE_WORD[cp.value]) + "</span>") + "</div>";
     h += "</div>";
-    h += '<div class="grid2"><div class="panel"><h2 style="margin-top:0">In plain words <span class="ai">AI-written from the PSI record</span></h2><p>' + esc(inv.summary.did) + "</p><ul class=\"clean\">";
+    h += '<div class="grid2"><div class="panel"><h2 style="margin-top:0">In plain words</h2><p class="ai" style="margin:-.4rem 0 .8rem">AI-written from the PSI record</p><p>' + esc(inv.summary.did) + "</p><ul class=\"clean\">";
     inv.summary.points.forEach(function (p) {
       h += '<li><span class="kind ' + p.kind + '">' + KIND[p.kind] + "</span>" + esc(p.text) + quote(inv.id, p.field, p.quote) + "</li>";
     });
@@ -568,7 +568,7 @@
       h += '<p class="muted small">Results live in these papers. ' + inv.publications_with_doi + " have a DOI.</p><ul class=\"clean pubs\">";
       inv.publications.forEach(function (p) {
         h += "<li>" + esc(p.title) + (p.year ? " (" + p.year + ")" : "") + (p.venue ? ', <span class="muted">' + esc(p.venue) + "</span>" : "") +
-          (p.doi ? ' · <a href="https://doi.org/' + esc(p.doi) + '" target="_blank" rel="noopener">' + esc(p.doi) + "</a>" : ' · <span class="muted">no DOI listed</span>') + "</li>";
+          (p.doi ? '<a href="https://doi.org/' + esc(p.doi) + '" target="_blank" rel="noopener">' + esc(p.doi) + "</a>" : ' <span class="muted">(no DOI listed)</span>') + "</li>";
       });
       h += "</ul>";
     } else h += '<p class="muted">None listed.</p>';
@@ -619,13 +619,13 @@
     h += '<div class="qgrid">' + D.questions.map(function (q) {
       return '<a class="qtile ' + q.status + '" href="#/questions/' + q.id + '"><span class="pill ' + q.status + '">' + word[q.status] + "</span><b>" + esc(q.question) + "</b></a>";
     }).join("") + "</div>";
-    h += '<p class="small muted"><span class="ai">AI-written</span> Answers written with AI (Claude, Anthropic) from the PSI records and tables, reviewed by the team. Quotations and numbers are checked by program.</p>';
+    h += '<p class="small muted">Answers written with AI (Claude, Anthropic) from the PSI records and tables, reviewed by the team. Quotations and numbers are checked by program.</p>';
     D.questions.forEach(function (q) {
       h += '<article class="q" id="q-' + q.id + '"><span class="pill ' + q.status + '">' + word[q.status] + "</span><h3>" + esc(q.question) + "</h3><p>" + esc(q.answer) + '</p><ul class="ev">';
       q.evidence.forEach(function (e) {
         var inv = BY_ID[e.inv];
-        h += "<li>" + chip(inv.cls) + " " + invLink(e.inv) + " · " + esc(e.text) + (e.kind === "record" ? quote(e.inv, e.field, e.quote) :
-          (inv.tables.length ? ' <button class="btn ghost sm" data-table="' + inv.tables[0].file + '">see the table</button>' : "")) + "</li>";
+        h += '<li><div class="ev-head">' + invLink(e.inv) + chip(inv.cls) + "</div>" + esc(e.text) + (e.kind === "record" ? quote(e.inv, e.field, e.quote) :
+          (inv.tables.length ? ' <button class="link" data-table="' + inv.tables[0].file + '">View NASA\'s table</button>' : "")) + "</li>";
       });
       h += '</ul><p class="missing"><strong>Missing:</strong> ' + esc(q.missing) + "</p></article>";
     });
@@ -678,7 +678,8 @@
       '<li><a href="https://www.nasa.gov/moonbase" target="_blank" rel="noopener">NASA: Moon Base</a></li>' +
       '<li><a href="https://ntrs.nasa.gov/citations/20205007829" target="_blank" rel="noopener">G. A. Ruff, Spacecraft Fire Safety Needs for Exploration, NASA Glenn, 2020</a> (roadmap listing Saffire IV to VI with elevated oxygen)</li>' +
       '<li><a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (year and journal of the publications PSI lists)</li></ul>';
-    h += '<p>Image: the Moon behind the pages is the <a href="' + MOON.page + '" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter near-side mosaic</a> (' + esc(MOON.credit) + "), public domain. It is a real photograph, not AI-generated.</p>";
+    h += '<p>Images, all NASA photographs in the public domain, none AI-generated: the Moon is the <a href="' + MOON.page + '" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter near-side mosaic</a> (' + esc(MOON.credit) + '); Earth is <a href="https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" target="_blank" rel="noopener">The Earth seen from Apollo 17</a> (NASA, Apollo 17 crew); the space station is <a href="https://commons.wikimedia.org/wiki/File:International_Space_Station_after_undocking_of_STS-132.jpg" target="_blank" rel="noopener">photograph S132-E-012208</a> (NASA, crew of STS-132).</p>';
+    h += '<p>Typefaces, all under the SIL Open Font License 1.1 and served with the site: <a href="https://github.com/CatharsisFonts/Cormorant" target="_blank" rel="noopener">Cormorant Garamond</a>, <a href="https://github.com/rsms/inter" target="_blank" rel="noopener">Inter</a> and <a href="https://github.com/googlefonts/dm-mono" target="_blank" rel="noopener">DM Mono</a>.</p>';
     main.innerHTML = h;
   }
 

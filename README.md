@@ -68,7 +68,8 @@ docs/                    the website; docs/data/ is written by build_dataset.py
 - NASA, Moon Base: https://www.nasa.gov/moonbase
 - G. A. Ruff, Spacecraft Fire Safety Needs for Exploration, NASA Glenn Research Center, 2020: https://ntrs.nasa.gov/citations/20205007829
 - OpenAlex (publication year, journal and abstracts): https://openalex.org
-- Moon photograph behind the pages: Lunar Reconnaissance Orbiter near-side mosaic, NASA/GSFC/Arizona State University, public domain: https://commons.wikimedia.org/wiki/File:Moon_nearside_LRO_5000.jpg (details in `docs/img/CREDITS.md`)
+- Photographs (Moon, Earth, space station): NASA, public domain, via Wikimedia Commons; sources, checksums and changes in `docs/img/CREDITS.md`
+- Typefaces: Cormorant Garamond, Inter and DM Mono, SIL Open Font License 1.1, from https://fontsource.org (details in `docs/img/CREDITS.md`)
 - Python 3 standard library: https://docs.python.org/3/library/
 
 ## Use of AI
