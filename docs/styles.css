@@ -231,7 +231,7 @@ ul.clean { list-style: none; padding: 0; margin: .3rem 0; } ul.clean li { paddin
 .q .missing { margin-top: 1rem; color: var(--red-soft); font-size: .97rem; max-width: 50rem; }
 
 /* table viewer */
-#modal { position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 60; display: grid; place-items: center; padding: 1rem; }
+#modal { position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 60; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 1rem; }
 #modal[hidden] { display: none; }
 .modal-box { background: #000; border: 1px solid var(--line2); width: min(1180px, 100%); max-height: 90vh; display: flex; flex-direction: column; }
 .modal-head { display: flex; justify-content: space-between; align-items: center; padding: .9rem 1.2rem; border-bottom: 1px solid var(--line2); gap: 1rem; }
