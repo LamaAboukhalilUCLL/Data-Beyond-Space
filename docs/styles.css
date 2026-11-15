@@ -735,3 +735,24 @@ table.an-near td, table.an-near th { font-size: .88rem; white-space: nowrap; }
 .chart .an-tl { fill: var(--red-soft); font-size: 13px; font-weight: 700; }
 .chart .an-bl { fill: var(--text); font-size: 13px; font-weight: 700; }
 .chart .an-tl, .chart .an-bl { paint-order: stroke; stroke: #000; stroke-width: 4px; stroke-linejoin: round; }
+
+/* a map of the investigations by meaning */
+.simmap { padding: .4rem .4rem .2rem; }
+.simsvg { display: block; width: 100%; height: auto; touch-action: none; user-select: none; }
+.simsvg .se { stroke: #77777a; stroke-width: 1.2; transition: stroke .15s; }
+.simsvg .se.on, .simsvg .se.lit { stroke: #e3e3e3; stroke-opacity: .95 !important; stroke-width: 1.8; }
+.simsvg .sn { cursor: pointer; }
+.simsvg .sn circle { stroke: #000; stroke-width: 2; transition: r .15s; }
+.simsvg .sn text { font: 12px var(--sans); fill: var(--muted); pointer-events: none; }
+.simsvg .sn.focus circle { stroke: #fff; stroke-width: 2.5; }
+.simsvg .sn.focus text { font-weight: 700; fill: var(--text); font-size: 14px; }
+.simsvg .sn.near text { fill: var(--text); }
+.simsvg.has-focus .sn:not(.focus):not(.near) { opacity: .55; }
+.simsvg.hovering .sn { opacity: .3; }
+.simsvg.hovering .se:not(.lit) { stroke-opacity: .12 !important; }
+.simsvg.hovering .sn.lit { opacity: 1; }
+.simsvg.hovering .sn.lit text { fill: var(--text); }
+.simsvg .sn:focus-visible circle { stroke: #fff; stroke-width: 3; }
+#simbox-inv { margin: -.4rem 0 1.4rem; }
+#simbox-inv:empty { display: none; }
+.simsvg .sn text { paint-order: stroke; stroke: #000; stroke-width: 3px; stroke-linejoin: round; }

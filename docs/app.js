@@ -684,6 +684,130 @@
     return h;
   }
 
+  // ------------------------------------------------- a map of the investigations by meaning
+  // Each investigation is joined to the three whose NASA record text is closest in meaning (the same
+  // similarities as related.json, recomputed here from the stored vectors). A spring layout turns those
+  // links into distances: the closer the text, the shorter the line. Drag a dot; the others follow.
+  var SIMMAP = null;
+  function simLoad() {
+    if (SIMMAP) return Promise.resolve(SIMMAP);
+    return askLoad().then(function () {
+      var rel = Ask.relatedByMeaning(ASK.P.passages, ASK.vec, ASK.dims), ids = Object.keys(rel).filter(function (id) { return BY_ID[id]; }).sort(function (a, b) { return +a.split("-")[1] - +b.split("-")[1]; });
+      var edges = [], seen = {}, all = [];
+      ids.forEach(function (a) {
+        rel[a].forEach(function (x) { if (BY_ID[x.id] && a < x.id) all.push(x.sim); });
+        rel[a].filter(function (x) { return BY_ID[x.id]; }).slice(0, 3).forEach(function (x) {
+          var k = a < x.id ? a + "|" + x.id : x.id + "|" + a;
+          if (!seen[k]) { seen[k] = 1; edges.push({ a: a, b: x.id, sim: x.sim }); }
+        });
+      });
+      var smin = Math.min.apply(null, edges.map(function (e) { return e.sim; })), smax = Math.max.apply(null, edges.map(function (e) { return e.sim; }));
+      edges.forEach(function (e) { e.t = smax > smin ? (smax - e.sim) / (smax - smin) : 0.5; e.len = 70 + 190 * e.t; });
+      // a fixed start (by what burns, around a circle) so the map looks the same on every visit
+      var order = ["solid", "emulated", "smoke", "aerosol", "gas", "droplet"], nodes = {};
+      ids.forEach(function (id, k) {
+        var c = order.indexOf(BY_ID[id].cls), ang = (c + (k % 4) * 0.18) / order.length * 2 * Math.PI;
+        nodes[id] = { id: id, x: 500 + 220 * Math.cos(ang) + (k % 3) * 7, y: 280 + 170 * Math.sin(ang) + (k % 5) * 5, vx: 0, vy: 0 };
+      });
+      SIMMAP = { ids: ids, nodes: nodes, edges: edges, rel: rel, smin: smin, smax: smax, pmin: Math.min.apply(null, all), pmax: Math.max.apply(null, all) };
+      for (var it = 0; it < 900; it++) simStep(SIMMAP, 1 - it / 900, null);
+      simFit(SIMMAP);
+      return SIMMAP;
+    });
+  }
+  function simStep(M, heat, fixed) {
+    var ids = M.ids, N = M.nodes, i, j;
+    for (i = 0; i < ids.length; i++) {
+      var a = N[ids[i]];
+      for (j = i + 1; j < ids.length; j++) {
+        var b = N[ids[j]], dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy + 0.01, f = 3600 / d2, d = Math.sqrt(d2);
+        a.vx += f * dx / d; a.vy += f * dy / d; b.vx -= f * dx / d; b.vy -= f * dy / d;
+      }
+      a.vx += (500 - a.x) * 0.004; a.vy += (280 - a.y) * 0.006;
+    }
+    M.edges.forEach(function (e) {
+      var a = N[e.a], b = N[e.b], dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy) || 0.01, f = 0.06 * (d - e.len);
+      a.vx += f * dx / d; a.vy += f * dy / d; b.vx -= f * dx / d; b.vy -= f * dy / d;
+    });
+    ids.forEach(function (id) {
+      var n = N[id];
+      if (fixed === id) { n.vx = n.vy = 0; return; }
+      var step = 0.5 + 2.5 * heat;
+      n.vx = Math.max(-step * 8, Math.min(step * 8, n.vx)); n.vy = Math.max(-step * 8, Math.min(step * 8, n.vy));
+      n.x += n.vx * 0.5; n.y += n.vy * 0.5; n.vx *= 0.6; n.vy *= 0.6;
+    });
+  }
+  // scale the layout into the drawing area, keeping its proportions
+  function simFit(M) {
+    var xs = M.ids.map(function (id) { return M.nodes[id].x; }), ys = M.ids.map(function (id) { return M.nodes[id].y; });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+    var k = Math.min(820 / (x1 - x0 || 1), 440 / (y1 - y0 || 1));
+    M.ids.forEach(function (id) { var n = M.nodes[id]; n.x = 500 + (n.x - (x0 + x1) / 2) * k; n.y = 280 + (n.y - (y0 + y1) / 2) * k; });
+  }
+  function simSvg(M, focus) {
+    var near = {};
+    if (focus) M.rel[focus].filter(function (x) { return BY_ID[x.id]; }).slice(0, 3).forEach(function (x) { near[x.id] = 1; });
+    var s = '<svg viewBox="0 0 1000 560" class="simsvg' + (focus ? " has-focus" : "") + '" role="img" aria-label="Map of the ' + M.ids.length + ' investigations: each is joined to the three whose NASA text is closest in meaning">';
+    M.edges.forEach(function (e, k) {
+      var a = M.nodes[e.a], b = M.nodes[e.b], on = focus && (e.a === focus || e.b === focus);
+      s += '<line class="se' + (on ? " on" : "") + '" data-e="' + k + '" data-a="' + e.a + '" data-b="' + e.b + '" x1="' + a.x.toFixed(1) + '" y1="' + a.y.toFixed(1) + '" x2="' + b.x.toFixed(1) + '" y2="' + b.y.toFixed(1) + '" style="stroke-opacity:' + (0.35 + 0.55 * (1 - e.t)).toFixed(2) + '"/>';
+    });
+    M.ids.forEach(function (id) {
+      var n = M.nodes[id], inv = BY_ID[id], cls = id === focus ? " focus" : near[id] ? " near" : "";
+      s += '<g class="sn' + cls + '" data-sim="' + id + '" transform="translate(' + n.x.toFixed(1) + " " + n.y.toFixed(1) + ')" tabindex="0" role="link" aria-label="' + esc(inv.name) + '"><circle r="' + (id === focus ? 11 : 7) + '" fill="' + COLOR[inv.cls] + '"/><text x="' + (id === focus ? 16 : 12) + '" y="4">' + esc(inv.name) + "</text></g>";
+    });
+    return s + "</svg>";
+  }
+  function simNote(M) {
+    return "Each dot is one investigation, coloured by what burns. A line joins each one to the three whose NASA record text is closest in meaning, as measured by the site's language model when the page loads. " +
+      "The shorter the line, the closer the text, compared with the other pairs: every pair of records falls between " + fx(M.pmin, 2) + " and " + fx(M.pmax, 2) + " in similarity, so the map stretches a small range. It shows wording and topic, not test results. Drag a dot to move it; choose one to open it.";
+  }
+  // after the SVG is on the page: hover highlights a dot and its neighbours, drag moves it and the springs pull the rest
+  function simWire(box, M, focus) {
+    var svg = box.querySelector("svg"), drag = null, moved = false, raf = 0;
+    function pt(ev) { var r = svg.getBoundingClientRect(); return { x: (ev.clientX - r.left) / r.width * 1000, y: (ev.clientY - r.top) / r.height * 560 }; }
+    function redraw() {
+      svg.querySelectorAll("g.sn").forEach(function (g) { var n = M.nodes[g.getAttribute("data-sim")]; g.setAttribute("transform", "translate(" + n.x.toFixed(1) + " " + n.y.toFixed(1) + ")"); });
+      svg.querySelectorAll("line.se").forEach(function (l) { var a = M.nodes[l.getAttribute("data-a")], b = M.nodes[l.getAttribute("data-b")]; l.setAttribute("x1", a.x.toFixed(1)); l.setAttribute("y1", a.y.toFixed(1)); l.setAttribute("x2", b.x.toFixed(1)); l.setAttribute("y2", b.y.toFixed(1)); });
+    }
+    function loop() { if (!drag) return; for (var k = 0; k < 3; k++) simStep(M, 0.15, drag); redraw(); raf = requestAnimationFrame(loop); }
+    function hl(id) {
+      var near = {};
+      if (id) { near[id] = 1; M.edges.forEach(function (e) { if (e.a === id) near[e.b] = 1; if (e.b === id) near[e.a] = 1; }); }
+      svg.classList.toggle("hovering", !!id);
+      svg.querySelectorAll("g.sn").forEach(function (g) { g.classList.toggle("lit", !!near[g.getAttribute("data-sim")]); });
+      svg.querySelectorAll("line.se").forEach(function (l) { l.classList.toggle("lit", !!id && (l.getAttribute("data-a") === id || l.getAttribute("data-b") === id)); });
+    }
+    svg.addEventListener("pointerover", function (ev) { var g = ev.target.closest("g.sn"); if (g && !drag) hl(g.getAttribute("data-sim")); });
+    svg.addEventListener("pointerout", function (ev) { if (!drag && !(ev.relatedTarget && ev.relatedTarget.closest && ev.relatedTarget.closest("g.sn"))) hl(null); });
+    svg.addEventListener("pointerdown", function (ev) {
+      var g = ev.target.closest("g.sn"); if (!g) return;
+      drag = g.getAttribute("data-sim"); moved = false; svg.setPointerCapture(ev.pointerId); ev.preventDefault(); raf = requestAnimationFrame(loop);
+    });
+    svg.addEventListener("pointermove", function (ev) {
+      if (!drag) return;
+      var p = pt(ev), n = M.nodes[drag];
+      if (Math.abs(p.x - n.x) + Math.abs(p.y - n.y) > 3) moved = true;
+      n.x = Math.max(20, Math.min(980, p.x)); n.y = Math.max(20, Math.min(540, p.y));
+    });
+    svg.addEventListener("pointerup", function (ev) {
+      if (!drag) return;
+      var id = drag; drag = null; cancelAnimationFrame(raf); redraw(); hl(null);
+      if (!moved && id !== focus) location.hash = "#/inv/" + id;
+    });
+    svg.addEventListener("keydown", function (ev) { var g = ev.target.closest("g.sn"); if (g && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); location.hash = "#/inv/" + g.getAttribute("data-sim"); } });
+  }
+  function simShow(boxId, focus) {
+    simLoad().then(function (M) {
+      var box = document.getElementById(boxId);
+      if (!box) return;
+      box.innerHTML = '<div class="chart simmap">' + simSvg(M, focus) + '</div><p class="legend">' + ["solid", "emulated", "smoke", "aerosol", "gas", "droplet"].map(function (c) {
+        return '<span><i class="sw" style="background:' + COLOR[c] + '"></i>' + esc(D.about.class_labels[c]) + "</span>";
+      }).join("") + '</p><p class="src">' + simNote(M) + "</p>";
+      simWire(box, M, focus);
+    }).catch(function () {});
+  }
+
   // ---------------------------------------------------------------- habitat
   // One drawing is the whole tool. The reader sets the air and one material for four parts of the habitat,
   // in boxes tied to those parts; each part then shows what NASA has tested for it. The numbered spots are the six open questions.
@@ -938,14 +1062,18 @@
     document.body.appendChild(a); a.click(); a.remove();
   }
   function viewExplore(tab) {
-    if (tab === "oxygen" || tab === "pressure" || tab === "find") exploreTab = tab;
+    if (tab === "oxygen" || tab === "pressure" || tab === "find" || tab === "similar") exploreTab = tab;
     setTitle("Explore");
-    var S = D.summary, tabs = [["oxygen", "Oxygen, by what burns"], ["pressure", "Oxygen against pressure"], ["find", "Find a material or a test"]];
+    var S = D.summary, tabs = [["oxygen", "Oxygen, by what burns"], ["pressure", "Oxygen against pressure"], ["find", "Find a material or a test"], ["similar", "Map by meaning"]];
     var h = '<p class="kick">Explore</p><h1>Every NASA test, against the air you choose</h1>' + atmBar() + counters();
     h += '<div class="tabs" role="tablist">' + tabs.map(function (t) {
       return '<a role="tab" href="#/explore/' + t[0] + '" class="' + (exploreTab === t[0] ? "on" : "") + '" aria-selected="' + (exploreTab === t[0]) + '">' + t[1] + "</a>";
     }).join("") + '</div><div class="tabpanel">';
-    if (exploreTab === "oxygen") {
+    if (exploreTab === "similar") {
+      h += '<div class="panel-head"><p class="figt">The ' + D.summary.investigations + ' investigations, placed by how close their NASA record text is in meaning</p></div><div id="simbox-all"><p class="loading">Loading NASA\'s text…</p></div>';
+      setTimeout(function () { simShow("simbox-all", null); }, 0);
+    }
+    else if (exploreTab === "oxygen") {
       h += '<div class="panel-head"><p class="figt">Every test that states its oxygen level. ' + COUNTS.o2AtOrAbove + " of " + COUNTS.plainO2 + " are at " + num(ATM.o2) + ' % oxygen or more.</p><label class="check"><input type="checkbox" id="burner"' + (burnerOn ? " checked" : "") + "> Show oxygen blown from a burner (not cabin air)</label></div>";
       h += '<div class="chart" id="chart-lanes">' + laneChart({ burner: burnerOn }) + "</div>" + legend(burnerOn ? ["solid", "emulated", "droplet", "gas", "burner"] : ["solid", "emulated", "droplet", "gas"]);
       h += '<details class="howto"><summary>Why the 85 % oxygen in the challenge statement is not counted</summary><p>In those tests (inverse flames in ' + invLink("PSI-159") + " and " + invLink("PSI-10") +
@@ -963,7 +1091,7 @@
       h += '<label class="check"><input type="checkbox" id="fonly"' + (find.only ? " checked" : "") + "> Only tests in the chosen air</label></div>";
       h += '<div id="find-out"></div>';
     }
-    h += '</div><p class="src">Source: NASA PSI Experimental Tables, ' + TESTS.length + " table rows from " + Object.keys(TESTS.reduce(function (a, t) { a[t.inv] = 1; return a; }, {})).length + " investigations. Oxygen is the air around the flame; cells NASA did not write as plain numbers are shown as written and not counted.</p>";
+    h += '</div>' + (exploreTab === "similar" ? "" : '<p class="src">Source: NASA PSI Experimental Tables, ' + TESTS.length + " table rows from " + Object.keys(TESTS.reduce(function (a, t) { a[t.inv] = 1; return a; }, {})).length + " investigations. Oxygen is the air around the flame; cells NASA did not write as plain numbers are shown as written and not counted.</p>");
     main.innerHTML = h;
     bindPoints(document.getElementById("chart-lanes"));
     bindPoints(document.getElementById("chart-scatter"));
@@ -1313,7 +1441,7 @@
         return '<option value="' + i.id + '">' + esc(i.name) + "</option>";
       }).join("") + "</select></label></div>";
 
-    h += '<p class="relm" id="relm" data-for="' + esc(id) + '"></p>';
+    h += '<p class="relm" id="relm" data-for="' + esc(id) + '"></p><div id="simbox-inv"></div>';
     h += '<div class="grid2"><div class="panel"><h2>In plain words</h2><p class="ai" style="margin:-.3rem 0 .8rem">AI-written from the PSI record</p><p>' + esc(inv.summary.did) + '</p><ul class="clean">';
     inv.summary.points.forEach(function (p) { h += '<li><span class="kind ' + p.kind + '">' + KIND[p.kind] + "</span>" + esc(p.text) + quote(inv.id, p.field, p.quote) + "</li>"; });
     h += '</ul><p class="small muted">Aim: what it set out to do. Expected: what its authors expected beforehand. Result: a finding the record states. The quotations are NASA\'s words, checked by program against the record.</p></div>';
@@ -1362,8 +1490,8 @@
     relatedLoad().then(function (R) {
       var el = document.getElementById("relm"), list = R && R.related[id];
       if (!el || !list || !list.length || el.getAttribute("data-for") !== id) return;
-      el.innerHTML = "<b>Closest by meaning</b> " + list.filter(function (x) { return BY_ID[x.id]; }).map(function (x) { return invLink(x.id) + ' <span class="muted">' + x.similarity.toFixed(2) + "</span>"; }).join(", ") +
-        '<span class="relnote">The records whose NASA text is nearest to this one, as measured by the language model when the site is built (1 would be the same text). A match of wording and topic, not a judgement by NASA.</span>';
+      el.innerHTML = "<b>Closest by meaning</b> " + list.filter(function (x) { return BY_ID[x.id]; }).map(function (x) { return invLink(x.id); }).join(", ") +
+        ' <button class="link" data-simopen="' + esc(id) + '">See it on the map</button>';
     });
     var f = main.querySelector("[data-findinv]");
     if (f) f.addEventListener("click", function () { find.q = f.getAttribute("data-findinv"); find.cls = "all"; find.only = false; });
@@ -1611,6 +1739,7 @@
       var done = function (ok) { note.textContent = ok ? "Link copied." : link; };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(function () { done(true); }, function () { done(false); }); else done(false);
     }
+    else if (b.dataset.simopen) { var sb = document.getElementById("simbox-inv"); if (sb.innerHTML) sb.innerHTML = ""; else simShow("simbox-inv", b.dataset.simopen); }
     else if (b.dataset.anfuel) { AN.fuel = b.dataset.anfuel; AN.v.d0 = anMedianSize(); rerender(); }
     else if (b.dataset.dl === "find") downloadFind();
     else if (b.dataset.more === "find") { find.limit += 200; drawFinder(); }
