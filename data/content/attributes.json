@@ -138,7 +138,7 @@
   "PSI-68": {
    "sample": {"text": "Single fuel droplets on a support fibre or floating free", "field": "approach", "quote": "the dispensing of a predetermined amount of fuel (based on the target droplet size) onto the support fiber"},
    "varied": {"text": "Fuel, gas mixture, pressure and droplet size", "field": "approach", "quote": "1) Fuel type 2) Ambient gas composition 3) Ambient Pressure 4) Droplet initial diameter"},
-   "flow": {"text": "A slow flow made by moving the droplet", "column": "Flow Velocity (cm/s)"},
+   "flow": {"text": "A slow flow; its speed is in the table", "column": "Flow Velocity (cm/s)"},
    "earth": {"text": "Jet engines and cleaner fuels", "field": "researchImpacts", "quote": "Validation of jet engine models by engine manufacturers"},
    "measured": {
     "camera": {"field": "approach", "quote": "track flame evolution using high speed photography"},
