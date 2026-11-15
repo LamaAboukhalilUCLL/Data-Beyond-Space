@@ -69,7 +69,7 @@ docs/                    the website; docs/data/ is written by build_dataset.py
 - G. A. Ruff, Spacecraft Fire Safety Needs for Exploration, NASA Glenn Research Center, 2020: https://ntrs.nasa.gov/citations/20205007829
 - OpenAlex (publication year, journal and abstracts): https://openalex.org
 - Photographs (Moon, Earth, space station): NASA, public domain, via Wikimedia Commons; sources, checksums and changes in `docs/img/CREDITS.md`
-- Typefaces: Cormorant Garamond, Inter and DM Mono, SIL Open Font License 1.1, from https://fontsource.org (details in `docs/img/CREDITS.md`)
+- Typefaces: Barlow Condensed, Public Sans and DM Mono, SIL Open Font License 1.1, from https://fontsource.org (details in `docs/img/CREDITS.md`)
 - Python 3 standard library: https://docs.python.org/3/library/
 
 ## Use of AI

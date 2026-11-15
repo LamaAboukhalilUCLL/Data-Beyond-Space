@@ -32,8 +32,9 @@
   var FIELD = { objective: "Objective", approach: "Approach", hypothesis: "Hypothesis", researchImpacts: "Research impacts" };
   var KIND = { aim: "Aim", expected: "Expected", result: "Result", stated: "Stated" };
   var LANES = ["solid", "smoke", "emulated", "droplet", "gas"];
-  // NASA's chart palette for dark backgrounds (Horizon Design System, github.com/nasa/hds-core)
-  var COLOR = { solid: "#f29d49", emulated: "#c2b47c", droplet: "#609af6", gas: "#79a3ad", smoke: "#959599", aerosol: "#77777a", burner: "#fa8c87" };
+  // One accent only. Solid materials are white, every other test grey; red is kept for the Moon Base.
+  var COLOR = { solid: "#ffffff", emulated: "#959599", droplet: "#959599", gas: "#959599", smoke: "#959599", aerosol: "#959599", burner: "#77777a" };
+  var RED = "#f64137";
 
   // ---------------------------------------------------------------- helpers
   function esc(s) {
@@ -47,16 +48,17 @@
     return String(r);
   }
   function chip(cls) {
-    return '<span class="chip"><i class="c-' + cls + '"></i>' + esc(D.about.class_labels[cls]) + "</span>";
+    return '<span class="chip">' + esc(D.about.class_labels[cls]) + "</span>";
   }
-  function dot(c) {
-    var k = c.score === 1 ? "full" : c.score === 0.5 ? "half" : (c.value === "text" || c.value === "not stated" || c.value === "no table") ? "unknown" : "";
-    return '<span class="dot ' + k + '"></span>';
+  // A condition as a plain mark: filled = met, half = partly, ring = not met, blank = the table does not say.
+  function glyph(c) {
+    return c.score === 1 ? "●" : c.score === 0.5 ? "◐" : (c.value === "text" || c.value === "not stated" || c.value === "no table") ? "" : "○";
   }
+  function dot(c) { return '<span class="g">' + (glyph(c) || "&nbsp;") + "</span>"; }
   function dots(inv) {
-    return '<span class="dots" role="img" aria-label="' + esc(CRIT.map(function (c) {
+    return '<span class="marks" role="img" aria-label="' + esc(CRIT.map(function (c) {
       return c[1] + ": " + VALUE_WORD[inv.criteria[c[0]].value];
-    }).join("; ")) + '">' + CRIT.map(function (c) { return dot(inv.criteria[c[0]]); }).join("") + "</span>";
+    }).join("; ")) + '">' + CRIT.map(function (c) { return glyph(inv.criteria[c[0]]) || "&nbsp;"; }).join("") + "</span>";
   }
   function quote(invId, field, q) {
     return "<blockquote>“" + esc(q) + "”<cite>NASA PSI record " + esc(invId) + ", " + FIELD[field] + "</cite></blockquote>";
@@ -72,47 +74,39 @@
   function narrow() { return window.innerWidth < 700; }
   var SHORT = { purpose: "Fire safety", material: "Solids", oxygen: "30 % O₂", pressure: "≤ 10.2 psi", both: "Both" };
   function cell(c, label) {
-    var k = c.score === 1 ? "full" : c.score === 0.5 ? "half" : (c.value === "text" || c.value === "not stated" || c.value === "no table") ? "unknown" : "none";
-    return '<span class="sq ' + k + '" title="' + esc(label + ": " + VALUE_WORD[c.value]) + '"></span>';
+    return '<span title="' + esc(label + ": " + VALUE_WORD[c.value]) + '">' + glyph(c) + "</span>";
   }
-  // How far each fuel type got: one bar from the lowest to the highest ambient oxygen
-  // its tests state (computed by the build), against Earth air and the Moon Base line.
+  // Figure 1. One bar per fuel type, from the lowest to the highest ambient oxygen its tests state
+  // (computed by the build). Labels sit on the bars; one note carries the finding.
   function fuelBars() {
     var R = D.summary.o2_range_by_class, zone = D.about.moon_base.o2_min_percent;
     var rows = ["solid", "droplet", "gas"].filter(function (c) { return R[c]; });
-    var nw = narrow(), W = nw ? 380 : 1100, L = nw ? 12 : 190, Rt = nw ? 14 : 30, rowH = nw ? 70 : 76, T = 56, bh = nw ? 22 : 30;
-    var H = T + rows.length * rowH + (nw ? 52 : 60), x = scaleLin(10, 45, L, W - Rt), yb = T + rows.length * rowH;
-    var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Range of ambient oxygen tested, by what burns. Solid materials stop at ' + num(R.solid.max) + ' percent; Moon Base air starts at ' + num(zone) + ' percent.">';
-    s += '<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line class="gap-hatch" x1="0" y1="0" x2="0" y2="8" stroke-width="3"/></pattern></defs>';
-    // the Moon Base zone, and the gap between the solid-material maximum and it
-    s += '<rect class="zone" x="' + x(zone) + '" y="' + (T - 14) + '" width="' + (W - Rt - x(zone)) + '" height="' + (rows.length * rowH + 14) + '" rx="8"/>';
-    var r0 = R.solid, gy = T + rows.indexOf("solid") * rowH;
-    if (r0.max < zone) s += '<rect x="' + x(r0.max) + '" y="' + (gy - 4) + '" width="' + (x(zone) - x(r0.max)) + '" height="' + (rowH - 8) + '" fill="url(#hatch)"/>';
-    s += '<line x1="' + x(21) + '" x2="' + x(21) + '" y1="' + (T - 14) + '" y2="' + yb + '" class="earth"/>';
-    s += '<text class="earth-label strong" x="' + x(21) + '" y="' + (T - 24) + '" text-anchor="middle">Earth air 21 %</text>';
-    s += '<rect x="' + (x(zone) - 1.5) + '" y="' + (T - 14) + '" width="3" height="' + (yb - T + 14) + '" class="zone-line"/>';
-    s += '<text class="zone-label strong" x="' + (x(zone) + (nw ? 6 : 20)) + '" y="' + (T - 24) + '">Moon Base: ' + num(zone) + " % +</text>";
+    var nw = narrow(), W = nw ? 380 : 1160, L = nw ? 30 : 230, Rt = nw ? 48 : 40, T = nw ? 64 : 70, rowH = nw ? 84 : 86, bh = nw ? 22 : 30;
+    var yb = T + rows.length * rowH, H = yb + 62, x = scaleLin(10, 45, L, W - Rt);
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Range of ambient oxygen tested, by what burns. Solid materials stop at ' + num(R.solid.max) + " percent; Moon Base air starts at " + num(zone) + ' percent.">';
+    s += '<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="' + RED + '"/></marker></defs>';
+    s += '<rect class="zone" x="' + x(zone) + '" y="' + (T - 34) + '" width="' + (W - Rt - x(zone)) + '" height="' + (yb - T + 34) + '"/>';
+    for (var v = 10; v <= 45; v += nw ? 10 : 5) s += '<line class="grid" x1="' + x(v) + '" x2="' + x(v) + '" y1="' + (T - 34) + '" y2="' + yb + '"/><text class="tick" x="' + x(v) + '" y="' + (yb + 24) + '" text-anchor="middle">' + v + " %</text>";
+    s += '<line class="earth" x1="' + x(21) + '" x2="' + x(21) + '" y1="' + (T - 34) + '" y2="' + yb + '"/>';
+    s += '<text class="ann" x="' + (x(21) - 8) + '" y="' + (T - 42) + '" text-anchor="end">Earth air, 21 %</text>';
+    s += '<line class="zone-line" x1="' + x(zone) + '" x2="' + x(zone) + '" y1="' + (T - 34) + '" y2="' + yb + '"/>';
+    s += '<text class="ann red" x="' + (x(zone) + (nw ? 6 : 10)) + '" y="' + (T - 42) + '">' + (nw ? "Moon Base: " + num(zone) + " % or more" : "Moon Base air starts at " + num(zone) + " %") + "</text>";
     rows.forEach(function (c, k) {
-      var r = R[c], y0 = T + k * rowH, by = nw ? y0 + 26 : y0 + (rowH - bh) / 2 - 4, x0 = x(r.min), x1 = x(r.max);
-      if (nw) {
-        s += '<text class="lane-label" x="' + L + '" y="' + (y0 + 16) + '">' + esc(D.about.class_labels[c]) + '<tspan class="sub"> (' + r.rows + " tests)</tspan></text>";
-      } else {
-        var words = D.about.class_labels[c].split(" "), mid = Math.ceil(words.length / 2);
-        s += '<text class="lane-label big" x="14" y="' + (by + 4) + '">' + esc(words.slice(0, mid).join(" ")) + '<tspan x="14" dy="20">' + esc(words.slice(mid).join(" ")) + '</tspan><tspan class="sub" x="14" dy="20">(' + r.rows + " tests)</tspan></text>";
-      }
-      s += '<rect x="' + x0 + '" y="' + by + '" width="' + Math.max(8, x1 - x0) + '" height="' + bh + '" rx="' + bh / 2 + '" fill="' + COLOR[c] + '"/>';
-      var ty = by + bh / 2 + 5;
-      if (x1 - x0 > (nw ? 110 : 140)) s += '<text class="bar-val" x="' + (x0 + 12) + '" y="' + ty + '">' + num(r.min) + " %</text>";
-      s += '<text class="bar-val" x="' + (x1 - 12) + '" y="' + ty + '" text-anchor="end">' + num(r.max) + " %</text>";
-      if (r.max < zone) {
-        var gx = (x1 + x(zone)) / 2;
-        s += nw ? '<text class="stop sm" x="' + gx + '" y="' + ty + '" text-anchor="middle">✕ stops short</text>' :
-          '<text class="stop" x="' + gx + '" y="' + (ty - 10) + '" text-anchor="middle">' + num(r.max) + ' % ✕<tspan x="' + gx + '" dy="22">stops short</tspan></text>';
+      var r = R[c], y0 = T + k * rowH, by = nw ? y0 + 30 : y0 + 18, x0 = x(r.min), x1 = x(r.max), ty = by + bh / 2 + 5;
+      if (nw) s += '<text class="lab" x="' + L + '" y="' + (y0 + 18) + '" style="font-size:14px">' + esc(D.about.class_labels[c]) + '<tspan class="sub">, ' + r.rows + " tests</tspan></text>";
+      else s += '<text class="lab" x="0" y="' + (y0 + 34) + '">' + esc(D.about.class_labels[c]) + '</text><text class="sub" x="0" y="' + (y0 + 54) + '">' + r.rows + " tests</text>";
+      s += '<rect x="' + x0 + '" y="' + by + '" width="' + Math.max(6, x1 - x0) + '" height="' + bh + '" fill="' + (c === "solid" ? "#fff" : "#77777a") + '"/>';
+      s += '<text class="val" x="' + (x0 - 7) + '" y="' + ty + '" text-anchor="end">' + num(r.min) + "</text>";
+      s += '<text class="val" x="' + (x1 + 7) + '" y="' + ty + '">' + num(r.max) + " %</text>";
+      if (c === "solid" && r.max < zone) {
+        if (nw) s += '<text class="ann red" x="' + (x(zone) + 6) + '" y="' + ty + '">none here</text>';
+        else {
+          s += '<path d="M' + (x1 + 70) + " " + (by + bh / 2) + "H" + (x(zone) - 6) + '" stroke="' + RED + '" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>';
+          s += '<text class="ann red" x="' + (x(zone) + 10) + '" y="' + (ty - 9) + '">No solid-material test</text><text class="ann red" x="' + (x(zone) + 10) + '" y="' + (ty + 9) + '">reaches this zone</text>';
+        }
       }
     });
-    s += '<line x1="' + x(10) + '" x2="' + x(45) + '" y1="' + yb + '" y2="' + yb + '" stroke="var(--line)"/>';
-    for (var v = 10; v <= 45; v += nw ? 10 : 5) s += '<line x1="' + x(v) + '" x2="' + x(v) + '" y1="' + yb + '" y2="' + (yb + 6) + '" stroke="var(--line)"/><text class="tick" x="' + x(v) + '" y="' + (yb + 24) + '" text-anchor="middle">' + v + " %</text>";
-    s += '<text class="axis-title" x="' + ((x(10) + x(45)) / 2) + '" y="' + (yb + (nw ? 44 : 50)) + '" text-anchor="middle">Oxygen in ambient air (percent)</text>';
+    s += '<text class="tick" x="' + ((L + W - Rt) / 2) + '" y="' + (yb + 50) + '" text-anchor="middle">Oxygen in the air around the flame</text>';
     return s + "</svg>";
   }
   // a small range bar for one investigation: its tested min..max against a threshold
@@ -120,9 +114,9 @@
     var W = 300, H = 46, L = 6, R = 6, x = scaleLin(d0, d1, L, W - R), cl = function (v) { return Math.max(d0, Math.min(d1, v)); };
     var zx0 = better === "above" ? x(thr) : L, zx1 = better === "above" ? W - R : x(thr);
     var s = '<svg class="mini" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Tested ' + num(lo) + " to " + num(hi) + " " + unit + '">';
-    s += '<rect class="zone" x="' + zx0 + '" y="4" width="' + (zx1 - zx0) + '" height="22" rx="4"/>';
-    s += '<rect class="bar-track" x="' + L + '" y="10" width="' + (W - L - R) + '" height="10" rx="5"/>';
-    s += '<rect x="' + x(cl(lo)) + '" y="10" width="' + Math.max(5, x(cl(hi)) - x(cl(lo))) + '" height="10" rx="5" fill="var(--flame)"/>';
+    s += '<rect class="zone" x="' + zx0 + '" y="4" width="' + (zx1 - zx0) + '" height="22"/>';
+    s += '<rect class="bar-track" x="' + L + '" y="10" width="' + (W - L - R) + '" height="10"/>';
+    s += '<rect x="' + x(cl(lo)) + '" y="10" width="' + Math.max(5, x(cl(hi)) - x(cl(lo))) + '" height="10" fill="#fff"/>';
     s += '<line class="zone-edge" x1="' + x(thr) + '" x2="' + x(thr) + '" y1="2" y2="28"/>';
     s += '<text x="' + L + '" y="42">' + d0 + "</text>" + '<text x="' + x(thr) + '" y="42" text-anchor="middle" class="zone-label">' + num(thr) + "</text>" + '<text x="' + (W - R) + '" y="42" text-anchor="end">' + d1 + " " + unit + "</text>";
     return s + "</svg>";
@@ -152,7 +146,7 @@
     s += '<text x="' + (x(21) - 6) + '" y="' + (T - 10) + '" text-anchor="end" class="earth-label">Earth air 21 %</text>';
     lanes.forEach(function (cls, k) {
       var y0 = T + k * laneH;
-      if (k % 2 === 0) s += '<rect x="0" y="' + y0 + '" width="' + W + '" height="' + laneH + '" fill="rgba(255,255,255,.022)"/>';
+      s += '<line class="grid" x1="0" x2="' + W + '" y1="' + y0 + '" y2="' + y0 + '"/>';
       var label = cls === "burner" ? "Oxygen blown from a burner" : D.about.class_labels[cls];
       var pts = TESTS.filter(function (t) { return cls === "burner" ? t.burner_o2 != null : (t.cls === cls && (t.o2 != null || t.o2_list)); });
       var plain = pts.filter(function (t) { return cls === "burner" ? true : t.o2 != null; }).length;
@@ -163,18 +157,17 @@
       if (nw) {
         s += '<text class="lane-label small" x="' + (L + 2) + '" y="' + (y0 + 13) + '">' + esc(label) + "</text>";
       } else {
-      s += '<circle cx="14" cy="' + (y0 + 20) + '" r="6" fill="' + COLOR[cls] + '"/>';
-      s += '<text class="lane-label" x="28" y="' + (y0 + 24) + '">' + esc(label) + "</text>";
+      s += '<text class="lane-label" x="0" y="' + (y0 + 24) + '">' + esc(label) + "</text>";
       }
       var sub = cls === "burner" ? "not an atmosphere; " + plain + " tests" :
         (plain ? plain + " tests plotted" : "") + (listed ? (plain ? ", " : "") + listed + " rows listing values" : "") + (!pts.length ? "no oxygen stated" : "");
       if (nw) {
         // phones: the lane name is enough; counts are in the tooltip and the text above
       } else if (!opts.compact) {
-        s += '<text x="28" y="' + (y0 + 42) + '">' + esc(sub) + "</text>";
-        if (cls !== "burner" && missing) s += '<text x="28" y="' + (y0 + 58) + '" fill="#959599">' + missing + " of " + invs.length + " investigations not plotted</text>";
+        s += '<text class="sub" x="0" y="' + (y0 + 42) + '">' + esc(sub) + "</text>";
+        if (cls !== "burner" && missing) s += '<text class="sub" x="0" y="' + (y0 + 58) + '">' + missing + " of " + invs.length + " investigations not plotted</text>";
       } else {
-        s += '<text x="28" y="' + (y0 + 40) + '">' + esc(sub) + "</text>";
+        s += '<text class="sub" x="0" y="' + (y0 + 40) + '">' + esc(sub) + "</text>";
       }
       var above = 0;
       pts.forEach(function (t) {
@@ -224,7 +217,7 @@
     s += '<line class="earth" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(14.7) + '" y2="' + y(14.7) + '"/><text x="' + (L + 6) + '" y="' + (y(14.7) - 5) + '" class="earth-label">Earth sea level 14.7 psi</text>';
     TESTS.forEach(function (t) {
       if (t.in_zone == null) return;
-      s += '<circle cx="' + x(t.o2).toFixed(1) + '" cy="' + y(t.p_psi).toFixed(1) + '" r="' + (t.in_zone ? 4.2 : 3) + '" fill="' + COLOR[t.cls] + '"' + pointAttrs(t) + "/>";
+      s += '<circle cx="' + x(t.o2).toFixed(1) + '" cy="' + y(t.p_psi).toFixed(1) + '" r="' + (t.in_zone ? 4.4 : 3) + '" fill="' + (t.in_zone ? RED : COLOR[t.cls]) + '"' + pointAttrs(t) + "/>";
     });
     s += '<text class="zone-label" x="' + (W - R - 8) + '" y="' + (y(0) - 10) + '" text-anchor="end">Moon Base: ' + num(zo) + " % +, " + num(zp) + " psi or less</text>";
     s += '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 6) + '" text-anchor="middle">ambient oxygen, percent</text>';
@@ -232,10 +225,8 @@
     return s;
   }
 
-  function legend(classes) {
-    return '<div class="legend">' + classes.map(function (c) {
-      return '<span class="chip"><i style="background:' + COLOR[c] + '"></i>' + esc(c === "burner" ? "Burner-flow oxygen" : D.about.class_labels[c]) + "</span>";
-    }).join("") + '<span>● one test with a plain number</span><span>◇ a value listed for a test day or fuel</span><span>Click any mark to see NASA\'s table row.</span></div>';
+  function legend() {
+    return '<p class="legend"><span>● one test that states a number</span><span>◇ a value listed for a test day or fuel</span><span>White: solid materials</span><span>Click a mark to see NASA\'s table row.</span></p>';
   }
 
   function bindPoints(root) {
@@ -315,85 +306,89 @@
   function closeModal() { document.getElementById("modal").hidden = true; }
 
   // ------------------------------------------------------------------ views
-  // The journey: where the evidence was gathered, and where it is needed.
-  var stopState = "moon";
-  function stopDetail() {
-    var S = D.summary, R = S.o2_range_by_class, zone = D.about.moon_base.o2_min_percent, zp = D.about.moon_base.pressure_max_psi;
-    var ground = D.investigations.filter(function (i) { return i.ground; }), flight = D.investigations.filter(function (i) { return !i.ground; });
-    var lo = Math.min.apply(null, Object.keys(R).map(function (k) { return R[k].min; })), hi = Math.max.apply(null, Object.keys(R).map(function (k) { return R[k].max; }));
-    function chips(list) {
-      return '<div class="invchips">' + list.map(function (i) {
-        return '<a href="#/inv/' + i.id + '"><span class="swatch" style="background:' + COLOR[i.cls] + ';margin:0"></span>' + esc(i.name) + "</a>";
-      }).join("") + "</div>";
-    }
-    if (stopState === "earth") return '<div><h3>Earth</h3><div class="count">' + ground.length + ' <small>investigations</small></div><p class="muted small">Laboratory and computer studies that build on the flight data.</p></div>' +
-      "<div><ul><li>Normal gravity: hot air rises and feeds a flame.</li><li>Earth air: 21 % oxygen at 14.7 psi.</li><li>NASA's screening test for spacecraft materials is run here.</li></ul>" + chips(ground) + "</div>";
-    if (stopState === "orbit") return '<div><h3>Low Earth orbit</h3><div class="count">' + flight.length + ' <small>investigations</small></div><p class="muted small">Run on the space station or in a cargo spacecraft, in weightlessness.</p></div>' +
-      "<div><ul><li>Ambient oxygen tested from " + num(lo) + " % to " + num(hi) + " %.</li><li>Solid materials stop at " + num(R.solid.max) + " %.</li><li>" + S.rows_in_zone + " of " + S.rows_with_both +
-      " tests that state both oxygen and pressure are in Moon Base air. All are gas flames.</li></ul>" + chips(flight) + "</div>";
-    return '<div><h3>Moon Base</h3><div class="count">' + S.records_mentioning_moon_or_partial_gravity + ' <small>of ' + S.investigations + ' records mention the Moon</small></div><p class="muted small">NASA plans the base near the lunar South Pole.</p></div>' +
-      "<div><ul><li>Air expected: " + num(zone) + " % oxygen or more, at " + num(zp) + " psi or less.</li><li>Solid-material tests in PSI at " + num(zone) + " % oxygen or more: " + R.solid.rows_at_or_above +
-      '.</li><li>No investigation in PSI was run in Moon gravity.</li></ul><p style="margin-top:1rem"><a class="btn ghost sm" href="#/questions">See what is still open</a></p></div>';
+  function rankRows(list, openable) {
+    var t = "";
+    list.forEach(function (i) {
+      var open = openable && !!rankState.open[i.id];
+      t += "<tr" + (openable ? ' class="pick' + (open ? " on" : "") + '" data-open="' + i.id + '" tabindex="0" aria-expanded="' + open + '"' : "") + '><td class="num">' + i.rank +
+        '</td><td class="rank-name">' + (openable ? "<b>" + esc(i.name) + "</b>" : invLink(i.id)) + "<span>" + esc(i.cls_label) + "</span></td>" +
+        CRIT.map(function (c) { var g = cell(i.criteria[c[0]], c[1]); return '<td class="m">' + g + "</td>"; }).join("") + '<td class="num">' + num(i.score) + "</td></tr>";
+      if (open) t += '<tr class="detail"><td colspan="8"><p>' + esc(i.summary.did) + ' <span class="ai">(AI-written summary)</span></p>' + critDetail(i) +
+        '<p style="margin-top:1rem"><a class="more" href="#/inv/' + i.id + '">Open ' + esc(i.name) + "</a></p></td></tr>";
+    });
+    return t;
   }
-  function journey() {
-    var stops = [["earth", "Earth", "normal gravity"], ["orbit", "Low Earth orbit", "weightless"], ["moon", "Moon Base", "where the data is needed"]];
-    return '<div class="journey"><div class="track" role="tablist" aria-label="Where the evidence was gathered">' + stops.map(function (x) {
-      return '<button class="stop' + (stopState === x[0] ? " on" : "") + '" data-stop="' + x[0] + '" role="tab" aria-selected="' + (stopState === x[0]) + '"><span class="node ' + x[0] + '"></span><b>' + x[1] + "</b><span class=\"sub\">" + x[2] + "</span></button>";
-    }).join("") + '</div><div class="stop-detail" id="stop-detail" role="tabpanel">' + stopDetail() + "</div></div>";
+  function rankHead() {
+    return '<thead><tr><th class="num"></th><th>Investigation</th>' + CRIT.map(function (c, k) {
+      return '<th class="m" title="' + esc(c[2]) + '"><span class="full">' + esc(HEAD[c[0]]) + '</span><span class="short">' + (k + 1) + "</span></th>";
+    }).join("") + '<th class="num">Met of 5</th></tr></thead>';
   }
+  var HEAD = { purpose: "Fire safety", material: "Solid materials", oxygen: "30 % oxygen", pressure: "10.2 psi or less", both: "Both together" };
+  var KEY = '<p class="key"><b>●</b>met <b>◐</b>half <b>○</b>not met <span style="margin-left:1rem">Blank: the table does not say.</span></p>';
+  var WORD = { answered: "Answered", partly: "Partly answered", open: "Open" };
 
   function viewHome() {
     setTitle("Overview");
-    var S = D.summary, solid = S.o2_range_by_class.solid, zone = D.about.moon_base.o2_min_percent;
-    var h = '<section class="hero"><div><p class="eyebrow">NASA Space Apps Challenge 2026</p>';
-    h += '<h1 class="hero-title">Solid-material evidence <em>stops before</em> Moon Base air.</h1>';
-    h += '<p class="lead">NASA\'s Moon Base is expected to hold air with ' + num(zone) + " % oxygen or more. In NASA's microgravity fire data, solid-material tests reach " + num(solid.max) + " %.</p>";
-    h += '<div class="row"><a class="btn" href="#/map">See the coverage map</a><a class="btn ghost" href="#/rank">Explore the ' + S.investigations + " investigations</a></div>";
-    h += '<p class="scroll-hint">Scroll for the evidence ↓</p></div>';
-    h += '<aside class="stats" aria-label="Key numbers">';
-    h += '<a class="stat hot" href="#/map"><b>' + S.rows_in_zone + "<small> / " + S.rows_with_both + "</small></b>tests run in Moon Base air. All gas flames, all from " + esc(BY_ID[S.investigations_in_zone[0]].name) + ".</a>";
-    h += '<a class="stat" href="#/rank"><b>' + S.meet_all_five + "<small> / " + S.investigations + "</small></b>investigations meet all five Moon Base conditions.</a>";
-    h += '<a class="stat" href="#/questions"><b>' + S.records_mentioning_moon_or_partial_gravity + "<small> / " + S.investigations + "</small></b>records mention the Moon, Mars or partial gravity.</a>";
-    h += "</aside></section>";
+    var S = D.summary, R = S.o2_range_by_class, zone = D.about.moon_base.o2_min_percent, zp = D.about.moon_base.pressure_max_psi;
+    var ground = D.investigations.filter(function (i) { return i.ground; }), flight = D.investigations.filter(function (i) { return !i.ground; });
+    var lo = Math.min.apply(null, Object.keys(R).map(function (k) { return R[k].min; })), hi = Math.max.apply(null, Object.keys(R).map(function (k) { return R[k].max; }));
+    var day = new Date(D.about.snapshot_retrieved_from).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+    function names(list) { return '<p class="names">' + list.map(function (i) { return invLink(i.id); }).join(", ") + "</p>"; }
 
-    h += '<div class="sec"><span>01</span><h2>The gap in one picture</h2></div>';
-    h += '<p class="muted">Each bar runs from the lowest to the highest oxygen level that NASA tested for one kind of fuel. The shaded zone is Moon Base air.</p>';
-    h += '<div class="chart hero-chart" id="chart-bars">' + fuelBars() + "</div>";
-    h += '<div class="hero-foot"><div class="legend"><strong>What burns</strong>' + ["solid", "droplet", "gas"].map(function (c) {
-      return '<span class="chip"><i style="background:' + COLOR[c] + '"></i>' + esc(D.about.class_labels[c]) + "</span>";
-    }).join("") + "</div></div>";
-    h += '<details class="howto"><summary>How to read this</summary><p>The bars use the ambient oxygen stated in NASA\'s Experimental Tables. Moon Base air is taken from the challenge statement: ' + num(zone) + " % oxygen or more, at " +
-      num(D.about.moon_base.pressure_max_psi) + ' psi or less. <a href="#/map">The coverage map</a> shows every single test.</p><p>This shows which conditions NASA tested, not how fire behaves on the Moon: no investigation in PSI was run in Moon gravity.</p></details>';
+    var h = '<section class="hero"><div class="moon"></div><div class="shade"></div><div class="hero-text"><p class="kick">NASA Space Apps Challenge 2026</p>';
+    h += "<h1>Solid-material evidence stops before Moon Base air</h1>";
+    h += '<p class="lead">NASA\'s Moon Base is expected to hold air with ' + num(zone) + " % oxygen or more, which makes materials burn more easily. In NASA's microgravity fire data, tests on solid materials reach " + num(R.solid.max) + " %.</p>";
+    h += '<p class="by">Data Beyond Space, NASA Space Apps Challenge 2026. Data: NASA Physical Sciences Informatics repository, snapshot of ' + esc(day) + ".</p></div>";
+    h += '<p class="cap">The Moon\'s near side. Lunar Reconnaissance Orbiter, NASA/GSFC/Arizona State University</p></section>';
 
-    h += '<div class="sec"><span>02</span><h2>From Earth to the Moon Base</h2></div>';
-    h += '<p class="muted">Where NASA\'s fire evidence was gathered, and where it is needed next. Choose a stop.</p>' + journey();
+    h += '<section class="figs">';
+    h += '<a href="#/map"><b>' + S.rows_in_zone + "</b>of " + S.rows_with_both + " tests that state both oxygen and pressure were run in Moon Base air. All are gas flames from one investigation, " + esc(BY_ID[S.investigations_in_zone[0]].name) + ".</a>";
+    h += '<a href="#/rank"><b>' + S.meet_all_five + "</b>of " + S.investigations + " investigations meet all five Moon Base conditions. The closest meet " + num(S.best_score) + ".</a>";
+    h += '<a href="#/questions"><b>' + S.records_mentioning_moon_or_partial_gravity + "</b>of " + S.investigations + " records mention the Moon, Mars or partial gravity.</a>";
+    h += "</section>";
 
-    h += '<div class="sec"><span>03</span><h2>Explore</h2></div><div class="steps">';
-    h += '<a class="step" href="#/map"><i>01</i><b>Coverage map</b>Every NASA test placed by oxygen and pressure, with Moon Base air marked. Click a mark to see NASA\'s own table row.<br><u>Open the map</u></a>';
-    h += '<a class="step" href="#/rank"><i>02</i><b>Ranking</b>All ' + S.investigations + " investigations ordered by how close they came to Moon Base air, with the evidence for each.<br><u>Open the ranking</u></a>";
-    h += '<a class="step" href="#/questions"><i>03</i><b>Open questions</b>Six fire-safety questions for a Moon Base: what the data answers, and what is missing.<br><u>Open the questions</u></a>';
-    h += "</div>";
+    h += '<h2>How far the tests went</h2><p class="sub2">Each bar runs from the lowest to the highest oxygen level NASA tested for one kind of fuel.</p>';
+    h += '<p class="figt">Figure 1. Oxygen levels tested, by what burns</p><div class="chart" id="chart-bars">' + fuelBars() + "</div>";
+    h += '<p class="src">Source: NASA PSI Experimental Tables, ' + S.rows_with_plain_ambient_o2 + ' tests that state ambient oxygen as a number. Moon Base air as given in the Space Apps challenge statement: ' + num(zone) + " % oxygen or more, at " + num(zp) +
+      ' psi or less. <a href="#/map">See every test on the coverage map.</a></p>';
+
+    h += '<h2>Where the evidence was gathered</h2><p class="sub2">And where it is needed next. This shows which conditions NASA tested, not how fire behaves on the Moon.</p><section class="places">';
+    h += '<figure><img src="img/earth.jpg" alt="Earth seen from space"><h3>Earth</h3><p class="cnt">' + ground.length + " investigations</p><p>Laboratory and computer studies that build on the flight data. Normal gravity, air with 21 % oxygen at 14.7 psi.</p>" + names(ground) + "<figcaption>Earth from Apollo 17. NASA</figcaption></figure>";
+    h += '<figure><img src="img/iss.jpg" alt="The International Space Station above Earth"><h3>Low Earth orbit</h3><p class="cnt">' + flight.length + " investigations</p><p>Run in weightlessness on the space station or in a cargo spacecraft. Oxygen tested from " + num(lo) + " % to " + num(hi) +
+      " %; solid materials stop at " + num(R.solid.max) + " %.</p>" + names(flight) + "<figcaption>The space station, 2010. NASA, crew of STS-132</figcaption></figure>";
+    h += '<figure><img src="img/moon.jpg" alt="The Moon\'s near side"><h3>Moon Base</h3><p class="cnt">No investigation</p><p>Air expected: ' + num(zone) + " % oxygen or more, at " + num(zp) +
+      ' psi or less. No test in PSI was run in Moon gravity.</p><p class="names"><a href="#/questions">What is still open</a></p><figcaption>The Moon\'s near side. NASA/GSFC/Arizona State University</figcaption></figure>';
+    h += "</section>";
+
+    h += '<h2>Which investigations come closest</h2><p class="sub2">Five conditions for Moon Base air, checked against every investigation.</p>' + KEY;
+    h += '<div class="tablewrap"><table class="grid">' + rankHead() + "<tbody>" + rankRows(D.investigations.slice(0, 7), false) + '</tbody></table></div><a class="more" href="#/rank">See all ' + S.investigations + " investigations</a>";
+
+    h += '<h2>What is still open</h2><p class="sub2">Six fire-safety questions for a Moon Base, and what NASA\'s data can say about each today.</p><div class="qlist">' + D.questions.map(function (q) {
+      return '<a href="#/questions/' + q.id + '"><span class="pill ' + q.status + '">' + WORD[q.status] + "</span><b>" + esc(q.question) + "</b></a>";
+    }).join("") + "</div>";
     main.innerHTML = h;
   }
 
   function viewMap() {
     setTitle("Coverage map");
     var S = D.summary;
-    var h = '<p class="eyebrow">Coverage map</p><h1>Where NASA\'s fire tests sit, and where the Moon Base sits</h1>';
+    var h = '<p class="kick">Coverage map</p><h1>Where NASA\'s fire tests sit, and where the Moon Base sits</h1>';
     h += '<p class="lead">One mark per NASA test. Shaded: Moon Base air. Click a mark to see NASA\'s table row.</p>';
-    h += "<h2>1. Oxygen, by what burns</h2>";
+    h += "<h2>Oxygen, by what burns</h2>";
     h += '<p class="muted">' + S.rows_with_o2_at_or_above + " of " + S.rows_with_plain_ambient_o2 + " tests are at " +
       num(D.about.moon_base.o2_min_percent) + " % oxygen or more. Solid materials: " + S.o2_range_by_class.solid.rows_at_or_above + ".</p>";
     h += '<label class="check"><input type="checkbox" id="burner"> Show burner-flow oxygen (up to 85 %, not cabin air)</label>';
-    h += '<div class="chart" id="chart-lanes">' + laneChart() + '</div><div id="legend-lanes">' + legend(["solid", "emulated", "droplet", "gas"]) + "</div>";
+    h += '<p class="figt">Figure 2. Every test that states its oxygen level</p><div class="chart" id="chart-lanes">' + laneChart() + '</div><div id="legend-lanes">' + legend() + "</div>";
+    h += '<p class="src">Source: NASA PSI Experimental Tables. Oxygen shown is the air around the flame. Mole fractions are multiplied by 100.</p>';
     h += '<details class="howto"><summary>Why the 85 % in the challenge statement does not count</summary><p>In those tests (inverse flames in ' +
       invLink("PSI-159") + " and " + invLink("PSI-10") + ") the oxygen is blown out of the burner into a chamber filled with fuel gas. It is a flow, not the air a crew would breathe, so this dashboard never mixes it with ambient oxygen.</p></details>";
 
-    h += "<h2>2. Oxygen and pressure together</h2>";
+    h += "<h2>Oxygen and pressure together</h2>";
     h += '<p class="muted">' + S.rows_in_zone + " of " + S.rows_with_both + " tests that state both fall inside the zone. Only " + S.state_pressure + " investigations state pressure at all.</p>";
-    h += '<div class="chart" id="chart-scatter">' + scatterChart() + "</div>" + legend(["droplet", "gas"]);
+    h += '<p class="figt">Figure 3. Tests that state both oxygen and pressure</p><div class="chart" id="chart-scatter">' + scatterChart() + "</div>";
+    h += '<p class="src">Source: NASA PSI Experimental Tables. Pressure converted to psi. Red marks are inside the Moon Base zone.</p>';
 
-    h += "<h2>3. Not on the map</h2>";
+    h += "<h2>Not on the map</h2>";
     h += '<p class="muted">Their table gives oxygen as text, or not at all. Shown as NASA wrote them.</p>';
     h += '<div class="tablewrap"><table><thead><tr><th>Investigation</th><th>What burns</th><th>Oxygen in the table</th><th>Pressure in the table</th></tr></thead><tbody>';
     D.investigations.slice().sort(function (a, b) { return LANES.indexOf(a.cls) - LANES.indexOf(b.cls); }).forEach(function (i) {
@@ -407,7 +402,7 @@
     bindPoints(document.getElementById("chart-scatter"));
     document.getElementById("burner").addEventListener("change", function (e) {
       document.getElementById("chart-lanes").innerHTML = laneChart({ burner: e.target.checked });
-      document.getElementById("legend-lanes").innerHTML = legend(e.target.checked ? ["solid", "emulated", "droplet", "gas", "burner"] : ["solid", "emulated", "droplet", "gas"]);
+      document.getElementById("legend-lanes").innerHTML = legend();
     });
   }
 
@@ -419,19 +414,18 @@
         extra = k.quote ? quote(inv.id, k.field, k.quote) : "<p class=\"small\">" + esc(k.detail) + "</p>";
         if (k.psi_sub_research_area) extra += '<p class="small muted">PSI sub-research area: ' + esc(k.psi_sub_research_area) + "</p>";
       } else extra = '<p class="small">' + esc(k.detail) + "</p>";
-      return "<div><h4>" + dot(k) + esc(c[1]) + "</h4><strong>" + VALUE_WORD[k.value] + "</strong>" + extra + "</div>";
+      return "<div><h4>" + esc(c[1]) + "</h4><strong>" + (glyph(k) ? glyph(k) + " " : "") + VALUE_WORD[k.value] + "</strong>" + extra + "</div>";
     }).join("") + "</div>";
   }
   function viewRank() {
     setTitle("Ranking");
     var S = D.summary;
-    var h = '<p class="eyebrow">Ranking</p><h1>Which investigations come closest to the Moon Base?</h1>';
-    h += '<p class="lead">Five Moon Base conditions, one square each. More green, closer to Moon Base air. Click a row for the evidence.</p>';
-    h += '<div class="legend"><span><span class="sq full"></span> met</span><span><span class="sq half"></span> half</span><span><span class="sq none"></span> not met</span><span><span class="sq unknown"></span> not stated</span></div>';
-    h += '<details class="howto"><summary>The five conditions</summary><ol>' + CRIT.map(function (c) { return "<li><strong>" + esc(c[1]) + ".</strong> " + esc(c[2]) + "</li>"; }).join("") +
-      '</ol><p class="small muted">Half: fire safety named only as a benefit, or a burner or model standing in for solids. Ties are ordered by fire-safety purpose, then solid materials. The conditions are this team\'s reading; the numbers are NASA\'s.</p></details>';
-    h += '<div class="filters"><input type="search" id="q" placeholder="Search name, fuel, material…" aria-label="Search investigations" value="' + esc(rankState.q) + '">';
-    h += '<span class="seg" role="group" aria-label="Sort">' + [["match", "Closest to Moon Base air"], ["purpose", "Fire-safety purpose first"]].map(function (o) {
+    var h = '<p class="kick">Ranking</p><h1>Which investigations come closest to the Moon Base</h1>';
+    h += '<p class="lead">Five conditions for Moon Base air, checked against all ' + S.investigations + " investigations. Click a row for the evidence.</p>" + KEY;
+    h += '<details class="howto"><summary>The five conditions, and how the order is made</summary><ol>' + CRIT.map(function (c) { return "<li><strong>" + esc(c[1]) + ".</strong> " + esc(c[2]) + "</li>"; }).join("") +
+      '</ol><p>One point for each condition met. Half a point where fire safety is named only as a benefit, or where a burner or a computer model stands in for solid materials. Ties are ordered by fire-safety purpose, then solid materials. The conditions are this team\'s reading; the numbers are NASA\'s.</p></details>';
+    h += '<div class="filters"><input type="search" id="q" placeholder="Search name, fuel, material" aria-label="Search investigations" value="' + esc(rankState.q) + '">';
+    h += '<span class="seg" role="group" aria-label="Order">' + [["match", "Closest to Moon Base air"], ["purpose", "Fire-safety purpose first"]].map(function (o) {
       return '<button data-sort="' + o[0] + '" class="' + (rankState.sort === o[0] ? "on" : "") + '">' + o[1] + "</button>";
     }).join("") + "</span></div>";
     h += '<div class="filters" role="group" aria-label="Filter by what burns"><button data-cls="all" class="' + (rankState.cls === "all" ? "on" : "") + '">All ' + S.investigations + "</button>" +
@@ -453,18 +447,8 @@
       if (rankState.sort === "purpose") list = list.slice().sort(function (a, b) {
         return b.criteria.purpose.score - a.criteria.purpose.score || b.criteria.material.score - a.criteria.material.score || a.rank - b.rank;
       });
-      var t = '<div class="tablewrap"><table class="grid"><thead><tr><th class="num">#</th><th>Investigation</th>' + CRIT.map(function (c) { return '<th class="sqh" title="' + esc(c[2]) + '"><span class="full">' + esc(SHORT[c[0]]) + '</span><span class="short">' + (CRIT.indexOf(c) + 1) + "</span></th>"; }).join("") +
-        '<th class="num">Met</th></tr></thead><tbody>';
-      list.forEach(function (i) {
-        var open = !!rankState.open[i.id], rows = i.tables.reduce(function (a, x) { return a + x.entries; }, 0);
-        t += '<tr class="pick' + (open ? " on" : "") + '" data-open="' + i.id + '" tabindex="0" aria-expanded="' + open + '"><td class="num">' + i.rank +
-          '</td><td class="rank-name"><span class="swatch" style="background:' + COLOR[i.cls] + '"></span>' + esc(i.name) + "<small>" + esc(i.cls_label) + "</small></td>" +
-          CRIT.map(function (c) { return '<td class="sqc">' + cell(i.criteria[c[0]], c[1]) + "</td>"; }).join("") + '<td class="num"><span class="score">' + num(i.score) + "</span></td></tr>";
-        if (open) t += '<tr class="detail"><td colspan="8"><p>' + esc(i.summary.did) + ' <span class="ai">AI-written summary</span></p>' + critDetail(i) +
-          '<p style="margin-top:.7rem"><a class="btn sm" href="#/inv/' + i.id + '">Open ' + esc(i.name) + "</a></p></td></tr>";
-      });
-      if (!list.length) t += '<tr><td colspan="8" class="muted">Nothing matches.</td></tr>';
-      document.getElementById("rank-table").innerHTML = t + "</tbody></table></div>";
+      document.getElementById("rank-table").innerHTML = '<div class="tablewrap"><table class="grid">' + rankHead() + "<tbody>" + rankRows(list, true) +
+        (list.length ? "" : '<tr><td colspan="8" class="muted">Nothing matches.</td></tr>') + "</tbody></table></div>";
     }
     drawRank = draw;
     draw();
@@ -523,11 +507,11 @@
     var inv = BY_ID[id];
     if (!inv) return viewHome();
     setTitle(inv.name);
-    var h = '<p class="small"><a href="#/rank">← Ranking</a></p><div class="inv-head"><div><p class="eyebrow">' + esc(inv.id) + ", rank " + inv.rank + " of " + D.summary.investigations + "</p><h1>" + esc(inv.name) + "</h1>";
+    var h = '<p class="small"><a href="#/rank">← Ranking</a></p><div class="inv-head"><div><p class="kick">' + esc(inv.id) + ", rank " + inv.rank + " of " + D.summary.investigations + "</p><h1>" + esc(inv.name) + "</h1>";
     h += '<p class="lead">' + esc(inv.title) + (inv.name_is_ours ? ' <span class="small muted">(PSI gives no acronym; the short name is ours)</span>' : "") + "</p>";
     h += '<div class="row">' + chip(inv.cls) + '<span class="chip">' + esc(inv.project_type) + '</span><span class="chip">' + esc(inv.gravity) + "</span>" +
       (inv.flight_program ? '<span class="chip">' + esc(inv.flight_program) + "</span>" : "") + "</div></div>";
-    h += '<div><div class="score" style="font-size:1.8rem">' + num(inv.score) + ' <small>/ 5 Moon Base conditions</small></div><span class="sqrow">' + CRIT.map(function (c) { return cell(inv.criteria[c[0]], c[1]); }).join("") + "</span></div></div>";
+    h += '<div><div class="score big">' + num(inv.score) + ' <small>of 5 Moon Base conditions</small></div>' + dots(inv) + "</div></div>";
     h += '<div class="row" style="margin:1rem 0"><a class="btn" href="' + inv.psi_url + '" target="_blank" rel="noopener">Open on NASA PSI</a>' +
       (inv.doi ? '<a class="btn ghost" href="https://doi.org/' + esc(inv.doi) + '" target="_blank" rel="noopener">DOI ' + esc(inv.doi) + "</a>" : "") +
       '<label class="small muted">Compare with <select id="cmp"><option value="">choose…</option>' + D.investigations.filter(function (i) { return i.id !== id; }).map(function (i) {
@@ -601,7 +585,7 @@
       ["Moon Base conditions met", function (i) { return dots(i) + " " + num(i.score) + " of 5"; }],
       ["Publications listed", function (i) { return String(i.publications.length); }]
     ];
-    var h = '<p class="small"><a href="#/inv/' + a + '">← ' + esc(A.name) + '</a></p><p class="eyebrow">Compare</p><h1>' + esc(A.name) + " and " + esc(B.name) + "</h1>";
+    var h = '<p class="small"><a href="#/inv/' + a + '">← ' + esc(A.name) + '</a></p><p class="kick">Compare</p><h1>' + esc(A.name) + " and " + esc(B.name) + "</h1>";
     h += '<p class="muted">Side by side, from NASA\'s records and tables. Rows marked "differs" are where the two are not the same.</p>';
     h += '<div class="tablewrap"><table class="cmp"><thead><tr><th></th><th>' + invLink(a) + "</th><th>" + invLink(b) + "</th></tr></thead><tbody>";
     rows.forEach(function (r) {
@@ -614,15 +598,14 @@
 
   function viewQuestions(focusId) {
     setTitle("Open questions");
-    var word = { answered: "Answered", partly: "Partly answered", open: "Open" };
-    var h = '<p class="eyebrow">Open questions</p><h1>Six fire-safety questions for a Moon Base</h1>';
-    h += '<p class="lead">Red: open. Amber: partly answered. Click a tile for the evidence.</p>';
-    h += '<div class="qgrid">' + D.questions.map(function (q) {
-      return '<a class="qtile ' + q.status + '" href="#/questions/' + q.id + '"><span class="pill ' + q.status + '">' + word[q.status] + "</span><b>" + esc(q.question) + "</b></a>";
+    var h = '<p class="kick">Open questions</p><h1>Six fire-safety questions for a Moon Base</h1>';
+    h += '<p class="lead">For each: what NASA\'s microgravity data can say today, the evidence, and what is missing.</p>';
+    h += '<div class="qlist">' + D.questions.map(function (q) {
+      return '<a href="#/questions/' + q.id + '"><span class="pill ' + q.status + '">' + WORD[q.status] + "</span><b>" + esc(q.question) + "</b></a>";
     }).join("") + "</div>";
-    h += '<p class="small muted">Answers written with AI (Claude, Anthropic) from the PSI records and tables, reviewed by the team. Quotations and numbers are checked by program.</p>';
+    h += '<p class="note">The answers below were written with AI (Claude, Anthropic) from the PSI records and tables, and reviewed by the team. Every quotation is NASA\'s wording and every number comes from a NASA table; a program checks both.</p>';
     D.questions.forEach(function (q) {
-      h += '<article class="q" id="q-' + q.id + '"><span class="pill ' + q.status + '">' + word[q.status] + "</span><h3>" + esc(q.question) + "</h3><p>" + esc(q.answer) + '</p><ul class="ev">';
+      h += '<article class="q" id="q-' + q.id + '"><span class="pill ' + q.status + '">' + WORD[q.status] + "</span><h3>" + esc(q.question) + "</h3><p>" + esc(q.answer) + '</p><ul class="ev">';
       q.evidence.forEach(function (e) {
         var inv = BY_ID[e.inv];
         h += '<li><div class="ev-head">' + invLink(e.inv) + chip(inv.cls) + "</div>" + esc(e.text) + (e.kind === "record" ? quote(e.inv, e.field, e.quote) :
@@ -631,13 +614,13 @@
       h += '</ul><p class="missing"><strong>Missing:</strong> ' + esc(q.missing) + "</p></article>";
     });
     main.innerHTML = h;
-    if (focusId) { var el = document.getElementById("q-" + focusId); if (el) { el.classList.add("hl"); setTimeout(function () { el.scrollIntoView({ block: "start" }); }, 0); } }
+    if (focusId) { var el = document.getElementById("q-" + focusId); if (el) { setTimeout(function () { el.scrollIntoView({ block: "start" }); }, 0); } }
   }
 
   function viewData() {
     setTitle("Data and method");
     var S = D.summary, A = D.about;
-    var h = '<p class="eyebrow">Data and method</p><h1>Take the data, check the method</h1>';
+    var h = '<p class="kick">Data and method</p><h1>Take the data, check the method</h1>';
     h += '<p class="lead">Everything on this site is built by one script from an untouched copy of NASA\'s files. No number is typed in by hand, and nothing is estimated.</p>';
     h += '<h2>Download</h2><div class="cards">';
     h += '<div class="card"><h3>Investigations</h3><p>' + S.investigations + ' rows: rank, conditions, oxygen and pressure ranges, DOI.</p><p><a class="btn sm" href="data/investigations.csv" download>investigations.csv</a></p></div>';
@@ -679,9 +662,9 @@
       '<li><a href="https://www.nasa.gov/moonbase" target="_blank" rel="noopener">NASA: Moon Base</a></li>' +
       '<li><a href="https://ntrs.nasa.gov/citations/20205007829" target="_blank" rel="noopener">G. A. Ruff, Spacecraft Fire Safety Needs for Exploration, NASA Glenn, 2020</a> (roadmap listing Saffire IV to VI with elevated oxygen)</li>' +
       '<li><a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (year and journal of the publications PSI lists)</li>' +
-      '<li><a href="https://github.com/nasa/hds-core" target="_blank" rel="noopener">NASA Horizon Design System</a> (the colour values: NASA Red, the Carbon greys and the chart palette for dark backgrounds)</li></ul>';
+      '<li><a href="https://github.com/nasa/hds-core" target="_blank" rel="noopener">NASA Horizon Design System</a> (the colour values: NASA Red and the Carbon greys)</li></ul>';
     h += '<p>Images, all NASA photographs in the public domain, none AI-generated: the Moon is the <a href="' + MOON.page + '" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter near-side mosaic</a> (' + esc(MOON.credit) + '); Earth is <a href="https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" target="_blank" rel="noopener">The Earth seen from Apollo 17</a> (NASA, Apollo 17 crew); the space station is <a href="https://commons.wikimedia.org/wiki/File:International_Space_Station_after_undocking_of_STS-132.jpg" target="_blank" rel="noopener">photograph S132-E-012208</a> (NASA, crew of STS-132).</p>';
-    h += '<p>Typefaces, all under the SIL Open Font License 1.1 and served with the site: <a href="https://github.com/CatharsisFonts/Cormorant" target="_blank" rel="noopener">Cormorant Garamond</a>, <a href="https://github.com/rsms/inter" target="_blank" rel="noopener">Inter</a> and <a href="https://github.com/googlefonts/dm-mono" target="_blank" rel="noopener">DM Mono</a>.</p>';
+    h += '<p>Typefaces, all under the SIL Open Font License 1.1 and served with the site: <a href="https://github.com/jpt/barlow" target="_blank" rel="noopener">Barlow Condensed</a>, <a href="https://github.com/uswds/public-sans" target="_blank" rel="noopener">Public Sans</a> and <a href="https://github.com/googlefonts/dm-mono" target="_blank" rel="noopener">DM Mono</a>.</p>';
     main.innerHTML = h;
   }
 
@@ -712,11 +695,6 @@
     var b = e.target.closest ? e.target.closest("button, tr.pick") : null;
     if (!b || (e.target.closest("a") && b.tagName === "TR")) return;
     if (b.dataset.table) openTable(b.dataset.table);
-    else if (b.dataset.stop) {
-      stopState = b.dataset.stop;
-      document.querySelectorAll(".stop").forEach(function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-selected", x === b); });
-      document.getElementById("stop-detail").innerHTML = stopDetail();
-    }
     else if (b.dataset.open && drawRank) { rankState.open[b.dataset.open] = !rankState.open[b.dataset.open]; drawRank(); }
     else if (b.dataset.sort) { rankState.sort = b.dataset.sort; viewRank(); }
     else if (b.dataset.cls) { rankState.cls = b.dataset.cls; viewRank(); }

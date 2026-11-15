@@ -18,7 +18,7 @@ All three photographs are NASA images in the public domain (as listed on Wikimed
 - **Author:** NASA / Apollo 17 crew.
 - **Page:** https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg
 - **Original:** 3000 x 3002 px, SHA-256 `51049ed4e34514880bfbe39d34e2dd2c56e31f55919e7f4f0b34ef1698cb9f50`, downloaded 15 November 2026.
-- **Changes:** cropped to the disc, scaled to 360 x 360 px, JPEG quality 82.
+- **Changes:** scaled to 900 x 900 px, JPEG quality 84.
 
 ## iss.jpg
 
@@ -27,15 +27,15 @@ All three photographs are NASA images in the public domain (as listed on Wikimed
 - **Author:** NASA / crew of STS-132.
 - **Page:** https://commons.wikimedia.org/wiki/File:International_Space_Station_after_undocking_of_STS-132.jpg
 - **Original:** 3319 x 2116 px, SHA-256 `b59016d5d1f66a88778d35021c8a4174b11451a03ccbcfd31bef0b064af28500`, downloaded 15 November 2026.
-- **Changes:** centre square cropped, scaled to 360 x 360 px, JPEG quality 82.
+- **Changes:** centre square cropped, scaled to 900 x 900 px, JPEG quality 84.
 
 ## Fonts (docs/fonts/)
 
 All under the SIL Open Font License 1.1, Latin subsets from the Fontsource project (https://fontsource.org), served with the site so no outside request is made.
 
-- **Cormorant Garamond** (titles): Copyright 2015 The Cormorant Project Authors, https://github.com/CatharsisFonts/Cormorant
-- **Inter** (text): Copyright 2016 The Inter Project Authors, https://github.com/rsms/inter
-- **DM Mono** (small labels): Copyright 2020 The DM Mono Project Authors, https://github.com/googlefonts/dm-mono
+- **Barlow Condensed** (headlines): Copyright 2017 The Barlow Project Authors, https://github.com/jpt/barlow
+- **Public Sans** (text): Copyright 2015 Impallari Type, adapted by the U.S. General Services Administration, https://github.com/uswds/public-sans
+- **DM Mono** (cells quoted from NASA's tables): Copyright 2020 The DM Mono Project Authors, https://github.com/googlefonts/dm-mono
 
 ## Logo
 
