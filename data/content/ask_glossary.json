@@ -12,7 +12,7 @@
     { "say": ["wind", "breeze", "draft", "moving air"], "nasa": ["airflow", "flow velocity", "forced flow"] },
     { "say": ["put out", "puts out", "putting out", "fire extinguisher"], "nasa": ["extinguish", "extinction", "suppression"] },
     { "say": ["cloth", "textile"], "nasa": ["fabric", "cotton", "fiberglass"] },
-    { "say": ["drop", "bead"], "nasa": ["droplet"] },
+    { "say": ["bead"], "nasa": ["droplet"] },
     { "say": ["alcohol"], "nasa": ["methanol"] },
     { "say": ["weightless", "weightlessness", "zero gravity", "zero g", "no gravity", "without gravity"], "nasa": ["microgravity"] },
     { "say": ["wire", "cable", "coating"], "nasa": ["Teflon", "Kapton"] },
