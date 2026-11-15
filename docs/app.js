@@ -108,8 +108,12 @@
   function counters() {
     var c = COUNTS, solid = c.byCls.solid, n5 = RANKED.filter(function (x) { return x.score === 5; }).length;
     var names = c.invsInZone.map(function (id) { return BY_ID[id].name; });
+    // tests that meet the oxygen level and miss the pressure limit by half a psi or less
+    var nearP = TESTS.filter(function (t) { return t.o2 != null && t.p_psi != null && t.o2 >= ATM.o2 && t.p_psi > ATM.p && t.p_psi <= ATM.p + 0.5; }), nearInv = {};
+    nearP.forEach(function (t) { nearInv[BY_ID[t.inv].name] = 1; });
     var h = '<div class="counters">';
-    h += '<div class="hot"><b>' + c.inZone + "</b><span>of " + c.both + " tests that state both oxygen and pressure are in this air." + (names.length ? " " + (names.length === 1 ? "All from " : "From ") + esc(names.join(", ")) + "." : "") + "</span></div>";
+    h += '<div class="hot"><b>' + c.inZone + "</b><span>of " + c.both + " tests that state both oxygen and pressure are in this air." + (names.length ? " " + (names.length === 1 ? "All from " : "From ") + esc(names.join(", ")) + "." : "") +
+      (nearP.length ? " <strong>" + nearP.length + " more</strong> miss the pressure limit by 0.5 psi or less (" + esc(Object.keys(nearInv).join(", ")) + ')' + (nearInv.FLEX ? ', see the <a href="#/analysis">analysis</a>' : "") + "." : "") + "</span></div>";
     h += "<div><b>" + solid.atOrAbove + "</b><span>of " + solid.rows + " solid-material tests reach " + num(ATM.o2) + " % oxygen. Solid materials were tested from " + num(solid.min) + " to " + num(solid.max) + " %.</span></div>";
     h += "<div><b>" + n5 + "</b><span>of " + D.summary.investigations + " investigations meet all five conditions for this air. The closest meet " + num(RANKED[0].score) + ".</span></div>";
     return h + "</div>";
@@ -339,6 +343,163 @@
       col("moon", "Moon Base", S.records_mentioning_moon_or_partial_gravity, "Moon gravity. Air expected: " + num(mb.o2_min_percent) + " % oxygen or more, at " + num(mb.pressure_max_psi) + " psi or less. Only " + S.rows_in_zone + " of " +
         S.rows_with_both + " tests elsewhere used this air, all on gas flames.", '<a class="link" href="#/questions">See what is still open</a>') + "</div>";
     return '<div class="routemap">' + s + '<p class="ai-mark">Drawing made with AI assistance. The photographs are NASA\'s.</p>' + cols + '<div class="stop-chips" id="stop-chips">' + stopChips() + "</div></div>";
+  }
+
+  // ---------------------------------------------------------------- analysis
+  // The FLEX droplet model (scripts/analyze_flex.py fits it; model.js evaluates it here).
+  var AN = { data: null, fuel: "Heptane", v: null };
+  var AN_SLIDER = { o2: [10, 45, 0.5], co2: [0, 70, 1], he: [0, 45, 1], p: [8, 20, 0.1], d0: [1, 5, 0.1] };
+  var AN_GAS = { n2: ["Nitrogen only", "#609af6"], co2: ["With carbon dioxide", "#f29d49"], he: ["With helium", "#0cc9ac"] };
+  function fx(x, d) { return (+x).toFixed(d == null ? 2 : d); }
+  function pct(x) { return String(Math.round(Math.max(0, Math.min(1, x)) * 100)); }
+  function anLoad() {
+    if (AN.data) return Promise.resolve();
+    return fetch("data/flex_model.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (M) { AN.data = M; });
+  }
+  function anRows() { return AN.data.rows.filter(function (r) { return r.fuel === AN.fuel; }); }
+  function anMedianSize() { var d = anRows().map(function (r) { return r.d0; }).sort(function (a, b) { return a - b; }); return d[Math.floor(d.length / 2)]; }
+  function anStart() {
+    var S = AN_SLIDER;
+    AN.v = { o2: Math.max(S.o2[0], Math.min(S.o2[1], ATM.o2)), co2: 0, he: 0, p: Math.max(S.p[0], Math.min(S.p[1], ATM.p)), d0: anMedianSize() };
+  }
+  function anGas(r) { return r.he > 0 ? "he" : r.co2 > 0 ? "co2" : "n2"; }
+  function anFeature(k) { return AN.data.about.features.filter(function (f) { return f[0] === k; })[0]; }
+  // what the estimate rests on: inside the tested range or not, and the nearest real tests
+  function anSupport() {
+    var F = AN.data.fuels[AN.fuel], out = FlexModel.outside(F.range, AN.v), e = FlexModel.estimate(F.models.rate, AN.v);
+    if (out.length) return '<p class="an-support warn"><b>Outside what FLEX tested.</b> ' + out.map(function (o) {
+      var f = anFeature(o.key);
+      return esc(f[1]) + " " + num(o.value) + " " + f[2] + " is " + o.side + " the " + (o.side === "above" ? "highest" : "lowest") + " tested for this fuel (" + num(o.limit) + " " + f[2] + ")";
+    }).join("; ") + ". The model is a straight line, so outside the tested range the figures are an extension of the trend, not evidence.</p>";
+    if (e.unusual) return '<p class="an-support warn"><b>Inside the tested ranges, but an unusual combination.</b> Each setting was tested, yet few FLEX tests combine them like this, so the ranges are wide.</p>';
+    return '<p class="an-support ok"><b>Inside the conditions FLEX tested</b> for ' + esc(AN.fuel.toLowerCase()) + " droplets.</p>";
+  }
+  function anOut() {
+    var F = AN.data.fuels[AN.fuel], v = AN.v, r = FlexModel.estimate(F.models.rate, v), mr = F.models.rate;
+    var near = FlexModel.nearest(AN.data.rows, AN.fuel, v, F.range, 5), ends = {};
+    near.forEach(function (x) { ends[x.row.end] = (ends[x.row.end] || 0) + 1; });
+    var h = '<div class="an-res"><div><span>Burning rate, model estimate</span><b>' + fx(Math.max(0, r.value)) + "</b><small>A single test would likely fall between " + fx(Math.max(0, r.low)) + " and " + fx(Math.max(0, r.high)) +
+      " (95 % range). FLEX measured " + fx(mr.min) + " to " + fx(mr.max) + ' for this fuel.</small></div><div><span>How the five closest real tests ended</span><b class="words">' +
+      Object.keys(ends).sort(function (a, b) { return ends[b] - ends[a]; }).map(function (e) { return ends[e] + " " + esc(e.toLowerCase()); }).join(", ") +
+      "</b><small>NASA's labels. Extinction: the flame went out at a finite droplet size. Completion: the droplet burned to completion. Disruption is not explained in the table. Measured, not modelled.</small></div></div>" + anSupport();
+    h += '<h3>The five real FLEX tests closest to this condition</h3><div class="tablewrap"><table class="an-near"><thead><tr><th>Test</th><th class="num">Oxygen</th><th class="num">CO2</th><th class="num">Helium</th><th class="num">Pressure</th><th class="num">Size</th><th class="num">Burning rate</th><th class="num">Fuel left</th><th>How it ended</th><th></th></tr></thead><tbody>' +
+      near.map(function (x) {
+        var t = x.row;
+        return "<tr><td>" + esc(t.id) + '</td><td class="num">' + num(t.o2) + ' %</td><td class="num">' + num(t.co2) + ' %</td><td class="num">' + num(t.he) + ' %</td><td class="num">' + num(t.p) + ' psi</td><td class="num">' + num(t.d0) +
+          ' mm</td><td class="num">' + (t.rate == null ? "" : num(t.rate)) + '</td><td class="num">' + (t.left == null ? "" : pct(t.left) + " %") + "</td><td>" + esc(t.end) + '</td><td><button class="link" data-table="' + AN.data.about.source_table + '" data-row="' + t.row + '">NASA\'s row</button></td></tr>';
+      }).join("") + "</tbody></table></div>";
+    return h;
+  }
+  // Measured burning rate against oxygen, with the model's line for the chosen settings.
+  function anChart() {
+    var F = AN.data.fuels[AN.fuel], m = F.models.rate, rows = anRows().filter(function (r) { return r.rate != null; });
+    var W = 1000, H = 400, L = 62, R = 24, T = 20, B = 52, x = scaleLin(10, 46, L, W - R), ymax = Math.ceil(Math.max(m.max, 1) * 10) / 10 + 0.1, y = scaleLin(0, ymax, H - B, T);
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Measured burning rate against oxygen for ' + esc(AN.fuel) + ' droplets, with the model line">';
+    for (var g = 0; g <= ymax + 1e-9; g += 0.2) s += '<line class="grid" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(g) + '" y2="' + y(g) + '"/><text class="tick" x="' + (L - 10) + '" y="' + (y(g) + 4) + '" text-anchor="end">' + fx(g, 1) + "</text>";
+    for (var o = 10; o <= 45; o += 5) s += '<text class="tick" x="' + x(o) + '" y="' + (H - B + 22) + '" text-anchor="middle">' + o + " %</text>";
+    s += '<text class="axis-title" x="' + ((L + W - R) / 2) + '" y="' + (H - 8) + '" text-anchor="middle">Oxygen in the gas around the droplet</text><text class="axis-title" x="12" y="13">Burning rate</text>';
+    // tested oxygen range, then the model's 95 % band and line across it
+    s += '<rect class="an-range" x="' + x(F.range.o2[0]) + '" y="' + T + '" width="' + (x(F.range.o2[1]) - x(F.range.o2[0])) + '" height="' + (H - B - T) + '"/>';
+    var up = [], dn = [], mid = [], lo = 10, hi = 46, cl = function (v) { return Math.max(0, Math.min(ymax, v)); };
+    for (var k = 0; k <= 36; k++) {
+      var ox = lo + (hi - lo) * k / 36, e = FlexModel.estimate(m, { o2: ox, co2: AN.v.co2, he: AN.v.he, p: AN.v.p, d0: AN.v.d0 });
+      up.push(x(ox) + "," + y(cl(e.high))); dn.unshift(x(ox) + "," + y(cl(e.low))); mid.push(x(ox) + "," + y(cl(e.value)));
+    }
+    s += '<polygon class="an-band" points="' + up.concat(dn).join(" ") + '"/><polyline class="an-line" points="' + mid.join(" ") + '"/>';
+    rows.forEach(function (r) {
+      s += '<circle cx="' + x(r.o2).toFixed(1) + '" cy="' + y(r.rate).toFixed(1) + '" r="4.5" fill="' + AN_GAS[anGas(r)][1] + '" fill-opacity=".8" stroke="#000" stroke-width=".7"><title>' + esc(r.id + ": " + num(r.o2) + " % oxygen, " +
+        num(r.co2) + " % CO2, " + num(r.he) + " % helium, " + num(r.p) + " psi, burning rate " + num(r.rate)) + "</title></circle>";
+    });
+    var cur = FlexModel.estimate(m, AN.v), cx = x(Math.max(10, Math.min(46, AN.v.o2)));
+    s += '<line class="an-now" x1="' + cx + '" x2="' + cx + '" y1="' + T + '" y2="' + (H - B) + '"/><circle class="an-dot" cx="' + cx + '" cy="' + y(cl(cur.value)) + '" r="7"/>';
+    return s + "</svg>";
+  }
+  function anDraw() {
+    var a = document.getElementById("an-out"), b = document.getElementById("an-chart");
+    if (a) a.innerHTML = anOut();
+    if (b) b.innerHTML = anChart();
+  }
+  function viewAnalysis() {
+    setTitle("Analysis");
+    if (!AN.data) {
+      main.innerHTML = '<p class="loading">Loading the model…</p>';
+      anLoad().then(function () { if (hashParts()[0] === "analysis") route(true); });
+      return;
+    }
+    if (!AN.v) anStart();
+    var M = AN.data, F = M.fuels[AN.fuel], mr = F.models.rate, mb = D.about.moon_base, R = D.summary.o2_range_by_class;
+    var earth = D.about.presets.filter(function (p) { return p.id === "earth"; })[0], gap = mb.o2_min_percent - earth.o2;
+    var base = { o2: earth.o2, co2: 0, he: 0, p: Math.max(mb.pressure_max_psi, F.range.p[0]), d0: anMedianSize() }, top = { o2: mb.o2_min_percent, co2: 0, he: 0, p: base.p, d0: base.d0 };
+    var r0 = FlexModel.estimate(mr, base).value, r1 = FlexModel.estimate(mr, top).value;
+    var h = '<p class="kick">Analysis</p><h1 class="wide">What oxygen does to a burning droplet</h1>';
+    h += '<p class="lead wide">FLEX is the one investigation in NASA\'s repository that burned fuel at ' + num(mb.o2_min_percent) + " % oxygen and more, close to Moon Base pressure, and recorded how every test ended. We fitted a simple statistical model to its " +
+      M.about.rows_in_table + " tests to measure what oxygen, pressure and extinguishing gases change. It covers fuel droplets only. For solid materials no such analysis is possible: their tests stop at " + num(R.solid.max) + " % oxygen.</p>";
+    h += '<div class="tabs" role="group" aria-label="Fuel">' + Object.keys(M.fuels).map(function (f) {
+      return '<button class="tabbtn' + (f === AN.fuel ? " on" : "") + '" data-anfuel="' + esc(f) + '" aria-pressed="' + (f === AN.fuel) + '">' + esc(f) + " droplets, " + M.fuels[f].tests + " tests</button>";
+    }).join("") + "</div>";
+    // the same comparison measured directly: nitrogen-only tests near Moon Base pressure
+    var direct = function (lo, hi) {
+      var v = anRows().filter(function (t) { return t.rate != null && !t.co2 && !t.he && t.p <= mb.pressure_max_psi + 0.5 && t.o2 >= lo - 1e-9 && t.o2 <= hi + 1e-9; }).map(function (t) { return t.rate; });
+      return { n: v.length, mean: v.length ? v.reduce(function (a, b) { return a + b; }, 0) / v.length : null };
+    };
+    var d0 = direct(earth.o2 - 1, earth.o2), d1 = direct(mb.o2_min_percent, mb.o2_min_percent);
+    var E = F.endings, endOf = function (b) { var c = E.filter(function (x) { return x.band === b; })[0].counts, n = 0; Object.keys(c).forEach(function (k) { n += c[k]; }); return { ext: c.Extinction || 0, n: n }; };
+    var eLow = endOf("below"), eHigh = endOf("at_or_above");
+    h += '<div class="counters an-find"><div class="hot"><b>+' + Math.round((r1 - r0) / r0 * 100) + " %</b><span>faster burning at " + num(mb.o2_min_percent) + " % oxygen than at " + num(earth.o2) + " %, in nitrogen at " + num(base.p) +
+      " psi (model). Each extra point of oxygen raised the burning rate by " + fx(mr.beta[1], 3) + " (95 % range " + fx(mr.ci_low[1], 3) + " to " + fx(mr.ci_high[1], 3) + ")." +
+      (d0.n && d1.n ? " Measured directly: " + fx(d0.mean) + " at " + num(earth.o2 - 1) + " to " + num(earth.o2) + " % (" + d0.n + " tests) against " + fx(d1.mean) + " at " + num(mb.o2_min_percent) + " % (" + d1.n + " tests)." : "") + "</span></div>";
+    h += "<div><b>" + eHigh.ext + " of " + eHigh.n + "</b><span>flames went out on their own at " + num(mb.o2_min_percent) + " % oxygen or more. Below " + num(earth.o2) + " % oxygen, " + eLow.ext + " of " + eLow.n +
+      " did. Counted from NASA's table, no model. NASA picked the conditions of each test, so this is what happened in these tests, not a rate for all fires.</span></div>";
+    h += "<div><b>" + (mr.beta[2] > 0 ? "+" : "") + fx(mr.beta[2] * 10, 2) + "</b><span>change in burning rate for every 10 points of carbon dioxide in the gas (95 % range " + fx(mr.ci_low[2] * 10, 2) + " to " + fx(mr.ci_high[2] * 10, 2) +
+      "), against " + (mr.beta[1] > 0 ? "+" : "") + fx(mr.beta[1] * 10, 2) + " for 10 points of oxygen. Helium " + (mr.ci_low[3] > 0 ? "raised" : mr.ci_high[3] < 0 ? "lowered" : "did not clearly change") + " the burning rate.</span></div></div>";
+    h += '<p class="src">From NASA\'s FLEX table (PSI-69), ' + esc(AN.fuel.toLowerCase()) + " droplets. These describe burning fuel droplets in weightlessness. They are not a forecast for cabin materials or for Moon gravity.</p>";
+
+    h += "<h2>Try a condition</h2><p class=\"sub2\">Move a setting. The estimate, its range, and the real tests behind it update at once. It starts at the atmosphere you chose on the overview.</p>";
+    h += '<div class="an-grid"><div class="an-ctl">' + FlexModel.KEYS.map(function (k) {
+      var f = anFeature(k), S = AN_SLIDER[k];
+      return '<label><span>' + esc(f[1]) + ' <b id="an-val-' + k + '">' + num(AN.v[k]) + " " + f[2] + '</b></span><input type="range" data-an="' + k + '" min="' + S[0] + '" max="' + S[1] + '" step="' + S[2] + '" value="' + AN.v[k] +
+        '"><small>FLEX tested ' + num(F.range[k][0]) + " to " + num(F.range[k][1]) + " " + f[2] + "</small></label>";
+    }).join("") + '<p class="small muted">The rest of the gas is nitrogen.</p></div><div id="an-out">' + anOut() + "</div></div>";
+
+    h += '<h2>Measured burning rate against oxygen</h2><p class="sub2">Each point is one FLEX test. The line is the model for the settings above, the band is where a single test would likely fall, and the lighter area is the oxygen range FLEX tested.</p>';
+    h += '<div class="chart" id="an-chart">' + anChart() + '</div><p class="legend">' + Object.keys(AN_GAS).map(function (k) { return '<span><i class="sw" style="background:' + AN_GAS[k][1] + '"></i>' + AN_GAS[k][0] + "</span>"; }).join("") + "</p>";
+
+    var endNames = Object.keys(E[0].counts), bandName = { below: "Below " + num(earth.o2) + " % oxygen", between: num(earth.o2) + " % to below " + num(mb.o2_min_percent) + " %", at_or_above: num(mb.o2_min_percent) + " % oxygen or more" };
+    h += "<h2>How the tests ended</h2><p class=\"sub2\">Counted from NASA's column \"Test end\", by oxygen level. Extinction means the flame went out at a finite droplet size, completion that the droplet burned to completion (the FLEX record's words). The table does not explain \"Disruption\".</p>";
+    h += '<div class="tablewrap"><table><thead><tr><th>Oxygen</th>' + endNames.map(function (e) { return '<th class="num">' + esc(e) + "</th>"; }).join("") + '<th class="num">Tests</th><th class="num">Went out on their own</th></tr></thead><tbody>' +
+      E.map(function (b) {
+        var n = 0; endNames.forEach(function (e) { n += b.counts[e]; });
+        return "<tr><td>" + bandName[b.band] + "</td>" + endNames.map(function (e) { return '<td class="num">' + b.counts[e] + "</td>"; }).join("") + '<td class="num">' + n + '</td><td class="num"><b>' + (n ? Math.round(b.counts.Extinction / n * 100) + " %" : "") + "</b></td></tr>";
+      }).join("") + "</tbody></table></div>";
+
+    h += '<h2>How good is the model</h2><p class="sub2">We hid tests from the model and asked it to predict them: one test at a time, and one whole test day at a time. The error should be clearly smaller than the error of always guessing the average.</p>';
+    h += '<div class="tablewrap"><table><thead><tr><th>Outcome</th><th class="num">Tests</th><th class="num">Share of variation explained</th><th class="num">Error, one test hidden</th><th class="num">Error, one day hidden</th><th class="num">Error of guessing the average</th></tr></thead><tbody>' +
+      Object.keys(F.models).map(function (k) {
+        var m = F.models[k];
+        return "<tr><td>" + esc(M.about.outcomes[k].label) + '</td><td class="num">' + m.n + '</td><td class="num">' + Math.round(m.r2 * 100) + ' %</td><td class="num">' + fx(m.rmse_leave_one_out, 3) + '</td><td class="num">' + fx(m.rmse_leave_one_day_out, 3) +
+          " <span class=\"muted\">(" + m.test_days + ' days)</span></td><td class="num">' + fx(m.rmse_of_guessing_the_mean, 3) + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    h += '<h3>What each setting changes</h3><div class="tablewrap"><table><thead><tr><th>One step more of</th>' + Object.keys(F.models).map(function (k) { return '<th class="num">Change in ' + esc(M.about.outcomes[k].label.toLowerCase()) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      FlexModel.KEYS.map(function (k, i) {
+        var f = anFeature(k);
+        return "<tr><td>" + esc(f[1]) + ' <span class="muted">(+1 ' + (f[2] === "%" ? "point" : f[2]) + ")</span></td>" + Object.keys(F.models).map(function (o) {
+          var m = F.models[o], a = i + 1, clear = m.ci_low[a] > 0 || m.ci_high[a] < 0;
+          return '<td class="num">' + (clear ? "<b>" : '<span class="muted">') + (m.beta[a] > 0 ? "+" : "") + fx(m.beta[a], 4) + (clear ? "</b>" : "</span>") + ' <span class="muted">(' + fx(m.ci_low[a], 4) + " to " + fx(m.ci_high[a], 4) + ")</span></td>";
+        }).join("") + "</tr>";
+      }).join("") + '</tbody></table></div><p class="src">Change in the outcome for one step more of a setting, the others held fixed, with the 95 % range. Grey: the range includes zero, so the data shows no clear effect.</p>';
+
+    h += '<details class="sect"><summary>Method and limits</summary><ul>' +
+      "<li><strong>Data.</strong> " + M.about.rows_used + " of the " + M.about.rows_in_table + " tests in NASA's FLEX table are used. Left out: " + Object.keys(M.about.rows_skipped).map(function (k) { return M.about.rows_skipped[k] + " with " + k; }).join(", ") + ".</li>" +
+      "<li><strong>Model.</strong> Ordinary least squares, one model per fuel: burning rate = constant + oxygen + carbon dioxide + helium + pressure + droplet size. Nitrogen is the rest of the gas and so the reference.</li>" +
+      "<li><strong>Burning rate</strong> is NASA's column \"Burning rate; mm\"; the table does not complete the unit. For droplets it is normally the shrink rate of the diameter squared, in mm² per second.</li>" +
+      "<li><strong>Fuel left</strong> in the list of closest tests is (extinction diameter / starting diameter) cubed, for tests NASA marks as ended by extinction. It is shown per test and not modelled: at " + num(mb.o2_min_percent) + " % oxygen almost no test ended in extinction, so there is nothing to model there.</li>" +
+      "<li><strong>Inside or outside.</strong> A setting counts as outside when it lies beyond the range FLEX tested for that fuel by more than 1 % of that range. An unusual combination is one whose leverage is above three times the average.</li>" +
+      "<li><strong>Ranges.</strong> The 95 % range for a single test comes from the scatter of the tests around the line and grows as a condition moves away from the bulk of the tests.</li>" +
+      "<li><strong>Not causal proof.</strong> NASA chose the test conditions for its own goals, not at random. The model describes this set of tests.</li>" +
+      "<li><strong>Scope.</strong> Fuel droplets in weightlessness. Not solid materials, not smoke, not Moon gravity.</li>" +
+      '<li><strong>Checked twice.</strong> A Python script fits the model; a separate JavaScript script reads NASA\'s CSV again, refits it and must get the same numbers. See <a href="#/data">Data and method</a>.</li></ul>' +
+      '<p><button class="btn sm ghost" data-table="' + M.about.source_table + '">Open NASA\'s FLEX table</button> <a class="more" style="margin-left:1rem" href="data/flex_model.json">Download the model (JSON)</a> <a class="more" style="margin-left:1rem" href="#/inv/' + M.about.investigation + '">About FLEX</a></p></details>';
+    main.innerHTML = h;
   }
 
   // ---------------------------------------------------------------- habitat
@@ -978,7 +1139,8 @@
     h += "<p>Conditions 3 to 5 are counted from NASA's tables. Conditions 1 and 2 are this team's reading of each record: for condition 1 the sentence it rests on is quoted on every investigation page, and the build fails if that sentence is not in NASA's record word for word. Purpose: " +
       (S.purpose_counts.primary || 0) + " main purpose, " + (S.purpose_counts.benefit || 0) + " named as a benefit, " + (S.purpose_counts.none || 0) + " not their purpose.</p></details>";
 
-    h += '<details class="sect"><summary>How AI was used</summary><p>AI does four jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
+    h += '<details class="sect"><summary>The droplet model on the Analysis page</summary><p>The <a href="#/analysis">Analysis</a> page fits a plain statistical model (ordinary least squares) to the FLEX table. It is statistics, not a language model: <code>scripts/analyze_flex.py</code> fits it with the Python standard library, and <code>scripts/check_model.cjs</code>, written separately in JavaScript, reads the CSV from NASA again, refits it and fails unless it gets the same coefficients, errors and counts. The fitted model is in <a href="data/flex_model.json">data/flex_model.json</a>.</p></details>' +
+      '<details class="sect"><summary>How AI was used</summary><p>AI does four jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
       "<li><strong>It reads NASA's records.</strong> An AI model (Claude, Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. Before the site is built, a program checks that every quotation exists word for word in the named NASA record, that every table column exists, and that the texts contain no hand-typed numbers.</li>" +
       "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (all-MiniLM-L6-v2) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer.</li>" +
       "<li><strong>It helped write the code.</strong> The scripts and this website were written with AI assistance and reviewed by the team.</li>" +
@@ -1030,6 +1192,7 @@
     else if (name === "rank") viewRank(parts[1]);
     else if (name === "ask") viewAsk(parts.slice(1).join("/"));
     else if (name === "habitat") viewHabitat(parts[1]);
+    else if (name === "analysis") viewAnalysis();
     else if (name === "inv") viewInv(parts[1]);
     else if (name === "table" && BY_ID[(parts[1] || "").split("_")[0]]) {   // #/table/<file>/<row>: a link straight to one NASA table row
       viewInv(parts[1].split("_")[0]);
@@ -1073,6 +1236,7 @@
       rerender();
     }
     else if (b.dataset.table) openTable(b.dataset.table, +b.dataset.row || 0);
+    else if (b.dataset.anfuel) { AN.fuel = b.dataset.anfuel; AN.v.d0 = anMedianSize(); rerender(); }
     else if (b.dataset.dl === "find") downloadFind();
     else if (b.dataset.more === "find") { find.limit += 200; drawFinder(); }
     else if (b.dataset.stop) {
@@ -1085,6 +1249,14 @@
     else if (b.dataset.open && drawRank) { rankState.open[b.dataset.open] = !rankState.open[b.dataset.open]; drawRank(); }
     else if (b.dataset.sort) { rankState.sort = b.dataset.sort; rerender(); }
     else if (b.dataset.cls) { rankState.cls = b.dataset.cls; rerender(); }
+  });
+  // the sliders of the analysis page
+  main.addEventListener("input", function (e) {
+    var k = e.target.dataset ? e.target.dataset.an : null;
+    if (!k) return;
+    AN.v[k] = +e.target.value;
+    document.getElementById("an-val-" + k).textContent = num(AN.v[k]) + " " + anFeature(k)[2];
+    anDraw();
   });
   // the reader's own atmosphere; a decimal comma ("30,5") is read as a point
   function readNum(t) { var v = parseFloat(String(t).trim().replace(",", ".")); return isNaN(v) ? NaN : v; }
