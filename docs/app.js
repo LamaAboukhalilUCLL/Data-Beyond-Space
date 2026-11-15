@@ -1229,8 +1229,8 @@
     if (!el) return;
     el.className = "askmode " + ASK.model;
     var mb = ASK.P && ASK.P.about.download_mb ? "about " + ASK.P.about.download_mb + " MB" : "";   // counted by the build from the files served
-    el.innerHTML = ASK.model === "ready" ? "<b>Matching by meaning</b><span>a small language model in your browser · it matches, it writes nothing · your question stays on your computer</span>" :
-      ASK.model === "loading" ? "<b>Loading the language model</b><span>" + (mb ? mb + ", once · " : "") + "matching by words until it is ready</span>" :
+    el.innerHTML = ASK.model === "ready" ? "<b>Matching by meaning</b><span>A small language model in your browser. It matches, it writes nothing, and your question stays on your computer.</span>" :
+      ASK.model === "loading" ? "<b>Loading the language model</b><span>" + (mb ? mb + ", once. " : "") + "Matching by words until it is ready.</span>" :
       ASK.model === "failed" ? "<b>Matching by words</b><span>the language model could not start in this browser</span>" :
       '<b>Matching by words</b><button class="link" data-smart="1">Match by meaning instead</button><span>loads a small language model' + (mb ? ", " + mb + "," : "") + " once</span>";
   }
@@ -1243,9 +1243,9 @@
     var term = Ask.moon(q);
     if (!term) return "";
     var S = D.summary, n = S.records_mentioning_moon_or_partial_gravity, g = D.questions.filter(function (x) { return x.id === "gravity"; })[0];
-    var h = '<section class="askcard gap"><p class="kick">Outside NASA\'s data · you mentioned “' + esc(term) + "”</p><h3>" + (n === 0 ? "PSI holds no test at Moon or Mars gravity" : plural(n, "PSI record mentions", "PSI records mention") + " the Moon, Mars or partial gravity") + "</h3>";
+    var h = '<section class="askcard gap"><p class="kick">Outside NASA\'s data: you mentioned “' + esc(term) + "”</p><h3>" + (n === 0 ? "PSI holds no test at Moon or Mars gravity" : plural(n, "PSI record mentions", "PSI records mention") + " the Moon, Mars or partial gravity") + "</h3>";
     h += "<p><b>" + n + " of " + S.investigations + "</b> records mention the Moon, Mars or partial gravity. Every test ran in weightlessness or on Earth, so the passages below are not Moon results.</p>";
-    if (g) h += '<p class="small"><a href="#/questions/gravity">Open question: ' + esc(g.question) + "</a>" + (g.elsewhere && g.elsewhere.length ? ' <span class="muted">· ' + plural(g.elsewhere.length, "NASA document", "NASA documents") + " outside PSI</span>" : "") + "</p>";
+    if (g) h += '<p class="small"><a href="#/questions/gravity">Open question: ' + esc(g.question) + "</a>" + (g.elsewhere && g.elsewhere.length ? ' <span class="muted">(' + plural(g.elsewhere.length, "NASA document", "NASA documents") + " outside PSI)</span>" : "") + "</p>";
     return h + "</section>";
   }
   // A question about conditions or counts: the numbers, counted from NASA's tables for the tests it names.
@@ -1260,11 +1260,11 @@
     if (it.invs.length) scope.push("in " + it.invs.map(function (id) { return invLink(id); }).join(", "));
     var h = '<section class="askcard count"><p class="kick">Counted from NASA\'s tables</p><h3>' + (scope.length ? plural(a.tests, "test", "tests") + " " + scope.join(", ") : "All " + a.tests + " tests in NASA's tables") + "</h3>";
     if (!a.tests) return h + "<p>No row of NASA's Experimental Tables matches, so there is nothing to count.</p></section>";
-    if (!it.invs.length || it.invs.length > 1) h += '<p class="invs">' + a.invs.slice(0, 6).map(function (x) { return invLink(x.id) + ' <span class="muted">' + x.tests + "</span>"; }).join(" · ") + (a.invs.length > 6 ? ' <span class="muted">· and ' + (a.invs.length - 6) + " more</span>" : "") + "</p>";
+    if (!it.invs.length || it.invs.length > 1) h += '<p class="invs">' + a.invs.slice(0, 6).map(function (x) { return invLink(x.id) + ' <span class="muted">' + x.tests + "</span>"; }).join(", ") + (a.invs.length > 6 ? ' <span class="muted">and ' + (a.invs.length - 6) + " more</span>" : "") + "</p>";
     // one tile per condition: the count, what it counts, and out of how many tests that state it
     function tile(label, val, of, rest, none) {
-      if (!of) return '<div class="na"><b>–</b><span>' + label + '</span><small>' + none + "</small></div>";
-      return '<div class="' + (val === 0 ? "zero" : "") + '"><b>' + val + "</b><span>" + label + "</span><small>of " + plural(of, "test", "tests") + " that state it" + (rest ? " · " + rest : "") + "</small></div>";
+      if (!of) return '<div class="na"><b>none</b><span>' + label + '</span><small>' + none + "</small></div>";
+      return '<div class="' + (val === 0 ? "zero" : "") + '"><b>' + val + "</b><span>" + label + "</span><small>of " + plural(of, "test", "tests") + " that state it" + (rest ? ", " + rest : "") + "</small></div>";
     }
     h += '<div class="stats">' +
       tile("at " + num(o2) + " % oxygen or more", a.oxygen.atOrAbove, a.oxygen.stated, a.oxygen.stated ? "tested " + num(a.oxygen.min) + " to " + num(a.oxygen.max) + " %" : "", "no test states oxygen as a number") +
@@ -1273,7 +1273,7 @@
       "</div>";
     var from = it.o2 != null && it.p != null ? "both limits from your question" : it.o2 != null ? "oxygen limit from your question, pressure from " + esc(ATM.name) : it.p != null ? "pressure limit from your question, oxygen from " + esc(ATM.name) : "limits of " + esc(ATM.name);
     var fq = it.fuels.length === 1 && !it.invs.length ? it.fuels[0] : it.invs.length === 1 && !it.fuels.length ? BY_ID[it.invs[0]].name : "";
-    h += '<p class="small muted">Counted by this page from NASA\'s Experimental Tables · ' + from + " · cells written as text are not counted" + (fq ? ' · <button class="link" data-findq="' + esc(fq) + '">See these rows</button>' : "") + "</p>";
+    h += '<p class="small muted">Counted by this page from NASA\'s Experimental Tables; ' + from + ". Cells written as text are not counted." + (fq ? ' <button class="link" data-findq="' + esc(fq) + '">See these rows</button>' : "") + "</p>";
     return h + "</section>";
   }
   // How many of the investigations behind the passages have a test in the chosen atmosphere.
@@ -1281,8 +1281,8 @@
     var r = Ask.reach(top, ASK.P.passages, RK), n = r.invs.length;
     if (!n) return "";
     var h = '<section class="reach' + (r.yes ? "" : " none") + '"><div class="reach-head"><span class="big">' + r.yes + "<small>/" + n + "</small></span><p><b>investigations behind these passages have a test in " + esc(ATM.name) + "</b>" +
-      '<span>' + airWords() + (r.rowsOf ? " · " + r.rowsIn + " of the " + plural(r.rowsOf, "test", "tests") + " that state both" : "") +
-      (r.unknown ? " · " + r.unknown + " cannot be placed: " + (r.unknown === 1 ? "its table does" : "their tables do") + " not state both oxygen and pressure as numbers" : "") + "</span></p></div>";
+      '<span>' + airWords() + (r.rowsOf ? ": " + r.rowsIn + " of the " + plural(r.rowsOf, "test", "tests") + " that state both" : "") +
+      (r.unknown ? ". " + r.unknown + " cannot be placed: " + (r.unknown === 1 ? "its table does" : "their tables do") + " not state both oxygen and pressure as numbers" : "") + "</span></p></div>";
     h += "<details><summary>Per investigation</summary><ul>";
     r.invs.forEach(function (x) {
       var judged = x.value === "yes" || x.value === "no", t;
@@ -1613,7 +1613,7 @@
       (TOPICS ? dataTopics() : "") +
       '<details class="sect"><summary>How AI was used</summary><p>AI does five jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
       "<li><strong>It reads NASA's records.</strong> An AI model (Claude, Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. Before the site is built, a program checks that every quotation exists word for word in the named NASA record, that every table column exists, and that the texts contain no hand-typed numbers.</li>" +
-      "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (snowflake-arctic-embed-s) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer. The numbers the Ask page shows beside the quotations are counted from NASA's tables by ordinary code, not by the model. A short fixed list links everyday words to NASA's terms (for example plastic and PMMA); it was drafted with AI, and the build stops if a term is not in NASA's text or tables.</li>" +
+      "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (snowflake-arctic-embed-s) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer. The numbers the Ask page shows beside the quotations are counted from NASA's tables by ordinary code, not by the model. A short fixed list links everyday words to NASA's terms (for example plastic and PMMA); it was drafted with AI, and the build stops if a term is not in NASA's text or tables. The same numbers place the investigations on the map by meaning on the Explore page.</li>" +
       "<li><strong>It sorted NASA's text by fire question.</strong> An AI model (Claude, Anthropic) read all " + (TOPICS ? TOPICS.about.passages : "") + " passages of the records and of the listed papers and labelled each with the questions it addresses, quoting the words that justify each label. A program checks every quote. The counts on the Open questions page come from these labels.</li>" +
       "<li><strong>It helped write the code.</strong> The scripts and this website were written with AI assistance and reviewed by the team.</li>" +
       "<li><strong>It drew the pictures that are not photographs.</strong> The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance. Each drawing on a page carries a note saying so. The three photographs are NASA's and are not AI-generated.</li></ol>" +
@@ -1635,6 +1635,7 @@
       '<li><a href="https://www.nasa.gov/moonbase" target="_blank" rel="noopener">NASA: Moon Base</a></li>' +
       '<li><a href="https://ntrs.nasa.gov/citations/20205007829" target="_blank" rel="noopener">G. A. Ruff, Spacecraft Fire Safety Needs for Exploration, NASA Glenn, 2020</a> (roadmap listing Saffire IV to VI with elevated oxygen)</li>' +
       '<li><a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (year and journal of the publications PSI lists)</li>' +
+      '<li><a href="https://ntrs.nasa.gov/citations/20070018178" target="_blank" rel="noopener">D. B. Hirsch et al., Oxygen Concentration Flammability Thresholds of Selected Aerospace Materials Considered for the Constellation Program, NASA White Sands Test Facility, 2007</a> (the Earth-test table on the Habitat page, the one source outside PSI; text extracted once with <a href="https://github.com/py-pdf/pypdf" target="_blank" rel="noopener">pypdf</a>, BSD-3-Clause)</li>' +
       '<li><a href="https://github.com/nasa/hds-core" target="_blank" rel="noopener">NASA Horizon Design System</a> (the colour values: NASA Red, the Carbon greys and the chart palette for dark backgrounds)</li>' +
       '<li><a href="https://huggingface.co/Snowflake/snowflake-arctic-embed-s" target="_blank" rel="noopener">snowflake-arctic-embed-s</a> language model (Snowflake, Apache-2.0), run with <a href="https://github.com/huggingface/transformers.js" target="_blank" rel="noopener">Transformers.js</a> (Apache-2.0) and <a href="https://github.com/microsoft/onnxruntime" target="_blank" rel="noopener">ONNX Runtime Web</a> (MIT); all three are served with this site</li></ul>';
     h += '<p>Images, all NASA photographs in the public domain, none AI-generated: the Moon is the <a href="' + MOON.page + '" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter near-side mosaic</a> (' + esc(MOON.credit) + '); Earth is <a href="https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" target="_blank" rel="noopener">The Earth seen from Apollo 17</a> (NASA, Apollo 17 crew); the space station is <a href="https://commons.wikimedia.org/wiki/File:International_Space_Station_after_undocking_of_STS-132.jpg" target="_blank" rel="noopener">photograph S132-E-012208</a> (NASA, crew of STS-132).</p>';
