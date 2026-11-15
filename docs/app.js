@@ -1056,7 +1056,7 @@
         var p = P[x.i];
         if (p.kind === "record") {
           var inv = BY_ID[p.inv];
-          h += '<article class="hit"><div class="ev-head">' + invLink(p.inv) + chip(inv.cls) + '<span class="small muted">NASA PSI record ' + esc(p.inv) + ", " + FIELD[p.field] + "</span></div><blockquote>“" + mark(p.text, qm) + "”</blockquote></article>";
+          h += '<article class="hit"><div class="ev-head">' + invLink(p.inv) + chip(inv.cls) + '<span class="small muted">NASA PSI record ' + esc(p.inv) + ", " + FIELD[p.field] + '. <a class="ctx" href="#/inv/' + esc(p.inv) + "/" + p.field + "/" + x.i + '">Read it in context</a></span></div><blockquote>“' + mark(p.text, qm) + "”</blockquote></article>";
         } else {
           h += '<article class="hit"><div class="ev-head"><span class="papert">' + esc(p.title) + '</span></div><p class="small muted">Paper' + (p.year ? ", " + p.year : "") + (p.venue ? ", " + esc(p.venue) : "") + ". Listed by PSI under " +
             p.psi.map(function (id) { return invLink(id); }).join(", ") + '. <a href="https://doi.org/' + esc(p.doi) + '" target="_blank" rel="noopener">Read it</a></p>' +
@@ -1152,8 +1152,22 @@
     return s + "</svg>";
   }
 
-  function viewInv(id) {
+  // NASA's text for one field, with the passage the reader came from marked. The search index cut the
+  // text with its spaces collapsed, so the passage is found word by word, allowing any spacing.
+  function markPassage(text, id, k, pi) {
+    var p = ASK.P && ASK.P.passages[+pi];
+    if (!p || p.kind !== "record" || p.inv !== id || p.field !== k) return esc(text);
+    var parts = p.text.trim().split(/\s+/).map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); });
+    var m = new RegExp(parts.join("\\s+")).exec(text);
+    if (!m) return esc(text);
+    return esc(text.slice(0, m.index)) + '<mark class="hl">' + esc(m[0]) + "</mark>" + esc(text.slice(m.index + m[0].length));
+  }
+  // `field` and `pi` come from a "Read it in context" link on the Ask page: the page opens NASA's
+  // description at that field and marks the quoted passage (pi = its index in passages.json).
+  var invFocusDone = "";
+  function viewInv(id, field, pi) {
     var inv = BY_ID[id];
+    if (field && !FIELD[field]) field = null;
     if (!inv) return viewHome();
     setTitle(inv.name);
     var x = RK[id], co = x.criteria.oxygen, cp = x.criteria.pressure;
@@ -1181,8 +1195,8 @@
     h += '<details class="sect"><summary>What NASA\'s table records</summary>';
     if (!inv.tables.length) h += '<p class="muted">PSI holds no Experimental Table for this investigation. Its results are in its publications and documents.</p>';
     inv.tables.forEach(function (t) { h += tableBlock(inv, t); });
-    h += '</details><details class="sect"><summary>NASA\'s description, word for word</summary>';
-    Object.keys(FIELD).forEach(function (k) { if (inv.text[k]) h += "<h3>" + FIELD[k] + '</h3><p class="verbatim">' + esc(inv.text[k]) + "</p>"; });
+    h += '</details><details class="sect" id="verbatim"' + (field ? " open" : "") + '><summary>NASA\'s description, word for word</summary>';
+    Object.keys(FIELD).forEach(function (k) { if (inv.text[k]) h += '<h3 id="f-' + k + '">' + FIELD[k] + '</h3><p class="verbatim">' + (k === field ? markPassage(inv.text[k], id, k, pi) : esc(inv.text[k])) + "</p>"; });
     h += '<dl class="facts" style="margin-top:1rem">' +
       (inv.hardware ? "<dt>Hardware</dt><dd>" + esc(inv.hardware) + "</dd>" : "") +
       (inv.start ? "<dt>Dates</dt><dd>" + esc(inv.start) + " to " + esc(inv.end || "not stated") + "</dd>" : "") +
@@ -1201,6 +1215,10 @@
     } else h += '<p class="muted">None listed.</p>';
     h += "</details>";
     main.innerHTML = h;
+    if (field && invFocusDone !== location.hash) {
+      invFocusDone = location.hash;
+      setTimeout(function () { var el = main.querySelector("#verbatim mark.hl") || document.getElementById("f-" + field); if (el) el.scrollIntoView({ block: "center" }); }, 0);
+    }
     document.getElementById("cmp").addEventListener("change", function (e) { if (e.target.value) location.hash = "#/compare/" + id + "/" + e.target.value; });
     relatedLoad().then(function (R) {
       var el = document.getElementById("relm"), list = R && R.related[id];
@@ -1376,7 +1394,7 @@
     else if (name === "ask") viewAsk(parts.slice(1).join("/"));
     else if (name === "habitat") viewHabitat(parts[1]);
     else if (name === "analysis") viewAnalysis();
-    else if (name === "inv") viewInv(parts[1]);
+    else if (name === "inv") viewInv(parts[1], parts[2], parts[3]);   // #/inv/<id>/<field>/<passage>: opens NASA's text at that section
     else if (name === "table" && BY_ID[(parts[1] || "").split("_")[0]]) {   // #/table/<file>/<row>: a link straight to one NASA table row
       viewInv(parts[1].split("_")[0]);
       openTable(parts[1], +parts[2] || 0);

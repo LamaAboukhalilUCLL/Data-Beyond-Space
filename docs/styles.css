@@ -228,6 +228,8 @@ ul.clean { list-style: none; padding: 0; margin: .3rem 0; } ul.clean li { paddin
 .ev-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem 1rem; margin-bottom: .15rem; }
 .ev-head a { font-weight: 700; text-decoration: none; }
 .ev-head a:hover { text-decoration: underline; }
+.ev-head a.ctx { font-weight: 400; text-decoration: underline; }   /* "Read it in context", like the papers' "Read it" */
+details.sect .verbatim mark.hl { color: var(--text, inherit); }
 .q .missing { margin-top: 1rem; color: var(--red-soft); font-size: .97rem; max-width: 50rem; }
 
 /* table viewer */
