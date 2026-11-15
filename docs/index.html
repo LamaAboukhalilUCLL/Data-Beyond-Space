@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="backdrop" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <a class="brand" href="#/">
@@ -28,9 +29,11 @@
 </header>
 <main id="main" tabindex="-1"><p class="loading">Loading NASA's data…</p></main>
 <footer>
+  <div class="foot-nav"><a href="#/">Overview</a><a href="#/map">Coverage map</a><a href="#/rank">Ranking</a><a href="#/questions">Open questions</a><a href="#/data">Data and method</a></div>
   <p><strong>Data Beyond Space</strong> · NASA Space Apps Challenge 2026 · Challenge: Flame in Freefall</p>
   <p>All data: <a href="https://psi.nasa.gov/physci/repo/search?q=combustion">NASA Physical Sciences Informatics (PSI) repository</a>, Combustion Science, shown as NASA published it. This site shows which conditions were tested and which were not. It does not predict how fire behaves on the Moon.</p>
   <p>Code and plain-language summaries were written with AI assistance (Claude, Anthropic) and reviewed by the team. NASA's own words always appear in quotation marks. This project is not affiliated with or endorsed by NASA.</p>
+  <p>Moon photograph: <a href="https://commons.wikimedia.org/wiki/File:Moon_nearside_LRO_5000.jpg">Lunar Reconnaissance Orbiter mosaic, NASA/GSFC/Arizona State University</a>, public domain. A real photograph, not AI-generated.</p>
 </footer>
 <div id="tip" role="tooltip" hidden></div>
 <div id="modal" hidden>
