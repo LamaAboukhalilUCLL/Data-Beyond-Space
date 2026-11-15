@@ -1229,8 +1229,8 @@
     if (!el) return;
     el.className = "askmode " + ASK.model;
     var mb = ASK.P && ASK.P.about.download_mb ? "about " + ASK.P.about.download_mb + " MB" : "";   // counted by the build from the files served
-    el.innerHTML = ASK.model === "ready" ? "<b>Matching by meaning</b><span>A small language model in your browser. It matches, it writes nothing, and your question stays on your computer.</span>" :
-      ASK.model === "loading" ? "<b>Loading the language model</b><span>" + (mb ? mb + ", once. " : "") + "Matching by words until it is ready.</span>" :
+    el.innerHTML = ASK.model === "ready" ? "<b>Matching by meaning</b><span>a small language model in your browser · it matches, it writes nothing · your question stays on your computer</span>" :
+      ASK.model === "loading" ? "<b>Loading the language model</b><span>" + (mb ? mb + ", once · " : "") + "matching by words until it is ready</span>" :
       ASK.model === "failed" ? "<b>Matching by words</b><span>the language model could not start in this browser</span>" :
       '<b>Matching by words</b><button class="link" data-smart="1">Match by meaning instead</button><span>loads a small language model' + (mb ? ", " + mb + "," : "") + " once</span>";
   }
@@ -1243,9 +1243,9 @@
     var term = Ask.moon(q);
     if (!term) return "";
     var S = D.summary, n = S.records_mentioning_moon_or_partial_gravity, g = D.questions.filter(function (x) { return x.id === "gravity"; })[0];
-    var h = '<section class="askcard gap"><p class="kick">Outside NASA\'s data: you mentioned “' + esc(term) + "”</p><h3>" + (n === 0 ? "PSI holds no test at Moon or Mars gravity" : plural(n, "PSI record mentions", "PSI records mention") + " the Moon, Mars or partial gravity") + "</h3>";
+    var h = '<section class="askcard gap"><p class="kick">Outside NASA\'s data · you mentioned “' + esc(term) + "”</p><h3>" + (n === 0 ? "PSI holds no test at Moon or Mars gravity" : plural(n, "PSI record mentions", "PSI records mention") + " the Moon, Mars or partial gravity") + "</h3>";
     h += "<p><b>" + n + " of " + S.investigations + "</b> records mention the Moon, Mars or partial gravity. Every test ran in weightlessness or on Earth, so the passages below are not Moon results.</p>";
-    if (g) h += '<p class="small"><a href="#/questions/gravity">Open question: ' + esc(g.question) + "</a>" + (g.elsewhere && g.elsewhere.length ? ' <span class="muted">(' + plural(g.elsewhere.length, "NASA document", "NASA documents") + " outside PSI)</span>" : "") + "</p>";
+    if (g) h += '<p class="small"><a href="#/questions/gravity">Open question: ' + esc(g.question) + "</a>" + (g.elsewhere && g.elsewhere.length ? ' <span class="muted">· ' + plural(g.elsewhere.length, "NASA document", "NASA documents") + " outside PSI</span>" : "") + "</p>";
     return h + "</section>";
   }
   // A question about conditions or counts: the numbers, counted from NASA's tables for the tests it names.
@@ -1260,11 +1260,11 @@
     if (it.invs.length) scope.push("in " + it.invs.map(function (id) { return invLink(id); }).join(", "));
     var h = '<section class="askcard count"><p class="kick">Counted from NASA\'s tables</p><h3>' + (scope.length ? plural(a.tests, "test", "tests") + " " + scope.join(", ") : "All " + a.tests + " tests in NASA's tables") + "</h3>";
     if (!a.tests) return h + "<p>No row of NASA's Experimental Tables matches, so there is nothing to count.</p></section>";
-    if (!it.invs.length || it.invs.length > 1) h += '<p class="invs">' + a.invs.slice(0, 6).map(function (x) { return invLink(x.id) + ' <span class="muted">' + x.tests + "</span>"; }).join(", ") + (a.invs.length > 6 ? ' <span class="muted">and ' + (a.invs.length - 6) + " more</span>" : "") + "</p>";
+    if (!it.invs.length || it.invs.length > 1) h += '<p class="invs">' + a.invs.slice(0, 6).map(function (x) { return invLink(x.id) + ' <span class="muted">' + x.tests + "</span>"; }).join(" · ") + (a.invs.length > 6 ? ' <span class="muted">· and ' + (a.invs.length - 6) + " more</span>" : "") + "</p>";
     // one tile per condition: the count, what it counts, and out of how many tests that state it
     function tile(label, val, of, rest, none) {
-      if (!of) return '<div class="na"><b>none</b><span>' + label + '</span><small>' + none + "</small></div>";
-      return '<div class="' + (val === 0 ? "zero" : "") + '"><b>' + val + "</b><span>" + label + "</span><small>of " + plural(of, "test", "tests") + " that state it" + (rest ? ", " + rest : "") + "</small></div>";
+      if (!of) return '<div class="na"><b>–</b><span>' + label + '</span><small>' + none + "</small></div>";
+      return '<div class="' + (val === 0 ? "zero" : "") + '"><b>' + val + "</b><span>" + label + "</span><small>of " + plural(of, "test", "tests") + " that state it" + (rest ? " · " + rest : "") + "</small></div>";
     }
     h += '<div class="stats">' +
       tile("at " + num(o2) + " % oxygen or more", a.oxygen.atOrAbove, a.oxygen.stated, a.oxygen.stated ? "tested " + num(a.oxygen.min) + " to " + num(a.oxygen.max) + " %" : "", "no test states oxygen as a number") +
@@ -1273,7 +1273,7 @@
       "</div>";
     var from = it.o2 != null && it.p != null ? "both limits from your question" : it.o2 != null ? "oxygen limit from your question, pressure from " + esc(ATM.name) : it.p != null ? "pressure limit from your question, oxygen from " + esc(ATM.name) : "limits of " + esc(ATM.name);
     var fq = it.fuels.length === 1 && !it.invs.length ? it.fuels[0] : it.invs.length === 1 && !it.fuels.length ? BY_ID[it.invs[0]].name : "";
-    h += '<p class="small muted">Counted by this page from NASA\'s Experimental Tables; ' + from + ". Cells written as text are not counted." + (fq ? ' <button class="link" data-findq="' + esc(fq) + '">See these rows</button>' : "") + "</p>";
+    h += '<p class="small muted">Counted by this page from NASA\'s Experimental Tables · ' + from + " · cells written as text are not counted" + (fq ? ' · <button class="link" data-findq="' + esc(fq) + '">See these rows</button>' : "") + "</p>";
     return h + "</section>";
   }
   // How many of the investigations behind the passages have a test in the chosen atmosphere.
@@ -1281,8 +1281,8 @@
     var r = Ask.reach(top, ASK.P.passages, RK), n = r.invs.length;
     if (!n) return "";
     var h = '<section class="reach' + (r.yes ? "" : " none") + '"><div class="reach-head"><span class="big">' + r.yes + "<small>/" + n + "</small></span><p><b>investigations behind these passages have a test in " + esc(ATM.name) + "</b>" +
-      '<span>' + airWords() + (r.rowsOf ? ": " + r.rowsIn + " of the " + plural(r.rowsOf, "test", "tests") + " that state both" : "") +
-      (r.unknown ? ". " + r.unknown + " cannot be placed: " + (r.unknown === 1 ? "its table does" : "their tables do") + " not state both oxygen and pressure as numbers" : "") + "</span></p></div>";
+      '<span>' + airWords() + (r.rowsOf ? " · " + r.rowsIn + " of the " + plural(r.rowsOf, "test", "tests") + " that state both" : "") +
+      (r.unknown ? " · " + r.unknown + " cannot be placed: " + (r.unknown === 1 ? "its table does" : "their tables do") + " not state both oxygen and pressure as numbers" : "") + "</span></p></div>";
     h += "<details><summary>Per investigation</summary><ul>";
     r.invs.forEach(function (x) {
       var judged = x.value === "yes" || x.value === "no", t;
