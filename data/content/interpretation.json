@@ -18,7 +18,7 @@
     },
     {
      "kind": "stated",
-     "text": "Oxygen was only varied downward from normal air.",
+     "text": "Oxygen was kept at or below about normal air, by adding nitrogen.",
      "field": "approach",
      "quote": "oxygen varied below 21% by adding nitrogen"
     }
@@ -71,7 +71,7 @@
    ]
   },
   "PSI-99": {
-   "did": "Nine smaller samples (silicone, cotton-fiberglass fabric, acrylic plastic, Nomex) were burned one after another inside an empty cargo ship. The table lists how far each burned in space and in the same test on Earth.",
+   "did": "Nine smaller samples (silicone, cotton-fiberglass fabric, acrylic plastic, Nomex) were burned one after another inside an empty cargo ship. The table lists how far each burned in space and how far it burned on Earth.",
    "points": [
     {
      "kind": "aim",
@@ -118,6 +118,12 @@
      "text": "This happened in higher-oxygen air. In normal air the same flames went out by themselves.",
      "field": "researchImpacts",
      "quote": "whereas such flames in a normal atmosphere of 21% oxygen self-extinguished in a short time"
+    },
+    {
+      "kind": "stated",
+      "text": "NASA calls these results preliminary.",
+      "field": "researchImpacts",
+      "quote": "results are still preliminary"
     },
     {
      "kind": "aim",
@@ -234,13 +240,13 @@
    "points": [
     {
      "kind": "aim",
-     "text": "The purpose is better engines, not fire safety.",
+     "text": "Its record names engines as the purpose and never mentions fire safety.",
      "field": "researchImpacts",
      "quote": "This should facilitate the development of more efficient internal combustion engines"
     },
     {
      "kind": "stated",
-     "text": "Cool flames are a recent discovery.",
+     "text": "Cool diffusion flames were only discovered recently.",
      "field": "researchImpacts",
      "quote": "has grown exponentially since they were discovered in 2012"
     }
@@ -257,7 +263,7 @@
     },
     {
      "kind": "expected",
-     "text": "A perfectly round flame can hold steady in weightlessness.",
+     "text": "A round flame can burn steadily in weightlessness.",
      "field": "hypothesis",
      "quote": "Steady-state spherical diffusion flames are possible"
     }
@@ -346,7 +352,7 @@
    "points": [
     {
      "kind": "aim",
-     "text": "A tool to predict whether a spacecraft material will burn.",
+     "text": "A tool to predict the flammability limits of spacecraft materials.",
      "field": "objective",
      "quote": "enable accurate prediction of flammability limits for spacecraft materials"
     }
@@ -385,7 +391,7 @@
    "points": [
     {
      "kind": "result",
-     "text": "Between hot and cool flames there is a third, 'warm' flame that governs the switch from one to the other.",
+     "text": "Between hot and cool flames there is a third, 'warm' flame that plays a key role in the switch from one to the other.",
      "field": "researchImpacts",
      "quote": "the warm flame has a double reaction zone structure and plays a critical role in the transition between cool flames and hot flames"
     },
@@ -445,7 +451,7 @@
     {
      "inv": "PSI-25",
      "kind": "record",
-     "text": "Oxygen was only lowered, never raised.",
+     "text": "Oxygen was kept at or below about normal air, by adding nitrogen.",
      "field": "approach",
      "quote": "oxygen varied below 21% by adding nitrogen"
     },
@@ -493,7 +499,7 @@
    "id": "earth-test",
    "question": "Can the Earth test for approving materials be trusted there?",
    "status": "open",
-   "answer": "NASA's own records question it, and the comparisons that exist were made near normal air, not Moon Base air. Where there is no space data, the Earth test is all there is.",
+   "answer": "NASA's own records question it. The one direct comparison, made near normal air, found the Earth burns at least as long as those in space; nothing was compared in Moon Base air. Where there is no space data, the Earth test is all there is.",
    "evidence": [
     {
      "inv": "PSI-26",
@@ -519,7 +525,7 @@
     {
      "inv": "PSI-99",
      "kind": "table",
-     "text": "Saffire-II is the only table that lists a burn in space and on Earth for the same samples ({{PSI-99.tables.0.entries}} samples). Read the two columns on its page: at near-normal oxygen the Earth burn is not the smaller one."
+     "text": "Saffire-II is the only table that lists a burn in space and on Earth for the same samples ({{PSI-99.tables.0.entries}} samples). Wherever the table gives both for the same material, it burned at least as far on Earth as in space, so near normal air the Earth test was on the safe side. No such comparison exists at 30 % oxygen or more."
     }
    ],
    "missing": "Space-versus-Earth comparisons at 30 % oxygen or more.",
@@ -540,7 +546,7 @@
    "id": "put-out",
    "question": "If a fire starts, can it be put out?",
    "status": "partly",
-   "answer": "There is real data on extinguishing gases, but for fuel droplets. For solids there is one warning: an imitation of burning plastic kept going without airflow in higher-oxygen air.",
+   "answer": "There is real data on extinguishing gases, but for fuel droplets. For solids there is one early warning: an imitation of burning plastic kept going in still air when the oxygen was higher. NASA calls these results preliminary.",
    "evidence": [
     {
      "inv": "PSI-69",
@@ -557,9 +563,16 @@
     {
      "inv": "PSI-20",
      "kind": "record",
-     "text": "Stopping the airflow did not stop the flame in higher-oxygen air.",
+     "text": "In still air, with no airflow at all, flames kept burning in higher-oxygen air.",
      "field": "researchImpacts",
      "quote": "The ongoing combustion without air flow was notably seen in elevated-oxygen atmospheres which are being considered for use in future spacecraft"
+    },
+    {
+      "inv": "PSI-20",
+      "kind": "record",
+      "text": "NASA calls these BRE results preliminary.",
+      "field": "researchImpacts",
+      "quote": "results are still preliminary"
     },
     {
      "inv": "PSI-26",

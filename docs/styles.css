@@ -177,6 +177,7 @@ label.check { display: inline-flex; gap: .5rem; align-items: center; font-size: 
 blockquote { margin: .5rem 0 .3rem 1.3rem; padding: 0; color: var(--soft); font-size: 1.02rem; line-height: 1.5; }
 blockquote cite { display: block; color: var(--dim); font-style: normal; font-size: .8rem; margin-top: .15rem; }
 .ai { font-size: .84rem; color: var(--dim); font-weight: 400; }
+.ai-mark { font-size: .78rem; color: var(--dim); margin: .35rem .9rem .5rem; max-width: none; }
 .asw { font: 400 .84rem var(--mono); background: #1c1c20; padding: .05rem .35rem; color: var(--soft); }
 details { border-top: 1px solid var(--line2); padding: .7rem 0; }
 details summary { cursor: pointer; font-weight: 600; }
@@ -230,7 +231,7 @@ ul.clean { list-style: none; padding: 0; margin: .3rem 0; } ul.clean li { paddin
 .q .missing { margin-top: 1rem; color: var(--red-soft); font-size: .97rem; max-width: 50rem; }
 
 /* table viewer */
-#modal { position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 60; display: grid; place-items: center; padding: 1rem; }
+#modal { position: fixed; inset: 0; background: rgba(0,0,0,.86); z-index: 60; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 1rem; }
 #modal[hidden] { display: none; }
 .modal-box { background: #000; border: 1px solid var(--line2); width: min(1180px, 100%); max-height: 90vh; display: flex; flex-direction: column; }
 .modal-head { display: flex; justify-content: space-between; align-items: center; padding: .9rem 1.2rem; border-bottom: 1px solid var(--line2); gap: 1rem; }
