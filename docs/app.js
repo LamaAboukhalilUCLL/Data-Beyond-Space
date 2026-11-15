@@ -414,10 +414,69 @@
     s += '<line class="an-now" x1="' + cx + '" x2="' + cx + '" y1="' + T + '" y2="' + (H - B) + '"/><circle class="an-dot" cx="' + cx + '" cy="' + y(cl(cur.value)) + '" r="7"/>';
     return s + "</svg>";
   }
+  // The next test that would narrow the model's estimate the most, among the conditions FLEX's hardware ran
+  // (nitrogen only, as in a habitat). Candidates on a grid over the tested ranges; model.js does the algebra.
+  function anNextGrid() {
+    var F = AN.data.fuels[AN.fuel], m = F.models.rate, R = F.range, v0 = AN.v, best = null, cells = [];
+    var o2s = [], ps = [], ds = [];
+    for (var o = Math.ceil(R.o2[0]); o <= Math.floor(R.o2[1]); o += 1) o2s.push(o);
+    var pStep = (R.p[1] - R.p[0]) / 34;
+    for (var k = 0; k <= 34; k++) ps.push(R.p[0] + k * pStep);
+    for (var d = 0; d <= 8; d++) ds.push(R.d0[0] + d * (R.d0[1] - R.d0[0]) / 8);
+    o2s.forEach(function (o2) {
+      ps.forEach(function (p) {
+        var cellBest = null;
+        ds.forEach(function (d0) {
+          var v = { o2: o2, co2: 0, he: 0, p: p, d0: d0 }, r = FlexModel.nextTest(m, v0, v);
+          if (!cellBest || r.shrink > cellBest.r.shrink) cellBest = { v: v, r: r };
+        });
+        cells.push(cellBest);
+        if (!best || cellBest.r.shrink > best.r.shrink) best = cellBest;
+      });
+    });
+    return { m: m, R: R, o2s: o2s, ps: ps, cells: cells, best: best };
+  }
+  function anNextMap(G) {
+    var W = 1000, H = 330, L = 64, Rt = 20, T = 14, B = 46, x = scaleLin(G.R.p[0], G.R.p[1], L, W - Rt), y = scaleLin(G.R.o2[0], G.R.o2[1], H - B, T);
+    var cw = (W - Rt - L) / (G.ps.length - 1), ch = (H - B - T) / Math.max(1, G.o2s.length - 1), top = G.best.r.shrink || 1;
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="How much one more test would narrow the range, for each oxygen level and pressure FLEX tested">';
+    G.cells.forEach(function (c) {
+      var a = Math.max(0.04, c.r.shrink / top);
+      s += '<rect shape-rendering="crispEdges" x="' + (x(c.v.p) - cw / 2).toFixed(1) + '" y="' + (y(c.v.o2) - ch / 2).toFixed(1) + '" width="' + (cw + 1.2).toFixed(1) + '" height="' + (ch + 1.2).toFixed(1) + '" fill="rgb(' + Math.round(12 + a * 0.85 * 215) + "," + Math.round(12 + a * 0.85 * 215) + "," + Math.round(14 + a * 0.85 * 213) + ')"><title>' +
+        num(c.v.o2) + " % oxygen, " + num(c.v.p) + " psi: one test narrows the range by " + Math.round(c.r.shrink * 100) + " %</title></rect>";
+    });
+    for (var o = Math.ceil(G.R.o2[0] / 5) * 5; o <= G.R.o2[1]; o += 5) s += '<text class="tick" x="' + (L - 8) + '" y="' + (y(o) + 4) + '" text-anchor="end">' + o + " %</text>";
+    for (var p = Math.ceil(G.R.p[0] / 5) * 5; p <= G.R.p[1]; p += 5) s += '<text class="tick" x="' + x(p) + '" y="' + (H - B + 20) + '" text-anchor="middle">' + p + "</text>";
+    s += '<text class="axis-title" x="' + ((L + W - Rt) / 2) + '" y="' + (H - 6) + '" text-anchor="middle">Pressure of the test, psi</text><text class="axis-title" x="4" y="10">Oxygen</text>';
+    var v0 = AN.v;
+    if (v0.p >= G.R.p[0] - 1 && v0.p <= G.R.p[1] && v0.o2 >= G.R.o2[0] && v0.o2 <= G.R.o2[1]) s += '<circle class="an-target" cx="' + x(Math.max(G.R.p[0], v0.p)) + '" cy="' + y(v0.o2) + '" r="9"/><text class="an-tl" x="' + (x(Math.max(G.R.p[0], v0.p)) + 14) + '" y="' + (y(v0.o2) - 10) + '">your condition</text>';
+    var b = G.best.v;
+    s += '<circle class="an-best" cx="' + x(b.p) + '" cy="' + y(b.o2) + '" r="6"/><text class="an-bl" x="' + (x(b.p) + 12) + '" y="' + (y(b.o2) + 18) + '">best next test</text>';
+    return s + "</svg>";
+  }
+  function anNext() {
+    var G = anNextGrid(), m = G.m, v0 = AN.v, best = G.best, est = FlexModel.estimate(m, v0);
+    var pre = function (id) { return D.about.presets.filter(function (p) { return p.id === id; })[0]; };
+    var cmp = Math.abs(v0.o2 - pre("earth").o2) < 2 && Math.abs(v0.p - pre("earth").p) < 1 ? pre("moon") : pre("earth");   // compare with an air far from the condition
+    var ev = { o2: cmp.o2, co2: 0, he: 0, p: cmp.p, d0: best.v.d0 }, er = FlexModel.nextTest(m, v0, ev);
+    var half = FlexModel.testsToShrink(m, v0, best.v, 0.5, 2000);
+    var pc = function (x) { return x < 0.1 ? (x * 100).toFixed(1) : String(Math.round(x * 100)); };
+    var h = '<p class="sub2">The model estimates a burning rate of <b>' + fx(est.value) + "</b> at the condition set above, give or take <b>" + fx(best.r.half0, 3) + "</b> for the average (95 % range). " +
+      "Which single extra test, of the kind FLEX ran, would narrow that range the most? Every condition FLEX's hardware covered for " + esc(AN.fuel.toLowerCase()) + " was tried: " + G.cells.length + " combinations of oxygen and pressure, each at the droplet size that helps most, nitrogen only.</p>";
+    h += '<div class="counters an-find"><div class="hot"><b>' + pc(best.r.shrink) + " %</b><span>narrower range after one test at <strong>" + num(best.v.o2) + " % oxygen, " + num(best.v.p) + " psi</strong>, with a " + num(best.v.d0) + " mm droplet: from &plusmn;" + fx(best.r.half0, 3) + " to &plusmn;" + fx(best.r.half1, 3) + ".</span></div>";
+    h += "<div><b>" + pc(er.shrink) + " %</b><span>narrower after one test in " + esc(cmp.name) + " (" + num(cmp.o2) + " % oxygen, " + num(cmp.p) + " psi), for comparison. A test far from the condition teaches the model little about it.</span></div>";
+    h += half.k ? "<div><b>" + half.k + "</b><span>tests at that best condition would halve the range.</span></div></div>" :
+      "<div><b>" + Math.round(half.floor * 100) + " %</b><span>of today's range is as far as tests at that one condition can go, however many are run. Tests at one condition pin down only part of the model; going further takes tests at several conditions.</span></div></div>";
+    h += '<div class="chart">' + anNextMap(G) + '</div><p class="src">Each square: how much one more test there would narrow the range at your condition (brighter is more). Hover a square for its value. ' +
+      "This is the standard algebra for adding one test to a straight-line model; it assumes the model holds and the scatter between tests stays as it is. It ranks tests for fuel droplets only. For solid materials there is no model to improve: NASA's data has no solid-material test at 30 % oxygen or more, so any such test would be the first.</p>";
+    return h;
+  }
   function anDraw() {
     var a = document.getElementById("an-out"), b = document.getElementById("an-chart");
     if (a) a.innerHTML = anOut();
     if (b) b.innerHTML = anChart();
+    var c = document.getElementById("an-next");
+    if (c) c.innerHTML = anNext();
   }
   function viewAnalysis() {
     setTitle("Analysis");
@@ -463,6 +522,8 @@
 
     h += '<h2>Measured burning rate against oxygen</h2><p class="sub2">Each point is one FLEX test. The line is the model for the settings above, the band is where a single test would likely fall, and the lighter area is the oxygen range FLEX tested.</p>';
     h += '<div class="chart" id="an-chart">' + anChart() + '</div><p class="legend">' + Object.keys(AN_GAS).map(function (k) { return '<span><i class="sw" style="background:' + AN_GAS[k][1] + '"></i>' + AN_GAS[k][0] + "</span>"; }).join("") + "</p>";
+
+    h += '<h2>The next test that would teach the most</h2><div id="an-next">' + anNext() + "</div>";
 
     var endNames = Object.keys(E[0].counts), bandName = { below: "Below " + num(earth.o2) + " % oxygen", between: num(earth.o2) + " % to below " + num(mb.o2_min_percent) + " %", at_or_above: num(mb.o2_min_percent) + " % oxygen or more" };
     h += "<h2>How the tests ended</h2><p class=\"sub2\">Counted from NASA's column \"Test end\", by oxygen level. Extinction means the flame went out at a finite droplet size, completion that the droplet burned to completion (the FLEX record's words). The table does not explain \"Disruption\".</p>";

@@ -115,6 +115,19 @@ for (const [fuel, F] of Object.entries(M.fuels)) {
       if (!close(e.value, dot(beta, xOf(v)), 1e-6)) fail(`${tag}: model.js estimate differs from a direct calculation`);
       if (!(e.low < e.value && e.value < e.high && e.mean_low >= e.low && e.mean_high <= e.high && e.leverage > 0)) fail(`${tag}: model.js ranges are not ordered`);
     }
+    // the value of one more test: model.js uses a closed formula; here the extra row is really added to X'X
+    {
+      const p = 6, X = rs.map(xOf), A = Array.from({ length: p }, (_, a) => Array.from({ length: p }, (_, b) => X.reduce((s2, x) => s2 + x[a] * x[b], 0)));
+      const lev = (M2, x0) => dot(x0, solve(M2.map(r => r.slice()), x0));
+      const v0 = { o2: 30, co2: 0, he: 0, p: 10.2, d0: 3 }, x0 = xOf(v0), h0 = lev(A, x0);
+      if (!close(h0, FlexModel.nextTest(m, v0, v0).h0, 1e-6)) fail(`${tag}: model.js leverage differs from a direct solve`);
+      for (const v of [v0, { o2: 34, co2: 0, he: 0, p: 15, d0: 4 }, { o2: 21, co2: 0, he: 0, p: 14.7, d0: 2 }]) {
+        const x = xOf(v), A1 = A.map((r, a) => r.map((val, b) => val + x[a] * x[b])), h1 = lev(A1, x0);
+        if (!close(h1, FlexModel.nextTest(m, v0, v).h1, 1e-6)) fail(`${tag}: next-test leverage for ${JSON.stringify(v)} differs from a refit with that row added`);
+        const t = FlexModel.testsToShrink(m, v0, v, 0.5, 2000);
+        if (t.k) { const Ak = A.map((r, a) => r.map((val, b) => val + t.k * x[a] * x[b])); if (!(Math.sqrt(lev(Ak, x0) / h0) <= 0.5 + 1e-9)) fail(`${tag}: ${t.k} tests do not halve the range`); }
+      }
+    }
     // the reported confidence limits must be coefficient +- t * standard error
     m.beta.forEach((b, a) => { if (!close(m.ci_low[a], b - m.t975 * m.se[a]) || !close(m.ci_high[a], b + m.t975 * m.se[a])) fail(`${tag}: confidence limits inconsistent`); });
   }

@@ -728,3 +728,10 @@ table.an-near td, table.an-near th { font-size: .88rem; white-space: nowrap; }
 .topic-ex li b { color: var(--text); }
 .topic-ex li span { display: block; font-size: .82rem; color: var(--dim); margin-top: .15rem; }
 .topic-none { margin: 0 1.4rem 1.3rem; color: var(--red-soft); font-weight: 600; }
+
+/* the next test that would teach the most */
+.chart .an-target { fill: none; stroke: var(--red); stroke-width: 2.5; }
+.chart .an-best { fill: var(--red); stroke: #000; stroke-width: 2; }
+.chart .an-tl { fill: var(--red-soft); font-size: 13px; font-weight: 700; }
+.chart .an-bl { fill: var(--text); font-size: 13px; font-weight: 700; }
+.chart .an-tl, .chart .an-bl { paint-order: stroke; stroke: #000; stroke-width: 4px; stroke-linejoin: round; }
