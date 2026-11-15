@@ -502,6 +502,69 @@
     main.innerHTML = h;
   }
 
+  // ------------------------------------------------- what NASA has written about each question
+  // Every passage of the records and of the listed papers was labelled by a large language model;
+  // scripts/build_topics.mjs checks every label's quote and counts. See data/content/question_topics.json.
+  var TOPICS = null;
+  function topicsLoad() {
+    if (TOPICS) return Promise.resolve();
+    return fetch("data/topics.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (t) { TOPICS = t; });
+  }
+  var TOPIC_SHORT = { tested: "Tested in Moon Base air", materials: "Cabin materials", "earth-test": "Trusting the Earth test", "put-out": "Putting a fire out", detect: "Detecting a fire", gravity: "Moon gravity" };
+  // a passage with the words that justify its label in bold
+  function markQuote(text, quotes) {
+    var t = esc(text);
+    (quotes || []).forEach(function (q) {
+      var e = esc(q), at = t.indexOf(e);
+      if (at >= 0) t = t.slice(0, at) + "<b>" + e + "</b>" + t.slice(at + e.length);
+    });
+    return t;
+  }
+  function topicSource(x) {
+    if (x.kind === "record") return '<a href="#/inv/' + x.inv + '">' + esc(BY_ID[x.inv] ? BY_ID[x.inv].name : x.inv) + "</a>, NASA record";
+    return '<a href="https://doi.org/' + esc(x.doi) + '" target="_blank" rel="noopener">' + esc(x.title) + "</a>" + (x.year ? " (" + x.year + ")" : "") + ", paper listed by " + esc((x.psi || []).map(function (id) { return BY_ID[id] ? BY_ID[id].name : id; }).join(", "));
+  }
+  function topicLine(id) {
+    var t = TOPICS && TOPICS.topics[id];
+    if (!t) return "";
+    return t.passages + " of " + TOPICS.about.passages + " passages, from " + t.records + " NASA record" + (t.records === 1 ? "" : "s") + " and " + t.papers + " paper" + (t.papers === 1 ? "" : "s");
+  }
+  function topicChart() {
+    var T = TOPICS, ids = D.questions.map(function (q) { return q.id; }), max = Math.max.apply(null, ids.map(function (id) { return T.topics[id].passages; }));
+    var W = 1000, L = 250, R = 330, row = 46, H = ids.length * row + 34, x = scaleLin(0, max, L, W - R);
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Passages of NASA text that address each fire question">';
+    ids.forEach(function (id, k) {
+      var t = T.topics[id], y = 10 + k * row, low = t.passages < 30;
+      s += '<a href="#/questions/' + id + '"><text class="tq' + (low ? " low" : "") + '" x="' + (L - 14) + '" y="' + (y + 19) + '" text-anchor="end">' + esc(TOPIC_SHORT[id]) + "</text>";
+      s += '<rect class="tr" x="' + L + '" y="' + (y + 4) + '" width="' + Math.max(0, x(t.record_passages) - L) + '" height="22"/><rect class="tp" x="' + x(t.record_passages) + '" y="' + (y + 4) + '" width="' + Math.max(0, x(t.passages) - x(t.record_passages)) + '" height="22"/>';
+      s += '<text class="tn' + (low ? " low" : "") + '" x="' + (x(t.passages) + 10) + '" y="' + (y + 20) + '">' + t.passages + '</text><text class="ts" x="' + (W - R + 70) + '" y="' + (y + 20) + '">' + t.records + (t.records === 1 ? " record, " : " records, ") + t.papers + (t.papers === 1 ? " paper" : " papers") + "</text></a>";
+    });
+    return s + "</svg>";
+  }
+  function topicSection() {
+    if (!TOPICS) return '<p class="loading">Loading…</p>';
+    var T = TOPICS, A = T.about, O = {};
+    T.overlaps.forEach(function (o) { O[o.id] = o; });
+    var h = '<h2>What NASA has written about each question</h2><p class="sub2">An AI read all ' + A.passages + " passages of NASA's " + D.summary.investigations + " records and of the papers they list, and sorted each one under the questions it addresses. " +
+      "For every passage it sorted, it quotes the words that justify it, and a program checks each quote. A passage can count for several questions.</p>";
+    h += '<div class="chart topic-chart">' + topicChart() + '</div><p class="legend"><span><i class="sw sq" style="background:#e3e3e3"></i>Passages from NASA\'s records</span><span><i class="sw sq" style="background:#6b6b70"></i>Passages from papers</span></p>';
+    var g = T.topics.gravity, so = O["solids-in-moon-air"], de = O["detect-in-moon-air"];
+    h += '<div class="counters topic-find"><div class="hot"><b>' + g.passages + "</b><span>of " + A.passages + " passages " + (g.passages === 1 ? "is" : "are") + " about fire in Moon or partial gravity. " + (g.records ? "" : "None of them is in NASA's records.") + "</span></div>";
+    h += '<div class="hot"><b>' + so.passages + "</b><span>passages, from " + so.sources + " source" + (so.sources === 1 ? "" : "s") + ", are about solid materials in high-oxygen or low-pressure air: " +
+      so.examples.map(function (x) { return x.kind === "record" ? esc(BY_ID[x.inv].name) : "a paper of " + x.year; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" and ") + '. <button class="link" data-topicshow="solids-in-moon-air">Read them</button></span></div>';
+    h += "<div><b>" + de.passages + "</b><span>passages are about detecting a fire in high-oxygen or low-pressure air, against " + T.topics.detect.passages + " about detection in general.</span></div></div>";
+    h += '<div id="topic-show"></div>';
+    h += '<p class="src">Labelled by ' + esc(A.labelled_by) + ", " + esc(A.date) + ', following a written guide for each question. These are counts of what NASA wrote about, not of tests run. A program verifies every quote; whether each label is right is a judgement, and a person should check a sample. <a href="data/topics.json">Download the labels and counts (JSON)</a></p>';
+    return h;
+  }
+  function topicExamples(id) {
+    var t = TOPICS && TOPICS.topics[id];
+    if (!t || !t.passages) return '<p class="topic-none">No passage in NASA\'s records or the listed papers addresses this question.</p>';
+    return '<div class="topic-ex"><p><b>What NASA has written on this:</b> ' + topicLine(id) + ". A few of them, the justifying words in bold:</p><ul>" + t.examples.slice(0, 5).map(function (x) {
+      return "<li>“" + markQuote(x.text, [x.quote]) + "”<span>" + topicSource(x) + "</span></li>";
+    }).join("") + "</ul></div>";
+  }
+
   // ------------------------------------------------- Earth tests at Moon Base pressure (not from PSI)
   // NASA White Sands Test Facility, 2007. scripts/build_external.py reads the thresholds from the paper's text.
   var EARTH = null;
@@ -640,9 +703,9 @@
   var habReport = "";
   function viewHabitat(sel) {
     setTitle("Habitat");
-    if (!EARTH) {
+    if (!EARTH || !TOPICS) {
       main.innerHTML = '<p class="loading">Loading the habitat…</p>';
-      earthLoad().then(function () { if (hashParts()[0] === "habitat") route(true); });
+      Promise.all([earthLoad(), topicsLoad().catch(function () {})]).then(function () { if (hashParts()[0] === "habitat") route(true); });
       return;
     }
     if (!habPick) habStart();
@@ -681,7 +744,7 @@
     }).join("") + "</div>";
     h += '<div class="hab-panel ' + q.status + '"><span class="no">' + (Q.indexOf(q) + 1) + '</span><p class="st">' + WORD[q.status] + "</p><h3>" + esc(q.question) + "</h3><p>" + esc(q.answer) +
       ' <span class="ai">(AI-written, checked against NASA\'s tables)</span></p><h4>What NASA\'s data holds</h4><ul>' + q.evidence.slice(0, 3).map(function (x) { return "<li>" + esc(x.text) + "</li>"; }).join("") +
-      '</ul><p><a class="more" href="#/questions/' + q.id + '">Read the evidence</a></p></div></div>';
+      '</ul>' + (TOPICS ? '<p class="small muted">NASA wrote about this in ' + topicLine(q.id) + ".</p>" : "") + '<p><a class="more" href="#/questions/' + q.id + '">Read the evidence</a></p></div></div>';
     h += earthAll();
     main.innerHTML = h;
   }
@@ -1045,6 +1108,12 @@
     var embed = ASK.embed;   // called on its own: the pipeline must not see ASK as "this"
     if (ASK.model === "ready") embed([q], { pooling: "mean", normalize: true }).then(function (o) { show(o.tolist()[0]); }).catch(function (e) { console.error(e); probe("embed failed: " + e + " " + (e && e.stack || "").slice(0, 300)); });
   }
+  function askMeasured() {
+    if (!TOPICS) return "";
+    var E = TOPICS.evaluation, a = E.average;
+    return "Measured: when the fire questions are typed in, on average " + fx(a.both.precision_at_k * E.k, 1) + " of the top " + E.k + " results address them (" + fx(a.words.precision_at_k * E.k, 1) + " with words alone, " + fx(a.meaning.precision_at_k * E.k, 1) +
+      ' with meaning alone). It finds sentences; it does not judge them. <a href="#/data">How this was measured</a>';
+  }
   function viewAsk(q) {
     setTitle("Ask");
     if (q) { try { ASK.q = decodeURIComponent(q); } catch (e) { ASK.q = q; } }
@@ -1052,6 +1121,8 @@
     h += '<p class="lead">Type a question in your own words. You get the sentences from NASA\'s records, and from the papers NASA lists, that answer it best. Every line is a quotation with its source.</p>';
     h += '<form class="askbox" id="ask-form"><input type="search" id="ask-q" placeholder="For example: does smoke behave differently without gravity?" aria-label="Your question" value="' + esc(ASK.q) + '"><button class="btn" type="submit">Search</button></form>';
     h += '<p class="examples">Try: ' + ASK_EXAMPLES.map(function (x) { return '<button class="link" data-ask="' + esc(x) + '">' + esc(x) + "</button>"; }).join("") + "</p>";
+    if (!TOPICS) topicsLoad().then(function () { var el = document.getElementById("ask-measured"); if (el) el.innerHTML = askMeasured(); });
+    h += '<p id="ask-measured" class="small muted">' + askMeasured() + "</p>";
     h += '<p id="ask-mode" class="askmode"></p><div id="ask-out"><p class="muted">Loading NASA\'s text…</p></div>';
     h += '<p class="src">Searched: the objective, approach, hypothesis and research impacts of the ' + D.summary.investigations + " NASA PSI records, and the titles and abstracts of the publications PSI lists for them (abstracts from OpenAlex, " + D.summary.dois_with_abstract + " of " + D.summary.unique_dois + " papers have one). Results are quotations, not answers written by AI.</p>";
     main.innerHTML = h;
@@ -1218,6 +1289,8 @@
     setTitle("Open questions");
     var h = '<p class="kick">Open questions</p><h1>Six fire-safety questions for a Moon Base</h1>';
     h += '<p class="lead">What NASA\'s microgravity data can say today, the evidence, and what is missing. Choose a question.</p>';
+    if (!TOPICS) topicsLoad().then(function () { if (hashParts()[0] === "questions") route(true); });
+    h += '<div id="topics">' + topicSection() + "</div><h2>The six questions</h2>";
     D.questions.forEach(function (q, n) {
       h += '<details class="q" id="q-' + q.id + '"' + ((focusId ? q.id === focusId : n === 0) ? " open" : "") + '><summary><span class="pill ' + q.status + '">' + WORD[q.status] + "</span><b>" + esc(q.question) + "</b></summary><p>" + esc(q.answer) + '</p><ul class="ev">';
       q.evidence.forEach(function (e) {
@@ -1225,7 +1298,7 @@
         h += '<li><div class="ev-head">' + invLink(e.inv) + chip(inv.cls) + "</div>" + esc(e.text) + (e.kind === "record" ? quote(e.inv, e.field, e.quote) :
           (inv.tables.length ? ' <button class="link" data-table="' + inv.tables[0].file + '">View NASA\'s table</button>' : "")) + "</li>";
       });
-      h += '</ul><p class="missing"><strong>Missing:</strong> ' + esc(q.missing) + "</p>";
+      h += '</ul><p class="missing"><strong>Missing:</strong> ' + esc(q.missing) + "</p>" + (TOPICS ? topicExamples(q.id) : "");
       if (q.elsewhere && q.elsewhere.length) h += '<div class="elsewhere"><b>NASA work on this outside PSI</b><span>Not part of the PSI data, and not used for any number on this site.</span><ul>' + q.elsewhere.map(function (x) {
         return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.title) + "</a> (" + x.year + ", NASA Technical Reports Server)</li>";
       }).join("") + "</ul></div>";
@@ -1236,8 +1309,24 @@
     if (focusId) { var el = document.getElementById("q-" + focusId); if (el) setTimeout(function () { el.scrollIntoView({ block: "start" }); }, 0); }
   }
 
+  function dataTopics() {
+    var T = TOPICS, E = T.evaluation, A = T.about;
+    var h = '<details class="sect"><summary>Sorting NASA\'s text by question, and measuring the search</summary>';
+    h += "<p>All " + A.passages + " passages (" + A.record_passages + " from NASA's records, " + A.paper_passages + " from the titles and abstracts of the papers PSI lists) were read by " + esc(A.labelled_by) + " and labelled with the six questions they address, following a written guide for each question (<code>data/content/question_topics.json</code>). " +
+      A.labelled_passages + " passages address at least one question; " + A.unlabelled_passages + " address none. <code>scripts/build_topics.mjs</code> stops if a quoted justification is not in its passage word for word, or if any passage changed since it was labelled.</p>";
+    h += "<p>The site's small language model first tried this sorting on its own and failed: it put most passages about weightlessness under Moon gravity. So the labels come from the large model, and the small model is measured against them.</p>";
+    h += "<p><strong>How good is the Ask search?</strong> Each question was typed into the same three rankings the Ask page uses. The table counts how many of the top " + E.k + " results are labelled as addressing that question.</p>";
+    h += '<div class="tablewrap"><table><thead><tr><th>Question</th><th class="num">Passages labelled</th><th class="num">By chance</th><th class="num">Words</th><th class="num">Meaning</th><th class="num">Both (the Ask page)</th></tr></thead><tbody>' +
+      D.questions.map(function (q) {
+        var r = E.per_question[q.id];
+        return "<tr><td>" + esc(q.question) + '</td><td class="num">' + r.labelled + '</td><td class="num">' + fx(r.chance_at_k * E.k, 1) + '</td><td class="num">' + r.words.hits_at_k + '</td><td class="num">' + r.meaning.hits_at_k + '</td><td class="num"><b>' + r.both.hits_at_k + "</b></td></tr>";
+      }).join("") + '<tr class="tot"><td>Average over the ' + E.average.both.questions.length + ' questions with at least ' + E.k + ' labelled passages</td><td></td><td></td><td class="num">' + fx(E.average.words.precision_at_k * E.k, 1) + '</td><td class="num">' + fx(E.average.meaning.precision_at_k * E.k, 1) + '</td><td class="num"><b>' + fx(E.average.both.precision_at_k * E.k, 1) + "</b></td></tr></tbody></table></div>";
+    h += '<p class="src">Results out of ' + E.k + ". “By chance” is what ten passages picked at random would get. The labels were made by the same kind of tool that wrote this site's texts; a person should check a sample of them.</p></details>";
+    return h;
+  }
   function viewData() {
     setTitle("Data and method");
+    if (!TOPICS) topicsLoad().then(function () { if (hashParts()[0] === "data") route(true); });
     var S = D.summary, A = D.about;
     var h = '<p class="kick">Data and method</p><h1>Take the data, check the method</h1>';
     h += '<p class="lead">Everything on this site is built by one script from an untouched copy of NASA\'s files. No number is typed in by hand, and nothing is estimated.</p>';
@@ -1267,9 +1356,11 @@
 
     h += '<details class="sect"><summary>The one table that is not from PSI</summary><p>The <a href="#/habitat">Habitat</a> page shows Earth tests of 26 material samples at Moon Base pressure, from a NASA White Sands Test Facility paper of 2007 (<a href="https://ntrs.nasa.gov/citations/20070018178">NTRS 20070018178</a>, public use permitted). The PDF, its extracted text and their checksums are stored with the source code. <code>scripts/build_external.py</code> reads every threshold from that text and stops if a sample name, a number or a quoted sentence is not found exactly. Nothing from it is mixed into the PSI counts.</p></details>' +
       '<details class="sect"><summary>The droplet model on the Analysis page</summary><p>The <a href="#/analysis">Analysis</a> page fits a plain statistical model (ordinary least squares) to the FLEX table. It is statistics, not a language model: <code>scripts/analyze_flex.py</code> fits it with the Python standard library, and <code>scripts/check_model.cjs</code>, written separately in JavaScript, reads the CSV from NASA again, refits it and fails unless it gets the same coefficients, errors and counts. The fitted model is in <a href="data/flex_model.json">data/flex_model.json</a>.</p></details>' +
-      '<details class="sect"><summary>How AI was used</summary><p>AI does four jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
+      (TOPICS ? dataTopics() : "") +
+      '<details class="sect"><summary>How AI was used</summary><p>AI does five jobs on this site, and each one is checked or limited so that it cannot invent anything.</p><ol>' +
       "<li><strong>It reads NASA's records.</strong> An AI model (Claude, Anthropic) wrote the plain-language summaries and answers, and extracted for every investigation what was burned, what was varied, what was measured and what it is for on Earth. Before the site is built, a program checks that every quotation exists word for word in the named NASA record, that every table column exists, and that the texts contain no hand-typed numbers.</li>" +
       "<li><strong>It matches your question to NASA's sentences.</strong> On the Ask page, a small open language model (all-MiniLM-L6-v2) runs inside your browser. It turns your question and " + (ASK.P ? ASK.P.passages.length : "about 900") + " passages into lists of numbers that capture meaning, and shows the passages closest to your question. It writes nothing: every result is a quotation with its source. Your question never leaves your computer.</li>" +
+      "<li><strong>It sorted NASA's text by fire question.</strong> An AI model (Claude, Anthropic) read all " + (TOPICS ? TOPICS.about.passages : "") + " passages of the records and of the listed papers and labelled each with the questions it addresses, quoting the words that justify each label. A program checks every quote. The counts on the Open questions page come from these labels.</li>" +
       "<li><strong>It helped write the code.</strong> The scripts and this website were written with AI assistance and reviewed by the team.</li>" +
       "<li><strong>It drew the pictures that are not photographs.</strong> The logo, the route map and the habitat schematic were drawn as code (SVG) with AI assistance. Each drawing on a page carries a note saying so. The three photographs are NASA's and are not AI-generated.</li></ol>" +
       "<p>An early layout of the overview followed a design mockup made with ChatGPT (OpenAI); the mockup itself is not used. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.</p></details>";
@@ -1363,6 +1454,12 @@
       rerender();
     }
     else if (b.dataset.table) openTable(b.dataset.table, +b.dataset.row || 0);
+    else if (b.dataset.topicshow) {
+      var o = TOPICS.overlaps.filter(function (x) { return x.id === b.dataset.topicshow; })[0], box = document.getElementById("topic-show");
+      box.innerHTML = box.innerHTML ? "" : '<div class="topic-ex"><p><b>' + esc(o.label) + ":</b> all " + o.passages + " passages, the justifying words in bold.</p><ul>" + o.examples.map(function (x) {
+        return "<li>“" + markQuote(x.text, x.quotes) + "”<span>" + topicSource(x) + "</span></li>";
+      }).join("") + "</ul></div>";
+    }
     else if (b.dataset.habdl) {
       var blob = new Blob([habReport], { type: "text/plain;charset=utf-8" }), a = document.createElement("a");
       a.href = URL.createObjectURL(blob); a.download = "habitat-evidence-report.txt"; document.body.appendChild(a); a.click(); a.remove();
