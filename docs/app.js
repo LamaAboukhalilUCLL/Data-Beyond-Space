@@ -678,7 +678,7 @@
       '<li><a href="https://www.nasa.gov/moonbase" target="_blank" rel="noopener">NASA: Moon Base</a></li>' +
       '<li><a href="https://ntrs.nasa.gov/citations/20205007829" target="_blank" rel="noopener">G. A. Ruff, Spacecraft Fire Safety Needs for Exploration, NASA Glenn, 2020</a> (roadmap listing Saffire IV to VI with elevated oxygen)</li>' +
       '<li><a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (year and journal of the publications PSI lists)</li></ul>';
-    h += '<p>Image: the Moon on the overview is a crop of the <a href="' + MOON.page + '" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter near-side mosaic</a> (' + esc(MOON.credit) + "), public domain. It is a real photograph, not AI-generated.</p>";
+    h += '<p>Image: the Moon behind the pages is the <a href="' + MOON.page + '" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter near-side mosaic</a> (' + esc(MOON.credit) + "), public domain. It is a real photograph, not AI-generated.</p>";
     main.innerHTML = h;
   }
 
