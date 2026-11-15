@@ -325,9 +325,20 @@ i.sw { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%;
 .presets b { display: block; color: var(--text); font: 600 1.25rem/1.1 var(--head); text-transform: uppercase; letter-spacing: .01em; margin-bottom: .25rem; }
 .presets button:hover { background: rgba(255,255,255,.05); }
 .presets button.on, .presets .custom.on { border-bottom-color: var(--red); background: rgba(255,255,255,.07); color: var(--text); }
-.presets .custom span { display: flex; flex-wrap: wrap; gap: .2rem .7rem; }
-.presets input[type=number] { width: 4.3rem; min-width: 0; background: #000; border: 1px solid var(--line2); color: var(--text); font: 600 .9rem var(--sans); padding: .22rem .35rem; border-radius: 0; }
-.presets input[type=number]:focus { border-color: var(--text); outline: none; }
+.presets .custom { display: flex; flex-direction: column; gap: .45rem; }
+.stepper label { display: block; font: 600 .7rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); margin-bottom: .25rem; }
+.step-box { display: flex; align-items: stretch; border: 1px solid var(--line2); background: #000; width: max-content; }
+.step-box:focus-within { border-color: var(--text); }
+.presets .step { width: 2.1rem; text-align: center; border-bottom: 0; border-right: 0; background: none; border: 0; color: var(--soft); font: 400 1.5rem/1 var(--sans); cursor: pointer; padding: 0 0 .1rem; }
+.presets .step:hover { color: var(--text); background: rgba(255,255,255,.08); }
+.presets .step:active { background: rgba(255,255,255,.14); }
+.presets .step:focus-visible { outline: 2px solid var(--text); outline-offset: -2px; }
+.step-field { display: flex; align-items: baseline; gap: .25rem; padding: .3rem .35rem; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+.step-field input { width: 3.1rem; min-width: 0; background: none; border: 0; color: var(--text); font: 600 1.15rem/1.2 var(--head); letter-spacing: .02em; text-align: right; padding: 0; -moz-appearance: textfield; appearance: textfield; }
+.step-field input[type=number]::-webkit-inner-spin-button, .step-field input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.step-field input:focus { outline: none; }
+.step-field i { font: 400 .85rem var(--sans); color: var(--muted); font-style: normal; min-width: 1.6rem; }
+.custom.on .step-box { border-color: var(--red); }
 .atm-say { margin: 0; padding: .6rem 1rem .7rem; border-top: 1px solid var(--line2); font-size: .92rem; color: var(--soft); }
 .atm-say b { color: var(--text); }
 .atm-say span { color: var(--dim); }

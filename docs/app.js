@@ -92,8 +92,16 @@
     D.about.presets.forEach(function (p) {
       h += '<button data-atm="' + p.id + '" class="' + (ATM.id === p.id ? "on" : "") + '" aria-pressed="' + (ATM.id === p.id) + '"><b>' + esc(p.name) + "</b><span>" + num(p.o2) + " % oxygen, " + num(p.p) + " psi</span></button>";
     });
-    h += '<div class="custom' + (ATM.id === "custom" ? " on" : "") + '"><b>Your own</b><span><label>at least <input type="number" id="atm-o2" min="10" max="100" step="0.5" value="' + num(ATM.o2) +
-      '" aria-label="Oxygen, percent, at least"> %</label> <label>at most <input type="number" id="atm-p" min="1" max="50" step="0.1" value="' + num(ATM.p) + '" aria-label="Pressure, psi, at most"> psi</label></span></div>';
+    // a stepper: minus, the number with its unit, plus (typing still works)
+    function stepper(id, cap, val, min, max, step, unit, label) {
+      return '<div class="stepper"><label for="' + id + '">' + cap + '</label><div class="step-box">' +
+        '<button type="button" class="step" data-step="' + id + '" data-dir="-1" aria-label="Less: ' + label + '">−</button>' +
+        '<span class="step-field"><input type="text" inputmode="decimal" autocomplete="off" spellcheck="false" id="' + id + '" data-min="' + min + '" data-max="' + max + '" data-inc="' + step + '" value="' + num(val) + '" aria-label="' + label + ', from ' + min + " to " + max + '"><i>' + unit + "</i></span>" +
+        '<button type="button" class="step" data-step="' + id + '" data-dir="1" aria-label="More: ' + label + '">+</button></div></div>';
+    }
+    h += '<div class="custom' + (ATM.id === "custom" ? " on" : "") + '"><b>Your own</b>' +
+      stepper("atm-o2", "Oxygen, at least", ATM.o2, 10, 100, 0.5, "%", "oxygen, percent, at least") +
+      stepper("atm-p", "Pressure, at most", ATM.p, 1, 50, 0.1, "psi", "pressure, psi, at most") + "</div>";
     h += '</div><p class="atm-say">Counting tests at <b>' + num(ATM.o2) + " % oxygen or more</b> and <b>" + num(ATM.p) + " psi or less</b>. <span>" + esc(ATM.source) + ".</span></p></section>";
     return h;
   }
@@ -1050,7 +1058,15 @@
   main.addEventListener("click", function (e) {
     var b = e.target.closest ? e.target.closest("button, tr.pick") : null;
     if (!b || (e.target.closest("a") && b.tagName === "TR")) return;
-    if (b.dataset.atm) {
+    if (b.dataset.step) {
+      var inp = document.getElementById(b.dataset.step), st = +inp.dataset.inc, v = readNum(inp.value) || 0;
+      v = Math.round((v + st * +b.dataset.dir) / st) * st;
+      inp.value = String(Math.round(Math.min(+inp.dataset.max, Math.max(+inp.dataset.min, v)) * 100) / 100);
+      inp.dispatchEvent(new Event("change", { bubbles: true }));
+      var again = document.querySelector('[data-step="' + b.dataset.step + '"][data-dir="' + b.dataset.dir + '"]');
+      if (again) again.focus();   // keep focus on the button after the bar is redrawn
+    }
+    else if (b.dataset.atm) {
       var p = D.about.presets.filter(function (x) { return x.id === b.dataset.atm; })[0];
       setAtm({ id: p.id, name: p.name, o2: p.o2, p: p.p, source: p.source });
       rerender();
@@ -1069,10 +1085,18 @@
     else if (b.dataset.sort) { rankState.sort = b.dataset.sort; rerender(); }
     else if (b.dataset.cls) { rankState.cls = b.dataset.cls; rerender(); }
   });
-  // the reader's own atmosphere
+  // the reader's own atmosphere; a decimal comma ("30,5") is read as a point
+  function readNum(t) { var v = parseFloat(String(t).trim().replace(",", ".")); return isNaN(v) ? NaN : v; }
+  main.addEventListener("keydown", function (e) {
+    if ((e.target.id === "atm-o2" || e.target.id === "atm-p") && (e.key === "ArrowUp" || e.key === "ArrowDown")) {
+      e.preventDefault();
+      var b = document.querySelector('[data-step="' + e.target.id + '"][data-dir="' + (e.key === "ArrowUp" ? 1 : -1) + '"]');
+      if (b) { b.click(); var i = document.getElementById(e.target.id); if (i) i.focus(); }
+    }
+  });
   main.addEventListener("change", function (e) {
     if (e.target.id !== "atm-o2" && e.target.id !== "atm-p") return;
-    var o = parseFloat(document.getElementById("atm-o2").value), p = parseFloat(document.getElementById("atm-p").value);
+    var o = readNum(document.getElementById("atm-o2").value), p = readNum(document.getElementById("atm-p").value);
     if (!(o >= 0 && o <= 100) || !(p > 0 && p <= 100)) return;
     setAtm({ id: "custom", name: "Your atmosphere", o2: o, p: p, source: "Set by you" });
     rerender();
