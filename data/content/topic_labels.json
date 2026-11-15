@@ -1,0 +1,2604 @@
+{
+"about": "Every one of the passages in docs/data/passages.json was read and labelled with the questions it addresses, following data/content/question_topics.json. Labelled by Claude (Anthropic) through Claude Code on 15 Nov 2026, in one pass, in passage order. Passages not listed were read and belong to no question. Each label carries the words from the passage that justify it; scripts/build_topics.mjs checks every quote and refuses labels for passages whose text has changed. After the pass, passages containing tell-tale words (such as extinguish, smoke detector, lunar, low pressure, fabric) but no label were listed by a script and re-read; four labels were added.",
+"labelled_by": "Claude (Anthropic), via Claude Code",
+"date": "2026-11-15",
+"passages_read": 925,
+"texts_sha256": "2b436b78cd7d7377d4a367c971625c3736e81a7a327417b54fc2f3136b9da4b9",
+"labels": [
+{
+"i": 0,
+"h": "da0b3403ff6b",
+"l": {
+"put-out": "gaseous fire suppressants"
+}
+},
+{
+"i": 2,
+"h": "9ecf1a1c0581",
+"l": {
+"put-out": "flame extinction behavior"
+}
+},
+{
+"i": 4,
+"h": "d8db29cc010e",
+"l": {
+"put-out": "Limiting Oxygen Index (LOI)"
+}
+},
+{
+"i": 5,
+"h": "c5e84545522d",
+"l": {
+"put-out": "for the LOI tests"
+}
+},
+{
+"i": 6,
+"h": "de03c2916451",
+"l": {
+"put-out": "extinguishing at a finite droplet size"
+}
+},
+{
+"i": 7,
+"h": "f876ec802d89",
+"l": {
+"put-out": "radiative extinction"
+}
+},
+{
+"i": 8,
+"h": "1230e5ef7303",
+"l": {
+"put-out": "extinction droplet sizes"
+}
+},
+{
+"i": 9,
+"h": "c7828b685e0c",
+"l": {
+"put-out": "observing flame extinction"
+}
+},
+{
+"i": 10,
+"h": "afd175be2d00",
+"l": {
+"put-out": "extinction droplet diameters"
+}
+},
+{
+"i": 11,
+"h": "4320c6b112da",
+"l": {
+"put-out": "influences the extinction process"
+}
+},
+{
+"i": 12,
+"h": "cd82b26131ac",
+"l": {
+"put-out": "burning and extinction process"
+}
+},
+{
+"i": 13,
+"h": "c5733f06a764",
+"l": {
+"put-out": "extinction characteristics"
+}
+},
+{
+"i": 14,
+"h": "2fc3aecac69d",
+"l": {
+"put-out": "suppression efficacy",
+"earth-test": "compared to normal gravity conditions"
+}
+},
+{
+"i": 15,
+"h": "2d7dd52816b1",
+"l": {
+"put-out": "quantify suppressant efficacy"
+}
+},
+{
+"i": 17,
+"h": "d6076ddf10e5",
+"l": {
+"put-out": "traditional fire suppression methods may be ineffective"
+}
+},
+{
+"i": 19,
+"h": "7ed0ddeb3c71",
+"l": {
+"put-out": "effectiveness of various fire suppressants"
+}
+},
+{
+"i": 26,
+"h": "69d5b32c9122",
+"l": {
+"put-out": "will cause extinction"
+}
+},
+{
+"i": 30,
+"h": "bdcf01a4b522",
+"l": {
+"materials": "in terms of material properties"
+}
+},
+{
+"i": 31,
+"h": "0ec0723a1e71",
+"l": {
+"tested": "8.2 psia, 34 % oxygen",
+"materials": "related to a diverse range of condensed fuels"
+}
+},
+{
+"i": 32,
+"h": "9a643594bd95",
+"l": {
+"put-out": "extinction limits"
+}
+},
+{
+"i": 35,
+"h": "e0cc6b8fc3ba",
+"l": {
+"put-out": "the flame will extinguish"
+}
+},
+{
+"i": 36,
+"h": "7939e730bebb",
+"l": {
+"put-out": "terminate for a given flow rate at extinction"
+}
+},
+{
+"i": 37,
+"h": "e864e2c4c276",
+"l": {
+"put-out": "The extinction limit could be found"
+}
+},
+{
+"i": 38,
+"h": "c4f169330fcd",
+"l": {
+"earth-test": "these results should carry over to microgravity conditions"
+}
+},
+{
+"i": 39,
+"h": "ea73bd7adb39",
+"l": {
+"materials": "gaseous, liquid, and solid fuels",
+"put-out": "1-g ignition and extinction limits"
+}
+},
+{
+"i": 41,
+"h": "76d420c8311e",
+"l": {
+"materials": "as a function of materials properties"
+}
+},
+{
+"i": 42,
+"h": "d7987b766930",
+"l": {
+"materials": "condensed fuels in the microgravity environment"
+}
+},
+{
+"i": 43,
+"h": "6a0cd8c436ba",
+"l": {
+"materials": "flammability maps for real materials",
+"earth-test": "Cone Calorimeter (NASA Test 2)"
+}
+},
+{
+"i": 44,
+"h": "55c773b0afc5",
+"l": {
+"materials": "represent a real solid fuel"
+}
+},
+{
+"i": 46,
+"h": "a505e09bd776",
+"l": {
+"materials": "condensed-phase materials (such as PMMA and Nylon)",
+"put-out": "the cessation of ventilation is an established step in putting out spacecraft fires"
+}
+},
+{
+"i": 47,
+"h": "3f8b75c23b7e",
+"l": {
+"tested": "elevated-oxygen atmospheres",
+"put-out": "self-extinguished in a short time"
+}
+},
+{
+"i": 48,
+"h": "e2d170401e6f",
+"l": {
+"earth-test": "alternative flammability Test 2",
+"materials": "measure material properties"
+}
+},
+{
+"i": 49,
+"h": "b80524345dcb",
+"l": {
+"materials": "flame spread, and extinction limits for solid fuels",
+"put-out": "extinction limits for solid fuels",
+"detect": "design of fire detection and suppression systems"
+}
+},
+{
+"i": 50,
+"h": "50d91bad59c0",
+"l": {
+"earth-test": "normal gravity NASA-STD-6001 Test #1 method",
+"materials": "actual material flammability in microgravity"
+}
+},
+{
+"i": 51,
+"h": "98852c9b1c4b",
+"l": {
+"materials": "realistic (thicker) fuels"
+}
+},
+{
+"i": 52,
+"h": "aad4eb884fc1",
+"l": {
+"materials": "fabric sheets"
+}
+},
+{
+"i": 54,
+"h": "0a202907427d",
+"l": {
+"materials": "spread rates were determined"
+}
+},
+{
+"i": 55,
+"h": "51a96ee1da9d",
+"l": {
+"earth-test": "burn as well if not better than the same material in normal gravity",
+"materials": "burn as well if not better than the same material"
+}
+},
+{
+"i": 56,
+"h": "543b53990c0d",
+"l": {
+"earth-test": "it may not be conservative for flammability in space",
+"materials": "controls materials from a flammability perspective"
+}
+},
+{
+"i": 57,
+"h": "a67e101d397b",
+"l": {
+"put-out": "flame spread and extinction",
+"materials": "fundamental limit for a given material"
+}
+},
+{
+"i": 58,
+"h": "77b379b69dc9",
+"l": {
+"materials": "select the safest materials",
+"put-out": "improve firefighting methods"
+}
+},
+{
+"i": 61,
+"h": "bd4d411a176e",
+"l": {
+"earth-test": "bridge the gap between the normal gravity NASA-STD-6001 Test#1 method",
+"materials": "actual material flammability in microgravity"
+}
+},
+{
+"i": 62,
+"h": "a7be47cecaa5",
+"l": {
+"materials": "realistic (thicker) fuels"
+}
+},
+{
+"i": 63,
+"h": "4dc87e37c9d4",
+"l": {
+"put-out": "inert, gaseous extinguishing agent"
+}
+},
+{
+"i": 64,
+"h": "da7e2cc65e7a",
+"l": {
+"materials": "Nomex fabric and Ultem"
+}
+},
+{
+"i": 65,
+"h": "8dc47c924509",
+"l": {
+"materials": "initiate combustion at one end of the fabric"
+}
+},
+{
+"i": 66,
+"h": "1002d64de69c",
+"l": {
+"materials": "direction of flame spread"
+}
+},
+{
+"i": 67,
+"h": "e7a1525c2c61",
+"l": {
+"materials": "spread rate",
+"put-out": "potential flame quenching"
+}
+},
+{
+"i": 68,
+"h": "7e53d1e164df",
+"l": {
+"earth-test": "burn as well if not better than the same material in normal gravity",
+"materials": "burn as well if not better than the same material"
+}
+},
+{
+"i": 69,
+"h": "fb174b9972a3",
+"l": {
+"earth-test": "segregates material based on 1-g behavior without consideration of low gravity effects",
+"materials": "spacecraft materials selection"
+}
+},
+{
+"i": 70,
+"h": "cb33de55a675",
+"l": {
+"earth-test": "NASA cone calorimeter test",
+"materials": "performance-based material selection process"
+}
+},
+{
+"i": 71,
+"h": "528410b093f8",
+"l": {
+"put-out": "nitrogen as a flame suppressant"
+}
+},
+{
+"i": 74,
+"h": "7d3985370b49",
+"l": {
+"earth-test": "normal gravity material flammability screening test",
+"materials": "how rapidly a large scale fire grows in low-gravity"
+}
+},
+{
+"i": 75,
+"h": "fc8da01f78ad",
+"l": {
+"materials": "composite fabric called Sibal"
+}
+},
+{
+"i": 76,
+"h": "2a20215d2846",
+"l": {
+"materials": "large piece of flammable fabric"
+}
+},
+{
+"i": 79,
+"h": "3b7d3e61240b",
+"l": {
+"earth-test": "the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk"
+}
+},
+{
+"i": 83,
+"h": "8524a225f385",
+"l": {
+"earth-test": "material selection criteria",
+"materials": "microgravity flammability limits for several spacecraft materials"
+}
+},
+{
+"i": 85,
+"h": "9fbb1f89bf3b",
+"l": {
+"earth-test": "normal gravity material flammability screening test",
+"materials": "how rapidly a large scale fire grows in low-gravity"
+}
+},
+{
+"i": 86,
+"h": "ff4a5934abe0",
+"l": {
+"materials": "SIBAL, silicone, structure PMMA, flat PMMA, and PMMA with Nomex"
+}
+},
+{
+"i": 87,
+"h": "027db55eb274",
+"l": {
+"materials": "9 samples, each 5 cm x 29 cm"
+}
+},
+{
+"i": 91,
+"h": "3b7d3e61240b",
+"l": {
+"earth-test": "the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk"
+}
+},
+{
+"i": 95,
+"h": "8524a225f385",
+"l": {
+"earth-test": "material selection criteria",
+"materials": "microgravity flammability limits for several spacecraft materials"
+}
+},
+{
+"i": 97,
+"h": "7d3985370b49",
+"l": {
+"earth-test": "normal gravity material flammability screening test",
+"materials": "how rapidly a large scale fire grows in low-gravity"
+}
+},
+{
+"i": 98,
+"h": "d81e969a199c",
+"l": {
+"materials": "used SIBAL as the sample material"
+}
+},
+{
+"i": 102,
+"h": "3b7d3e61240b",
+"l": {
+"earth-test": "the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk"
+}
+},
+{
+"i": 106,
+"h": "8524a225f385",
+"l": {
+"earth-test": "material selection criteria",
+"materials": "microgravity flammability limits for several spacecraft materials"
+}
+},
+{
+"i": 108,
+"h": "d53e7e66472c",
+"l": {
+"detect": "liquid smoke particulate"
+}
+},
+{
+"i": 109,
+"h": "a15a135e3034",
+"l": {
+"detect": "shapes of certain types of smoke particles"
+}
+},
+{
+"i": 112,
+"h": "af88ae308858",
+"l": {
+"detect": "an ionization detector"
+}
+},
+{
+"i": 114,
+"h": "08dd188ecdeb",
+"l": {
+"detect": "smoke particle growth"
+}
+},
+{
+"i": 115,
+"h": "81373d54407b",
+"l": {
+"detect": "The formation of the larger particles"
+}
+},
+{
+"i": 116,
+"h": "71733a2ce2bd",
+"l": {
+"detect": "liquid aerosol smokes"
+}
+},
+{
+"i": 117,
+"h": "d3533656d94e",
+"l": {
+"detect": "affect the response of the smoke detectors"
+}
+},
+{
+"i": 118,
+"h": "d8c35e1bc147",
+"l": {
+"detect": "advanced fire detector"
+}
+},
+{
+"i": 119,
+"h": "ccf0dbd56b53",
+"l": {
+"detect": "sensitivity of these detectors to reduced gravity smokes"
+}
+},
+{
+"i": 120,
+"h": "f63a748575b5",
+"l": {
+"detect": "future sensor technology"
+}
+},
+{
+"i": 121,
+"h": "a1ba647cbfd2",
+"l": {
+"detect": "Accurate detection of smoke"
+}
+},
+{
+"i": 122,
+"h": "6c0733abd18c",
+"l": {
+"detect": "liquid smoke particulate"
+}
+},
+{
+"i": 123,
+"h": "1df33d55001a",
+"l": {
+"detect": "predict the smoke droplet growth"
+}
+},
+{
+"i": 125,
+"h": "6807a0743654",
+"l": {
+"detect": "self diagnostic procedures on the two smoke detectors"
+}
+},
+{
+"i": 126,
+"h": "e2fbd783212a",
+"l": {
+"detect": "primary and aggregate particle dimensions"
+}
+},
+{
+"i": 127,
+"h": "ab001634a485",
+"l": {
+"detect": "response of the detectors"
+}
+},
+{
+"i": 128,
+"h": "40ed10a01090",
+"l": {
+"detect": "smoke generated by overheated spacecraft materials"
+}
+},
+{
+"i": 129,
+"h": "d721791cb06c",
+"l": {
+"detect": "smoke particle growth"
+}
+},
+{
+"i": 130,
+"h": "81373d54407b",
+"l": {
+"detect": "The formation of the larger particles"
+}
+},
+{
+"i": 131,
+"h": "71733a2ce2bd",
+"l": {
+"detect": "liquid aerosol smokes"
+}
+},
+{
+"i": 132,
+"h": "d3533656d94e",
+"l": {
+"detect": "affect the response of the smoke detectors"
+}
+},
+{
+"i": 133,
+"h": "347d0e3c11dd",
+"l": {
+"detect": "advanced fire detector"
+}
+},
+{
+"i": 134,
+"h": "6d760dd63e01",
+"l": {
+"detect": "future sensor technology"
+}
+},
+{
+"i": 135,
+"h": "a8a9c06d07f5",
+"l": {
+"detect": "future detection technology"
+}
+},
+{
+"i": 136,
+"h": "27532f755ae9",
+"l": {
+"detect": "Accurate detection of smoke"
+}
+},
+{
+"i": 139,
+"h": "ef5ec2609000",
+"l": {
+"put-out": "Obtain extinction limits"
+}
+},
+{
+"i": 140,
+"h": "009c4a496263",
+"l": {
+"put-out": "pseudo-flammability limits"
+}
+},
+{
+"i": 142,
+"h": "72b1401a3f8f",
+"l": {
+"put-out": "Microgravity spherical diffusion flames extinguish when the peak temperature first decreases below 1130 K"
+}
+},
+{
+"i": 144,
+"h": "62a706000ca0",
+"l": {
+"materials": "concurrent flame spread in microgravity"
+}
+},
+{
+"i": 145,
+"h": "1f7acce67cdf",
+"l": {
+"materials": "near the solid-vapor interface"
+}
+},
+{
+"i": 148,
+"h": "498d6eb85215",
+"l": {
+"materials": "simulate solid fuel combustion processes"
+}
+},
+{
+"i": 149,
+"h": "d547a4b999fb",
+"l": {
+"materials": "flammability limits for spacecraft materials"
+}
+},
+{
+"i": 150,
+"h": "54cf36eb3b8c",
+"l": {
+"materials": "materials subject to charring and ablation"
+}
+},
+{
+"i": 151,
+"h": "e48c1311fe85",
+"l": {
+"materials": "rod-shaped polymethyl methacrylate (PMMA) samples"
+}
+},
+{
+"i": 153,
+"h": "2599a2a1ba87",
+"l": {
+"materials": "flame spread rate"
+}
+},
+{
+"i": 154,
+"h": "c144cd5f1fce",
+"l": {
+"earth-test": "across both microgravity and normal-gravity conditions",
+"materials": "terrestrial flame spread project"
+}
+},
+{
+"i": 155,
+"h": "ff2e0ee42a66",
+"l": {
+"materials": "concurrent flame spread in microgravity"
+}
+},
+{
+"i": 156,
+"h": "cf514c411ecc",
+"l": {
+"materials": "screening new materials"
+}
+},
+{
+"i": 161,
+"h": "ec19c467e8cb",
+"l": {
+"detect": "quantify the differences between microgravity and Earth gravity smoke"
+}
+},
+{
+"i": 162,
+"h": "cf071bfae55a",
+"l": {
+"detect": "formation and growth of dibutyl-phthalate (DBP) particles"
+}
+},
+{
+"i": 163,
+"h": "56e59c191682",
+"l": {
+"detect": "particle size distributions"
+}
+},
+{
+"i": 165,
+"h": "43f5359becc5",
+"l": {
+"detect": "particle accumulation and growth"
+}
+},
+{
+"i": 166,
+"h": "2fb3c9d95f5a",
+"l": {
+"detect": "changing the composition of the smoke"
+}
+},
+{
+"i": 167,
+"h": "e8233c3a019e",
+"l": {
+"detect": "better smoke detection devices"
+}
+},
+{
+"i": 169,
+"h": "0e07dea17aaf",
+"l": {
+"put-out": "Study flame extinction mechanisms and their boundaries"
+}
+},
+{
+"i": 170,
+"h": "49c12e6af584",
+"l": {
+"put-out": "flammability limits and extinction behavior"
+}
+},
+{
+"i": 172,
+"h": "35e63c29a424",
+"l": {
+"tested": "O2 concentration between 0.1 to 0.4 mole fraction"
+}
+},
+{
+"i": 189,
+"h": "b43eaa45bfa2",
+"l": {
+"detect": "Smoke Aerosol Measurement Experiment (SAME)"
+}
+},
+{
+"i": 190,
+"h": "e7df7887c124",
+"l": {
+"detect": "quantify smoke aerosols in a microgravity environment"
+}
+},
+{
+"i": 191,
+"h": "5c0932760f77",
+"l": {
+"detect": "modified P-Trak particulate counter"
+}
+},
+{
+"i": 192,
+"h": "6292f13e2d41",
+"l": {
+"detect": "Modified TSI P-Trak"
+}
+},
+{
+"i": 193,
+"h": "147c78893817",
+"l": {
+"detect": "TSI P-Trak was modified for use in microgravity"
+}
+},
+{
+"i": 194,
+"h": "d90bfae5535e",
+"l": {
+"detect": "aerosol standard"
+}
+},
+{
+"i": 195,
+"h": "2583852e88e6",
+"l": {
+"detect": "counting aerosol particles"
+}
+},
+{
+"i": 196,
+"h": "6a1ae5d09312",
+"l": {
+"detect": "condensing isopropanol around aerosol particulates"
+}
+},
+{
+"i": 197,
+"h": "d987e8a8744e",
+"l": {
+"detect": "over counting of particulates"
+}
+},
+{
+"i": 198,
+"h": "d5df3dd426f6",
+"l": {
+"detect": "the P-Trak, as modified for use in SAME"
+}
+},
+{
+"i": 199,
+"h": "265ce07d24c9",
+"l": {
+"detect": "fire detection systems with increased reliability and sensitivity"
+}
+},
+{
+"i": 200,
+"h": "cad3ed8ecc0b",
+"l": {
+"detect": "accurate detection of smoke"
+}
+},
+{
+"i": 201,
+"h": "91d0eb9c43de",
+"l": {
+"put-out": "extinction limits"
+}
+},
+{
+"i": 204,
+"h": "f2ab999cdec1",
+"l": {
+"put-out": "as extinction limits are approached"
+}
+},
+{
+"i": 214,
+"h": "7f70710b28bb",
+"l": {
+"put-out": "factors that affect flame extinction in diffusion flames is critical in the suppression of fires"
+}
+},
+{
+"i": 218,
+"h": "a1bf510de808",
+"l": {
+"tested": "pressures ranging from 0.25 atm to 5 atm"
+}
+},
+{
+"i": 219,
+"h": "71d6f5409562",
+"l": {
+"put-out": "droplet size, pressure, and flame extinction"
+}
+},
+{
+"i": 220,
+"h": "c548ea494f4f",
+"l": {
+"tested": "ranging from 0.25 to 0.5 atm"
+}
+},
+{
+"i": 222,
+"h": "6c86b540232d",
+"l": {
+"put-out": "influence on flame extinction"
+}
+},
+{
+"i": 224,
+"h": "edd2587f753a",
+"l": {
+"put-out": "droplet extinction diameters"
+}
+},
+{
+"i": 237,
+"h": "edc9e05f62e4",
+"l": {
+"detect": "safer fire detection",
+"put-out": "suppression"
+}
+},
+{
+"i": 257,
+"h": "bacdcbf19c87",
+"l": {
+"put-out": "extinction under microgravity"
+}
+},
+{
+"i": 262,
+"h": "de9f45b83cce",
+"l": {
+"put-out": "extinction diameters"
+}
+},
+{
+"i": 264,
+"h": "8c6aa9ae5fb3",
+"l": {
+"put-out": "transition to hot ignition, and extinction"
+}
+},
+{
+"i": 266,
+"h": "b79a3f38e041",
+"l": {
+"put-out": "resolving cool-flame/extinction behavior"
+}
+},
+{
+"i": 268,
+"h": "0cf8f8811102",
+"l": {
+"put-out": "flammability limits of diffusional cool flames"
+}
+},
+{
+"i": 269,
+"h": "8649f660ac1b",
+"l": {
+"put-out": "flammability limits and extinction limits"
+}
+},
+{
+"i": 270,
+"h": "bfdf9048ba80",
+"l": {
+"put-out": "quantitative data of extinction limit"
+}
+},
+{
+"i": 272,
+"h": "6144479532a0",
+"l": {
+"put-out": "oxygen concentration effects on the extinction limits"
+}
+},
+{
+"i": 274,
+"h": "5f965236a129",
+"l": {
+"put-out": "hot flame flammability limit and extinction limit"
+}
+},
+{
+"i": 297,
+"h": "b5805b7e1ec9",
+"l": {
+"put-out": "extinction limits (low system Damk"
+}
+},
+{
+"i": 305,
+"h": "6dc720f1987d",
+"l": {
+"put-out": "flame extinctions"
+}
+},
+{
+"i": 311,
+"h": "ea959d41e730",
+"l": {
+"materials": "Emulation of condensed fuel flames"
+}
+},
+{
+"i": 312,
+"h": "fb648314c3d8",
+"l": {
+"materials": "emulates condensed fuel flames"
+}
+},
+{
+"i": 313,
+"h": "d45174f30111",
+"l": {
+"materials": "polymethylmethacrylate, polypropylene, and polystyrene"
+}
+},
+{
+"i": 320,
+"h": "a45f6b31f0aa",
+"l": {
+"materials": "Concurrent Flame Spread Over Two-Sided Thick PMMA Slabs"
+}
+},
+{
+"i": 324,
+"h": "f4ecdae5a174",
+"l": {
+"tested": "ambient oxygen mole fractions between 0.1 and 0.4"
+}
+},
+{
+"i": 325,
+"h": "d154851faf68",
+"l": {
+"put-out": "radiative and diffusive extinction"
+}
+},
+{
+"i": 326,
+"h": "9ccd6f3b7b86",
+"l": {
+"put-out": "limiting extinction conditions"
+}
+},
+{
+"i": 327,
+"h": "e0cc21461ea6",
+"l": {
+"put-out": "the oxygen concentration below which quasi-steady combustion cannot be supported"
+}
+},
+{
+"i": 328,
+"h": "28af526d2dcd",
+"l": {
+"put-out": "the LOI is 0.12 and 0.15"
+}
+},
+{
+"i": 329,
+"h": "8177a9fba590",
+"l": {
+"put-out": "simulated dispersing an inert-gas suppressant (carbon dioxide)"
+}
+},
+{
+"i": 330,
+"h": "e8ca26064e41",
+"l": {
+"put-out": "when helium is dispersed into air"
+}
+},
+{
+"i": 331,
+"h": "6380c7a3b1b7",
+"l": {
+"put-out": "after visible flame extinction"
+}
+},
+{
+"i": 338,
+"h": "4bf4b1cb8cd3",
+"l": {
+"earth-test": "beyond flammability testing of small samples"
+}
+},
+{
+"i": 343,
+"h": "c33c34e64b19",
+"l": {
+"tested": "oxygen-enriched combustion",
+"put-out": "Scalar dissipation rate at extinction"
+}
+},
+{
+"i": 344,
+"h": "3165d0ba6104",
+"l": {
+"tested": "oxygen-enriched coflow flames"
+}
+},
+{
+"i": 346,
+"h": "f11e7b229ae0",
+"l": {
+"put-out": "Radiative extinction of gaseous spherical diffusion flames"
+}
+},
+{
+"i": 347,
+"h": "38ae18910892",
+"l": {
+"tested": "application to oxy"
+}
+},
+{
+"i": 349,
+"h": "259b4ba1982d",
+"l": {
+"tested": "oxygen-enhanced combustion"
+}
+},
+{
+"i": 352,
+"h": "12bdd1b48bc5",
+"l": {
+"tested": "oxygen-enhanced combustion"
+}
+},
+{
+"i": 355,
+"h": "43cb6946011a",
+"l": {
+"put-out": "Kinetic and radiative extinctions"
+}
+},
+{
+"i": 358,
+"h": "efb6f6e82529",
+"l": {
+"put-out": "carbon-dioxide enriched environment"
+}
+},
+{
+"i": 362,
+"h": "a741943ef4d7",
+"l": {
+"put-out": "extinction characteristics of alcohol droplet combustion"
+}
+},
+{
+"i": 365,
+"h": "aba97ac422d8",
+"l": {
+"put-out": "methanol droplet extinction"
+}
+},
+{
+"i": 367,
+"h": "532ca6cf1701",
+"l": {
+"put-out": "Cool-flame extinction"
+}
+},
+{
+"i": 369,
+"h": "13c7af497dc8",
+"l": {
+"materials": "Emulation of condensed fuel flames"
+}
+},
+{
+"i": 370,
+"h": "7a18a64015b0",
+"l": {
+"put-out": "critical flow velocity for radiative extinction",
+"materials": "opposed-flow flame spread"
+}
+},
+{
+"i": 376,
+"h": "fab638114b73",
+"l": {
+"put-out": "cool diffusion flame extinction"
+}
+},
+{
+"i": 377,
+"h": "ee708ee681e9",
+"l": {
+"materials": "PMMA rods",
+"put-out": "Microgravity flammability boundary"
+}
+},
+{
+"i": 378,
+"h": "77670b02cd5a",
+"l": {
+"put-out": "Extended flammability limits"
+}
+},
+{
+"i": 379,
+"h": "a920cb421025",
+"l": {
+"put-out": "Structure and extinction"
+}
+},
+{
+"i": 382,
+"h": "7c49afb82dfa",
+"l": {
+"materials": "condensed fuel burning in microgravity"
+}
+},
+{
+"i": 384,
+"h": "8f840b4cdf43",
+"l": {
+"put-out": "Radiative extinction of large n-alkane droplets"
+}
+},
+{
+"i": 386,
+"h": "15356cec22a2",
+"l": {
+"materials": "Flame spread"
+}
+},
+{
+"i": 387,
+"h": "a77df3ffecf9",
+"l": {
+"materials": "concurrent flame spread over thick PMMA",
+"earth-test": "Buoyancy effects"
+}
+},
+{
+"i": 390,
+"h": "403c0f38b134",
+"l": {
+"put-out": "Radiative extinction of burner-supported spherical diffusion flames"
+}
+},
+{
+"i": 393,
+"h": "1a777fb17684",
+"l": {
+"put-out": "droplet extinction diameters"
+}
+},
+{
+"i": 397,
+"h": "4f95c55f590d",
+"l": {
+"materials": "flame to fuel surface radiative heat flux"
+}
+},
+{
+"i": 398,
+"h": "1204dbacd1df",
+"l": {
+"put-out": "non-premixed cool flame extinction"
+}
+},
+{
+"i": 399,
+"h": "09bd49dc9c2b",
+"l": {
+"materials": "using a burning emulator"
+}
+},
+{
+"i": 409,
+"h": "2f086d9fe92f",
+"l": {
+"materials": "Flammability maps for microgravity burning of a small flat material"
+}
+},
+{
+"i": 411,
+"h": "984abb88dd67",
+"l": {
+"materials": "thin condensed fuel",
+"put-out": "flammability bounds"
+}
+},
+{
+"i": 412,
+"h": "7b7d9e0040ed",
+"l": {
+"materials": "solid fuel flame spread"
+}
+},
+{
+"i": 418,
+"h": "59a521cc71d7",
+"l": {
+"earth-test": "A comparison of microgravity and normal gravity experiments",
+"materials": "Opposed-flow flame spread"
+}
+},
+{
+"i": 419,
+"h": "2255eee19fc2",
+"l": {
+"put-out": "ignition and extinction of small-scale fires",
+"materials": "emulating gas burner"
+}
+},
+{
+"i": 420,
+"h": "ea776fd23519",
+"l": {
+"detect": "spacecraft smoke detector performance"
+}
+},
+{
+"i": 421,
+"h": "f118d97f0c42",
+"l": {
+"put-out": "Analysis of extinction"
+}
+},
+{
+"i": 422,
+"h": "4d29ba014ffc",
+"l": {
+"detect": "gas and particle sensors for detecting spacecraft-relevant fire emissions"
+}
+},
+{
+"i": 426,
+"h": "b9b2b48b005d",
+"l": {
+"put-out": "carbon dioxide enriched environments"
+}
+},
+{
+"i": 438,
+"h": "31db7dd1b379",
+"l": {
+"put-out": "burning rate and extinction in air and helium"
+}
+},
+{
+"i": 443,
+"h": "81bab05e7dfd",
+"l": {
+"materials": "A novel apparatus for flame spread study"
+}
+},
+{
+"i": 444,
+"h": "aefa7c9dec32",
+"l": {
+"tested": "oxygen-enriched air"
+}
+},
+{
+"i": 446,
+"h": "7f85f026e9e3",
+"l": {
+"put-out": "flame quenching"
+}
+},
+{
+"i": 447,
+"h": "50ef6934d153",
+"l": {
+"put-out": "quenching limits"
+}
+},
+{
+"i": 450,
+"h": "44761d78b182",
+"l": {
+"materials": "downward spreading flame over thin cellulose"
+}
+},
+{
+"i": 454,
+"h": "e4c0697f8ef7",
+"l": {
+"materials": "opposed-flow flame spread"
+}
+},
+{
+"i": 455,
+"h": "8d8df4a3d985",
+"l": {
+"earth-test": "difference between flammability limits of a thin material in normal gravity and microgravity",
+"materials": "flammability limits of a thin material"
+}
+},
+{
+"i": 457,
+"h": "59df2dd2062e",
+"l": {
+"materials": "opposed-flow flame spread"
+}
+},
+{
+"i": 458,
+"h": "62a63b37b0cd",
+"l": {
+"materials": "composite fabric samples",
+"put-out": "quenching"
+}
+},
+{
+"i": 461,
+"h": "a8a52a72deb5",
+"l": {
+"put-out": "burning limits of near-limit hot, warm, and cool diffusion flames"
+}
+},
+{
+"i": 463,
+"h": "f438c333731f",
+"l": {
+"materials": "large solid fabric"
+}
+},
+{
+"i": 471,
+"h": "a4410e41d53b",
+"l": {
+"put-out": "radiative extinction"
+}
+},
+{
+"i": 474,
+"h": "5552340ebf13",
+"l": {
+"put-out": "radiative extinction of ethylene microgravity spherical diffusion flames"
+}
+},
+{
+"i": 476,
+"h": "25c71aa54d4c",
+"l": {
+"put-out": "Extinction characteristics"
+}
+},
+{
+"i": 477,
+"h": "e4da16db5fd2",
+"l": {
+"materials": "steady burning for small flat materials"
+}
+},
+{
+"i": 478,
+"h": "5a974fae9eac",
+"l": {
+"put-out": "kinetics and extinction"
+}
+},
+{
+"i": 485,
+"h": "9cb66cd2d54f",
+"l": {
+"put-out": "Extinction mechanisms of near-limit premixed flames"
+}
+},
+{
+"i": 489,
+"h": "e195ef3b002c",
+"l": {
+"put-out": "Oscillatory extinction"
+}
+},
+{
+"i": 491,
+"h": "d31dbd2f6786",
+"l": {
+"materials": "rotating polymer disc"
+}
+},
+{
+"i": 492,
+"h": "232862589ea9",
+"l": {
+"materials": "thermoplastic, polymer fuel disc"
+}
+},
+{
+"i": 493,
+"h": "c5098ce77d2e",
+"l": {
+"materials": "melt layer"
+}
+},
+{
+"i": 495,
+"h": "59fe7edfd17a",
+"l": {
+"materials": "(PMMA) discs burning in air"
+}
+},
+{
+"i": 496,
+"h": "0542bc1c3f1f",
+"l": {
+"detect": "Space Smoke Aerosols"
+}
+},
+{
+"i": 513,
+"h": "7a4c7a3d4067",
+"l": {
+"tested": "Oxy-fuel combustion"
+}
+},
+{
+"i": 515,
+"h": "6b71c3b0082d",
+"l": {
+"tested": "in oxy-combustion"
+}
+},
+{
+"i": 517,
+"h": "aea37f1d8700",
+"l": {
+"tested": "in oxy-combustion"
+}
+},
+{
+"i": 530,
+"h": "0f3116843dfa",
+"l": {
+"tested": "OXYGEN-ENRICHED AIR"
+}
+},
+{
+"i": 537,
+"h": "c83cb4ce2f21",
+"l": {
+"earth-test": "UNDER NORMAL AND REDUCED GRAVITY",
+"put-out": "DROPLET FLAMMABILITY"
+}
+},
+{
+"i": 538,
+"h": "89c8df20cc6e",
+"l": {
+"earth-test": "Reduced gravity and normal gravity combustion experiments"
+}
+},
+{
+"i": 539,
+"h": "9ec7696c5d58",
+"l": {
+"put-out": "until droplets could no longer be ignited"
+}
+},
+{
+"i": 540,
+"h": "8b98081a6847",
+"l": {
+"put-out": "inert gas required to suppress combustion",
+"earth-test": "higher in reduced gravity than normal gravity"
+}
+},
+{
+"i": 541,
+"h": "da1bae3b9bbd",
+"l": {
+"put-out": "suppression of combustion"
+}
+},
+{
+"i": 545,
+"h": "1923b5d41998",
+"l": {
+"put-out": "Use of helium caused extinction",
+"tested": "the pressure was 0.03, 0.1, or 0.3 MPa"
+}
+},
+{
+"i": 548,
+"h": "4d420732bc0a",
+"l": {
+"earth-test": "Reduced gravity and normal gravity combustion experiments"
+}
+},
+{
+"i": 550,
+"h": "491d49325af8",
+"l": {
+"put-out": "inert gas required to suppress combustion",
+"earth-test": "higher in reduced gravity than normal gravity"
+}
+},
+{
+"i": 551,
+"h": "38511eec6251",
+"l": {
+"put-out": "flame suppressant on a mass basis"
+}
+},
+{
+"i": 552,
+"h": "a4f8f2138c77",
+"l": {
+"earth-test": "Comparison with cup burner results",
+"put-out": "cup burner"
+}
+},
+{
+"i": 553,
+"h": "2d3d02fe769d",
+"l": {
+"put-out": "Free Droplet Flame Extinction"
+}
+},
+{
+"i": 554,
+"h": "b7da4430fbc9",
+"l": {
+"put-out": "Flame extinction of n-heptane"
+}
+},
+{
+"i": 556,
+"h": "925ea8d85a7e",
+"l": {
+"put-out": "extinction conditions"
+}
+},
+{
+"i": 557,
+"h": "d132da33e5b7",
+"l": {
+"put-out": "extinction diameters"
+}
+},
+{
+"i": 558,
+"h": "b46686e36d5b",
+"l": {
+"materials": "Opposed-Flow Flame Spread over Thin Fuels"
+}
+},
+{
+"i": 559,
+"h": "60b646f4f613",
+"l": {
+"materials": "flame spread over solid fuels",
+"put-out": "leads to flame extinguishment"
+}
+},
+{
+"i": 560,
+"h": "39335ba6398f",
+"l": {
+"put-out": "leading to flame extinguishment",
+"materials": "flame spread behavior"
+}
+},
+{
+"i": 563,
+"h": "87037d495ace",
+"l": {
+"put-out": "blow-off extinction velocity"
+}
+},
+{
+"i": 572,
+"h": "c2885128cffd",
+"l": {
+"tested": "at 0.1 and 0.07 MPa"
+}
+},
+{
+"i": 574,
+"h": "2b05f26d5360",
+"l": {
+"put-out": "limiting oxygen indices"
+}
+},
+{
+"i": 575,
+"h": "ca002a0ee658",
+"l": {
+"put-out": "limiting oxygen index values"
+}
+},
+{
+"i": 577,
+"h": "f168137eab12",
+"l": {
+"tested": "ambient pressures between 0.05 and 0.30 MPa"
+}
+},
+{
+"i": 578,
+"h": "4cee6015812c",
+"l": {
+"put-out": "following radiative extinction"
+}
+},
+{
+"i": 579,
+"h": "90d49ac6944b",
+"l": {
+"put-out": "cool-flame extinction"
+}
+},
+{
+"i": 580,
+"h": "68a559b76814",
+"l": {
+"put-out": "radiatively extinguished"
+}
+},
+{
+"i": 609,
+"h": "d7a8a9138748",
+"l": {
+"detect": "Spacecraft Fire Detection"
+}
+},
+{
+"i": 610,
+"h": "8a96603c9749",
+"l": {
+"detect": "Smoke Aerosol Measurement Experiment (SAME)"
+}
+},
+{
+"i": 611,
+"h": "ebfde826664e",
+"l": {
+"detect": "particle size distributions of the smoke"
+}
+},
+{
+"i": 612,
+"h": "c6b0778ec7b1",
+"l": {
+"detect": "two commercial smoke detectors"
+}
+},
+{
+"i": 613,
+"h": "97097d91fe83",
+"l": {
+"detect": "smoke particles"
+}
+},
+{
+"i": 614,
+"h": "a8b5f72faab5",
+"l": {
+"detect": "smoke particle size distributions"
+}
+},
+{
+"i": 615,
+"h": "53aca590348a",
+"l": {
+"detect": "particle size distribution statistics"
+}
+},
+{
+"i": 616,
+"h": "9e5779825b6c",
+"l": {
+"detect": "Pyrolysis Smoke"
+}
+},
+{
+"i": 617,
+"h": "6c9634f4955d",
+"l": {
+"detect": "properties of the smoke aerosol"
+}
+},
+{
+"i": 618,
+"h": "3117f3d1e7f6",
+"l": {
+"detect": "the smoke plume structure"
+}
+},
+{
+"i": 619,
+"h": "fbd55037498a",
+"l": {
+"detect": "study the smoke plume"
+}
+},
+{
+"i": 620,
+"h": "e0dd731b2e42",
+"l": {
+"detect": "smoke could be generated by the overheating of electronic components"
+}
+},
+{
+"i": 621,
+"h": "e12a32acc3e1",
+"l": {
+"detect": "the shape of the smoke"
+}
+},
+{
+"i": 629,
+"h": "06a6df92aa7a",
+"l": {
+"put-out": "significantly influences the observed burning rate, standoff ratio, and extinction"
+}
+},
+{
+"i": 630,
+"h": "c554ac54c9fe",
+"l": {
+"put-out": "quasi-steady combustion and extinction"
+}
+},
+{
+"i": 631,
+"h": "54ef752b754f",
+"l": {
+"put-out": "follows radiative extinction"
+}
+},
+{
+"i": 632,
+"h": "19f4696a8c44",
+"l": {
+"put-out": "experienced diffusive extinction"
+}
+},
+{
+"i": 633,
+"h": "50aaa9966508",
+"l": {
+"put-out": "extinction diameters for this cool-flame regime"
+}
+},
+{
+"i": 637,
+"h": "e8b8033743be",
+"l": {
+"put-out": "droplet diameters at extinction"
+}
+},
+{
+"i": 638,
+"h": "984506fb2a00",
+"l": {
+"put-out": "control the diffusion-flame structure and its extinction"
+}
+},
+{
+"i": 642,
+"h": "a1d6197fb5a0",
+"l": {
+"put-out": "the extinction condition"
+}
+},
+{
+"i": 643,
+"h": "e24c5f0c5a36",
+"l": {
+"put-out": "Droplet diameters at extinction are predicted as functions of the oxygen concentration"
+}
+},
+{
+"i": 644,
+"h": "ce0f9cd6ecbb",
+"l": {
+"put-out": "dependences of extinction diameters on atmospheric conditions"
+}
+},
+{
+"i": 658,
+"h": "0e853a481b37",
+"l": {
+"put-out": "near diffusive extinction"
+}
+},
+{
+"i": 659,
+"h": "de75e90eb05c",
+"l": {
+"put-out": "where cool-flame extinction is observed to occur"
+}
+},
+{
+"i": 662,
+"h": "d1ea6e9a5c01",
+"l": {
+"put-out": "limiting oxygen index (LOI) for droplet combustion"
+}
+},
+{
+"i": 663,
+"h": "3a9b4ffb885d",
+"l": {
+"put-out": "radiative extinction of spherical diffusion flames"
+}
+},
+{
+"i": 664,
+"h": "97d0c2651e51",
+"l": {
+"put-out": "cool until they extinguish at a critical temperature near 1130 K"
+}
+},
+{
+"i": 666,
+"h": "347bd538b59c",
+"l": {
+"put-out": "decreases until extinction due to radiative losses"
+}
+},
+{
+"i": 668,
+"h": "15dbdd5150cd",
+"l": {
+"put-out": "critical extinction temperature"
+}
+},
+{
+"i": 670,
+"h": "6d707b10fc18",
+"l": {
+"put-out": "delays extinction but is not sufficiently exothermic to prevent it"
+}
+},
+{
+"i": 672,
+"h": "722b9cd9d1e8",
+"l": {
+"put-out": "The structure and extinction of diffusion flames"
+}
+},
+{
+"i": 674,
+"h": "f5d77aedf0dc",
+"l": {
+"put-out": "more susceptible to extinction"
+}
+},
+{
+"i": 703,
+"h": "b35678571d7d",
+"l": {
+"put-out": "Radiative Extinction of Laminar Diffusion Flame"
+}
+},
+{
+"i": 704,
+"h": "de9627c37dcf",
+"l": {
+"put-out": "formation and extinction of methane- and ethylene-fueled flames"
+}
+},
+{
+"i": 707,
+"h": "e9eafbb46b70",
+"l": {
+"materials": "fuel mass fluxes characteristic of solid and liquid combustibles"
+}
+},
+{
+"i": 708,
+"h": "8f7fcd6e7d50",
+"l": {
+"put-out": "complete extinguishment of the flame"
+}
+},
+{
+"i": 710,
+"h": "3b1ce01b4378",
+"l": {
+"put-out": "the reason for extinction and instability"
+}
+},
+{
+"i": 722,
+"h": "ff364132dfd4",
+"l": {
+"earth-test": "with Reduced and Normal Gravity"
+}
+},
+{
+"i": 723,
+"h": "daf1e2bc64e0",
+"l": {
+"earth-test": "Reduced and normal gravity combustion experiments"
+}
+},
+{
+"i": 725,
+"h": "488e2f5d0d58",
+"l": {
+"put-out": "would not burn steadily if helium or carbon dioxide mole fractions were 0.50"
+}
+},
+{
+"i": 726,
+"h": "107cad112f4d",
+"l": {
+"earth-test": "influenced by the fuel type and also the gravitational level"
+}
+},
+{
+"i": 729,
+"h": "9e7ebc0eaecb",
+"l": {
+"tested": "oxygen mole fractions of 0.3 or 0.4"
+}
+},
+{
+"i": 734,
+"h": "01c0fb1867f9",
+"l": {
+"materials": "Experiments on polymethylmethacrylate"
+}
+},
+{
+"i": 747,
+"h": "64cdc0dc918a",
+"l": {
+"put-out": "Blow-Off Extinction in Opposed-Flow Flame Spread",
+"materials": "solid combustion"
+}
+},
+{
+"i": 754,
+"h": "ead256a5ccb5",
+"l": {
+"materials": "opposed-flow flame spread"
+}
+},
+{
+"i": 755,
+"h": "1eb5d3f19eff",
+"l": {
+"materials": "opposed-flow solid fuel flame spread"
+}
+},
+{
+"i": 795,
+"h": "b67a2e7e30c8",
+"l": {
+"detect": "Detection and Suppression",
+"put-out": "Suppression in Crewed Exploration Systems"
+}
+},
+{
+"i": 797,
+"h": "30398bb28f5d",
+"l": {
+"materials": "ignitability and flammability of candidate materials",
+"gravity": "under reduced and microgravity conditions"
+}
+},
+{
+"i": 798,
+"h": "89506f5abfb0",
+"l": {
+"detect": "fast and reliable detection of such occurrences"
+}
+},
+{
+"i": 799,
+"h": "25e80e57039c",
+"l": {
+"put-out": "reliable means of extinguishing this fire"
+}
+},
+{
+"i": 800,
+"h": "6b1cf848cce8",
+"l": {
+"put-out": "interaction of the flame with the extinguishant"
+}
+},
+{
+"i": 802,
+"h": "fe003a015ac5",
+"l": {
+"put-out": "near the extinction limit"
+}
+},
+{
+"i": 805,
+"h": "38611805f032",
+"l": {
+"put-out": "indicating flame quenching"
+}
+},
+{
+"i": 821,
+"h": "b0d629967a3b",
+"l": {
+"detect": "Spacecraft Fire Detection"
+}
+},
+{
+"i": 822,
+"h": "81d0e46dfe78",
+"l": {
+"detect": "smoke particle size measurement experiment"
+}
+},
+{
+"i": 823,
+"h": "806988d3232a",
+"l": {
+"detect": "detection times are longer than in normal gravity"
+}
+},
+{
+"i": 825,
+"h": "0b4cce449d64",
+"l": {
+"put-out": "strain-induced extinction response"
+}
+},
+{
+"i": 837,
+"h": "266d982cd518",
+"l": {
+"put-out": "Extinction Characteristics Of Droplet Combustion"
+}
+},
+{
+"i": 839,
+"h": "17d99ff5a7bc",
+"l": {
+"put-out": "effectiveness of various diluents as fire suppressants"
+}
+},
+{
+"i": 840,
+"h": "d6a31ddf789d",
+"l": {
+"put-out": "Extinction of methanol droplets"
+}
+},
+{
+"i": 841,
+"h": "2db6e0bf9c02",
+"l": {
+"put-out": "regimes of diffusive and radiative extinction"
+}
+},
+{
+"i": 842,
+"h": "309395a0abf8",
+"l": {
+"put-out": "An extinction characteristics curve"
+}
+},
+{
+"i": 843,
+"h": "507e6343f667",
+"l": {
+"put-out": "radiative and diffusive extinction"
+}
+},
+{
+"i": 844,
+"h": "345db56a3f70",
+"l": {
+"earth-test": "Simulating Microgravity Flame Spread",
+"materials": "Flame Spread over Thin Fuels"
+}
+},
+{
+"i": 845,
+"h": "07e437805f05",
+"l": {
+"earth-test": "NASA-STD-(I)-6001A Test 1",
+"materials": "non-metallic solids"
+}
+},
+{
+"i": 846,
+"h": "0166661bc274",
+"l": {
+"earth-test": "this is not representative of actual flame behavior in microgravity"
+}
+},
+{
+"i": 847,
+"h": "f2d3a2c56dbf",
+"l": {
+"earth-test": "in an Earth-based flame spread test",
+"materials": "horizontally spreading flame"
+}
+},
+{
+"i": 848,
+"h": "7d7c05f0f5c8",
+"l": {
+"earth-test": "Narrow Channel Apparatus"
+}
+},
+{
+"i": 849,
+"h": "1477fd87d2ba",
+"l": {
+"tested": "atmospheres that more closely match future spacecraft cabin atmospheres",
+"earth-test": "minimizes buoyant effects"
+}
+},
+{
+"i": 850,
+"h": "2899b8f417cf",
+"l": {
+"tested": "varying the total pressure"
+}
+},
+{
+"i": 851,
+"h": "63291f3d1e4b",
+"l": {
+"tested": "total pressures from .27 to 1.0 atm and oxygen mole fractions from 0.77 to 0.21",
+"materials": "Whatman 44 ashless filter paper"
+}
+},
+{
+"i": 852,
+"h": "91900dec0141",
+"l": {
+"tested": "low pressure/high oxygen concentrations",
+"materials": "flame spread rate"
+}
+},
+{
+"i": 853,
+"h": "fc5d74e02aca",
+"l": {
+"earth-test": "in true microgravity",
+"materials": "Kimwipes",
+"tested": "along the normoxic curve"
+}
+},
+{
+"i": 854,
+"h": "28d136d6aae9",
+"l": {
+"detect": "Smoke Aerosol Measurement Experiment-2"
+}
+},
+{
+"i": 855,
+"h": "de7ddadf4e9c",
+"l": {
+"detect": "Smoke Aerosol Measurement Experiment (SAME-2)"
+}
+},
+{
+"i": 856,
+"h": "0289e56240bb",
+"l": {
+"detect": "heated to temperatures below the ignition point"
+}
+},
+{
+"i": 857,
+"h": "be662510e64c",
+"l": {
+"detect": "transport time from the smoke source to the detector"
+}
+},
+{
+"i": 858,
+"h": "ad9cdea0dcc0",
+"l": {
+"detect": "prototype two-moment smoke detector"
+}
+},
+{
+"i": 859,
+"h": "d16de06a7065",
+"l": {
+"detect": "particle number concentration"
+}
+},
+{
+"i": 861,
+"h": "80f6fb474e7f",
+"l": {
+"detect": "average smoke particle sizes"
+}
+},
+{
+"i": 862,
+"h": "597b4973955a",
+"l": {
+"detect": "Smoke Aerosol Measurement Experiment-2"
+}
+},
+{
+"i": 863,
+"h": "7b0f625c70d4",
+"l": {
+"detect": "Smoke Aerosol Measurement Experiment (SAME-2)"
+}
+},
+{
+"i": 864,
+"h": "40d2f57e3afd",
+"l": {
+"detect": "particle size distributions of the smoke"
+}
+},
+{
+"i": 865,
+"h": "9d8fee5f04b4",
+"l": {
+"detect": "a commercial smoke detector"
+}
+},
+{
+"i": 866,
+"h": "fab9b8c23f20",
+"l": {
+"detect": "count mean diameter of the smoke particles"
+}
+},
+{
+"i": 867,
+"h": "6ae909e9e317",
+"l": {
+"detect": "Space Shuttle smoke detectors"
+}
+},
+{
+"i": 868,
+"h": "f3047ad6f455",
+"l": {
+"detect": "particle size distributions of the smoke"
+}
+},
+{
+"i": 869,
+"h": "ad265cf1aac9",
+"l": {
+"detect": "SMPS particle size distributions"
+}
+},
+{
+"i": 874,
+"h": "5422ace0224d",
+"l": {
+"put-out": "flame extinction mechanisms"
+}
+},
+{
+"i": 877,
+"h": "6e4bc63dac18",
+"l": {
+"put-out": "several extinction modes"
+}
+},
+{
+"i": 878,
+"h": "e8bf63430e25",
+"l": {
+"put-out": "An early extinction mechanism"
+}
+},
+{
+"i": 879,
+"h": "ba4598df7bbd",
+"l": {
+"put-out": "the extinction process"
+}
+},
+{
+"i": 883,
+"h": "ba2409698275",
+"l": {
+"put-out": "flame extinction caused by radiative heat loss"
+}
+},
+{
+"i": 894,
+"h": "3d49fb4e587b",
+"l": {
+"put-out": "radiative extinction of the SDF"
+}
+},
+{
+"i": 895,
+"h": "59c8016a8205",
+"l": {
+"tested": "pressures ranging from 0.5 to 2 atm"
+}
+},
+{
+"i": 899,
+"h": "ed45ac702e1e",
+"l": {
+"materials": "Emulate Condensed-Phase Burning"
+}
+},
+{
+"i": 900,
+"h": "4213fd838846",
+"l": {
+"detect": "Detection of Smoke"
+}
+},
+{
+"i": 901,
+"h": "6d8ea5aa5c37",
+"l": {
+"detect": "spacecraft smoke detection"
+}
+},
+{
+"i": 902,
+"h": "13e80ce21d20",
+"l": {
+"detect": "producing smokes with different properties"
+}
+},
+{
+"i": 903,
+"h": "8be52a41a35a",
+"l": {
+"detect": "particulate size distribution for the solid particulate smokes"
+}
+},
+{
+"i": 904,
+"h": "1e22087fc4e2",
+"l": {
+"detect": "ambient aerosol environment on the ISS"
+}
+},
+{
+"i": 905,
+"h": "73bc8eaa8e29",
+"l": {
+"detect": "Smoke Detection Model"
+}
+},
+{
+"i": 906,
+"h": "f0805a89db8f",
+"l": {
+"detect": "Smoke transport and detection were modeled"
+}
+},
+{
+"i": 907,
+"h": "10fe7aa4942d",
+"l": {
+"detect": "two smoke detectors to alarm"
+}
+},
+{
+"i": 908,
+"h": "1af12401181b",
+"l": {
+"detect": "detection times"
+}
+},
+{
+"i": 909,
+"h": "4849a5e7dc12",
+"l": {
+"detect": "Smoke Particle Size"
+}
+},
+{
+"i": 910,
+"h": "2a1ceac512a0",
+"l": {
+"detect": "Smoke detection experiments"
+}
+},
+{
+"i": 911,
+"h": "e74bfc5bbf59",
+"l": {
+"detect": "simulate detection of a prefire overheated-material event"
+}
+},
+{
+"i": 912,
+"h": "9b3f6c7a7e58",
+"l": {
+"detect": "The smoke properties were measured"
+}
+},
+{
+"i": 913,
+"h": "60c241e63c5f",
+"l": {
+"detect": "Spacecraft Smoke Detector Design"
+}
+},
+{
+"i": 914,
+"h": "82b2de370121",
+"l": {
+"detect": "smoke detection experiment"
+}
+},
+{
+"i": 915,
+"h": "020c464e45c7",
+"l": {
+"detect": "pyrolyzed at temperatures below the ignition point"
+}
+},
+{
+"i": 916,
+"h": "d300bc48ca9e",
+"l": {
+"detect": "from the smoke source to the detector"
+}
+},
+{
+"i": 917,
+"h": "8bb23619ec0f",
+"l": {
+"detect": "smoke detectors from the ISS and the space shuttle"
+}
+},
+{
+"i": 918,
+"h": "b0fb91bbdd55",
+"l": {
+"detect": "design of spacecraft smoke detectors"
+}
+},
+{
+"i": 919,
+"h": "e3ae59c3177e",
+"l": {
+"detect": "design requirements for smoke detectors"
+}
+}
+]
+}
