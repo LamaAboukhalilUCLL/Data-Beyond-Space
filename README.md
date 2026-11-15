@@ -68,10 +68,11 @@ docs/                    the website; docs/data/ is written by build_dataset.py
 - NASA, Moon Base: https://www.nasa.gov/moonbase
 - G. A. Ruff, Spacecraft Fire Safety Needs for Exploration, NASA Glenn Research Center, 2020: https://ntrs.nasa.gov/citations/20205007829
 - OpenAlex (publication year, journal and abstracts): https://openalex.org
+- Moon photograph on the overview: Lunar Reconnaissance Orbiter near-side mosaic, NASA/GSFC/Arizona State University, public domain: https://commons.wikimedia.org/wiki/File:Moon_nearside_LRO_5000.jpg (details in `docs/img/CREDITS.md`)
 - Python 3 standard library: https://docs.python.org/3/library/
 
 ## Use of AI
 
-The scripts, the website and the plain-language texts were written with AI assistance (Claude, Anthropic) and reviewed by the team. The AI was given only NASA's records and tables. AI-written text is labelled on the site, and NASA's own words always appear in quotation marks. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.
+The scripts, the website and the plain-language texts were written with AI assistance (Claude, Anthropic) and reviewed by the team. The AI was given only NASA's records and tables. AI-written text is labelled on the site, and NASA's own words always appear in quotation marks. The overview page layout follows a design mockup made with ChatGPT (OpenAI); the mockup is not part of the site, and every number on the page comes from the data. The idea of the project, asking how much of NASA's fire data applies to the Moon Base, is the team's.
 
 This project is not affiliated with or endorsed by NASA.
